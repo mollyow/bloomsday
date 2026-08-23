@@ -41,6 +41,12 @@ vignettes/*.pdf
 
 # pkgdown site
 docs/
+asymptotic-statistics/_book/
+
+# Local source exports and generated review files
+/asymptotic statistics/
+/asymptotic statistics 39efbda8594380b781eec34f053bc0f0.md
+/tmp/
 
 # translation temp files
 po/*~

@@ -1,0 +1,400 @@
+# Chapter 19: Empirical Processes
+
+[Worked problems for Chapter 19](problems.qmd#problems-chapter-19)
+
+- take the ordinary law of large numbers and central limit theorem and make them **uniform over classes of functions**.
+- The central object is the empirical measure $\mathbb P_n$ and the empirical process $\mathbb G_n$.
+- The main conceptual distinction is:
+    - **Glivenko–Cantelli class** = uniform law of large numbers.
+    - **Donsker class** = uniform central limit theorem.
+- Donsker conditions let us control empirical processes evaluated at **estimated/random functions**, such as functions involving estimated nuisance parameters.
+
+## 19.1 Empirical Distribution Functions
+
+- For i.i.d. observations $X_1,\ldots,X_n$ with distribution function $F$, define the empirical distribution function $\mathbb F_n(t)=\frac{1}{n}\sum_{i=1}^n1\{X_i\leq t\}$.
+- For each fixed $t$, the ordinary law of large numbers gives $\mathbb F_n(t)\overset {a.s.} \to F(t)$.
+- For each fixed $t$, the ordinary central limit theorem gives $\sqrt n(\mathbb F_n(t)-F(t))\rightsquigarrow N(0,F(t)(1-F(t)))$.
+- Chapter 19 asks for stronger results that hold **simultaneously over all** $t$.
+
+::: {.callout-note title="Definition"}
+**Kolmogorov–Smirnov statistic:**
+
+$$
+\sqrt n\,\|\mathbb F_n-F\|_\infty=\sup_t\left|\sqrt n\bigl(\mathbb F_n(t)-F(t)\bigr)\right|.
+$$
+
+:::
+
+::: {.callout-note title="Theorem"}
+### Theorem 19.1: Glivenko–Cantelli
+
+- The empirical CDF converges uniformly to the true CDF: $|\mathbb F_n-F|_\infty=\underset t \sup|\mathbb F_n(t)-F(t)|\overset{a.s.}\longrightarrow0$.
+- This is a **uniform law of large numbers**.
+- Compare:
+    - pointwise LLN: $\mathbb F_n(t)\to F(t)$ for each fixed $t$;
+    - Glivenko–Cantelli: $\sup_t|\mathbb F_n(t)-F(t)|\to0$.
+:::
+
+### Proof idea
+
+- Partition the real line into finitely many intervals on which $F$ changes by at most $\varepsilon$.
+- Use pointwise convergence at the finitely many endpoints.
+- Monotonicity of $F_n$ and $F$ controls all points between the endpoints.
+- The main idea is **finite approximation + control between approximation points**, echoing Chapter 18.
+
+::: {.callout-note title="Theorem"}
+### Theorem 19.3: Donsker
+
+- The process $\sqrt n(\mathbb F_n-F)$ converges as a random function to an $F$-Brownian bridge $\mathbb G_F$.
+- The limit is a zero-mean Gaussian process with covariance $E[\mathbb G_F(s)\mathbb G_F(t)]=F(s\wedge t)-F(s)F(t)$.
+- Thus Donsker is the **functional/uniform analogue of the central limit theorem**.
+- the abstract empirical-process theory in §19.2 explains when such results hold.
+:::
+
+$$
+\text{Glivenko--Cantelli}=\text{uniform LLN}
+$$
+
+$$
+\text{Donsker}=\text{uniform CLT}
+$$
+
+- The rest of the chapter generalizes these two ideas from the class of indicator functions $1_{\{x\leq t\}}$ to arbitrary classes of functions.
+
+## 19.2 Empirical Distributions
+
+::: {.callout-note title="Definition"}
+### Empirical measure notation
+
+- Let $P$ be the distribution of $X_1,\ldots,X_n$.
+- The empirical distribution is $\mathbb P_n=\frac{1}{n}\sum_{i=1}^n\delta_{X_i}$.
+- For a measurable function $f$, write $\mathbb P_nf=\frac{1}{n}\sum_{i=1}^nf(X_i)$ and $Pf=\int f,dP$.
+- Thus $\mathbb P_nf$ is simply the sample average of $f(X)$.
+
+### Empirical process notation
+
+- Define the empirical process by $\mathbb G_nf=\sqrt n(\mathbb P_n-P)f=\frac{1}{\sqrt n}\sum_{i=1}^n{f(X_i)-Pf}$.
+- For one fixed $f$ with $Pf^2<\infty$, the ordinary CLT gives $\mathbb G_nf\rightsquigarrow N(0,Pf^2-(Pf)^2)$.
+- The empirical-process question is what happens **uniformly over** $f\in\mathcal F$.
+- We therefore treat $f\mapsto\mathbb G_nf$ as one random function in $\ell^\infty(\mathcal F)$.
+:::
+
+::: {.callout-note title="Definition"}
+### Glivenko–Cantelli classes
+
+- A class $\mathcal F$ is called $P$Glivenko–Cantelli if $|\mathbb P_n-P|*{\mathcal F}=\sup*{f\in\mathcal F}|\mathbb P_nf-Pf|\overset{a.s.*}\longrightarrow0$.
+- This says the LLN holds **uniformly over the whole class** $\mathcal F$.
+:::
+
+- A finite class of integrable functions is automatically Glivenko–Cantelli.
+- If $\mathcal F$ is extremely large, pointwise LLNs need not combine into a uniform LLN.
+- Thus we need ways to measure the **size/complexity** of $\mathcal F$.
+
+::: {.callout-note title="Definition"}
+### Donsker classes
+
+- A class $\mathcal F$ is called $P$Donsker if the process ${\mathbb G_nf:f\in\mathcal F}$ converges weakly in $\ell^\infty(\mathcal F)$ to a tight Gaussian process $\mathbb G_P$.
+- The limiting process has mean zero and covariance $E[\mathbb G_Pf,\mathbb G_Pg]=Pfg-PfPg$.
+- This Gaussian limit is called a $P$**Brownian bridge**.
+:::
+
+- For every finite set $f_1,\ldots,f_k$, the ordinary multivariate CLT already gives convergence of ${\mathbb G_nf_1,\ldots,\mathbb G_nf_k}$.
+- The Donsker property adds enough uniform control to obtain convergence of the **entire process**.
+
+$$
+\text{finite-dimensional CLT}+\text{asymptotic equicontinuity}\Rightarrow\text{Donsker convergence}
+$$
+
+::: {.callout-note title="Definition"}
+### Envelope function
+
+- An envelope for $\mathcal F$ is a function $F$ such that $|f(x)|\leq F(x)$ for every $f\in\mathcal F$ and every $x$.
+- Moment conditions on the envelope control how large functions in the class can be.
+:::
+
+::: {.callout-note title="Definition"}
+### Brackets
+
+- Given functions $l$ and $u$ with $l\leq u$, the bracket $[l,u]$ consists of all functions $f$ satisfying $l\leq f\leq u$.
+- An $\varepsilon$-bracket in $L_r(P)$ satisfies $|u-l|*{P,r}<\varepsilon$, where $|f|*{P,r}=(P|f|^r)^{1/r}$.
+- The **bracketing number** $N_{[]}(\varepsilon,\mathcal F,L_r(P))$ is the minimum number of $\varepsilon$brackets needed to cover $\mathcal F$.
+- The smaller the bracketing number, the smaller the effective complexity of $\mathcal F$.
+:::
+
+- Replace the possibly infinite class $\mathcal F$ with finitely many approximating brackets.
+- If sufficiently few brackets are needed at increasingly fine scales, the empirical process can be uniformly controlled.
+
+::: {.callout-note title="Theorem"}
+### Theorem 19.4: Glivenko–Cantelli via bracketing
+
+- If $N_{[]}(\varepsilon,\mathcal F,L_1(P))<\infty$ for every $\varepsilon>0$, then $\mathcal F$ is $P$Glivenko–Cantelli.
+- At every desired level of accuracy, $\mathcal F$ can be approximated by finitely many functions.
+- The ordinary LLN can therefore be made uniform.
+:::
+
+::: {.callout-note title="Theorem"}
+### Theorem 19.5: Donsker via bracketing entropy
+
+- Define the bracketing entropy integral $J_{[]}(\delta,\mathcal F,L_2(P))=\int_0^\delta\sqrt{\log N_{[]}(\varepsilon,\mathcal F,L_2(P))},d\varepsilon$.
+- If $J_{[]}(1,\mathcal F,L_2(P))<\infty$, then $\mathcal F$ is $P$Donsker.
+:::
+
+- For a uniform CLT, finite approximation at every scale is not enough.
+- The complexity of the class cannot increase **too quickly** as $\varepsilon\downarrow0$.
+- The entropy integral measures the accumulated complexity over increasingly fine approximation scales.
+
+### Proof idea
+
+1. Finite-dimensional convergence follows from the ordinary multivariate CLT.
+2. Use bracketing and maximal inequalities to control $\sup_{f,g\text{ close}}|\mathbb G_n(f-g)|$.
+3. This establishes asymptotic equicontinuity.
+4. Apply Theorem 18.14.
+
+Thus:
+
+$$
+\boxed{\text{entropy condition}\Rightarrow\text{equicontinuity}\Rightarrow\text{Donsker}}
+$$
+
+::: {.callout-tip title="Example"}
+### Example 19.6: Distribution functions
+
+- Take $\mathcal F={1_{(-\infty,t]}:t\in\mathbb R}$.
+- Brackets can be constructed by dividing the distribution into intervals containing little probability mass.
+- The entropy condition easily holds.
+- Therefore the classical Donsker theorem is a special case of the abstract theorem.
+:::
+
+::: {.callout-tip title="Example"}
+### Example 19.7: Parametric classes
+
+- Suppose $\mathcal F={f_\theta:\theta\in\Theta\subset\mathbb R^d}$ and $|f_{\theta_1}(x)-f_{\theta_2}(x)|\leq m(x)|\theta_1-\theta_2|$.
+- If $Pm^2<\infty$ and $\Theta$ is bounded, the class has polynomially growing bracketing numbers and is Donsker.
+- Main lesson: **ordinary finite-dimensional smooth parametric families are typically Donsker under mild moment conditions**.
+:::
+
+::: {.callout-note title="Definition"}
+### Examples 19.9–19.10: Smooth function classes
+
+- Sufficiently smooth infinite-dimensional classes also have controlled entropy.
+- Main takeaway only:
+    - more smoothness makes the class effectively smaller;
+    - sufficiently smooth classes are Donsker.
+:::
+
+::: {.callout-tip title="Example"}
+### Example 19.11: Bounded variation
+
+- Classes of monotone functions, and more generally functions of bounded variation, are Donsker under broad conditions.
+- Chapter 25 uses bounded-variation arguments when verifying Donsker conditions.
+:::
+
+### VC classes
+
+- VC classes provide another convenient way of showing that a class is not too large.
+- A class has finite VC dimension if it cannot represent arbitrarily complicated patterns on finite sets.
+- Finite VC dimension implies polynomial covering-number growth.
+- With suitable envelope moment conditions, this gives Glivenko–Cantelli and Donsker properties.
+
+$$
+\boxed{\text{VC class}\Rightarrow\text{polynomial entropy}\Rightarrow\text{GC/Donsker}}
+$$
+
+::: {.callout-tip title="Example"}
+### Example 19.20: Stability under Lipschitz transformations
+
+- Donsker classes remain Donsker under many simple transformations.
+- In particular, if $\mathcal F$ and $\mathcal G$ are Donsker with suitable envelopes, then classes formed by sums, minima, maxima, and under boundedness conditions products can also be Donsker.
+- This is useful because complicated estimating functions can often be constructed from simpler known Donsker classes.
+:::
+
+## 19.4 Random Functions
+
+- So far, Donsker theory controls $\mathbb G_nf$ uniformly for deterministic $f\in\mathcal F$.
+- In statistics we often evaluate the empirical process at an **estimated function** $\widehat f_n$.
+- For example, $\widehat f_n=f_{\widehat\theta_n}$.
+- Because $\widehat f_n$ depends on the same observations that define $\mathbb G_n$, we cannot simply apply an ordinary CLT conditional on $\widehat f_n$.
+- Donsker theory solves this through **stochastic equicontinuity**.
+
+::: {.callout-important title="Lemma"}
+### Lemma 19.24
+
+Suppose:
+
+- $\mathcal F$ is $P$Donsker;
+- $\widehat f_n\in\mathcal F$;
+- $P(\widehat f_n-f_0)^2\overset P\longrightarrow0$.
+
+Then:
+
+$$
+\boxed{\mathbb G_n(\widehat f_n-f_0)\overset P\longrightarrow0}
+$$
+
+and consequently:
+
+$$
+\boxed{\mathbb G_n\widehat f_n=\mathbb G_nf_0+o_P(1).}
+$$
+
+:::
+
+- If $\widehat f_n$ is close to $f_0$ in $L_2(P)$, then they are close according to the natural variance semimetric of the limiting Gaussian process.
+- Because $\mathcal F$ is Donsker, the limiting Brownian bridge has uniformly continuous sample paths in this semimetric.
+- Therefore the empirical process cannot asymptotically distinguish $\widehat f_n$ from $f_0$.
+
+Thus:
+
+$$
+\boxed{L_2(P)\text{ closeness of functions}+\text{Donsker equicontinuity}\Rightarrow\text{empirical-process closeness}.}
+$$
+
+**Proof.**
+
+- Define $g(z,f)=z(f)-z(f_0)$.
+- Because $\mathcal F$ is Donsker, $\mathbb G_n\rightsquigarrow\mathbb G_P$ in $\ell^\infty(\mathcal F)$.
+- Because $P(\widehat f_n-f_0)^2\overset P\to0$, we have $\widehat f_n\overset P\to f_0$ in the $L_2(P)$ semimetric.
+- Therefore $(\mathbb G_n,\widehat f_n)\rightsquigarrow(\mathbb G_P,f_0)$.
+- By Lemma 18.15, almost every sample path $f\mapsto\mathbb G_Pf$ is continuous under the relevant semimetric.
+- Hence $g$ is continuous at $(\mathbb G_P,f_0)$ almost surely.
+- Apply the continuous mapping theorem: $\mathbb G_n(\widehat f_n-f_0)\rightsquigarrow\mathbb G_P(f_0)-\mathbb G_P(f_0)=0$.
+- Because the limit is constant, convergence in distribution to zero is equivalent to convergence in probability.
+
+This proof is essentially:
+
+$$
+\boxed{\text{Donsker convergence}+\text{Lemma 18.15}+\text{continuous mapping}.}
+$$
+
+- In semiparametric models, efficient scores and influence functions typically involve unknown nuisance parameters.
+- In practice we replace them with estimated versions.
+- Lemma 19.24 gives conditions under which $\mathbb G_n\widetilde\ell_{\widehat\eta_n}=\mathbb G_n\widetilde\ell_{\eta_0}+o_P(1)$.
+- Once this replacement is justified, an ordinary CLT can often finish the argument.
+
+::: {.callout-note title="Theorem"}
+### Theorem 19.26: Infinite-dimensional Z-estimation
+
+- A Z-estimator solves estimating equations.
+- In a finite-dimensional model we might solve $\mathbb P_n\psi_{\widehat\theta_n}=0$.
+- In semiparametric models, the parameter may be infinite-dimensional and we may have an entire collection of estimating equations indexed by $h\in H$.
+- Van der Vaart explicitly introduces Theorem 19.26 as useful for the treatment of semiparametric models in Chapter 25.
+
+### Setup
+
+- Let $\psi_{\theta,h}$ be estimating functions indexed by a parameter $\theta$ and $h\in H$.
+- Think of $P\psi_\theta$ as a function of $h$, hence an element of $\ell^\infty(H)$.
+- Suppose $\theta_0$ solves the population equations $P\psi_{\theta_0}=0$.
+- The estimator approximately solves $|\mathbb P_n\psi_{\widehat\theta_n}|_H=o_P(n^{-1/2})$.
+
+Under Donsker, consistency, and differentiability conditions,
+
+$$
+V\sqrt n(\widehat\theta_n-\theta_0)=-\mathbb G_n\psi_{\theta_0}+o_P(1).
+$$
+
+- Here $V$ is the derivative of the population map $\theta\mapsto P\psi_\theta$.
+
+This is the infinite-dimensional analogue of the familiar Z-estimator expansion.
+
+The basic decomposition is:
+
+$$
+0\approx\sqrt n\,\mathbb P_n\psi_{\widehat\theta_n}=\mathbb G_n\psi_{\widehat\theta_n}+\sqrt n\,P\psi_{\widehat\theta_n}.
+$$
+
+Then:
+
+- Donsker stochastic equicontinuity gives $\mathbb G_n\psi_{\widehat\theta_n}=\mathbb G_n\psi_{\theta_0}+o_P(1)$;
+- differentiability gives $\sqrt n\,P\psi_{\widehat\theta_n}=V\sqrt n(\widehat\theta_n-\theta_0)+o_P(1)$.
+
+Therefore:
+
+$$
+V\sqrt n(\widehat\theta_n-\theta_0)=-\mathbb G_n\psi_{\theta_0}+o_P(1).
+$$
+
+$$
+\boxed{\text{empirical-process linearization}+\text{population linearization}\Rightarrow\text{asymptotic linearity of the estimator}.}
+$$
+
+:::
+
+## 19.5 Changing Classes
+
+- Previous results assume a fixed class $\mathcal F$ for every $n$.
+- Sometimes the relevant class itself changes with the sample size, giving $\mathcal F_n$.
+- This arises, for example, after local rescaling around an estimated parameter.
+
+::: {.callout-note title="Theorem"}
+### Theorem 19.28
+
+- Extends Donsker-type weak convergence to classes $\mathcal F_n$ that change with $n$.
+- The same basic ingredients remain:
+    - finite-dimensional Gaussian convergence;
+    - control of the size of the changing classes through entropy;
+    - asymptotic equicontinuity.
+:::
+
+## 19.6 Maximal Inequalities
+
+- To prove asymptotic equicontinuity, we need to control quantities such as $\sup_{f\in\mathcal F}|\mathbb G_nf|$.
+- A **maximal inequality** gives a probabilistic or expectation bound on such a supremum.
+- These inequalities provide the technical bridge from **entropy of a function class** to **uniform control of its empirical process**.
+
+$$
+\boxed{\text{Bernstein inequality}\rightarrow\text{finite maxima}\rightarrow\text{chaining}\rightarrow\text{maximal inequality}.}
+$$
+
+::: {.callout-important title="Lemma"}
+### Lemma 19.34
+
+- This is the main maximal inequality underlying the bracketing Donsker theorem.
+- Conceptually, it says that if:
+    - every function in $\mathcal F$ is small in $L_2(P)$;
+    - the class has small bracketing entropy;
+    - the envelope is controlled;
+- then $E^*|\mathbb G_n|_{\mathcal F}$ is small.
+:::
+
+$$
+\boxed{\text{small functions}+\text{small class}\Rightarrow\text{small empirical-process supremum}.}
+$$
+
+::: {.callout-important title="Lemma"}
+### Lemma 19.36
+
+- Applies to uniformly bounded classes with $Pf^2<\delta^2$ and $|f|_\infty\leq M$.
+- It bounds $E^*|\mathbb G_n|_{\mathcal F}$ in terms of the bracketing entropy integral and the size parameters $\delta$ and $M$.
+- Interpretation: entropy plus local $L_2$ size yields a quantitative stochastic bound.
+:::
+
+::: {.callout-important title="Lemma"}
+### Lemma 19.37
+
+- Gives an analogous bound using a stronger Bernstein-type norm.
+- Again, its role is to convert complexity bounds into control of the empirical process.
+:::
+
+Summary
+
+$$
+\boxed{\mathbb P_n-P\rightarrow\mathbb G_n=\sqrt n(\mathbb P_n-P)}
+$$
+
+$$
+\boxed{\text{GC}=\text{uniform LLN},\qquad\text{Donsker}=\text{uniform CLT}}
+$$
+
+$$
+\boxed{\text{entropy/bracketing/VC conditions}\rightarrow\text{Donsker property}}
+$$
+
+$$
+\boxed{\text{Donsker}+\widehat f_n\to f_0\text{ in }L_2(P)\rightarrow\mathbb G_n(\widehat f_n-f_0)=o_P(1)}
+$$
+
+and therefore, for estimation,
+
+$$
+\boxed{\text{estimated nuisance function}\rightarrow\text{replace by true nuisance function at first order}.}
+$$

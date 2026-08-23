@@ -1,0 +1,16 @@
+# Asymptotic Statistics {.unnumbered}
+
+## Reading plan
+
+- Week 1: [Chapter 2: Stochastic Convergence](chapter-2.qmd)
+- Week 2: Continue [Chapter 2](chapter-2.qmd), including little $o$/big $O$ notation; [Chapter 6: Contiguity](chapter-6.qmd)
+- Week 3: [Chapter 7: Local Asymptotic Normality](chapter-7.qmd)
+- Week 4: Continue Chapter 7.12; [Chapter 8: Efficiency of Estimators](chapter-8.qmd)
+- Week 5:
+    - Briefly continue [the convolution theorem in Chapter 8](chapter-8.qmd#sec-convolution-theorem)
+    - [Chapter 18: Stochastic Convergence in Metric Spaces](chapter-18.qmd)
+    - [Chapter 19: Empirical Processes](chapter-19.qmd), through Donsker classes
+- Week 6: [Chapter 15: Efficiency of Tests](chapter-15.qmd), then [Chapter 25: Semiparametric Models](chapter-25.qmd), part 1
+- Week 7: [Chapter 25: Semiparametric Models](chapter-25.qmd), part 2 🎉
+
+See also the [worked problems](problems.qmd).

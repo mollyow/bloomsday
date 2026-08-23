@@ -1,0 +1,222 @@
+# Chapter 6: Contiguity
+
+Contiguity is **asymptotic absolute continuity**. It allows us to obtain the limiting distribution of statistics under a sequence of laws $Q_n$ from their limiting behavior under another sequence of laws $P_n$. Typically, $P_n$ represents the null hypothesis and $Q_n$ represents a sequence of alternatives.
+
+## 6.1 Likelihood Ratios
+
+::: {.callout-note title="Definition"}
+### Absolute continuity
+
+A probability measure $Q$ is absolutely continuous with respect to $P$ if every event that is impossible under $P$ is also impossible under $Q$:
+
+$$
+P(A)=0\implies Q(A)=0.
+$$
+
+Notation: $Q\ll P$.
+
+:::
+
+::: {.callout-note title="Definition"}
+### Orthogonality
+
+The measures $P$ and $Q$ are orthogonal if they live on disjoint parts of the sample space.
+
+Notation:
+
+$$
+P\perp Q.
+$$
+
+There exist disjoint sets $\Omega_P$ and $\Omega_Q$ such that
+
+$$
+P(\Omega_Q)=0,\qquad Q(\Omega_P)=0.
+$$
+
+:::
+
+### Supports of the measures
+
+Suppose $P$ and $Q$ have densities $p$ and $q$ with respect to a common measure $\mu$. Define
+
+$$
+\Omega_P={p>0},\qquad \Omega_Q={q>0}.
+$$
+
+The overlap
+
+$$
+\Omega_P\cap\Omega_Q
+$$
+
+is the part of the sample space on which both measures place mass.
+
+The region
+
+$$
+{p=0,\ q>0}
+$$
+
+contains outcomes that are possible under $Q$ but impossible under $P$.
+
+::: {.callout-note title="Definition"}
+<span id="eq-lebesgue-decomposition"></span>
+
+6.1 $Q^a(A) = Q\left(A \cap \{ p > 0\} \right); \qquad Q^\perp (A) = Q\left( A \cap \{p = 0\}\right)$
+
+:::
+
+::: {.callout-important title="Lemma"}
+### 6.2 Lemma: Lebesgue decomposition
+
+- Suppose $P$ and $Q$ are probability measures with densities $p$ and $q$ with respect to a common measure $\mu$.
+- The measure $Q$ can be decomposed into an absolutely continuous part and an orthogonal part, defined in [(6.1)](#eq-lebesgue-decomposition):
+1. $Q=Q^a+Q^\perp, \qquad Q^a\ll P,\qquad Q^\perp\perp P.$
+2. The absolutely continuous part: $Q^a(A)=\int_A\frac{q}{p}\,dP$ for every measurable set $A$
+3. $Q^a\ll P$ iff $Q(p = 0) = 0$ if and only if $\int (q/p) dP = 1$
+
+These parts are defined by:
+
+$$
+Q^a(A)=Q(A\cap{p>0}),\qquad Q^\perp(A)=Q(A\cap{p=0}).
+$$
+
+:::
+
+In general,
+
+$$
+E_P\frac{dQ}{dP}\leq 1.
+$$
+
+Equality holds exactly when
+
+$$
+Q\ll P.
+$$
+
+For a nonnegative measurable function $f$,
+
+$$
+\int f,dQ\geq\int f\frac{dQ}{dP},dP.
+$$
+
+The inequality may be strict because the right-hand side cannot recover the part of $Q$ supported on ${p=0}$.
+
+## 6.2 Contiguity
+
+If $Q\ll P,$ then the distribution of a random vector $X$ under $Q$ can be recovered from its joint distribution with the likelihood ratio under $P$:
+
+$$
+E_Qf(X)=E_P\left[f(X)\frac{dQ}{dP}\right].
+$$
+
+Equivalently,
+
+$$
+Q(X\in B)=E_P\left[1_B(X)\frac{dQ}{dP}\right].
+$$
+
+- The likelihood ratio therefore acts as a weight that transforms the $P$-distribution into the $Q$-distribution.
+
+::: {.callout-note title="Result"}
+### Definition 6.3
+
+The sequence $Q_n$ is contiguous with respect to $P_n$ if
+
+$$
+P_n(A_n)\to 0\implies Q_n(A_n)\to 0
+$$
+
+for every sequence of measurable events $A_n$.
+
+Notation: $Q_n\triangleleft P_n.$
+
+- Thus, no sequence of events can become asymptotically impossible under $P_n$ while retaining nonvanishing probability under $Q_n$.
+- The sequences are mutually contiguous if
+
+$$
+Q_n\triangleleft P_n\qquad\text{and}\qquad P_n\triangleleft Q_n.
+$$
+
+Notation: $P_n\triangleleft\triangleright Q_n.$
+
+:::
+
+- Absolute continuity concerns a single pair of measures:
+
+$$
+P(A)=0\implies Q(A)=0.
+$$
+
+- Contiguity concerns sequences of measures:
+
+$$
+P_n(A_n)\to 0\implies Q_n(A_n)\to 0.
+$$
+
+- Contiguous sequences need not be close in total variation. Contiguity only requires that asymptotically negligible events under one sequence are also negligible under the other.
+
+---
+
+::: {.callout-important title="Lemma"}
+### Lemma 6.4: Le Cam’s First Lemma {#lemma-le-cam-first}
+
+The following statements are equivalent.
+
+1. Contiguity $Q_n\triangleleft P_n.$
+2. The inverse likelihood ratio does not converge toward zero:
+
+    If, along a subsequence $\frac{dP_n}{dQ_n}\overset{Q_n}{\rightsquigarrow}U,$ then $P(U>0)=1.$ Thus, the limiting inverse likelihood ratio cannot place mass at zero.
+
+3. The likelihood ratio has limiting mean one:
+If, along a subsequence, $\frac{dQ_n}{dP_n}\overset{P_n}{\rightsquigarrow}V,$ then $\text{E} V = 1$.
+Because likelihood ratios are nonnegative and satisfy $E_{P_n}\frac{dQ_n}{dP_n}\leq 1,$ a limiting mean below one would represent probability mass under $Q_n$ that disappears from the perspective of $P_n$.
+4. Convergence in probability transfers: For every sequence of statistics $T_n$, $T_n\overset{P_n}{\to}0\implies T_n\overset{Q_n}{\to}0.$
+More generally, conclusions stated in terms of events whose probabilities converge to zero under $P_n$ continue to hold under $Q_n$.
+
+- Le Cam’s first lemma is primarily used to establish contiguity by studying likelihood-ratio limits.
+:::
+
+::: {.callout-tip title="Example"}
+### Example 6.5: Asymptotic Log Normality {#example-asymptotic-log-normality}
+
+- Suppose that, under $Q_n$, $\frac{dP_n}{dQ_n}\overset{Q_n}{\rightsquigarrow}e^{N(\mu,\sigma^2)}.$
+- Because a lognormal random variable is strictly positive, $Q_n\triangleleft P_n.$
+- The sequences are mutually contiguous if and only if $\mu=-\frac{1}{2}\sigma^2.$
+- This follows because $Ee^{N(\mu,\sigma^2)}=e^{\mu+\frac{1}{2}\sigma^2},$ which equals one exactly when $\mu=-\frac{1}{2}\sigma^2.$
+- The appearance of a normal log likelihood ratio with mean equal to minus one-half its variance is central in smooth parametric models.
+:::
+
+::: {.callout-note title="Theorem"}
+### Theorem 6.6: Abstract Change of Measure {#theorem-change-of-measure}
+
+- Suppose $Q_n\triangleleft P_n$ and, under $P_n$, $\left(X_n,\frac{dQ_n}{dP_n}\right)\overset{P_n}{\rightsquigarrow}(X,V).$
+- Define a measure $L$ by $L(B)=E[1_B(X)V].$
+- Then $L$ is a probability measure and, under $Q_n$, $X_n\overset{Q_n}{\rightsquigarrow}L.$
+- Under $P_n$, the limiting likelihood ratio $V$ reweights the limiting distribution of $X$.
+- For suitable functions $f$, $\int f,dL=E[f(X)V].$
+
+Thus:
+
+1. Find the joint limit of the statistic and likelihood ratio under $P_n$.
+2. Weight the limiting $P_n$distribution by $V$.
+3. The weighted distribution is the limiting distribution under $Q_n$.
+:::
+
+::: {.callout-important title="Lemma"}
+### Example 6.7: Le Cam’s Third Lemma {#lemma-le-cam-third}
+
+- Suppose that, under $P_n$, $\left(X_n,\log\frac{dQ_n}{dP_n}\right)\overset{P_n}{\rightsquigarrow}N_{k+1}\left(\begin{pmatrix}\mu \\ -\frac{1}{2}\sigma^2\end{pmatrix},\begin{pmatrix}\Sigma&\tau\\ \tau^T&\sigma^2\end{pmatrix}\right).$
+- Then, under $Q_n$, $X_n\overset{Q_n}{\rightsquigarrow}N_k(\mu+\tau,\Sigma).$
+
+Under the alternative:
+
+- The asymptotic covariance matrix remains $\Sigma.$
+- The asymptotic mean changes from $\mu$ to $\mu+\tau.$
+- Here, $\tau=\operatorname{Cov}\left(X,\log\frac{dQ_n}{dP_n}\right)$ in the limiting joint normal distribution.
+- Thus, moving from $P_n$ to $Q_n$ shifts the limiting mean by the asymptotic covariance between the statistic and the log likelihood ratio.
+    - By the [continuous mapping theorem](chapter-2.qmd#theorem-continuous-mapping), $\left(X_n,\frac{dQ_n}{dP_n}\right)\overset{P_n}{\rightsquigarrow}(X,e^W),$ where $W\sim N\left(-\frac{1}{2}\sigma^2,\sigma^2\right).$
+    - Because $\text{E}e^W=1,$ Le Cam’s first lemma gives mutual contiguity, and [Theorem 6.6](#theorem-change-of-measure) gives the tilted limiting distribution.
+:::

@@ -1,0 +1,6 @@
+# References {.unnumbered}
+
+The entries below collect the external books, articles, and lecture notes used alongside van der Vaart's *Asymptotic Statistics*.
+
+::: {#refs}
+:::

@@ -1,0 +1,32 @@
+project:
+  type: book
+  output-dir: _book
+
+bibliography: references.bib
+nocite: '@*'
+
+book:
+  title: "Asymptotic Statistics"
+  search: true
+  chapters:
+    - index.qmd
+    - glossary.qmd
+    - chapter-2.qmd
+    - chapter-6.qmd
+    - chapter-7.qmd
+    - chapter-8.qmd
+    - chapter-15.qmd
+    - chapter-18.qmd
+    - chapter-19.qmd
+    - chapter-25.qmd
+    - problems.qmd
+    - references.qmd
+
+format:
+  html:
+    theme: cosmo
+    toc: true
+    # Preserve the source book's nonconsecutive chapter numbers (2, 6, 7, 8,
+    # 15, 18, 19, and 25) rather than renumbering this selection sequentially.
+    number-sections: false
+    link-external-newwindow: true

@@ -1,0 +1,184 @@
+# Chapter 18: Stochastic Convergence in Metric Spaces
+
+[Worked problems for Chapter 18](problems.qmd#problems-chapter-18)
+
+- extend stochastic convergence from random vectors in Euclidean space to **random elements in general metric spaces**.
+- treat a stochastic process as a single random function rather than as a collection of separate random variables
+
+## 18.1 Metric and Normed Spaces
+
+- A metric space is a set $\mathbb D$ equipped with a distance function $d:\mathbb D\times\mathbb D\to[0,\infty)$. Properties:
+    1. symmetry: $d(x, y) = d(y, x)$
+    2. the triangle inequality $d(x,z)\leq d(x,y)+d(y,z)$, and
+    3. $d(x,y)=0$ iff $x=y$.
+- A **semimetric** satisfies (i) symmetry and (ii) the triangle inequality but can have $d(x,y)=0$ for distinct points.
+    - An **open ball**  is a set of the form $\{ y: d(x, y) < r\}$;
+        - a subset of a metric space is open if and only if it is a union of open balls
+        - it is closed iff its complement is open
+    - Convergence in a metric space means a sequence $x_n\to x$ if and only if $d(x_n,x)\to0$.
+    - The closure $\bar A$ of a set $A \subset \mathbb D$ consists of all points that are the limit of a sequence in $A$
+    - A space is **separable** if it contains a countable dense subset.
+    - A set is **totally bounded** if, for every $\varepsilon>0$, it can be covered by finitely many balls of radius $\varepsilon$.
+    - In a complete semimetric space, compactness is equivalent to being closed and totally bounded.
+
+- A **normed space** $\mathbb D$ is a vector space equipped with a norm $|\cdot| : \mathbb D \mapsto [0, \infty)$.
+- For every $x, y$ in $\mathbb D$, and $\alpha \in \mathbb R$
+    1. the triangle inequality $|| x + y|| \le ||x|| + ||y||$, and
+    2. $||\alpha x || = |\alpha| ||x||$
+    3. $||x||=0$ iff $x = 0$
+- A **seminorm** satisfies (i) and (ii), but not necessarily (iii).
+- Every norm induces a metric by $d(x,y)=|x-y|$.
+
+::: {.callout-note title="Result"}
+### Definition 18.1: Borel measurability and random elements
+
+- The **Borel** $\sigma$**-field** on a metric space $\mathbb D$ is the smallest $\sigma$-field containing all open sets.
+- A Borel-measurable map $X:\Omega\to\mathbb D$ is called a **random element** taking values in $\mathbb D$.
+- This generalizes the usual idea of a random variable or random vector to objects such as random functions.
+:::
+
+::: {.callout-important title="Lemma"}
+### Lemma 18.2
+
+- Every continuous map between metric spaces is Borel measurable.
+    - continuity means inverse images of open sets are open, and open sets generate the Borel $\sigma$-field.
+:::
+
+::: {.callout-tip title="Example"}
+### Example 18.5: Uniform norm
+
+- For an arbitrary index set $T$, $\ell^\infty(T)$ is the space of all bounded real-valued functions on $T$.
+- Formally, $\ell^\infty(T)={z:T\to\mathbb R:\sup_{t\in T}|z(t)|<\infty}$.
+- Equip this space with the **uniform norm** $|z|_T=\sup{t\in T}|z(t)|$.
+- Thus, convergence in $\ell^\infty(T)$ means uniform convergence: $|z_n-z|_T=\sup{t\in T}|z_n(t)-z(t)|\to0$.
+:::
+
+::: {.callout-tip title="Example"}
+### Example 18.7: Uniformly continuous functions
+
+- Suppose $T$ is equipped with a semimetric $\rho$.
+- $UC(T,\rho)$ is the collection of functions that are uniformly continuous with respect to $\rho$.
+- Uniform continuity means: for every $\varepsilon>0$ there exists $\delta>0$ such that $\rho(s,t)<\delta$ implies $|z(s)-z(t)|<\varepsilon$ for all $s,t\in T$.
+- If $(T,\rho)$ is totally bounded, then every uniformly continuous function is bounded, so $UC(T,\rho)\subset\ell^\infty(T)$.
+- Importantly, $UC(T,\rho)$ is separable even though $\ell^\infty(T)$ is generally not.
+:::
+
+## 18.2 Basic Properties
+
+- Distribution functions are not available for arbitrary metric-space-valued random elements, so weak convergence is defined through bounded continuous functions.
+1. Convergence in distribution:
+    - We say $X_n\rightsquigarrow X$ if $E^*f(X_n)\to Ef(X)$ for every bounded continuous $f:\mathbb D\to\mathbb R$.
+    - The stars on $E^*$ *and* $P^*$ deal with possible measurability problems in large function spaces..
+2. Convergence in probability
+    - $X_n\overset{P}\to X$ if, for every $\varepsilon>0$, $P^*(d(X_n,X)>\varepsilon)\to0$.\
+3. Convergence almost surely
+    - $X_n\overset{a.s.^*}\to X$ if there exists a sequence of random variables $\Delta_n$ such that $d(X_n, X) \le \Delta_n$ and $\Delta_n \overset{a.s.}{\to} 0.$
+
+::: {.callout-important title="Lemma"}
+### Lemma 18.9: Portmanteau
+
+- The [Portmanteau lemma from Chapter 2](chapter-2.qmd#lemma-portmanteau) extends to metric spaces.
+- In particular, $X_n\rightsquigarrow X$ is equivalent to convergence against bounded continuous functions, as well as the usual inequalities for open and closed sets.
+:::
+
+::: {.callout-note title="Theorem"}
+### Theorem 18.10: familiar stochastic convergence results still hold
+
+- See [convergence](chapter-2.qmd#sec-convergence) notes from Ch. 2
+- Almost-sure convergence implies convergence in probability.
+- Convergence in probability implies convergence in distribution.
+- If $X_n\rightsquigarrow X$ and $d(X_n,Y_n)\overset{P}\to0$, then $Y_n\rightsquigarrow X$.
+- If $X_n\rightsquigarrow X$ and $Y_n\overset{P}\to c$ for a constant $c$, then $(X_n,Y_n)\rightsquigarrow(X,c)$.
+- If $X_n\overset{P}\to X$ and $Y_n\overset{P}\to Y$, then $(X_n,Y_n)\overset{P}\to(X,Y)$.
+:::
+
+::: {.callout-note title="Theorem"}
+### Theorem 18.11: Continuous Mapping Theorem
+
+- The [continuous mapping theorem](chapter-2.qmd#theorem-continuous-mapping) also extends to random elements in metric spaces.
+- In the simplest version, if $X_n\rightsquigarrow X$ and $g$ is continuous at the relevant values of $X$, then $g(X_n)\rightsquigarrow g(X)$.
+- maps themselves may also vary with $n$: $g_n$ can converge appropriately to $g_0$.
+- Statistics of a stochastic process are often obtained by applying a functional to the whole random function.
+:::
+
+### Tightness
+
+- A random element $X$ in a metric space is **tight** if, for every $\varepsilon>0$, there exists a compact set $K$ such that $P(X\notin K)<\varepsilon$.
+    - almost all probability mass can be trapped inside a compact, manageable part of the space.
+
+::: {.callout-note title="Theorem"}
+### Theorem 18.12: Prokhorov
+
+- weak convergence to a tight limit implies asymptotic tightness;
+- under suitable measurability conditions, asymptotic tightness gives convergent subsequences.
+:::
+
+## 18.3 Bounded Stochastic Processes
+
+- A stochastic process is a collection $X={X_t:t\in T}$.
+- For each outcome $\omega$, the map $t\mapsto X_t(\omega)$ is a **sample path**.
+- If every sample path is bounded, then we can regard the entire process as one random element $X:\Omega\to\ell^\infty(T)$.
+
+::: {.callout-note title="Theorem"}
+### Theorem 18.14: Weak Convergence of Stochastic Processes {#theorem-weak-convergence-processes}
+
+What is required for $X_n={X_{n,t}:t\in T}$ to converge as an entire random function in $\ell^\infty(T)$?
+
+- Convergence separately at each $t$ is not enough.
+- We need:
+    1. convergence at finitely many points;
+        - For every finite collection $t_1,\ldots,t_k\in T$, we require $(X_{n,t_1},\ldots,X_{n,t_k})\rightsquigarrow(X_{t_1},\ldots,X_{t_k})$.
+        - This tells us the limiting distribution at any finite collection of coordinates.
+    2. control over how much the process can fluctuate between those points.
+        - For every $\varepsilon,\eta>0$, we can partition $T$ into finitely many sets $T_1,\ldots,T_k$ such that $\underset{n\to\infty}{\limsup} \text P^*\left(\underset i \sup \underset {s,t\in T_i} \sup|X_{n,s}-X_{n,t}|\ge\varepsilon\right)\le\eta$.
+        - divide the index set into finitely many sufficiently small regions.
+        - With high probability, the process varies by at most $\varepsilon$ inside each region.
+        - Therefore, the whole random function can be approximated by its values at finitely many representative points.
+- A sequence $X_n:\Omega_n\to\ell^\infty(T)$ converges weakly to a tight random element if and only if:
+    - its finite-dimensional distributions converge; and
+    - it satisfies the finite-approximation condition above.
+
+---
+
+$\text{finite-dimensional convergence}+\text{asymptotic equicontinuity}\Longleftrightarrow\text{weak convergence of the whole process}$
+
+- Finite-dimensional convergence tells us what happens **at selected points**.
+- Asymptotic equicontinuity ensures that nothing uncontrolled happens **between those points**.
+:::
+
+### Proof idea
+
+1. Use the partitions from condition (ii) to build a semimetric $\rho$ on $T$ under which increasingly fine partition cells have increasingly small diameter.
+2. Choose representative points from the partition cells to get a countable dense subset $T_0$.
+3. Finite-dimensional convergence gives a candidate limiting process on $T_0$.
+4. Condition (ii) controls the oscillation of this limit process.
+5. The oscillation control implies that the limiting sample paths are uniformly $\rho$-continuous.
+6. Extend the process from $T_0$ to all of $T$ by continuity.
+7. Approximate both $X_n$ and $X$ by processes defined on finitely many representative points.
+8. Finite-dimensional convergence handles these finite approximations; the oscillation condition makes the approximation error small.
+
+$\text{approximate an infinite-dimensional object by increasingly fine finite-dimensional objects}$
+
+::: {.callout-important title="Lemma"}
+### Lemma 18.15: The Natural Semimetric of the Limit
+
+- Under the conditions of [Theorem 18.14](#theorem-weak-convergence-processes), there exists a semimetric $\rho$ such that:
+    - $(T,\rho)$ is totally bounded;
+    - the limiting process has almost all sample paths in $UC(T,\rho)$.
+- Thus, even though the process is formally an element of the enormous space $\ell^\infty(T)$, tightness means that the limiting process actually lives in a much smaller, nicer space of uniformly continuous functions.
+- If the limiting process $X$ is zero-mean Gaussian, we can use the intrinsic semimetric $\rho(s,t)=\operatorname{sd}(X_s-X_t)$.
+    - Equivalently, $\rho(s,t)^2=E(X_s-X_t)^2$.
+    - Thus $s$ and $t$ are close when the random variables $X_s$ and $X_t$ are close in mean square.
+:::
+
+- If $\rho(s,t)$ is small, then $X_s-X_t$ has small variance.
+- Uniform $\rho$-continuity of the sample paths means that nearby indices produce nearby values of the process.
+- For empirical processes, the index $t$ will often become a function $f$.
+- The limiting process will be a Gaussian process indexed by a function class $\mathcal F$.
+- Lemma 18.15 says that the Gaussian limit has uniformly continuous sample paths under its natural variance semimetric.
+
+$\text{random variables}\rightarrow\text{random functions in }\ell^\infty(T)\rightarrow\text{finite-dimensional convergence}+\text{equicontinuity}\rightarrow\text{weak convergence as a process}$
+
+for tight Gaussian limits,
+
+$\text{the limit has uniformly continuous paths under }\rho(s,t)=\operatorname{sd}(X_s-X_t).$

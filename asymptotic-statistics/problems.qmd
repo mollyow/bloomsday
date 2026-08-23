@@ -1,0 +1,1707 @@
+# Problems {.unnumbered}
+
+## Chapter 8 {#problems-chapter-8}
+
+See [Chapter 8: Efficiency of Estimators](chapter-8.qmd).
+
+#### Relative-efficiency convention
+
+The chapter defines the relative efficiency of estimator 1 and estimator 2 as $\operatorname{RE}(T^{(1)},T^{(2)})=\lim_{\nu\to\infty}\frac{n_{\nu,2}}{n_{\nu,1}}=\frac{\sigma_2^2}{\sigma_1^2},$
+
+where estimator 2 needs this many times as many observations as estimator 1 to achieve the same asymptotic precision.
+
+The more conventional statement “efficiency of estimator 2 relative to estimator 1” is the reciprocal: $\operatorname{ARE}(T^{(2)}:T^{(1)})=\frac{\sigma_1^2}{\sigma_2^2}.$
+
+---
+
+### Problem 1
+
+Calculate the asymptotic relative efficiency of the sample mean and sample median for estimating the location parameter in the normal model.
+
+Suppose $X_1,\ldots,X_n\overset{\mathrm{iid}}{\sim}N(\theta,1).$
+
+#### Sample mean
+
+By the central limit theorem, $\sqrt n(\overline X_n-\theta)\rightsquigarrow N(0,1).$
+
+Thus, the asymptotic variance is $\sigma_{\mathrm{mean}}^2=1.$
+
+#### Sample median
+
+For a distribution with density evaluated at its median, the [empirical median satisfies](https://en.wikipedia.org/wiki/Median#Sampling_distribution) $\sqrt n(\widehat\theta_{\mathrm{med}}-\theta)\rightsquigarrow N\left(0,\frac{1}{4f(\theta)^2}\right).$
+
+- (the general result is $\sqrt n(\widehat q_p-q_p)\rightsquigarrow N\left(0,\frac{p(1-p)}{f(q_p)^2}\right),$ with the median obtained by setting $p=1/2$.)
+
+For the normal location model, $f(\theta)=\phi(0)=\frac{1}{\sqrt{2\pi}}.$
+
+In the normal location model,
+
+$$
+X\sim N(\theta,1),
+$$
+
+so the density is
+
+$$
+f_\theta(x)=\frac{1}{\sqrt{2\pi}}\exp\left(-\frac{(x-\theta)^2}{2}\right)=\phi(x-\theta).
+$$
+
+Evaluating the density at the median $x=\theta$ gives
+
+$$
+f_\theta(\theta)=\phi(\theta-\theta)=\phi(0)=\frac{1}{\sqrt{2\pi}}.
+$$
+
+The median equals $\theta$ because the normal distribution is symmetric around its mean.
+
+Therefore, $\sigma_{\mathrm{med}}^2=\frac{1}{4(1/(2\pi))}=\frac{\pi}{2}.$
+
+Under the chapter’s convention, with the mean listed first and the median second, $\operatorname{RE}(\overline X_n,\widehat\theta_{\mathrm{med}})=\frac{\pi/2}{1}=\frac{\pi}{2}.$
+
+Thus, the median requires approximately $\frac{\pi}{2}\approx1.571$ times as many observations as the mean.
+
+---
+
+### Problem 2
+
+Repeat Problem 1 for the Laplace location model with density $p_\theta(x)=\frac12e^{-|x-\theta|}.$
+
+#### Sample mean
+
+A standard Laplace random variable has variance $\operatorname{Var}_\theta(X)=2.$
+
+Therefore, $\sqrt n(\overline X_n-\theta)\rightsquigarrow N(0,2),$
+
+so $\sigma_{\mathrm{mean}}^2=2.$
+
+#### Sample median
+
+The density at the median is $p_\theta(\theta)=\frac12.$
+
+Therefore, $\sigma_{\mathrm{med}}^2=\frac{1}{4(1/2)^2}=1.$
+
+For the Laplace location model,
+
+$$
+X\sim \operatorname{Laplace}(\theta,1),
+$$
+
+with density
+
+$$
+f_\theta(x)=\frac12e^{-|x-\theta|}.
+$$
+
+The distribution is symmetric around $\theta$, so its median is $\theta$. Evaluating the density at the median gives
+
+$$
+f_\theta(\theta)=\frac12e^{-|\theta-\theta|}=\frac12e^0=\frac12.
+$$
+
+The general asymptotic variance of the empirical median is
+
+$$
+\sigma_{\mathrm{med}}^2=\frac{1}{4f_\theta(\theta)^2}.
+$$
+
+Substituting $f_\theta(\theta)=1/2$,
+
+$$
+\sigma_{\mathrm{med}}^2=\frac{1}{4(1/2)^2}=\frac{1}{4(1/4)}=\frac11=1.
+$$
+
+Therefore,
+
+$$
+\sqrt n\left(\widehat\theta_{\mathrm{med}}-\theta\right)\rightsquigarrow N(0,1),
+$$
+
+so the sampling variance of the median is approximately $1/n$ for large $n$.
+
+Under the chapter’s convention, $\operatorname{RE}(\overline X_n,\widehat\theta_{\mathrm{med}})=\frac{1}{2}.$
+
+Thus, the median requires asymptotically only half as many observations as the mean.
+
+Equivalently, the efficiency of the median relative to the mean is $\operatorname{ARE}(\widehat\theta_{\mathrm{med}}:\overline X_n)=2.$
+
+Unlike in the normal model, the median is more efficient than the mean in the Laplace model.
+
+---
+
+### Problem 3
+
+Suppose $X_1,\ldots,X_n\overset{\mathrm{iid}}{\sim}N(\theta,1),$
+
+and the target is the distribution function at a fixed point: $F_\theta(x)=P_\theta(X\leq x)=\Phi(x-\theta).$
+
+Let $z=x-\theta.$
+
+The two estimators are the empirical distribution function $\widehat F_n(x)=\frac1n\sum_{i=1}^n1{X_i\leq x},$
+
+and the parametric estimator $\widetilde F_n(x)=\Phi(x-\overline X_n).$
+
+#### Empirical estimator
+
+Because the indicators are Bernoulli with success probability $F_\theta(x)=\Phi(z),$
+
+the central limit theorem gives $\sqrt n\left(\widehat F_n(x)-F_\theta(x)\right)\rightsquigarrow N\left(0,\Phi(z)\left[1-\Phi(z)\right]\right).$
+
+Thus, $\sigma_{\mathrm{emp}}^2=\Phi(z)\left[1-\Phi(z)\right].$
+
+#### Parametric estimator
+
+Define $g(\theta)=\Phi(x-\theta).$
+
+Its derivative is $g'(\theta)=-\phi(x-\theta)=-\phi(z).$
+
+Since $\sqrt n(\overline X_n-\theta)\rightsquigarrow N(0,1),$
+
+the delta method gives $\sqrt n\left(\Phi(x-\overline X_n)-\Phi(x-\theta)\right)\rightsquigarrow N\left(0,\phi(z)^2\right).$
+
+Thus, $\sigma_{\mathrm{par}}^2=\phi(z)^2.$
+
+Under the chapter’s convention, with the empirical estimator first, $\operatorname{RE}(\widehat F_n,\widetilde F_n)=\frac{\phi(z)^2}{\Phi(z)[1-\Phi(z)]}.$
+
+The efficiency of the parametric estimator relative to the empirical estimator is $\operatorname{ARE}(\widetilde F_n:\widehat F_n)=\frac{\Phi(z)[1-\Phi(z)]}{\phi(z)^2}.$
+
+At the center of the distribution, where $x=\theta,$
+
+we have $z=0,$
+
+and hence $\operatorname{RE}(\widehat F_n,\widetilde F_n)=\frac{\phi(0)^2}{1/4}=\frac{2}{\pi}.$
+
+Thus, at the median, the parametric estimator requires only about $\frac{2}{\pi}\approx0.637$
+
+as many observations as the empirical estimator.
+
+---
+
+### Problem 4
+
+Suppose $X_1,\ldots,X_n\overset{\mathrm{iid}}{\sim}N(\mu,\sigma^2).$
+
+The population quantile of order $p$
+
+is $q_p=\mu+\sigma z_p,$
+
+where $z_p=\Phi^{-1}(p).$
+
+The two estimators are:
+
+- the empirical quantile;
+- the parametric estimator $\widehat q_{p,\mathrm{par}}=\overline X_n+z_pS_n.$
+
+#### Empirical quantile
+
+The asymptotic distribution of an empirical quantile is $\sqrt n(\widehat q_{p,\mathrm{emp}}-q_p)\rightsquigarrow N\left(0,\frac{p(1-p)}{f(q_p)^2}\right).$
+
+For the normal model, $f(q_p)=\frac1\sigma\phi(z_p).$
+
+Therefore, $\sigma_{\mathrm{emp}}^2=\frac{\sigma^2p(1-p)}{\phi(z_p)^2}.$
+
+#### Parametric quantile estimator
+
+For a normal sample, $\sqrt n(\overline X_n-\mu)\rightsquigarrow N(0,\sigma^2),$
+
+and $\sqrt n(S_n-\sigma)\rightsquigarrow N\left(0,\frac{\sigma^2}{2}\right).$
+
+The sample mean and sample standard deviation are asymptotically independent. Therefore, $\sqrt n\left(\overline X_n+z_pS_n-\mu-z_p\sigma\right)\rightsquigarrow N\left(0,\sigma^2+\frac{z_p^2\sigma^2}{2}\right).$
+
+Thus, $\sigma_{\mathrm{par}}^2=\sigma^2\left(1+\frac{z_p^2}{2}\right).$
+
+Under the chapter’s convention, $\operatorname{RE}(\widehat q_{p,\mathrm{emp}},\widehat q_{p,\mathrm{par}})=\frac{\sigma_{\mathrm{par}}^2}{\sigma_{\mathrm{emp}}^2}.$
+
+Hence, $\boxed{\operatorname{RE}(\widehat q_{p,\mathrm{emp}},\widehat q_{p,\mathrm{par}})=\frac{\left(1+z_p^2/2\right)\phi(z_p)^2}{p(1-p)}.}$
+
+The efficiency of the parametric estimator relative to the empirical quantile is $\boxed{\operatorname{ARE}(\widehat q_{p,\mathrm{par}}:\widehat q_{p,\mathrm{emp}})=\frac{p(1-p)}{\left(1+z_p^2/2\right)\phi(z_p)^2}.}$
+
+For the median, $p=\frac12,\qquad z_p=0,$
+
+so the empirical estimator is the sample median and the parametric estimator is the sample mean. This gives $\operatorname{RE}=\frac{2}{\pi},$
+
+consistent with Problem 1.
+
+---
+
+### Problem 5
+
+Compare the unbiased sample variance $S_n^2=\frac{1}{n-1}\sum_{i=1}^n(X_i-\overline X_n)^2$
+
+with $\widetilde S_n^2=\frac1n\sum_{i=1}^n(X_i-\overline X_n)^2=\frac{n-1}{n}S_n^2.$
+
+Their difference is $\widetilde S_n^2-S_n^2=-\frac1nS_n^2.$
+
+If the sample variance is consistent, then $S_n^2=O_P(1).$
+
+Therefore, $\sqrt n\left(\widetilde S_n^2-S_n^2\right)=-\frac{S_n^2}{\sqrt n}\overset{P}{\longrightarrow}0.$
+
+Thus, the two estimators are asymptotically equivalent: $\sqrt n\left(\widetilde S_n^2-\sigma^2\right)=\sqrt n\left(S_n^2-\sigma^2\right)+o_P(1).$
+
+They have the same limiting distribution and the same asymptotic variance.
+
+Hence, $\boxed{\operatorname{RE}(S_n^2,\widetilde S_n^2)=1.}$
+
+The difference between dividing by $n$
+
+and dividing by $n-1$
+
+is asymptotically negligible.
+
+---
+
+### Problem 6
+
+Compare the sample standard deviation with the interquartile range, corrected to estimate the standard deviation, under a normal model.
+
+Let $a=\Phi^{-1}(0.75).$
+
+Numerically, $a\approx0.67449.$
+
+For a normal distribution, $q_{0.75}=\mu+\sigma a,$
+
+and $q_{0.25}=\mu-\sigma a.$
+
+Therefore, the population interquartile range is $q_{0.75}-q_{0.25}=2a\sigma.$
+
+The corrected IQR estimator is $\widehat\sigma_{\mathrm{IQR}}=\frac{\widehat q_{0.75}-\widehat q_{0.25}}{2a}.$
+
+#### Sample standard deviation
+
+For a normal sample, $\sqrt n(S_n-\sigma)\rightsquigarrow N\left(0,\frac{\sigma^2}{2}\right).$
+
+Thus, $\sigma_{\mathrm{SD}}^2=\frac{\sigma^2}{2}.$
+
+#### Interquartile-range estimator
+
+For two empirical quantiles, $\operatorname{ACov}(\widehat q_p,\widehat q_r)=\frac{\min(p,r)-pr}{f(q_p)f(q_r)}.$
+
+At the two quartiles, $f(q_{0.25})=f(q_{0.75})=\frac{\phi(a)}{\sigma}.$
+
+The variance of either quartile is $\operatorname{AVar}(\widehat q_{0.25})=\operatorname{AVar}(\widehat q_{0.75})=\frac{(1/4)(3/4)\sigma^2}{\phi(a)^2}=\frac{3\sigma^2}{16\phi(a)^2}.$
+
+Their covariance is $\operatorname{ACov}(\widehat q_{0.25},\widehat q_{0.75})=\frac{1/4-(1/4)(3/4)}{\phi(a)^2/\sigma^2}=\frac{\sigma^2}{16\phi(a)^2}.$
+
+Therefore, $\operatorname{AVar}(\widehat q_{0.75}-\widehat q_{0.25})=\frac{3\sigma^2}{16\phi(a)^2}+\frac{3\sigma^2}{16\phi(a)^2}-2\frac{\sigma^2}{16\phi(a)^2}=\frac{\sigma^2}{4\phi(a)^2}.$
+
+After dividing by $2a,$
+
+we obtain $\sigma_{\mathrm{IQR}}^2=\frac{\sigma^2}{16a^2\phi(a)^2}.$
+
+Numerically, $\frac{1}{16a^2\phi(a)^2}\approx1.36046.$
+
+Thus, $\sigma_{\mathrm{IQR}}^2\approx1.36046\sigma^2.$
+
+Under the chapter’s convention, $\operatorname{RE}(S_n,\widehat\sigma_{\mathrm{IQR}})=\frac{\sigma_{\mathrm{IQR}}^2}{\sigma_{\mathrm{SD}}^2}=\frac{1}{8a^2\phi(a)^2}.$
+
+Numerically, $\boxed{\operatorname{RE}(S_n,\widehat\sigma_{\mathrm{IQR}})\approx2.721.}$
+
+Thus, the IQR estimator requires approximately $2.72$
+
+times as many observations as the sample standard deviation.
+
+Equivalently, the efficiency of the IQR estimator relative to the sample standard deviation is $\boxed{\operatorname{ARE}(\widehat\sigma_{\mathrm{IQR}}:S_n)=8a^2\phi(a)^2\approx0.368.}$
+
+---
+
+### Problem 7
+
+Suppose $X_1,\ldots,X_n\overset{\mathrm{iid}}{\sim}\operatorname{Uniform}[0,\theta].$
+
+Consider $T_n=X_{(1)}+X_{(n)}.$
+
+#### Unbiasedness
+
+For a uniform sample, $E_\theta X_{(1)}=\frac{\theta}{n+1},$
+
+and $E_\theta X_{(n)}=\frac{n\theta}{n+1}.$
+
+Therefore, $E_\theta T_n=\theta.$
+
+So the estimator is unbiased.
+
+#### Asymptotic distribution
+
+For nonnegative fixed numbers $x$
+
+and $y,$
+
+we have $P_\theta\left(\frac{nX_{(1)}}{\theta}>x,\frac{n(\theta-X_{(n)})}{\theta}>y\right)=\left(1-\frac{x+y}{n}\right)^n.$
+
+Therefore, $\left(\frac{nX_{(1)}}{\theta},\frac{n(\theta-X_{(n)})}{\theta}\right)\rightsquigarrow(E_1,E_2),$
+
+where $E_1,E_2\overset{\mathrm{ind}}{\sim}\operatorname{Exp}(1).$
+
+Now, $T_n-\theta=X_{(1)}-\left(\theta-X_{(n)}\right).$
+
+Hence, $\frac{n(T_n-\theta)}{\theta}\rightsquigarrow E_1-E_2.$
+
+The difference of two independent standard exponential variables has a standard Laplace distribution: $E_1-E_2\sim\operatorname{Laplace}(0,1).$
+
+Thus, $n(T_n-\theta)\rightsquigarrow\theta(E_1-E_2).$
+
+The estimator converges at rate $n,$
+
+which is faster than the usual root-(n) rate.
+
+#### Comparison with a corrected maximum
+
+The usual unbiased estimator based on the maximum is $\widetilde\theta_n=\frac{n+1}{n}X_{(n)}.$
+
+Its variance is $\operatorname{Var}_\theta(\widetilde\theta_n)=\frac{\theta^2}{n(n+2)}.$
+
+The variance of the sum of the minimum and maximum is $\operatorname{Var}_\theta(T_n)=\frac{2\theta^2}{(n+1)(n+2)}.$
+
+Therefore, $\frac{\operatorname{Var}*\theta(T_n)}{\operatorname{Var}*\theta(\widetilde\theta_n)}=\frac{2n}{n+1}\longrightarrow2.$
+
+Thus, although $T_n$
+
+is unbiased and converges at the fast rate $n,$
+
+it has asymptotically twice the variance of the unbiased estimator based only on the maximum.
+
+Therefore, it is not asymptotically optimal under squared-error loss.
+
+---
+
+### Problem 8
+
+The Hodges estimator is $S_n=\begin{cases}\overline X_n&\text{if }|\overline X_n|\geq n^{-1/4},\\ 0&\text{if }|\overline X_n|<n^{-1/4}.\end{cases}$
+
+The observations satisfy $X_1,\ldots,X_n\overset{\mathrm{iid}}{\sim}N(\theta,1).$
+
+#### Part (i)
+
+Suppose $\theta_n\to0,$
+
+with $n^{1/4}\theta_n\to0,$
+
+and $n^{1/2}\theta_n\to\infty.$
+
+Under $P_{\theta_n},$
+
+we can write $\overline X_n=\theta_n+\frac{Z_n}{\sqrt n},$
+
+where $Z_n\sim N(0,1).$
+
+Therefore, $n^{1/4}\overline X_n=n^{1/4}\theta_n+n^{-1/4}Z_n\overset{P_{\theta_n}}{\longrightarrow}0.$
+
+It follows that $P_{\theta_n}\left(|\overline X_n|<n^{-1/4}\right)\longrightarrow1.$
+
+Thus, with probability tending to one, $S_n=0.$
+
+On this event, $\sqrt n(S_n-\theta_n)=-\sqrt n\theta_n.$
+
+By assumption, $\sqrt n\theta_n\to\infty.$
+
+Therefore, $\boxed{\sqrt n(S_n-\theta_n)\overset{P_{\theta_n}}{\longrightarrow}-\infty.}$
+
+The Hodges estimator has extremely poor behavior along this sequence of parameters.
+
+---
+
+#### Part (ii)
+
+To be regular at zero, the distribution of $\sqrt n\left(S_n-\frac{h}{\sqrt n}\right)$
+
+under $\theta=\frac{h}{\sqrt n}$
+
+would have to converge to the same limit for every fixed $h.$
+
+Under this local parameter, $\overline X_n=\frac{h+Z_n}{\sqrt n},$
+
+where $Z_n\sim N(0,1).$
+
+Then $n^{1/4}\overline X_n=n^{-1/4}(h+Z_n)\overset{P}{\longrightarrow}0.$
+
+Therefore, $P_{h/\sqrt n}\left(S_n=0\right)\longrightarrow1.$
+
+Consequently, $\sqrt n\left(S_n-\frac{h}{\sqrt n}\right)\overset{P_{h/\sqrt n}}{\longrightarrow}-h.$
+
+The limit is a point mass at $-h,$
+
+and therefore depends on $h.$
+
+For example, at $h=0,$
+
+the limit is $0,$
+
+whereas at $h=1,$
+
+the limit is $-1.$
+
+Thus, $\boxed{S_n\text{ is not regular at }\theta=0.}$
+
+---
+
+#### Part (iii)
+
+We want to show that, for every fixed $\delta>0,$
+
+and for sequences $k_n\to\infty$
+
+that increase sufficiently slowly, $\sup_{-\delta\leq\theta\leq\delta}P_\theta\left(\sqrt n|S_n-\theta|>k_n\right)\longrightarrow1.$
+
+A sufficient condition is $k_n=o(n^{1/4}).$
+
+Define $\theta_n=n^{-3/8}\sqrt{k_n}.$
+
+Then $\theta_n\to0,$
+
+and hence $|\theta_n|\leq\delta$
+
+for sufficiently large $n.$
+
+Moreover, $n^{1/4}\theta_n=n^{-1/8}\sqrt{k_n}\to0,$
+
+because $k_n=o(n^{1/4}).$
+
+Also, $\sqrt n\theta_n=n^{1/8}\sqrt{k_n}\to\infty.$
+
+More strongly, $\frac{\sqrt n\theta_n}{k_n}=\frac{n^{1/8}}{\sqrt{k_n}}\to\infty.$
+
+By the same argument as in part (i), $P_{\theta_n}(S_n=0)\longrightarrow1.$
+
+On the event that $S_n=0,$
+
+we have $\sqrt n|S_n-\theta_n|=\sqrt n\theta_n.$
+
+Since $\frac{\sqrt n\theta_n}{k_n}\to\infty,$
+
+eventually $\sqrt n\theta_n>k_n.$
+
+Therefore, $P_{\theta_n}\left(\sqrt n|S_n-\theta_n|>k_n\right)\longrightarrow1.$
+
+Because $\theta_n\in[-\delta,\delta]$
+
+eventually, $\sup_{-\delta\leq\theta\leq\delta}P_\theta\left(\sqrt n|S_n-\theta|>k_n\right)\geq P_{\theta_n}\left(\sqrt n|S_n-\theta_n|>k_n\right).$
+
+Hence, $\boxed{\sup_{-\delta\leq\theta\leq\delta}P_\theta\left(\sqrt n|S_n-\theta|>k_n\right)\longrightarrow1.}$
+
+This makes the moving risk peak of the Hodges estimator explicit.
+
+---
+
+### Problem 9
+
+Show that a loss function $\ell:\mathbb R\to\mathbb R$
+
+is bowl-shaped if and only if $\ell(x)=\ell_0(|x|)$
+
+for a nondecreasing function $\ell_0.$
+
+#### Forward direction
+
+Suppose $\ell$
+
+is bowl-shaped. For each $c,$
+
+the sublevel set $C_c={x:\ell(x)\leq c}$
+
+is convex and symmetric around zero.
+
+#### Symmetry of the loss
+
+If $x\in C_{\ell(x)},$
+
+then symmetry gives $-x\in C_{\ell(x)}.$
+
+Therefore, $\ell(-x)\leq\ell(x).$
+
+Applying the same argument to $-x$
+
+gives $\ell(x)\leq\ell(-x).$
+
+Hence, $\ell(x)=\ell(-x).$
+
+Define $\ell_0(r)=\ell(r),\qquad r\geq0.$
+
+Then $\ell(x)=\ell_0(|x|).$
+
+#### Monotonicity
+
+Let $0\leq r\leq s.$
+
+Set $c=\ell(s).$
+
+Then $s\in C_c.$
+
+By symmetry, $-s\in C_c.$
+
+Because $C_c$
+
+is convex, it contains the interval between $-s$
+
+and $s.$
+
+In particular, $r\in C_c.$
+
+Therefore, $\ell_0(r)=\ell(r)\leq\ell(s)=\ell_0(s).$
+
+Thus, $\ell_0$
+
+is nondecreasing.
+
+---
+
+#### Reverse direction
+
+Suppose $\ell(x)=\ell_0(|x|),$
+
+where $\ell_0$
+
+is nondecreasing.
+
+For any $c,$
+
+the sublevel set is $C_c={x:\ell_0(|x|)\leq c}.$
+
+Because $\ell_0$
+
+is nondecreasing, the set of radii satisfying the inequality is an initial interval starting at zero.
+
+Thus, $C_c$
+
+is one of the following: $\varnothing,\qquad(-a,a),\qquad[-a,a],\qquad\mathbb R,$
+
+possibly with only one or both endpoints included.
+
+Every such set is convex and symmetric around zero.
+
+Therefore, $\ell$
+
+is bowl-shaped.
+
+Hence, $\boxed{\ell\text{ is bowl-shaped if and only if }\ell(x)=\ell_0(|x|)\text{ for a nondecreasing }\ell_0.}$
+
+---
+
+### Problem 10
+
+Let $\ell(x)=\ell_0(|x|),$
+
+where $\ell_0$
+
+is nondecreasing and $|\cdot|$
+
+is a norm.
+
+We show that every sublevel set is convex and symmetric.
+
+Fix $c$
+
+and define $C_c={x:\ell_0(|x|)\leq c}.$
+
+#### Symmetry
+
+If $x\in C_c,$
+
+then $\ell_0(|x|)\leq c.$
+
+Because $|-x|=|x|,$
+
+we have $\ell_0(|-x|)=\ell_0(|x|)\leq c.$
+
+Thus, $-x\in C_c.$
+
+Hence, the set is symmetric around zero.
+
+#### Convexity
+
+Let $x,y\in C_c$
+
+and let $t\in[0,1].$
+
+Set $r=\max{|x|,|y|}.$
+
+Because both points lie in the sublevel set, $\ell_0(r)\leq c.$
+
+By the triangle inequality, $|tx+(1-t)y|\leq t|x|+(1-t)|y|\leq r.$
+
+Since $\ell_0$
+
+is nondecreasing, $\ell_0(|tx+(1-t)y|)\leq\ell_0(r)\leq c.$
+
+Therefore, $tx+(1-t)y\in C_c.$
+
+Thus, every sublevel set is convex and symmetric around zero, so $\boxed{\ell(x)=\ell_0(|x|)\text{ is bowl-shaped}.}$
+
+---
+
+### Problem 11
+
+Prove Anderson’s lemma in one dimension.
+
+Let $Z\sim N(0,1),$
+
+and let $Y$
+
+be an independent random variable with arbitrary distribution $M.$
+
+We want to show that, for every bowl-shaped loss, $E\ell(Z)\leq E\ell(Z+Y).$
+
+#### Step 1: Compare probabilities of centered intervals
+
+For $a\geq0,$
+
+define $q_a(h)=P(|Z+h|\leq a).$
+
+We have $q_a(h)=P(-a-h\leq Z\leq a-h).$
+
+Therefore, $q_a(h)=\Phi(a-h)-\Phi(-a-h).$
+
+Using symmetry of the normal distribution, $q_a(h)=\Phi(a-h)+\Phi(a+h)-1.$
+
+For $h\geq0,$
+
+differentiate: $q_a'(h)=-\phi(a-h)+\phi(a+h).$
+
+Because $|a+h|\geq|a-h|$
+
+and the normal density decreases as the absolute value of its argument increases, $\phi(a+h)\leq\phi(a-h).$
+
+Hence, $q_a'(h)\leq0.$
+
+Also, $q_a(-h)=q_a(h).$
+
+Therefore, $q_a(h)\leq q_a(0)$
+
+for every $h.$
+
+Equivalently, $P(|Z+h|\leq a)\leq P(|Z|\leq a).$
+
+Thus, $P(|Z+h|>a)\geq P(|Z|>a).$
+
+#### Step 2: Randomize the shift
+
+Conditioning on $Y,$
+
+we obtain $P(|Z+Y|\leq a)=E\left[P(|Z+Y|\leq a\mid Y)\right].$
+
+Given $Y=h,$
+
+the conditional probability is $q_a(h).$
+
+Therefore, $P(|Z+Y|\leq a)=E[q_a(Y)]\leq q_a(0)=P(|Z|\leq a).$
+
+Thus, $|Z|$
+
+is stochastically smaller than $|Z+Y|.$
+
+#### Step 3: Apply this to bowl-shaped loss
+
+By Problem 9, a one-dimensional bowl-shaped loss has the form $\ell(x)=\ell_0(|x|),$
+
+where $\ell_0$
+
+is nondecreasing.
+
+Stochastic ordering therefore gives $E\ell_0(|Z|)\leq E\ell_0(|Z+Y|).$
+
+Hence, $\boxed{E\ell(Z)\leq E\ell(Z+Y).}$
+
+Since the distribution of $Z+Y$
+
+is $N(0,1)*M,$
+
+this proves $\boxed{\int\ell,dN(0,1)\leq\int\ell,d[N(0,1)*M].}$
+
+#### Does this proof generalize to higher dimensions?
+
+The one-dimensional derivative argument does not directly generalize.
+
+In one dimension, every symmetric convex set is a centered interval: $[-a,a].$
+
+In higher dimensions, symmetric convex sets may be balls, ellipsoids, cubes, diamonds, or more complicated convex bodies. Shifting such a set involves multidimensional geometry, and there is no single interval endpoint with respect to which we can take the same derivative.
+
+Anderson’s lemma does hold in higher dimensions, but its proof requires a genuinely multidimensional argument based on properties of Gaussian measures and symmetric convex sets.
+
+---
+
+### Problem 12
+
+The Stein estimator in the Gaussian limit experiment is $T(X)=X-(k-2)\frac{X}{|X|^2},$
+
+where $X\sim N(h,I)$
+
+and $k\geq3.$
+
+Its coordinate of order $j$
+
+is $T_j(X)=X_j-(k-2)\frac{X_j}{|X|^2}.$
+
+The target of this coordinate estimator is $h_j.$
+
+Lemma 8.13 says that a scalar estimator can be locally asymptotically minimax under a suitable bowl-shaped loss only if it is best regular.
+
+At the origin, the local distribution of $T_j(X)-h_j$
+
+depends on the entire vector $h,$
+
+because $T_j(X)-h_j=X_j-h_j-(k-2)\frac{X_j}{|X|^2}.$
+
+Thus, the coordinate estimator is not regular at the origin.
+
+By Lemma 8.13, it cannot be locally asymptotically minimax for estimating $h_j$
+
+under the relevant one-dimensional bowl-shaped losses.
+
+Therefore, the coordinates of the Stein estimator are not individually superior estimators of the corresponding coordinates of the mean vector.
+
+The Stein improvement applies to the joint quadratic loss $|T-h|^2=\sum_{j=1}^k(T_j-h_j)^2.$
+
+It is possible to reduce the sum of the coordinate risks while making some individual coordinate risks worse.
+
+Thus, $\boxed{\text{The Stein estimator is good for joint vector estimation, but not coordinatewise estimation.}}$
+
+At fixed nonzero parameter values, the shrinkage term becomes asymptotically negligible, so the coordinates are asymptotically equivalent to the corresponding sample means. The difficulty occurs at the shrinkage point.
+
+---
+
+### Problem 13
+
+Chapter 7 defines a sequence of experiments $\left(P_{n,\theta}:\theta\in\Theta\right)$ to be locally asymptotically normal at $\theta$ if there exist norming matrices $r_n,$ central sequences $\Delta_{n,\theta},$ and nonsingular information matrices $I_\theta$ such that $\Delta_{n,\theta}\overset{P_{n,\theta}}{\rightsquigarrow}N(0,I_\theta),$ and, for every sequence $h_n\to h,$ $\log\frac{dP_{n,\theta+r_n^{-1}h_n}}{dP_{n,\theta}}=h^T\Delta_{n,\theta}-\frac12h^TI_\theta h+o_{P_{n,\theta}}(1).$
+
+The corresponding local experiments converge to the Gaussian shift experiment $\left(N(h,I_\theta^{-1}):h\in\mathbb R^k\right).$
+
+This is the general LAN setup introduced in Chapter 7.
+
+For a general target, introduce target norming matrices $s_n$ and suppose that $s_n\left[\psi\left(\theta+r_n^{-1}h\right)-\psi(\theta)\right]\longrightarrow\dot\psi_\theta h.$
+
+In the usual i.i.d. case, $r_n=\sqrt nI_k,$ and $s_n=\sqrt nI_m.$
+
+---
+
+#### General LAN version of Theorem 8.9
+
+Assume that:
+
+- the sequence of experiments is LAN at every $\theta\in\Theta;$
+- each information matrix $I_\theta$
+
+is nonsingular;
+
+- the target satisfies $s_n\left[\psi\left(\theta+r_n^{-1}h\right)-\psi(\theta)\right]\to\dot\psi_\theta h;$
+- the relevant measurability conditions hold;
+- for every $\theta,$
+
+there is a limiting distribution $L_\theta$
+
+such that $s_n\left(T_n-\psi(\theta)\right)\overset{P_{n,\theta}}{\rightsquigarrow}L_\theta.$
+
+Then, for Lebesgue almost every $\theta,$
+
+there exists a probability measure $M_\theta$
+
+such that $\boxed{L_\theta=N\left(0,\dot\psi_\theta I_\theta^{-1}\dot\psi_\theta^T\right)*M_\theta.}$
+
+If $L_\theta$
+
+has covariance matrix $\Sigma_\theta,$
+
+then, for Lebesgue almost every $\theta,$ $\boxed{\Sigma_\theta-\dot\psi_\theta I_\theta^{-1}\dot\psi_\theta^T}$
+
+is nonnegative definite.
+
+Thus, the almost-everywhere convolution theorem depends only on LAN, not on the observations being independent and identically distributed.
+
+---
+
+#### General LAN version of Lemma 8.14
+
+An estimator sequence is best regular at $\theta$
+
+if and only if it has the asymptotic linear representation $\boxed{s_n\left(T_n-\psi(\theta)\right)=\dot\psi_\theta I_\theta^{-1}\Delta_{n,\theta}+o_{P_{n,\theta}}(1).}$
+
+Because $\Delta_{n,\theta}\rightsquigarrow N(0,I_\theta),$
+
+this representation gives $s_n\left(T_n-\psi(\theta)\right)\rightsquigarrow N\left(0,\dot\psi_\theta I_\theta^{-1}\dot\psi_\theta^T\right).$
+
+Under the local alternative $\theta+r_n^{-1}h,$
+
+Le Cam’s third lemma gives $\dot\psi_\theta I_\theta^{-1}\Delta_{n,\theta}\rightsquigarrow N\left(\dot\psi_\theta h,\dot\psi_\theta I_\theta^{-1}\dot\psi_\theta^T\right).$
+
+Subtracting the local change in the target, $s_n\left[\psi\left(\theta+r_n^{-1}h\right)-\psi(\theta)\right]\to\dot\psi_\theta h,$
+
+gives $s_n\left(T_n-\psi\left(\theta+r_n^{-1}h\right)\right)\rightsquigarrow N\left(0,\dot\psi_\theta I_\theta^{-1}\dot\psi_\theta^T\right).$
+
+The limit is the same for every $h,$
+
+so the estimator is regular and attains the lower bound.
+
+Conversely, every best regular estimator must be asymptotically equivalent to this efficient central-sequence estimator and therefore satisfies the same expansion.
+
+#### Special case: estimating the parameter itself
+
+If $\psi(\theta)=\theta,$
+
+then $s_n=r_n$
+
+and $\dot\psi_\theta=I_k.$
+
+The convolution bound becomes $L_\theta=N(0,I_\theta^{-1})*M_\theta,$
+
+and the efficient asymptotic expansion is $\boxed{r_n(T_n-\theta)=I_\theta^{-1}\Delta_{n,\theta}+o_{P_{n,\theta}}(1).}$
+
+## Chapter 18 {#problems-chapter-18}
+
+See [Chapter 18: Stochastic Convergence in Metric Spaces](chapter-18.qmd).
+
+### Problem 1
+
+#### (i) Show that a compact set is totally bounded
+
+- Let $K$ be compact.
+- Recall that $K$ is totally bounded if, for every $\varepsilon>0$, it can be covered by finitely many $\varepsilon$-balls.
+- Suppose instead that $K$ is **not** totally bounded.
+- Then there exists some $\varepsilon>0$ such that no finite collection of $\varepsilon-$balls covers $K$.
+- We can recursively choose points $x_1,x_2,\ldots\in K$ such that $x_{n+1}\notin\bigcup_{j=1}^nB(x_j,\varepsilon)$.
+- Therefore, for every $i\neq j$, $d(x_i,x_j)\geq\varepsilon$.
+- Because $K$ is compact, the sequence $x_n$ has a convergent subsequence $x_{n_j}\to x\in K$.
+- Every convergent sequence is Cauchy, so for sufficiently large $j,k$ we must have $d(x_{n_j},x_{n_k})<\varepsilon$.
+- But by construction $d(x_{n_j},x_{n_k})\geq\varepsilon$.
+- This is a contradiction.
+
+Therefore, $K$ is totally bounded.
+
+#### (ii) Show that a compact set is separable
+
+- From part (i), for every $m\geq1$, there exists a finite $1/m$ net $A_m$ for $K$.
+- That is, for every $x\in K$ there exists $a\in A_m$ such that $d(x,a)<1/m$.
+- Define $A=\bigcup_{m=1}^\infty A_m$.
+- Each $A_m$ is finite, so $A$ is countable.
+- To show that $A$ is dense in $K$, fix $x\in K$ and $\varepsilon>0$.
+- Choose $m$ such that $1/m<\varepsilon$.
+- Because $A_m$ is a $1/m-$net, there exists $a\in A_m\subset A$ such that $d(x,a)<1/m<\varepsilon$.
+- Thus every neighborhood of every point in $K$ contains a point of $A$.
+
+Therefore, $K$ has a countable dense subset and is separable.
+
+#### Takeaway
+
+$$
+\boxed{\text{compact}\Longrightarrow\text{totally bounded}\Longrightarrow\text{separable}}
+$$
+
+This is useful later because Theorem 18.14 and Lemma 18.15 turn tight stochastic-process limits into processes living on totally bounded/separable spaces.
+
+---
+
+### Problem 3: Projection $\sigma$-field
+
+Show that the $$\sigma$$-field generated by the coordinate projections $$z\mapsto z(t)$$ on $$C[a,b]$$ equals the Borel $$\sigma$$-field generated by the uniform norm.
+
+Let $$\mathcal A=\sigma{\pi_t:t\in[a,b]}$$ where $$\pi_t(z)=z(t)$$, and let $$\mathcal B$$ be the Borel $$\sigma$$-field generated by $$|z|*\infty=\sup*{t\in[a,b]}|z(t)|$$.
+
+We need to prove $$\mathcal A=\mathcal B$$.
+
+#### Step 1: Show $$\mathcal A\subseteq\mathcal B$$
+
+- For every fixed $$t$$, the coordinate map $$\pi_t:C\to\mathbb R$$ is continuous.
+- Indeed, $$|\pi_t(z)-\pi_t(w)|=|z(t)-w(t)|\leq|z-w|_\infty$$.
+- By Lemma 18.2, every continuous map is Borel measurable.
+- Thus every $$\pi_t$$ is measurable with respect to $$\mathcal B$$.
+- Therefore the $$\sigma$$-field they generate satisfies $$\mathcal A\subseteq\mathcal B$$.
+
+---
+
+#### Step 2: Show that $$C[a,b]$$ is separable
+
+- Construct piecewise-linear functions using:
+- a finite grid on $$[a,b]$$;
+- rational values at each grid point.
+- There are only countably many such functions.
+- Call this collection $$D$$.
+- Every continuous function on $$[a,b]$$ is uniformly continuous.
+- Therefore, given $$z\in C[a,b]$$ and $$\varepsilon>0$$, choose a sufficiently fine grid so that $$|z(s)-z(t)|<\varepsilon/2$$ whenever $$s$$ and $$t$$ lie in the same grid interval.
+- Approximate the value of $$z$$ at every grid point by a rational number to within $$\varepsilon/2$$.
+- The resulting piecewise-linear function $$q\in D$$ then satisfies $$|z-q|_\infty<\varepsilon$$.
+- Hence $$D$$ is countable and dense.
+
+Therefore, $$C[a,b]$$ is separable.
+
+---
+
+#### Step 3: Show that uniform-norm balls are in $$\mathcal A$$
+
+- Let $$T_0$$ be a countable dense subset of $$[a,b]$$.
+- Because $$z-w$$ is continuous, $$|z-w|*\infty=\sup*{t\in T_0}|z(t)-w(t)|$$.
+- Therefore the closed ball of radius $$r$$ around $$z_0$$ can be written as $$\overline B(z_0,r)=\bigcap_{t\in T_0}{z:|z(t)-z_0(t)|\leq r}$$.
+- Each set in the intersection depends on only one coordinate projection and hence belongs to $$\mathcal A$$.
+- The intersection is countable, so $$\overline B(z_0,r)\in\mathcal A$$.
+- An open ball can then be written as a countable union of smaller closed balls: $$B(z_0,r)=\bigcup_{m:1/m<r}\overline B(z_0,r-1/m)$$.
+- Hence every open ball belongs to $$\mathcal A$$.
+
+---
+
+#### Step 4: Use separability
+
+- In a separable metric space, there is a countable basis of open balls.
+- Therefore every open subset of $$C[a,b]$$ is a countable union of open balls.
+- Since every open ball is in $$\mathcal A$$, every open set is in $$\mathcal A$$.
+- The Borel $$\sigma$$-field is generated by the open sets, so $$\mathcal B\subseteq\mathcal A$$.
+
+Combining the two inclusions gives $$\boxed{\mathcal A=\mathcal B}$$.
+
+#### Why this matters
+
+This tells us that for a continuous stochastic process, measurability of the whole random function can essentially be understood through its coordinates $$X_t$$.
+
+---
+
+---
+
+### Problem 6
+
+Let $h\in D[-\infty,\infty]$ and $\varepsilon>0$. Show that there is a finite grid $-\infty=u_0<u_1<\cdots<u_m=\infty$ such that $h$ varies by less than $\varepsilon$ on each interval $[u_i,u_{i+1})$.
+
+This is a useful deterministic version of the **finite approximation** idea in Theorem 18.14.
+
+#### Step 1: Start at a point
+
+- Suppose we are currently at a point $u_i$.
+- Because $h$ is right continuous at $u_i$, there exists some $v>u_i$ such that $h$ varies by less than $\varepsilon/2$ on $[u_i,v)$.
+- Thus we can always move some positive distance to the right while keeping the oscillation small.
+
+Define the oscillation over a set $A$ by $\operatorname{osc}*h(A)=\sup*{s,t\in A}|h(s)-h(t)|$.
+
+Now define $u_{i+1}=\sup{v>u_i:\operatorname{osc}_h([u_i,v))<\varepsilon/2}$.
+
+Then $u_{i+1}>u_i$ and, by taking limits from below, $\operatorname{osc}*h([u_i,u*{i+1}))\leq\varepsilon/2<\varepsilon$.
+
+---
+
+#### Step 2: Show that this procedure must terminate after finitely many steps
+
+- Suppose instead that it produces infinitely many points $u_0<u_1<u_2<\cdots$.
+- Because the extended real line $[-\infty,\infty]$ is compact, the increasing sequence has a limit $u_i\uparrow u^*$.
+- Since $h$ is cadlag, the left limit $h(u^*-)$ exists.
+- Hence, for sufficiently small $\delta>0$, all values of $h$ on $(u^*\delta,u^*)$ are arbitrarily close to $h(u^*-)$.
+- In particular, we can choose $\delta$ such that $\operatorname{osc}_h((u^*\delta,u^*))<\varepsilon/2$.
+- For sufficiently large $i$, $u_i>u^*-\delta$.
+- Therefore $h$ varies by less than $\varepsilon/2$ throughout $[u_i,u^*)$.
+- By the definition of $u_{i+1}$, this forces $u_{i+1}\geq u^*$.
+- But $u^*$ was the limit of the increasing sequence, so we must have $u_{i+1}=u^*$.
+- Right continuity at $u^*$ then allows us to move strictly beyond $u^*$ at the next step.
+- This contradicts the fact that $u_i\uparrow u^*$.
+
+Thus the construction terminates after finitely many steps, eventually reaching $u_m=\infty$.
+
+Therefore we obtain a finite grid satisfying $\operatorname{osc}*h([u_i,u*{i+1}))<\varepsilon$ for every $i$.
+
+---
+
+#### Why all jumps larger than $\varepsilon$ must be grid points
+
+- Suppose $t$ is strictly inside one of the intervals $[u_i,u_{i+1})$.
+- Then both $t$ and points approaching $t$ from the left belong to the same interval.
+- Since the oscillation on the interval is less than $\varepsilon$, $|h(t)-h(t-)|<\varepsilon$.
+- Therefore any point satisfying $|h(t)-h(t-)|>\varepsilon$ cannot lie inside one of the intervals.
+- Hence it must be one of the grid points.
+
+#### Takeaway
+
+A cadlag function can be approximated by **finitely many locally almost-constant pieces**:
+
+$$
+\boxed{\text{cadlag}+\text{compact domain}\Longrightarrow\text{finite approximation at every }\varepsilon.}
+$$
+
+This is very close to the intuition behind condition (ii) of Theorem 18.14.
+
+---
+
+### Problem 7
+
+The problem asks us to show that, when $H_n\to H_0$ appropriately and $\Lambda_n\rightsquigarrow\Lambda$ in $\ell^\infty(H)$ with uniformly continuous limiting sample paths, $\sup_{h\in H_n}\Lambda_n(h)\rightsquigarrow\sup_{h\in H_0}\Lambda(h)$.
+
+#### Small technical issue with the printed statement
+
+As printed, the two conditions on $H_n$ do **not quite prevent points of** $H_n$ **from escaping without a convergent subsequence**. For example, take $H=\mathbb R$, $H_0={0}$ and $H_n={0,n}$. The two stated conditions hold, but a bounded uniformly continuous function can have different limiting suprema over $H_n$ and $H_0$.
+
+The intended argument works if $H$ is compact, or more generally if every sequence $h_n\in H_n$ has a convergent subsequence. This is exactly the type of precompact setting produced around Theorem 18.14/Lemma 18.15.
+
+Under that intended condition:
+
+#### Step 1: Define the maps to which we want to apply continuous mapping
+
+Define $g_n(z)=\sup_{h\in H_n}z(h)$ and $g_0(z)=\sup_{h\in H_0}z(h)$.
+
+We want to apply the changing-map version of the Continuous Mapping Theorem 18.11.
+
+Suppose $z_n\to z$ uniformly and $z$ is uniformly continuous.
+
+First, $|g_n(z_n)-g_n(z)|\leq|z_n-z|_H\to0$.
+
+Thus it remains to show $\sup_{h\in H_n}z(h)\to\sup_{h\in H_0}z(h)$.
+
+---
+
+#### Step 2: Lower bound
+
+- Fix any $h\in H_0$.
+- By condition (i), there exists $h_n\in H_n$ such that $h_n\to h$.
+- Since $z$ is uniformly continuous, $z(h_n)\to z(h)$.
+- Since $z(h_n)\leq\sup_{g\in H_n}z(g)$, we obtain $\liminf_{n\to\infty}\sup_{g\in H_n}z(g)\geq z(h)$.
+- This holds for every $h\in H_0$.
+- Therefore $\liminf_{n\to\infty}\sup_{g\in H_n}z(g)\geq\sup_{h\in H_0}z(h)$.
+
+---
+
+#### Step 3: Upper bound
+
+- Choose $h_n\in H_n$ to be an approximate maximizer satisfying $z(h_n)\geq\sup_{h\in H_n}z(h)-1/n$.
+- By compactness/precompactness, take a subsequence $h_{n_j}\to h$.
+- By condition (ii), $h\in H_0$.
+- Since $z$ is uniformly continuous, $z(h_{n_j})\to z(h)$.
+- Therefore along this subsequence, $\limsup_{j\to\infty}\sup_{g\in H_{n_j}}z(g)\leq z(h)\leq\sup_{g\in H_0}z(g)$.
+- Applying this to a subsequence attaining the overall limsup gives $\limsup_{n\to\infty}\sup_{g\in H_n}z(g)\leq\sup_{g\in H_0}z(g)$.
+
+Combining the lower and upper bounds,
+
+$$
+\sup_{h\in H_n}z(h)\to\sup_{h\in H_0}z(h).
+$$
+
+---
+
+#### Step 4: Apply Theorem 18.11
+
+- We have shown that whenever $z_n\to z$ uniformly and $z$ is uniformly continuous, $g_n(z_n)\to g_0(z)$.
+- By assumption, $\Lambda_n\rightsquigarrow\Lambda$ in $\ell^\infty(H)$.
+- Almost every sample path of $\Lambda$ is uniformly continuous.
+- Therefore Theorem 18.11 gives $\boxed{\sup_{h\in H_n}\Lambda_n(h)\rightsquigarrow\sup_{h\in H_0}\Lambda(h).}$
+
+#### Why Problem 7 is especially useful
+
+This is a very clean example of why Van der Vaart states the **changing-map** version of the continuous mapping theorem. The statistic itself changes with $n$ because the set over which we maximize changes:
+
+$$
+g_n(z)=\sup_{h\in H_n}z(h).
+$$
+
+The proof also combines the two central Chapter 18 ideas:
+
+$$
+\boxed{\text{uniform convergence of random functions}+\text{uniform continuity of the limit}.}
+$$
+
+### Problem 2 — worth knowing, but not worth group time
+
+The result is $$f:\mathbb D\to\mathbb E\text{ is continuous}\Longleftrightarrow f^{-1}(G)\text{ is open for every open }G\subseteq\mathbb E$$.
+
+- $$\Rightarrow$$: if $$f$$ is continuous and $$x\in f^{-1}(G)$$, then because $$G$$ is open there is a ball around $$f(x)$$ contained in $$G$$; continuity gives a neighborhood of $$x$$ mapped into that ball, so $$f^{-1}(G)$$ is open.
+- $$\Leftarrow$$: if inverse images of open sets are open, take any neighborhood $$G$$ of $$f(x)$$. Then $$f^{-1}(G)$$ is an open neighborhood of $$x$$, which is exactly continuity at $$x$$.
+
+For the reading group, I would rank the exercises $$\boxed{7>6>3>1}$$ in terms of payoff for Chapters 19 and 25.
+
+## Chapter 19 {#problems-chapter-19}
+
+See [Chapter 19: Empirical Processes](chapter-19.qmd).
+
+### Problem 5: Construct brackets for a Lipschitz class
+
+Let $\mathcal F$ be the class of functions $f:[0,1]\to[0,1]$ satisfying $|f(x)-f(y)|\leq |x-y|$.
+
+We want to construct $\varepsilon$-brackets whose number is bounded by $\exp(C/\varepsilon)$.
+
+#### Step 1: Put a grid on $[0,1]$
+
+- Choose $\delta=\varepsilon/3$.
+- Let $0=x_0<x_1<\cdots<x_m=1$ be a grid with mesh width at most $\delta$.
+- We can choose $m\leq 1/\delta+1$, so $m=O(1/\varepsilon)$.
+
+#### Step 2: Discretize the value of $f$ at each grid point
+
+- For each $j$, define an integer $k_j$ by $k_j\delta\leq f(x_j)<(k_j+1)\delta$.
+- Since $0\leq f\leq1$, there are at most $1/\delta+1$ possible values for $k_0$.
+
+Because $f$ is Lipschitz,
+
+$$
+|f(x_{j+1})-f(x_j)|\leq\delta.
+$$
+
+Therefore the discretized levels cannot jump much:
+
+$$
+|k_{j+1}-k_j|\leq1.
+$$
+
+- Thus, after choosing $k_j$, there are at most three possible values for $k_{j+1}$.
+
+#### Step 3: Construct a bracket from the sequence $k_0,\ldots,k_m$
+
+For $x\in[x_j,x_{j+1})$, Lipschitz continuity gives
+
+$$
+f(x)\geq f(x_j)-|x-x_j|\geq k_j\delta-|x-x_j|
+$$
+
+and
+
+$$
+f(x)\leq f(x_j)+|x-x_j|<(k_j+1)\delta+|x-x_j|.
+$$
+
+Define
+
+$$
+l(x)=\max{0,k_j\delta-|x-x_j|}
+$$
+
+and
+
+$$
+u(x)=\min{1,(k_j+1)\delta+|x-x_j|}.
+$$
+
+Then $l(x)\leq f(x)\leq u(x)$.
+
+Furthermore,
+
+$$
+u(x)-l(x)\leq\delta+2|x-x_j|\leq3\delta=\varepsilon.
+$$
+
+Therefore,
+
+$$
+|u-l|_\infty\leq\varepsilon.
+$$
+
+In particular, for any probability measure $P$,
+
+$$
+|u-l|_{P,2}\leq\varepsilon.
+$$
+
+So this is an $\varepsilon$-bracket.
+
+#### Step 4: Count the brackets
+
+- There are at most $1/\delta+1$ choices for $k_0$.
+- At each of the remaining $m$ grid points there are at most three choices.
+
+Thus,
+
+$$
+N_{[]}(\varepsilon,\mathcal F,|\cdot|_\infty)\leq (1/\delta+1)3^m.
+$$
+
+Taking logs,
+
+$$
+\log N_{[]}(\varepsilon,\mathcal F,|\cdot|_\infty)\leq\log(1/\delta+1)+m\log3.
+$$
+
+Since $m=O(1/\delta)$ and $\delta=\varepsilon/3$,
+
+$$
+\log N_{[]}(\varepsilon,\mathcal F,|\cdot|_\infty)\leq C/\varepsilon
+$$
+
+for some constant $C$.
+
+Hence,
+
+$$
+\boxed{N_{[]}(\varepsilon,\mathcal F,|\cdot|_\infty)\leq\exp(C/\varepsilon).}
+$$
+
+#### Why this matters
+
+The important lesson is not the exact construction. It is:
+
+$$
+\boxed{\text{smoothness restricts how quickly functions can vary}\Rightarrow\text{few brackets are needed}.}
+$$
+
+And because $\log N_{[]}(\varepsilon)=O(1/\varepsilon)$,
+
+$$
+\int_0^1\sqrt{\log N_{[]}(\varepsilon)},d\varepsilon\lesssim\int_0^1\varepsilon^{-1/2}d\varepsilon<\infty.
+$$
+
+So this class satisfies the bracketing entropy condition for Theorem 19.5 and is Donsker.
+
+---
+
+### Problem 9: Pointwise convergence of CDFs implies uniform convergence
+
+#### (i) Suppose $F_n(x)\to F(x)$ for every $x$ and $F$ is continuous. Show $|F_n-F|_\infty\to0$.
+
+#### Step 1: Construct a finite grid
+
+- Fix $\varepsilon>0$.
+- Because $F$ is a continuous distribution function, choose finitely many points $-\infty=t_0<t_1<\cdots<t_k=\infty$ such that $F(t_i)-F(t_{i-1})<\varepsilon$ for every $i$.
+
+#### Step 2: Use monotonicity
+
+For $t_{i-1}\leq t<t_i$,
+
+$$
+F_n(t_{i-1})\leq F_n(t)\leq F_n(t_i)
+$$
+
+and
+
+$$
+F(t_{i-1})\leq F(t)\leq F(t_i).
+$$
+
+Hence,
+
+$$
+F_n(t)-F(t)\leq F_n(t_i)-F(t_i)+F(t_i)-F(t)<F_n(t_i)-F(t_i)+\varepsilon
+$$
+
+and similarly,
+
+$$
+F_n(t)-F(t)\geq F_n(t_{i-1})-F(t_{i-1})-\varepsilon.
+$$
+
+Thus,
+
+$$
+|F_n-F|_\infty\leq\max_i|F_n(t_i)-F(t_i)|+\varepsilon.
+$$
+
+#### Step 3: Use pointwise convergence at finitely many points
+
+Since there are only finitely many $t_i$,
+
+$$
+\max_i|F_n(t_i)-F(t_i)|\to0.
+$$
+
+Therefore,
+
+$$
+\limsup_{n\to\infty}|F_n-F|_\infty\leq\varepsilon.
+$$
+
+Since $\varepsilon>0$ is arbitrary,
+
+$$
+\boxed{|F_n-F|_\infty\to0.}
+$$
+
+#### Takeaway
+
+This is the deterministic analogue of the proof strategy behind Glivenko–Cantelli:
+
+$$
+\boxed{\text{pointwise convergence}+\text{finite approximation}+\text{monotonicity}\Rightarrow\text{uniform convergence}.}
+$$
+
+---
+
+#### (ii) Suppose $F_n(x)\to F(x)$ and $F_n{x}\to F{x}$ for every $x$. Show $|F_n-F|_\infty\to0$.
+
+The complication is that $F$ may now have jumps.
+
+#### Step 1: Obtain convergence of left limits
+
+Since
+
+$$
+F_n(x-)=F_n(x)-F_n{x},
+$$
+
+the assumptions imply
+
+$$
+F_n(x-)\to F(x)-F{x}=F(x-).
+$$
+
+Thus we have convergence of both $F_n(x)$ and $F_n(x-)$.
+
+#### Step 2: Choose a grid controlling the variation of $F$
+
+- For any $\varepsilon>0$, choose $-\infty=t_0<t_1<\cdots<t_k=\infty$ such that $F(t_i-)-F(t_{i-1})<\varepsilon$.
+- Large jumps of $F$ are put at grid points.
+
+For $t_{i-1}\leq t<t_i$,
+
+$$
+F_n(t)\leq F_n(t_i-)
+$$
+
+and
+
+$$
+F_n(t)\geq F_n(t_{i-1}).
+$$
+
+Therefore,
+
+$$
+F_n(t)-F(t)\leq F_n(t_i-)-F(t_i-)+\varepsilon
+$$
+
+and
+
+$$
+F_n(t)-F(t)\geq F_n(t_{i-1})-F(t_{i-1})-\varepsilon.
+$$
+
+Because convergence holds at the finitely many quantities $F_n(t_{i-1})$ and $F_n(t_i-)$,
+
+$$
+\limsup_{n\to\infty}|F_n-F|_\infty\leq\varepsilon.
+$$
+
+Hence,
+
+$$
+\boxed{|F_n-F|_\infty\to0.}
+$$
+
+#### Why the extra assumption is needed
+
+If $F$ has jumps, pointwise convergence alone does not force the jumps of $F_n$ to line up with those of $F$.
+
+The condition
+
+$$
+F_n{x}\to F{x}
+$$
+
+ensures that the jump sizes converge at every point.
+
+---
+
+### Problem 10: Mean absolute deviation from the median
+
+Let $\widehat m_n$ be the sample median and define
+
+$$
+M_n=\frac1n\sum_{i=1}^n|X_i-\widehat m_n|=\mathbb P_n|X-\widehat m_n|.
+$$
+
+Let $m$ denote the population median.
+
+Under standard regularity conditions, including $EX^2<\infty$, $F(m)=1/2$, and sufficient regularity near $m$ so that $\widehat m_n-m=O_P(n^{-1/2})$, find the asymptotic distribution of $M_n$.
+
+This is the analogue of Example 19.25, but with the **sample median** replacing the sample mean.
+
+#### Step 1: Decompose
+
+Write
+
+$$
+\sqrt n(M_n-P|X-m|)=\sqrt n{P|X-\widehat m_n|-P|X-m|}+\mathbb G_n|X-\widehat m_n|.
+$$
+
+Add and subtract $\mathbb G_n|X-m|$:
+
+$$
+\sqrt n(M_n-P|X-m|)=\sqrt n{P|X-\widehat m_n|-P|X-m|}+\mathbb G_n|X-m|+\mathbb G_n(|X-\widehat m_n|-|X-m|).
+$$
+
+We analyze the three pieces.
+
+---
+
+#### Step 2: Control the random-function empirical-process term
+
+Consider the class
+
+$$
+\mathcal F={x\mapsto|x-\theta|:\theta\text{ near }m}.
+$$
+
+As in Example 19.25, this is a Donsker class under the relevant moment condition.
+
+Also,
+
+$$
+\big||X-\widehat m_n|-|X-m|\big|\leq|\widehat m_n-m|.
+$$
+
+Hence,
+
+$$
+P\left(|X-\widehat m_n|-|X-m|\right)^2\leq|\widehat m_n-m|^2\overset P\to0.
+$$
+
+Lemma 19.24 therefore gives
+
+$$
+\boxed{\mathbb G_n(|X-\widehat m_n|-|X-m|)=o_P(1).}
+$$
+
+This is the important empirical-process step.
+
+---
+
+#### Step 3: Expand the population term
+
+Define
+
+$$
+g(\theta)=P|X-\theta|.
+$$
+
+Where differentiable,
+
+$$
+g'(\theta)=2F(\theta)-1.
+$$
+
+At the median,
+
+$$
+g'(m)=2F(m)-1=0.
+$$
+
+Therefore,
+
+$$
+P|X-\widehat m_n|-P|X-m|=o_P(|\widehat m_n-m|).
+$$
+
+Since $\widehat m_n-m=O_P(n^{-1/2})$,
+
+$$
+\sqrt n{P|X-\widehat m_n|-P|X-m|}=o_P(1).
+$$
+
+This is the key simplification: **estimating the median has no first-order effect because the population median minimizes absolute loss.**
+
+---
+
+#### Step 4: What remains
+
+Thus,
+
+$$
+\sqrt n(M_n-P|X-m|)=\mathbb G_n|X-m|+o_P(1).
+$$
+
+By the ordinary CLT,
+
+$$
+\mathbb G_n|X-m|\rightsquigarrow N\left(0,\operatorname{Var}(|X-m|)\right).
+$$
+
+Therefore,
+
+$$
+\boxed{\sqrt n(M_n-E|X-m|)\rightsquigarrow N\left(0,\operatorname{Var}(|X-m|)\right).}
+$$
+
+#### Important interpretation
+
+At first order, using the **sample median** is just as good as knowing the population median:
+
+$$
+\boxed{\mathbb P_n|X-\widehat m_n|\quad\text{and}\quad\mathbb P_n|X-m|}
+$$
+
+have the same asymptotic distribution.
+
+This occurs because
+
+$$
+\left.\frac{\partial}{\partial\theta}E|X-\theta|\right|_{\theta=m}=0.
+$$
+
+This problem is particularly useful for Chapter 25 because the argument has the exact structure:
+
+$$
+\boxed{\text{estimated nuisance quantity inside }\mathbb G_n\overset{\text{Lemma 19.24}}{\longrightarrow}\text{replace it by its population value}.}
+$$
+
+---
+
+### Problem 6(i): VC index of intervals $(a,b]$
+
+Let
+
+$$
+\mathcal C={(a,b]:a<b}.
+$$
+
+Recall Van der Vaart's convention: the **VC index** $V(\mathcal C)$ is the smallest $n$ such that no set of $n$ points can be shattered.
+
+#### Step 1: Two points can be shattered
+
+Take $x_1<x_2$.
+
+The four subsets can all be picked out by intervals:
+
+- $\varnothing$: choose an interval containing neither point.
+- ${x_1}$: choose a small interval around $x_1$.
+- ${x_2}$: choose a small interval around $x_2$.
+- ${x_1,x_2}$: choose an interval containing both.
+
+Therefore a two-point set can be shattered.
+
+Thus,
+
+$$
+V(\mathcal C)>2.
+$$
+
+#### Step 2: Three points cannot be shattered
+
+Take any $x_1<x_2<x_3$.
+
+There is no interval $(a,b]$ that contains $x_1$ and $x_3$ but excludes $x_2$.
+
+Thus the subset
+
+$$
+{x_1,x_3}
+$$
+
+cannot be picked out.
+
+Therefore no three-point set is shattered.
+
+Hence,
+
+$$
+\boxed{V(\mathcal C)=3.}
+$$
+
+Under the more common convention where “VC dimension” is the largest shattered-set size, this class has VC dimension $2$.
+
+---
+
+#### What I would actually assign
+
+For your reading group, my order would be:
+
+1. **Problem 10** — most directly relevant to §19.4 and Chapter 25.
+2. **Problem 5** — makes bracketing/entropy real rather than purely definitional.
+3. **Problem 9** — short and reinforces pointwise versus uniform convergence.
+4. **Problem 6(i)** — quick exercise if you cover VC classes at all.
+
+So if time is limited, I would assign just:
+
+$$
+\boxed{\text{Problems 5 and 10}.}
+$$
+
+## Chapter 25 {#problems-chapter-25}
+
+See [Chapter 25: Semiparametric Models](chapter-25.qmd).
+
+### Problem 1: Known mean-zero distribution
+
+#### (i) Tangent set
+
+The model consists of distributions $P$ on $\mathbb R$ satisfying $PX=0$. For a differentiable path $dP_t=(1+tg)\,dP$, preservation of total mass and the mean-zero restriction require $Pg=0$ and $P(Xg)=0$. Thus a tangent set is
+
+$$
+\dot{\mathcal P}_P=\left\{g\in L_2(P):Pg=0,\ P(Xg)=0\right\}.
+$$
+
+Its closure is the orthogonal complement of the span of $1$ and $X$ in $L_2(P)$.
+
+#### (ii) Efficient influence function for $\psi(P)=P(C)$
+
+In the unrestricted nonparametric model, an influence function is $1_C-P(C)$. The efficient influence function in the restricted model is its projection onto the tangent space. Assuming $0<PX^2<\infty$,
+
+$$
+\widetilde\psi_P(X)=1_C(X)-P(C)-\frac{P[X1_C(X)]}{PX^2}X.
+$$
+
+Indeed, $P\widetilde\psi_P=0$ and $P[X\widetilde\psi_P]=0$, while for every tangent direction $g$, $P(\widetilde\psi_Pg)=P(1_Cg)=\dot\psi_Pg$.
+
+#### (iii) Efficient estimator
+
+A plug-in one-step estimator is
+
+$$
+T_n=\mathbb P_n1_C-\frac{\mathbb P_n(X1_C)}{\mathbb P_nX^2}\mathbb P_nX.
+$$
+
+Because the true mean is known to be zero, the second term uses the sample deviation from that restriction as a control variate. Under the usual moment and denominator conditions,
+
+$$
+\sqrt n\{T_n-P(C)\}=\frac1{\sqrt n}\sum_{i=1}^n\widetilde\psi_P(X_i)+o_P(1),
+$$
+
+so $T_n$ attains the efficiency bound $P\widetilde\psi_P^2$.
+
+### Problem 2: Symmetric location model
+
+Write $U=X-\theta$. The ordinary location score is $\dot\ell_{\theta,p}(X)=-\nabla\log p(X-\theta)$. Because $p(u)=p(-u)$, the location score is odd in $u$. Nuisance paths that preserve symmetry have even scores. Odd and even functions are orthogonal under a symmetric density, so projection onto the nuisance tangent space removes nothing: $\widetilde\ell_{\theta,p}=\dot\ell_{\theta,p}$.
+
+Let $I_p=P_{\theta,p}[\dot\ell_{\theta,p}\dot\ell_{\theta,p}^T]$. Provided $I_p$ is nonsingular, the efficient influence function is
+
+$$
+\widetilde\psi_{\theta,p}(X)=I_p^{-1}\dot\ell_{\theta,p}(X)=I_p^{-1}\{-\nabla\log p(X-\theta)\}.
+$$
+
+The key point is that symmetry makes the parametric location score automatically orthogonal to every nuisance score.
+
+### Problem 3: Regression with independent errors
+
+Suppose $Y=g_\theta(X)+e$, where $e$ is independent of $X$, $Ee=0$, $\operatorname{Var}(e)=\sigma^2$, and $e$ has density $f$. Write $\dot g_\theta(X)=\partial g_\theta(X)/\partial\theta$ and $\ell_f(e)=f'(e)/f(e)$. The ordinary score is $\dot\ell_\theta(X,Y)=-\dot g_\theta(X)\ell_f(e)$.
+
+Scores for the unknown distribution of $X$ are already orthogonal to this score because $E\{\ell_f(e)\}=0$. Scores for the unknown error density satisfy $Eb(e)=0$ and $E\{eb(e)\}=0$.
+
+Let $\mu_g=E\dot g_\theta(X)$. Projecting the ordinary score off the error-density tangent space yields
+
+$$
+\widetilde\ell_\theta(X,Y)=-\{\dot g_\theta(X)-\mu_g\}\ell_f(e)+\frac{\mu_g}{\sigma^2}e.
+$$
+
+This is the efficient score. When $E\dot g_\theta(X)=0$, it simplifies to $-\dot g_\theta(X)\ell_f(e)$.
+
+### Problem 4: Uniform mixtures
+
+The mixture density is $p_F(x)=\int 1_{\{z\leq x\leq z+1\}}\,dF(z)$. For a path $dF_t=(1+tb)\,dF$ with $Fb=0$, the observed-data score is
+
+$$
+A_Fb(x)=E\{b(Z)\mid X=x\}=\frac{\int_{[x-1,x]}b(z)\,dF(z)}{p_F(x)}.
+$$
+
+Thus a tangent set is $A_F L_2^0(F)$, or its linear span and closure.
+
+The adjoint satisfies
+
+$$
+A_F^*h(z)=E\{h(X)\mid Z=z\}=\int_z^{z+1}h(x)\,dx.
+$$
+
+This adjoint has a nontrivial kernel. For example, $h(x)=\sin(2\pi x)$ gives $A_F^*h(z)=0$. Hence $N(A_F^*)$ is nontrivial and $\overline{R(A_F)}=N(A_F^*)^\perp$ is a proper subspace of the nonparametric tangent space. Therefore, the closed linear span of the mixture-model tangent set is not the entire nonparametric tangent space.
+
+### Problem 5: Neyman–Scott problem
+
+Define $S=X+Y$ and $D=X-Y$. Conditional on $Z$, $S\sim N(2Z,2\theta)$ and $D\sim N(0,2\theta)$, and $D$ is independent of both $S$ and $Z$.
+
+#### (i) Nuisance tangent space
+
+Perturbing the unknown distribution $\eta$ of $Z$ changes only the marginal distribution of $S$. The nuisance scores are conditional expectations of mean-zero functions of $Z$ given $S$. Gaussian convolution is complete: if a square-integrable function of $S$ is orthogonal to all these scores, the corresponding convolution must vanish, forcing that function to be constant. After imposing mean zero, it must be zero. Therefore, the closed linear span of the nuisance tangent set contains every square-integrable mean-zero function of $S$.
+
+#### (ii) Efficiency of the difference-based estimator
+
+After projecting the full score for $\theta$ off all mean-zero functions of $S$, only the score from $D$ remains:
+
+$$
+\widetilde\ell_\theta(D)=\frac{D^2-2\theta}{4\theta^2},\qquad \widetilde I_\theta=\frac1{2\theta^2}.
+$$
+
+Thus the efficient influence function is $\widetilde\psi_\theta(D)=D^2/2-\theta$. The estimator
+
+$$
+T_n=\frac1{2n}\sum_{i=1}^n(X_i-Y_i)^2
+$$
+
+satisfies exactly
+
+$$
+\sqrt n(T_n-\theta)=\frac1{\sqrt n}\sum_{i=1}^n\left\{\frac{(X_i-Y_i)^2}{2}-\theta\right\}.
+$$
+
+Therefore it is asymptotically linear in the efficient influence function and is asymptotically efficient.
+
+#### (iii) Is $T_n$ the semiparametric MLE?
+
+Generally, no. $T_n$ maximizes the likelihood based only on the differences $D_i$. The full semiparametric likelihood also contains the distribution of the sums $S_i$, whose Gaussian-mixture form depends on both $\theta$ and the unknown mixing distribution $\eta$. Profiling that likelihood over $\eta$ need not give the same finite-sample maximizer. The sums contribute no first-order efficient information after nuisance projection, so a regular full semiparametric MLE can nevertheless be asymptotically equivalent to $T_n$.
