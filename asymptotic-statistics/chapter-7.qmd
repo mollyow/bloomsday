@@ -1,10 +1,28 @@
-# Chapter 7: Local Asymptotic Normality
+# Chapter 7: Local Asymptotic Normality {#sec-lan}
+
+This chapter shows how a smooth model, viewed on an $n^{-1/2}$ neighborhood of a fixed parameter, becomes a [Gaussian shift experiment](glossary.qmd#glossary-limit-experiment).
+
+::: {.callout-tip title="Why this chapter is here"}
+- **Prerequisites:** [stochastic order and Slutsky](chapter-2.qmd#sec-stochastic-order), together with [contiguity and change of measure](chapter-6.qmd#sec-contiguity).
+- **Purpose:** use [DQM](glossary.qmd#glossary-dqm) and [LAN](glossary.qmd#glossary-lan) to replace a smooth statistical model, in a shrinking neighborhood of the truth, by a Gaussian location experiment.
+- **Chapter 25 payoff:** [Lemma 25.14](chapter-25.qmd#lemma-25.14-local-asymptotic-normality-along-a-path) applies the same LAN expansion one path at a time. Along the way, LAN supplies the Gaussian reductions in [Theorem 8.3](chapter-8.qmd#theorem-limit-experiment-reduction) and [Chapter 15](chapter-15.qmd#sec-chapter-15-lan-power).
+:::
+
+::: {.callout-note title="Background and another treatment"}
+For complementary treatments of differentiability in quadratic mean, LAN, and convergence of experiments, see [@bailie2021, §6.2 and §§12.1–12.3] and [@tsybakov2009, §2.4].
+:::
+
+## Reading guide
+
+- **Sections 7.2--7.3 are essential:** Theorem 7.2 turns DQM into LAN, and Theorem 7.10 transfers limiting procedures to the Gaussian experiment.
+- **Section 7.5 is essential:** contiguity and Le Cam's third lemma determine behavior under local alternatives.
+- **Section 7.4 is useful but not required for Chapter 25:** it explains likelihood maximization and parameter-space boundaries in the Gaussian limit.
+- **Section 7.6 is a useful abstraction:** Definition 7.14 separates LAN from the i.i.d. setting. The dependent-model Examples 7.16--7.18 and the chapter exercises are omitted from this route.
+- **Examples 7.7--7.9 are compressed:** they illustrate how DQM is verified and why moving support can make it fail.
 
 ## 7.1 Introduction
 
-::: {.callout-note title="Definition"}
-### Summary
-
+::: {.callout-note title="Chapter roadmap"}
 1. Reparameterize locally using $\theta+h/\sqrt n$.
 2. Assume differentiability in quadratic mean.
 3. Obtain the quadratic likelihood expansion $h^T\Delta_{n,\theta}-\frac12h^TI_\theta h+o_{P_\theta}(1)$.
@@ -13,58 +31,60 @@
 6. Use the Gaussian experiment to understand maximum likelihood, local alternatives, testing, estimation, and asymptotic efficiency.
 7. Abstract the likelihood expansion into the general definition of LAN for non-i.i.d. and dependent models.
 
-The local behavior of a regular statistical model is asymptotically summarized by the central sequence $\Delta_{n,\theta}$ and the Fisher information $I_\theta$.
-
-Locally, the original model behaves like observing $X\sim N(h,I_\theta^{-1})$.
+The central sequence $\Delta_{n,\theta}$ and Fisher information $I_\theta$ summarize the local behavior of a regular model. In the limit, the original experiment behaves like observing $X\sim N(h,I_\theta^{-1})$.
 
 :::
 
-- A **sample** $X_1, \dots, X_n$ is from a **distribution** $P_\theta$ on a measurable space $(\mathcal X, \mathcal A)$ indexed by a **parameter** $\theta$ that ranges over an open subset $\Theta$ of $\mathbb R^k$
-    - a full **observation** comes from $P_\theta^n$ (i.e., $n$ copies of $P_\theta$) (implies iid)
-    - the **statistical model** is the collection of probability measures $\{P_\theta^n : \theta \in \Theta \}$ on **sample space** $(\mathcal X^n, \mathcal A^n)$
-- A **statistical experiment** is a specification of the distribution of the data for every possible value of the parameter; a distribution corresponds to a specific parameter value, the experiment allows for all distributions permitted by a given model.
+### Parametric-to-semiparametric dictionary
 
-::: {.callout-note title="Definition"}
+Chapter 25 keeps the structure developed here but allows infinitely many local directions. The correspondence is conceptual, not a literal change of notation:
+
+| Chapter 7: smooth parametric model | Chapter 25: semiparametric model |
+|---|---|
+| local vector $h$ selects a direction and magnitude | score $g$ selects a tangent direction; a scalar $h$ controls its magnitude |
+| DQM of $\theta\mapsto P_\theta$ along parameter vectors | DQM of a path $t\mapsto P_{t,g}$ with score $g$ |
+| local law $P_{\theta+h/\sqrt n}^n$ | local law $P_{h/\sqrt n,g}^n$ along a chosen path |
+| Fisher information $I_\theta$ | efficient information after projecting away nuisance directions |
+| $I_\theta^{-1}\dot\ell_\theta$ for $\theta$ itself (and $\dot\psi_\theta I_\theta^{-1}\dot\ell_\theta$ for a smooth scalar target, using the book's row-gradient convention) | efficient influence function $\widetilde\psi_P$ |
+
+The key move is therefore $h\leftrightarrow g$: Chapter 7 studies finitely many parameter directions at once, while [§25.3](chapter-25.qmd#tangent-spaces-and-information) collects the scores of all admissible paths into a tangent space.
+
+::: {.callout-note title="Statistical experiments"}
+
+Let $X_1,\ldots,X_n$ be an i.i.d. sample from $P_\theta$ on $(\mathcal X,\mathcal A)$, where $\theta$ ranges over an open subset $\Theta\subset\mathbb R^k$. The full observation has law $P_\theta^n$ on $(\mathcal X^n,\mathcal A^n)$, and the statistical experiment is the family $\{P_\theta^n:\theta\in\Theta\}$. A single $P_\theta^n$ describes the data law at one parameter value; the experiment retains the full family of possible laws.
+
+:::
+
+::: {.callout-note title="Local asymptotic normality, informally"}
 A sequence of statistical experiments is **locally asymptotically normal** when, after an appropriate local reparameterization, its likelihood-ratio process has the same asymptotic quadratic form as the likelihood-ratio process of a Gaussian location experiment.
 
 :::
 
-i.e., we are going to show that :
+The approximation to be established is
 
 $$
-\{P_{\theta+h/\sqrt n}^n:h\in\mathbb R^k\} \approx \{N(h,I_{\theta_0}^{-1}):h\in\mathbb R^k\}
+\{P_{\theta_0+h/\sqrt n}^n:h\in\mathbb R^k\} \approx \{N(h,I_{\theta_0}^{-1}):h\in\mathbb R^k\}
 $$
 
-- when $n$ is large and $\theta \mapsto P_\theta$ is smooth in the parameter
+when $n$ is large and $\theta\mapsto P_\theta$ is smooth in the parameter.
 
 ---
 
 ## 7.2 Expanding the Likelihood
 
-### Local re-parameterization
+### Local reparameterization
 
-- Fix parameter value $\theta_0$
-- Define the **local parameter** $h=\sqrt n(\theta-\theta_0)$.
-    - Equivalently, parameter values near $\theta_0$ can be written as $\theta=\theta_0+h/\sqrt n$.
-    - So we can rewrite $P_\theta^n$ as  $P_{\theta_0+h/\sqrt n}^n$.
-    - When $\theta_0$ is an interior point of $\Theta$, every fixed $h\in\mathbb R^k$ corresponds to a valid parameter $\theta_0+h/\sqrt n\in\Theta$ for all sufficiently large $n$.
+Fix $\theta_0$ and define the **local parameter** $h=\sqrt n(\theta-\theta_0)$. Equivalently, write nearby parameter values as $\theta=\theta_0+h/\sqrt n$ and the corresponding data law as $P_{\theta_0+h/\sqrt n}^n$. If $\theta_0$ is an interior point of $\Theta$, every fixed $h\in\mathbb R^k$ gives a valid parameter for all sufficiently large $n$.
 
 ---
 
 ### Heuristic likelihood expansion
 
-- $p_\theta$ is a density of $P_\theta$ with respect to some measure $\mu$
-- log-likelihood $\ell_\theta(x)=\log p_\theta(x)$
-    - the score function is $\dot \ell_\theta (x)= \partial \ell_\theta(x)/\partial \theta$
-    - the second derivative is  $\ddot \ell_\theta (x) = \partial \dot \ell_\theta (x) /\partial \theta$
+Let $p_\theta$ be a density of $P_\theta$ with respect to $\mu$, and write $\ell_\theta(x)=\log p_\theta(x)$. The score is $\dot\ell_\theta(x)=\partial\ell_\theta(x)/\partial\theta$, and the second derivative is $\ddot\ell_\theta(x)=\partial\dot\ell_\theta(x)/\partial\theta$.
 
 **Heuristic Taylor expansion:**
 
-- assume parameter is one-dimensional
-- assume $\ell_\theta(x)$ is twice differentiable with respect to $\theta$
-- $\log\dfrac{p_{\theta+h}}{p_\theta}(x)=\ell_{\theta + h}(x) - \ell_{\theta}(x)$
-
-Take a Taylor expansion of the first term, subtract the second, then:
+For a one-dimensional parameter, suppose $\ell_\theta(x)$ is twice differentiable in $\theta$. Expanding $\ell_{\theta+h}(x)-\ell_\theta(x)$ gives
 
 $$
 \log\dfrac{p_{\theta+h}}{p_\theta}(x)=h\dot\ell_\theta(x)+\frac12h^2\ddot\ell_\theta(x)+o_x(h^2).
@@ -82,26 +102,23 @@ $$
 \end{aligned}
 $$
 
-With:
+Under standard regularity conditions, the score has mean zero, $P_\theta\dot\ell_\theta=0$, and the Fisher information is
 
-- Under standard regularity conditions, the score has mean zero, $P_\theta\dot\ell_\theta=0$, and the Fisher information is
+$$
+I_\theta=P_\theta\dot\ell_\theta\dot\ell_\theta^T=-P_\theta\ddot\ell_\theta.
+$$
 
-  $$
-  I_\theta=P_\theta\dot\ell_\theta\dot\ell_\theta^T=-P_\theta\ddot\ell_\theta.
-  $$
+The first term is random and asymptotically normal:
 
-- The first term is random and asymptotically normal:
+$$
+\Delta_{n,\theta}=n^{-1/2}\sum_{i=1}^n\dot\ell_\theta(X_i)\rightsquigarrow N(0,I_\theta)
+$$
 
-  $$
-  \Delta_{n,\theta}=n^{-1/2}\sum_{i=1}^n\dot\ell_\theta(X_i)\rightsquigarrow N(0,I_\theta)
-  $$
-
-  by the central limit theorem.
-- The second term converges by the law of large numbers to the deterministic quadratic penalty $-\frac12h^2I_\theta$.
+by the central limit theorem. The second term converges by the law of large numbers to the deterministic quadratic penalty $-\frac12h^2I_\theta$.
 
 ### Differentiability in quadratic mean {#sec-differentiability-quadratic-mean}
 
-- The model $\{P_\theta:\theta\in\Theta\}$ is differentiable in quadratic mean at $\theta$ if there exists a measurable vector function $\dot\ell_\theta$ such that:
+The model $\{P_\theta:\theta\in\Theta\}$ is differentiable in quadratic mean at $\theta$ if there exists a measurable vector function $\dot\ell_\theta$ such that
 
 ::: {.callout-note title="Definition"}
 <span id="eq-differentiability-quadratic-mean"></span>
@@ -112,138 +129,330 @@ $$
 
 :::
 
-that is, when we move the parameter from $\theta$ to $\theta+h$ the **square-root density** changes approximately linearly in $h$.
+Thus, when the parameter moves from $\theta$ to $\theta+h$, the **square-root density** changes approximately linearly in $h$.
 
-When pointwise differentiation is valid, $\dot\ell_\theta(x)=  \frac{2}{\sqrt{p_\theta(x)}}\frac{\partial}{\partial\theta} \sqrt{p_\theta (x)} =\frac{\partial}{\partial\theta}\log p_\theta(x)$.
+When pointwise differentiation is valid, $\dot\ell_\theta(x)=\frac{2}{\sqrt{p_\theta(x)}}\frac{\partial}{\partial\theta}\sqrt{p_\theta(x)}=\frac{\partial}{\partial\theta}\log p_\theta(x)$.
+
+::: {#sevenfig-ch7-dqm-geometry}
+
+![](images/generated/chapter-7-dqm-geometry.svg){fig-alt="A blue arc lies on a circle representing the unit sphere in L2. At one square-root density, a green tangent arrow is perpendicular to the gray radius from the origin."}
+
+DQM treats square-root densities as a curve on the unit sphere of $L_2(\mu)$; the score determines its tangent, which is orthogonal to the radial direction because scores have mean zero.
+
+:::
+
+Chapter 25 extends this one-curve picture to all regular paths through $P$; compare @sevenfig-ch7-dqm-geometry with [the tangent-space construction in §25.3](chapter-25.qmd#tangent-spaces-and-information).
 
 ::: {.callout-note title="Theorem"}
 ### Theorem 7.2 {#theorem-lan-iid}
 
-Extending beyond one dimension:
-
-- Suppose $\Theta$ is open and the model is differentiable in quadratic mean at $\theta$.
-
-Then:
+Suppose $\Theta$ is open and the model is differentiable in quadratic mean at $\theta$. Then
 
 - $P_\theta\dot\ell_\theta=0$,
 - the Fisher information matrix $I_\theta=P_\theta\dot\ell_\theta\dot\ell_\theta^T$ exists,
-- and for every sequence $h_n\to h$:
+- and, for every sequence $h_n\to h$,
 
 $$
 \log\prod_{i=1}^n\frac{p_{\theta+h_n/\sqrt n}(X_i)}{p_\theta(X_i)}
-=\frac{1}{\sqrt n}\sum_{i=1}^nh_n^T\dot\ell_\theta(X_i)-\frac12h_n^TI_\theta h_n+o_{P_\theta}(1).
+=\frac{1}{\sqrt n}\sum_{i=1}^nh^T\dot\ell_\theta(X_i)-\frac12h^TI_\theta h+o_{P_\theta}(1).
 $$
 
 Differentiability in quadratic mean at $\theta$ implies the quadratic likelihood expansion above, and hence the i.i.d. sequence of experiments is LAN at $\theta$.
 
 :::
 
+**Proof roadmap.** Work with square-root likelihood ratios rather than differentiating the log likelihood directly.
+
+1. DQM and normalization of the densities show that the score is centered.
+2. The sum of the linearized square-root likelihood ratios equals the central sequence plus a deterministic drift.
+3. A logarithmic expansion supplies a second copy of the quadratic drift.
+4. DQM also controls the sum of squares and the largest summand, making the Taylor remainder negligible.
+
+<details>
+<summary>Complete proof of Theorem 7.2</summary>
+
+Write $p_n=p_{\theta+h_n/\sqrt n}$, $p=p_\theta$, and $g=h^T\dot\ell_\theta$. DQM and $h_n\to h$ give
+
+$$
+\sqrt n(\sqrt{p_n}-\sqrt p)\longrightarrow \frac12g\sqrt p
+\quad\text{in }L_2(\mu),
+\qquad
+\sqrt{p_n}\longrightarrow\sqrt p.
+$$
+
+Since both $p_n$ and $p$ integrate to one,
+
+$$
+P_\theta g
+=\lim_{n\to\infty}\int
+\sqrt n(\sqrt{p_n}-\sqrt p)(\sqrt{p_n}+\sqrt p)\,d\mu
+=0.
+$$
+
+Thus the score is centered. DQM also gives $P_\theta g^2=h^TI_\theta h<\infty$.
+
+Define, on the support of $p$,
+
+$$
+W_{ni}=2\left\{\sqrt{\frac{p_n}{p}}(X_i)-1\right\}.
+$$
+
+The $L_2$ approximation implies
+
+$$
+\operatorname{var}_{P_\theta}
+\left(\sum_{i=1}^nW_{ni}-\frac1{\sqrt n}\sum_{i=1}^ng(X_i)\right)
+\leq P_\theta\{\sqrt nW_{n1}-g\}^2\longrightarrow0.
+$$
+
+Normalization gives its mean exactly:
+
+$$
+\begin{aligned}
+E_{P_\theta}\sum_{i=1}^nW_{ni}
+&=2n\left(\int\sqrt{p_np}\,d\mu-1\right)\\
+&=-n\int(\sqrt{p_n}-\sqrt p)^2\,d\mu
+\longrightarrow-\frac14P_\theta g^2.
+\end{aligned}
+$$
+
+Consequently,
+
+$$
+\sum_{i=1}^nW_{ni}
+=\frac1{\sqrt n}\sum_{i=1}^ng(X_i)-\frac14P_\theta g^2+o_{P_\theta}(1).
+\tag{7.4}
+$$
+
+Use $\log(1+x)=x-x^2/2+x^2R(2x)$, where $R(u)\to0$ as $u\to0$. Then
+
+$$
+\log\prod_{i=1}^n\frac{p_n}{p}(X_i)
+=\sum_{i=1}^nW_{ni}-\frac14\sum_{i=1}^nW_{ni}^2
++\frac12\sum_{i=1}^nW_{ni}^2R(W_{ni}).
+\tag{7.5}
+$$
+
+DQM permits the decomposition $nW_{n1}^2=g^2(X_1)+A_{n1}$ with $P_\theta|A_{n1}|\to0$. The law of large numbers therefore yields
+
+$$
+\sum_{i=1}^nW_{ni}^2\overset{P_\theta}\longrightarrow P_\theta g^2.
+$$
+
+It remains to control the Taylor remainder. For every $\varepsilon>0$, the same decomposition and truncation give
+
+$$
+nP_\theta(|W_{n1}|>\varepsilon)
+\leq 2\varepsilon^{-2}P_\theta\!\left[g^2
+\mathbf 1\{g^2>n\varepsilon^2/2\}\right]
++2\varepsilon^{-2}P_\theta|A_{n1}|\longrightarrow0.
+$$
+
+Hence $\max_{i\leq n}|W_{ni}|\to0$ in probability. It follows that
+
+$$
+\left|\sum_{i=1}^nW_{ni}^2R(W_{ni})\right|
+\leq \sum_{i=1}^nW_{ni}^2
+\max_{i\leq n}|R(W_{ni})|
+=o_{P_\theta}(1).
+$$
+
+Combining (7.4) and (7.5) gives
+
+$$
+\log\prod_{i=1}^n\frac{p_n}{p}(X_i)
+=\frac1{\sqrt n}\sum_{i=1}^ng(X_i)
+-\frac12P_\theta g^2+o_{P_\theta}(1),
+$$
+
+which is the claimed expansion because $g=h^T\dot\ell_\theta$ and $P_\theta g^2=h^TI_\theta h$.
+
+</details>
+
+The two appearances of $-\tfrac14P_\theta g^2$ are worth remembering: one comes from the mean of the square-root likelihood ratio and one from the logarithm. Together they produce the LAN penalty $-\tfrac12h^TI_\theta h$. [Lemma 25.14](chapter-25.qmd#lemma-25.14-local-asymptotic-normality-along-a-path) uses this same mechanism along a single path.
+
+::: {#sevenfig-ch7-lan-quadratic}
+
+![](images/generated/chapter-7-lan-quadratic.svg){fig-alt="Three panels for increasing sample sizes compare a solid exact Poisson local log-likelihood curve with a dashed quadratic LAN approximation; the curves become nearly indistinguishable."}
+
+For a Poisson model under $\lambda=\lambda_0+h/\sqrt n$, the exact local log likelihood is increasingly well represented by the LAN quadratic on a fixed local-$h$ scale.
+
+:::
+
+::: {.callout-tip title="Forward connection: Lemma 25.14"}
+Theorem 7.2 is the finite-dimensional prototype for [Lemma 25.14](chapter-25.qmd#lemma-25.14-local-asymptotic-normality-along-a-path). Fixing a semiparametric score direction $g$ and following one path $P_{t,g}$ produces the same quadratic expansion, with $g$ replacing $h^T\dot\ell_\theta$ and $Pg^2$ replacing $h^TI_\theta h$.
+:::
+
 ::: {.callout-important title="Lemma"}
 ### Lemma 7.6
 
-A sufficient condition for differentiability in quadratic mean:
+Suppose $\theta\mapsto s_\theta(x)=\sqrt{p_\theta(x)}$ is continuously differentiable for every $x$, and the elements of
 
-- Suppose $\theta\mapsto s_\theta(x) =\sqrt{p_\theta(x)}$ is continuously differentiable for every $x$
-- the elements of $I_\theta=\int(\dot p_\theta/p_\theta)(\dot p_\theta/p_\theta)^Tp_\theta\,d\mu$ are well defined and continuous in $\theta.$
+$$
+I_\theta=\int(\dot p_\theta/p_\theta)(\dot p_\theta/p_\theta)^Tp_\theta\,d\mu
+$$
 
-Then: the model $\theta \mapsto \sqrt{p_\theta (x)}$ is differentiable in quadratic mean (7.1) with score $\dot\ell_\theta=\dot p_\theta/p_\theta$.
+are well defined and continuous in $\theta$. Then the model is differentiable in quadratic mean as in (7.1), with score $\dot\ell_\theta=\dot p_\theta/p_\theta$.
 
 :::
 
 ::: {.callout-tip title="Example"}
 ### Example 7.7: Exponential families
 
-Most exponential families are differentiable in quadratic mean when parameterized smoothly away from the boundary of the natural parameter space.
-
-Exponential family model:
+Most exponential families are differentiable in quadratic mean when parameterized smoothly away from the boundary of the natural parameter space. For the model
 
 $$
 p_\theta(x)=d(\theta)h(x)e^{Q(\theta)^Tt(x)}.
 $$
 
-- The score is $\dot \ell_\theta (x) = Q'_\theta \left( t(x) - \text{E}_\theta t(X)\right).$
-- The Fisher information: $I_\theta = Q_\theta ' \text{cov}_\theta t(X) \left(Q_\theta '\right)^T$
+the score is $\dot\ell_\theta(x)=Q'_\theta\{t(x)-E_\theta t(X)\}$ and the Fisher information is $I_\theta=Q'_\theta\operatorname{cov}_\theta\{t(X)\}(Q'_\theta)^T$.
 :::
 
 ::: {.callout-tip title="Example"}
 ### Example 7.8: Location models
 
-Location model $\{f(x-\theta):\theta\in\mathbb R\}$.
+Consider the location model $\{f(x-\theta):\theta\in\mathbb R\}$. If $f$ is positive and continuously differentiable and has finite Fisher information for location, then the model is differentiable in quadratic mean. Its score is $\dot\ell_\theta(x)=-\{f'/f\}(x-\theta)$, and its Fisher information is
 
-If $f$ is positive and continuously differentiable and has finite Fisher information for location, then the model is differentiable in quadratic mean.
+$$
+I_f=\int \left(\frac{f'}{f}\right)^2(x)f(x)\,dx,
+$$
 
-- The Fisher information: $I_f=\int \left(\dfrac{f'}{f}\right)^2(x) f(x)\,dx$ for every $\theta$
-- The score is $\dot\ell_\theta(x)=-\{f'/f\}(x-\theta)$.
+which does not depend on $\theta$.
 
 The Laplace location model is also differentiable in quadratic mean, even though the log density is not differentiable at $x=\theta$.
 
 :::
 
-::: {.callout-note title="Definition"}
-### Example 7.9: Uniform distribution counterexample
+::: {.callout-warning title="Counterexample"}
+### Counterexample 7.9: Uniform distribution
 
-- The family of uniform distributions on $[0,\theta]$ is nowhere differentiable in quadratic mean.
-- For the uniform model, $P_{\theta+h}(p_\theta=0)=h/(\theta+h)$, which is only $O(h)$.
-    - differentiability in quadratic mean would require probability mass outside the support of $P_\theta$ to be $o(h^2)$.
+The family of uniform distributions on $[0,\theta]$ is nowhere differentiable in quadratic mean. Here $P_{\theta+h}(p_\theta=0)=h/(\theta+h)$ is only $O(h)$, whereas differentiability in quadratic mean would require the mass outside the support of $P_\theta$ to be $o(h^2)$.
 :::
 
-## 7.3 Convergence to a normal experiment
+## 7.3 Convergence to a Normal Experiment
 
-- Suppose the limit experiment consists of observing one observation of  $X\sim N(h,I_\theta^{-1})$.
-
-Its log likelihood ratio relative to $h=0$ is:
+Suppose the limit experiment consists of one observation $X\sim N(h,I_\theta^{-1})$. Its log likelihood ratio relative to $h=0$ is
 
 $$
 \log \dfrac{ dN(h,I_\theta^{-1})}{dN(0,I_\theta^{-1})}(X)=h^TI_\theta X-\frac12h^TI_\theta h.
 $$
 
-- This has the sort of the same quadratic form as the LAN expansion in 7.2 $h^T\Delta_{n,\theta}-\frac12h^TI_\theta h$.
-
-- Suppose $T_n$ is a statistic in the local experiment and has a limiting distribution under every local parameter $h$.
-- The convergence of experiments means that the family of limiting distributions of $T_n$ can be reproduced by a statistic in the Gaussian limit experiment.
-- Thus asymptotic properties of procedures in the original model can be studied through procedures in the Gaussian experiment.
-
-- A **randomized statistic** in the limit experiment has the form $T=T(X,U)$, where $U\sim\operatorname{Unif}[0,1]$ is independent of $X$.
-- Randomization is included to ensure that every possible limiting conditional distribution can be represented.
+This is the same quadratic form as the LAN expansion $h^T\Delta_{n,\theta}-\frac12h^TI_\theta h$ in Section 7.2. If a statistic $T_n$ has a limiting distribution under every local parameter $h$, convergence of experiments means that the entire family of limits can be reproduced by a statistic in the Gaussian experiment. A **randomized statistic** has the form $T=T(X,U)$, where $U\sim\operatorname{Unif}[0,1]$ is independent of $X$; the auxiliary randomization represents arbitrary limiting conditional distributions.
 
 ::: {.callout-note title="Theorem"}
-### Theorem 7.10 {#theorem-normal-limit-experiment}
+### Theorem 7.10: Representation in the limit experiment {#theorem-normal-limit-experiment}
 
-Representation theorem (in the limit experiment)
-
-- Assume the model is differentiable in quadratic mean at $\theta$ and $I_\theta$ is nonsingular.
-- Let $T_n$ be statistics in the local experiments $\{P_{\theta+h/\sqrt n}^n:h\in\mathbb R^k\}$, and suppose $T_n$ converges in distribution under every $h$.
-- Then there exists a randomized statistic $T$ in the Gaussian experiment $\{N(h,I_\theta^{-1}):h\in\mathbb R^k\}$ having the same limiting distribution under every $h$.
+Assume the model is differentiable in quadratic mean at $\theta$ and $I_\theta$ is nonsingular. Let $T_n$ be statistics in the local experiments $\{P_{\theta+h/\sqrt n}^n:h\in\mathbb R^k\}$, and suppose $T_n$ converges in distribution under every $h$. Then there exists a randomized statistic $T$ in the Gaussian experiment $\{N(h,I_\theta^{-1}):h\in\mathbb R^k\}$ having the same limiting distribution under every $h$.
 :::
 
-The proof combines joint convergence with the central sequence, contiguity, Le Cam’s third lemma, and a representation of conditional distributions using randomization.
+This representation is the handoff to Chapter 8. [Theorem 8.3](chapter-8.qmd#theorem-limit-experiment-reduction) uses the Gaussian experiment to transfer lower bounds back to the original model; the corresponding semiparametric convolution and minimax results are [Theorems 25.20](chapter-25.qmd#theorem-25-20) and [25.21](chapter-25.qmd#theorem-25-21).
 
+**Proof roadmap.** Couple the procedure to the central sequence, identify its law under every local alternative by change of measure, and then reproduce that joint law from the Gaussian observation.
+
+<details>
+<summary>Complete proof of Theorem 7.10</summary>
+
+Write
+
+$$
+P_{n,h}=P_{\theta+h/\sqrt n}^n,
+\qquad
+J=I_\theta,
+\qquad
+\Delta_n=\frac1{\sqrt n}\sum_{i=1}^n\dot\ell_\theta(X_i).
+$$
+
+Under $P_{n,0}$, both $T_n$ and $\Delta_n$ are tight. Along any subsequence, extract a further subsequence such that
+
+$$
+(T_n,\Delta_n)\rightsquigarrow(S,\Delta),
+\qquad \Delta\sim N(0,J).
+$$
+
+Theorem 7.2 and Slutsky's lemma then give, for every fixed $h$,
+
+$$
+\left(T_n,\log\frac{dP_{n,h}}{dP_{n,0}}\right)
+\rightsquigarrow
+\left(S,h^T\Delta-\frac12h^TJh\right)
+\quad\text{under }P_{n,0}.
+$$
+
+The limiting likelihood ratio is positive and has mean one. The local laws are therefore mutually contiguous, and [Le Cam's third lemma](chapter-6.qmd#lemma-le-cam-third) identifies the limiting law $L_h$ of $T_n$ under $P_{n,h}$ as
+
+$$
+L_h(B)
+=E\left[\mathbf1_B(S)
+\exp\left\{h^T\Delta-\frac12h^TJh\right\}\right]
+$$
+
+for every Borel set $B$.
+
+By Lemma 7.11, on an extension carrying an independent $U\sim\operatorname{Unif}[0,1]$, there is a measurable map $T$ such that
+
+$$
+(T(\Delta,U),\Delta)\overset d=(S,\Delta).
+$$
+
+Now let $X\sim N(h,J^{-1})$. Under $h=0$, $JX\sim N(0,J)$ and hence has the same law as $\Delta$. The Gaussian likelihood ratio and the preceding display yield
+
+$$
+\begin{aligned}
+P_h\{T(JX,U)\in B\}
+&=E_0\left[\mathbf1_B\{T(JX,U)\}
+e^{h^TJX-h^TJh/2}\right]\\
+&=L_h(B).
+\end{aligned}
+$$
+
+Thus $T(JX,U)$ reproduces the full family of limiting distributions of $T_n$ in the Gaussian experiment.
+
+</details>
+
+::: {.callout-note title="Lemma"}
 ### Lemma 7.11
 
 Given a joint distribution $(S,\Delta)$, one can construct a measurable randomized function $T(\Delta,U)$ such that $(T(\Delta,U),\Delta)$ has the same distribution as $(S,\Delta)$.
 
+:::
+
+**Proof roadmap.** Disintegrate the joint law to obtain the conditional distribution of $S$ given $\Delta$, then use an independent uniform randomizer and measurable conditional quantiles to realize that distribution as a function of $(\Delta,U)$.
+
+<details>
+<summary>Complete proof of Lemma 7.11</summary>
+
+Take a regular conditional distribution of $S$ given $\Delta=\delta$. For a scalar $S$, let $Q(u\mid\delta)$ be its conditional quantile function and set $T(\delta,u)=Q(u\mid\delta)$. The conditional probability integral transform gives the required joint law.
+
+For a vector $S=(S_1,\ldots,S_d)$, split one uniform random variable measurably into $d$ independent uniforms, for example by distributing the digits of its binary expansion. Generate $S_1$ from its conditional law given $\Delta$, then $S_2$ from its conditional law given $(\Delta,S_1)$, and continue recursively. Conditional quantile maps may be chosen jointly measurable, so the resulting map $T(\Delta,U)$ has the same conditional law given $\Delta$ as $S$ and hence the same joint law with $\Delta$.
+
+</details>
+
+Randomization is not asserting that a good estimator should add noise. It is the device that represents any residual conditional variation in the limit after the Gaussian central sequence has been observed.
+
 ---
 
-## 7.4 Maximum likelihood
+## 7.4 Maximum Likelihood
 
-- Chapter 5 shows ML estimators in smooth parametric models are asymptotically normal
-- By [Theorem 7.10](#theorem-normal-limit-experiment), every sequence of statistics in the local experiments $\{P_{\theta+h/\sqrt n}^n:h\in\mathbb R^k\}$ is matched in the limit by a statistic in the normal experiment.
-- Also (not following directly from this theorem) a sequence of ML estimators is typically matched by the ML estimator in the limit experiment.
-    - The ML estimator of $h$ in the Gaussian experiment $N(h,I_\theta^{-1})$ is $X$ (the mean of a sample size one), normally distributed
-    - This suggests that the local maximum likelihood estimator $\widehat h_n=\sqrt n(\widehat\theta_n-\theta)$ should converge to $X$ under $h = 0$
-    - i.e., for an interior parameter under suitable regularity conditions, $\sqrt n(\widehat\theta_n-\theta)\rightsquigarrow N(0,I_\theta^{-1})$.
-- LAN therefore explains the asymptotic normality and asymptotic optimality of maximum likelihood estimators through the corresponding properties of maximum likelihood in the Gaussian experiment.
-- LAN alone is not sufficient to prove this result; additional uniformity and consistency conditions are needed, see also conditions of Theorem 5.39.
+Chapter 5 establishes asymptotic normality for maximum likelihood estimators in smooth parametric models. The Gaussian limit experiment explains the form of that result: the maximum likelihood estimator of $h$ from $X\sim N(h,I_\theta^{-1})$ is $X$ itself, suggesting that the local estimator $\widehat h_n=\sqrt n(\widehat\theta_n-\theta)$ should satisfy
+
+$$
+\sqrt n(\widehat\theta_n-\theta)\rightsquigarrow N(0,I_\theta^{-1})
+$$
+
+at an interior parameter point. This conclusion does not follow from LAN alone; consistency and uniform control of the likelihood are also required, as in Theorem 5.39.
 
 ### Constrained parameter spaces
 
-- Let $H_n=\sqrt n(\Theta-\theta_0)$ be the local parameter space.
-- If $H_n\to H$, the limiting maximum likelihood estimator maximizes the Gaussian likelihood over $H$.
-- Equivalently, it is the projection of $X$ onto $H$ in the Fisher-information metric $d(x,y)=(x-y)^TI_{\theta_0}(x-y)$.
-- If $H=\mathbb R^k$, the projection is simply $X$.
+Let $H_n=\sqrt n(\Theta-\theta_0)$ be the local parameter space. Here $H_n\to H$ has the source's two-sided set-convergence meaning: every convergent sequence $h_n\in H_n$ has its limit in $H$, and every $h\in H$ is the limit of some sequence $h_n\in H_n$. Under this condition, the limiting maximum likelihood estimator maximizes the Gaussian likelihood over $H$. Equivalently, it projects $X$ onto $H$ in the Fisher-information metric
+
+$$
+d_{I_{\theta_0}}(x,y)=\bigl[(x-y)^TI_{\theta_0}(x-y)\bigr]^{1/2}.
+$$
+
+Van der Vaart writes the corresponding squared form $(x-y)^TI_{\theta_0}(x-y)$ when describing the projection. Minimizing the squared form gives the same closest point, while the square root is the metric itself. If $H=\mathbb R^k$, the projection is simply $X$.
 
 ::: {.callout-note title="Theorem"}
-### Theorem 7.12
+### Theorem 7.12 {#theorem-7-12}
 
 - Suppose the model is differentiable in quadratic mean at $\theta_0$,
 - $I_{\theta_0}$ is nonsingular,
@@ -253,144 +462,174 @@ Given a joint distribution $(S,\Delta)$, one can construct a measurable randomiz
 
 Then $I_{\theta_0}^{1/2}\sqrt n(\widehat\theta_n-\theta_0)$ converges in distribution to the projection of a standard normal vector onto $I_{\theta_0}^{1/2}H$.
 
-Thus boundary restrictions can produce non-normal projected-Gaussian limiting distributions. ([portmanteau lemma](chapter-2.qmd#lemma-portmanteau) used in proof)
+Thus boundary restrictions can produce nonnormal projected-Gaussian limiting distributions. The proof uses the [portmanteau lemma](chapter-2.qmd#lemma-portmanteau).
 
 :::
 
-**Proof.**
+::: {.callout-warning title="Notation: the empirical process in this proof"}
 
-- Let $G_n=\sqrt n(\mathbb P_n-P_{\theta_0})$ be the empirical process, and define the local maximum likelihood estimator $\widehat h_n=\sqrt n(\widehat\theta_n-\theta_0).$
-- The goal is to show that $I_{\theta_0}^{1/2}\widehat h_n$ converges to the projection of a standard normal vector onto the limiting local parameter space $I_{\theta_0}^{1/2}H.$
-1. **Step 1: Obtain a uniform quadratic approximation to the local log likelihood**
-    - Under differentiability in quadratic mean and the Lipschitz condition, the log density is differentiable in $L_2(P_{\theta_0})$ at $\theta_0$, with derivative $\dot\ell_{\theta_0}$.
-    - Also, the expected log likelihood has a second-order expansion at $\theta_0$ with curvature matrix $-I_{\theta_0}$.
-    - Therefore, for every fixed $M<\infty$, $\sup_{|h|\leq M}\left|n\mathbb P_n\log\frac{p_{\theta_0+h/\sqrt n}}{p_{\theta_0}}-h^TG_n\dot\ell_{\theta_0}+\frac12h^TI_{\theta_0}h\right|\overset{P_{\theta_0}}\longrightarrow0.$
-    - Thus the local log likelihood is uniformly approximated by $h\mapsto h^TG_n\dot\ell_{\theta_0}-\frac12h^TI_{\theta_0}h.$
-2. **Step 2: Restrict attention to a slowly expanding bounded set**
-    - Consistency and the regularity assumptions imply that the MLE is $\sqrt n$consistent, so $\widehat h_n=O_{P_{\theta_0}}(1).$
-    - Hence there exists a sequence $M_n\to\infty$ sufficiently slowly such that $P_{\theta_0}(|\widehat h_n|\leq M_n)\to1$ and the uniform quadratic approximation remains valid on the ball of radius $M_n$.
-    - Therefore, with probability tending to one, $\widehat h_n$ maximizes the local likelihood over $H_n\cap{h:|h|\leq M_n},$ where $H_n=\sqrt n(\Theta-\theta_0).$
-    - These truncated sets still converge to $H$.
-3. **Step 3: Bound the probability that the estimator lies in a closed set**
-    - Fix an arbitrary closed set $F\subseteq\mathbb R^k.$
-    - If $\widehat h_n\in F,$ then the maximum of the local log likelihood over $F\cap H_n$ must be at least as large as the maximum over all of $H_n$.
-    - Hence $P_{\theta_0}(\widehat h_n\in F)\leq P_{\theta_0}\left(\sup_{h\in F\cap H_n}n\mathbb P_n\log\frac{p_{\theta_0+h/\sqrt n}}{p_{\theta_0}}\geq\sup_{h\in H_n}n\mathbb P_n\log\frac{p_{\theta_0+h/\sqrt n}}{p_{\theta_0}}\right).$
-    - Using the uniform quadratic approximation, this is bounded by $P_{\theta_0}\left(\sup_{h\in F\cap H_n}\left[h^TG_n\dot\ell_{\theta_0}-\frac12h^TI_{\theta_0}h\right]\geq\sup_{h\in H_n}\left[h^TG_n\dot\ell_{\theta_0}-\frac12h^TI_{\theta_0}h\right]+o_P(1)\right).$
-4. **Step 4: Complete the square**
-    - For every $h,$ $h^TG_n\dot\ell_{\theta_0}-\frac12h^TI_{\theta_0}h=-\frac12\left|I_{\theta_0}^{-1/2}G_n\dot\ell_{\theta_0}-I_{\theta_0}^{1/2}h\right|^2+\frac12\left|I_{\theta_0}^{-1/2}G_n\dot\ell_{\theta_0}\right|^2.$
-    - The last term does not depend on $h,$ so maximizing the quadratic expression is equivalent to minimizing distance.
-    - Therefore, $P_{\theta_0}(\widehat h_n\in F)\leq P_{\theta_0}\left(\left|I_{\theta_0}^{-1/2}G_n\dot\ell_{\theta_0}-I_{\theta_0}^{1/2}(F\cap H_n)\right|\leq\left|I_{\theta_0}^{-1/2}G_n\dot\ell_{\theta_0}-I_{\theta_0}^{1/2}H_n\right|+o_P(1)\right).$
-    - Here, $|x-A|=\inf_{a\in A}|x-a|$ denotes the distance from $x$ to the set $A$.
-5. **Step 5: Replace the varying sets by their limits**
-    - Since $H_n\to H,$ Lemma 7.13 allows the distances to the varying sets to be replaced asymptotically by distances to the limiting sets.
-    - Also, by the central limit theorem, $I_{\theta_0}^{-1/2}G_n\dot\ell_{\theta_0}\rightsquigarrow Z,$ where $Z\sim N(0,I_k).$
-    - Hence the preceding probability is asymptotically bounded above by $P\left(|Z-I_{\theta_0}^{1/2}(F\cap H)|\leq|Z-I_{\theta_0}^{1/2}H|\right).$
-6. **Step 6: Interpret the event using projection**
-    - Since $H$ is nonempty and convex, $I_{\theta_0}^{1/2}H$ is also nonempty, closed, and convex.
-    - Therefore the projection $\Pi Z=\operatorname{argmin}*{u\in I*{\theta_0}^{1/2}H}|Z-u|$ exists and is unique.
-    - If $|Z-I_{\theta_0}^{1/2}(F\cap H)|\leq|Z-I_{\theta_0}^{1/2}H|,$ then the closest point to $Z$ in $I_{\theta_0}^{1/2}H$ must lie in $I_{\theta_0}^{1/2}(F\cap H).$
-    - Thus $P\left(|Z-I_{\theta_0}^{1/2}(F\cap H)|\leq|Z-I_{\theta_0}^{1/2}H|\right)\leq P(\Pi Z\in I_{\theta_0}^{1/2}F).$
-7. **Step 7: Apply the portmanteau lemma**
-    - For every closed set $F,$ the preceding argument gives the required limsup inequality.
-    - By the closed-set formulation of the portmanteau lemma, $I_{\theta_0}^{1/2}\widehat h_n\rightsquigarrow\Pi Z.$
-    - Since $\widehat h_n=\sqrt n(\widehat\theta_n-\theta_0),$ we conclude that $I_{\theta_0}^{1/2}\sqrt n(\widehat\theta_n-\theta_0)\rightsquigarrow\Pi Z.$
-    - If $\theta_0$ is an interior point, then typically $H=\mathbb R^k,$ so $\Pi Z=Z$ and the usual Gaussian limit is recovered.
-    - If $\theta_0$ lies on the boundary, then $H$ is restricted, so the projection may have a nonnormal distribution.
+Following Chapter 7, the proof writes $G_n=\sqrt n(\mathbb P_n-P_{\theta_0})$. Chapter 19 writes the same empirical-process operator as $\mathbb G_n$. The local definition controls here; the operator has not changed.
+
+:::
+
+**Proof outline.**
+
+Let $G_n=\sqrt n(\mathbb P_n-P_{\theta_0})$ and $\widehat h_n=\sqrt n(\widehat\theta_n-\theta_0)$. The goal is to identify the limit of $I_{\theta_0}^{1/2}\widehat h_n$.
+
+#### Obtain a uniform quadratic approximation
+
+Differentiability in quadratic mean and the local Lipschitz condition yield, for every fixed $M<\infty$,
+
+$$
+\sup_{|h|\leq M}
+\left|n\mathbb P_n\log\frac{p_{\theta_0+h/\sqrt n}}{p_{\theta_0}}
+-h^TG_n\dot\ell_{\theta_0}+\frac12h^TI_{\theta_0}h\right|
+\overset{P_{\theta_0}}\longrightarrow0.
+$$
+
+Thus the local log likelihood is uniformly approximated by $h\mapsto h^TG_n\dot\ell_{\theta_0}-\frac12h^TI_{\theta_0}h$. Consistency and the regularity assumptions also give $\widehat h_n=O_{P_{\theta_0}}(1)$, so the maximization may be restricted to a slowly expanding bounded subset of $H_n=\sqrt n(\Theta-\theta_0)$.
+
+#### Convert maximization to projection
+
+For a closed set $F$, the event $\widehat h_n\in F$ requires the approximating quadratic to attain at least as large a value over $F\cap H_n$ as over $H_n$. Completing the square gives
+
+$$
+\begin{aligned}
+h^TG_n\dot\ell_{\theta_0}-\frac12h^TI_{\theta_0}h
+&=-\frac12\left\|I_{\theta_0}^{-1/2}G_n\dot\ell_{\theta_0}
+-I_{\theta_0}^{1/2}h\right\|^2\\
+&\quad+\frac12\left\|I_{\theta_0}^{-1/2}G_n\dot\ell_{\theta_0}\right\|^2.
+\end{aligned}
+$$
+
+The final term does not depend on $h$, so maximizing the quadratic is equivalent to minimizing distance. In the book's set-distance notation, $\|x-A\|=\inf_{a\in A}\|x-a\|$; expressions such as $I_{\theta_0}^{1/2}(F\cap H_n)$ denote sets.
+
+#### Pass to the limiting set
+
+By Lemma 7.13 and the central limit theorem,
+
+$$
+I_{\theta_0}^{-1/2}G_n\dot\ell_{\theta_0}\rightsquigarrow Z,
+\qquad Z\sim N(0,I_k),
+$$
+
+and distances to $H_n$ converge to distances to $H$. Because $I_{\theta_0}^{1/2}H$ is nonempty, closed, and convex, the projection
+
+$$
+\Pi Z=\operatorname*{argmin}_{u\in I_{\theta_0}^{1/2}H}\|Z-u\|
+$$
+
+exists and is unique. The closed-set form of the portmanteau lemma then yields
+
+$$
+I_{\theta_0}^{1/2}\sqrt n(\widehat\theta_n-\theta_0)\rightsquigarrow\Pi Z.
+$$
+
+At an interior point, typically $H=\mathbb R^k$ and $\Pi Z=Z$; at a boundary, the restricted set $H$ can produce a nonnormal projected-Gaussian limit.
 
 ::: {.callout-important title="Lemma"}
 ### Lemma 7.13
 
-- If $H_n\to H$ and $X_n\rightsquigarrow X$,
-- then distances from $X_n$ to $H_n$ converge to the corresponding distance from $X$ to $H$, with related results for intersections with closed and open sets.
+If $H_n\to H$ and $X_n\rightsquigarrow X$, then distances from $X_n$ to $H_n$ converge to the corresponding distance from $X$ to $H$. More explicitly,
 
-I.e.,
-
-1. $\|X_n - H_n \| \rightsquigarrow \| X - H\|$
-2. $\|X_n - H_n \cap F \| \ge \| X - H \cap F\| + o_P(1)$, for every closed set $F$
-3. $\|X_n - H_n \cap G \| \le \| X - H \cap G\| + o_P(1)$, for every open set $G$
+1. $\|X_n-H_n\|\rightsquigarrow\|X-H\|$;
+2. $\|X_n-(H_n\cap F)\|\geq\|X-(H\cap F)\|+o_P(1)$ for every closed set $F$;
+3. $\|X_n-(H_n\cap G)\|\leq\|X-(H\cap G)\|+o_P(1)$ for every open set $G$.
 :::
 
-**Proof.**
+**Proof outline.**
 
-For (i)
+For part (i):
 
-1. Since $X_n\rightsquigarrow X$ and the map $x\mapsto |x-H|$ is continuous, then, by the [continuous mapping theorem](chapter-2.qmd#theorem-continuous-mapping): $\|X_n-H\|\rightsquigarrow \|X-H\|$
+1. Since $X_n\rightsquigarrow X$ and the map $x\mapsto\|x-H\|$ is continuous, the [continuous mapping theorem](chapter-2.qmd#theorem-continuous-mapping) gives $\|X_n-H\|\rightsquigarrow\|X-H\|$.
 2. The set convergence $H_n\to H$ implies $\|X_n-H_n\|-\|X_n-H\|\overset{P}\to0$.
-3. Then Slutsky’s lemma gives (i), $\|X_n-H_n\|\rightsquigarrow \|X-H\|.$
+3. Then Slutsky’s lemma gives (i): $\|X_n-H_n\|\rightsquigarrow \|X-H\|$.
 
-Parts (ii) and (iii) are one-sided approximations that follow from set convergence, distinction between closed and open set.
+Parts (ii) and (iii) are one-sided approximations reflecting the distinction between closed and open sets. If $F$ is closed and $h_n\in H_n\cap F$ converges to $h$, then $h\in H\cap F$; the distance to $H_n\cap F$ therefore cannot be asymptotically smaller than the distance to $H\cap F$. If $G$ is open and $h\in H\cap G$, set convergence supplies $h_n\in H_n$ with $h_n\to h$, and openness ensures $h_n\in G$ eventually; the distance to $H_n\cap G$ therefore cannot be asymptotically larger than the distance to $H\cap G$.
 
-- $\|X_n-H_n\cap F\| \geq \|X_n-H\cap F\|+o_P(1)$ for closed $F$
-    - If $F$ is closed and $h_n\in H_n\cap F$ with $h_n\to h$, then closedness implies $h\in F$, while set convergence implies $h\in H$. Hence $h\in H\cap F$. Therefore, $\|X_n-H_n\cap F\|$ cannot asymptotically be substantially smaller than $\|X_n-H\cap F\|$
-- $\|X_n-H_n\cap G| \leq \|X_n-H\cap G\|+o_P(1)$ for open $G$.
-    - If $G$ is open and $h\in H\cap G$, set convergence provides approximating points $h_n\in H_n$ with $h_n\to h$. Since $G$ is open, $h_n\in G$ eventually. Therefore, $\|X_n-H_n\cap G\|$ cannot asymptotically be substantially larger than $\|X_n-H\cap G\|$.
+## 7.5 Limit Distributions Under Alternatives {#sec-limit-distributions-alternatives}
 
-## 7.5 Limit distributions under alternatives
-
-LAN implies under $P_\theta^n$
+From [Theorem 7.2](#theorem-lan-iid), LAN gives the expansion
 
 $$
-\log\dfrac{dP^n_{\theta+h/\sqrt n}}{dP_\theta^n} \overset{\theta}{\rightsquigarrow} N(-\frac12h^TI_\theta h,h^TI_\theta h).
+\log\frac{dP_{\theta+h/\sqrt n}^n}{dP_\theta^n}=h^T\Delta_{n,\theta}-\frac12h^TI_\theta h+o_{P_\theta}(1).
 $$
 
-Therefore $P_{\theta+h/\sqrt n}^n$ and $P_\theta^n$ are mutually contiguous (see [Example 6.5](chapter-6.qmd#example-asymptotic-log-normality)).
-
-- From [Theorem 7.2](#theorem-lan-iid), LAN gives the expansion:
-
-$$
-\log\frac{dP_{\theta+h/\sqrt n}^n}{dP_\theta^n}=h^T\Delta_{n,\theta}-\frac12h^TI_\theta h+o_{P_\theta}(1),
-$$
-
-- where, under $P_\theta^n$, $\Delta_{n,\theta}\rightsquigarrow N(0,I_\theta).$
-- Therefore, $h^T\Delta_{n,\theta}\rightsquigarrow N(0,h^TI_\theta h).$
-- Adding the constant term gives:
+Under $P_\theta^n$, $\Delta_{n,\theta}\rightsquigarrow N(0,I_\theta)$, so $h^T\Delta_{n,\theta}\rightsquigarrow N(0,h^TI_\theta h)$. Therefore,
 
 $$
 \log\frac{dP_{\theta+h/\sqrt n}^n}{dP_\theta^n}\rightsquigarrow N\left(-\frac12h^TI_\theta h,\,h^TI_\theta h\right).
 $$
 
-- Let $v=h^TI_\theta h.$ If $Z\sim N\left(-\frac12v,v\right)$,
-    - then $e^Z>0$ almost surely and $E[e^Z]=e^{-v/2+v/2}=1.$
-- Thus the limiting likelihood ratio is positive and has expectation one. By [Le Cam’s first lemma from 6.4](chapter-6.qmd#lemma-le-cam-first),
+Let $v=h^TI_\theta h$. If $Z\sim N(-v/2,v)$, then $e^Z>0$ almost surely and $E(e^Z)=1$. The limiting likelihood ratio is therefore positive with expectation one. By [Le Cam’s first lemma](chapter-6.qmd#lemma-le-cam-first),
 
 $$
 P_{\theta+h/\sqrt n}^n\triangleleft P_\theta^n.
 $$
 
-- Applying the same argument in the reverse direction gives
+Applying the same argument in the reverse direction gives
 
 $$
 P_\theta^n\triangleleft P_{\theta+h/\sqrt n}^n.
 $$
 
-- Therefore, $P_{\theta+h/\sqrt n}^n\quad\text{and}\quad P_\theta^n$ are mutually contiguous.
+Thus $P_{\theta+h/\sqrt n}^n$ and $P_\theta^n$ are mutually contiguous; compare [Example 6.5](chapter-6.qmd#example-asymptotic-log-normality).
 
 ### General scheme
 
-- Suppose a statistic has an asymptotically linear expansion $\sqrt n(T_n-\mu_\theta)=n^{-1/2}\sum_{i=1}^n\psi_\theta(X_i)+o_{P_\theta}(1)$.
-- The statistic and the log likelihood ratio have a joint multivariate normal limit under $P_\theta^n$.
-- [Le Cam's third lemma, Example 6.7](chapter-6.qmd#lemma-le-cam-third) then gives the limiting distribution of $T_n$ under the local alternative $\theta+h/\sqrt n$.
+Suppose a statistic has the asymptotically linear expansion, with $P_\theta\psi_\theta=0$ and $P_\theta\psi_\theta\psi_\theta^T<\infty$,
 
-The limiting covariance is unchanged, while the limiting mean is shifted according to the covariance between $\psi_\theta(X)$ and $h^T\dot\ell_\theta(X)$.
+$$
+\sqrt n(T_n-\mu_\theta)=n^{-1/2}\sum_{i=1}^n\psi_\theta(X_i)+o_{P_\theta}(1).
+$$
 
-In particular, the mean shift is $P_\theta\psi_\theta\dot\ell_\theta^Th$.
+The statistic and log likelihood ratio have the joint limit under $P_\theta^n$
 
-This method is used to study the local asymptotic behavior and efficiency of estimators and tests.
+$$
+\begin{pmatrix}
+\sqrt n(T_n-\mu_\theta)\\[2pt]
+\log(dP_{\theta+h/\sqrt n}^n/dP_\theta^n)
+\end{pmatrix}
+\rightsquigarrow
+N\!\left[
+\begin{pmatrix}0\\-\tfrac12h^TI_\theta h\end{pmatrix},
+\begin{pmatrix}
+P_\theta\psi_\theta\psi_\theta^T & P_\theta\psi_\theta\dot\ell_\theta^Th\\
+h^TP_\theta\dot\ell_\theta\psi_\theta^T & h^TI_\theta h
+\end{pmatrix}
+\right].
+$$
+
+[Le Cam's third lemma](chapter-6.qmd#lemma-le-cam-third) therefore gives, under $P_{\theta+h/\sqrt n}^n$,
+
+$$
+\sqrt n(T_n-\mu_\theta)
+\rightsquigarrow
+N\!\left(P_\theta\psi_\theta\dot\ell_\theta^Th,
+P_\theta\psi_\theta\psi_\theta^T\right).
+$$
+
+The covariance is unchanged, while the mean shifts by the covariance with the limiting log likelihood ratio.
+
+This method is used to study the local asymptotic behavior and efficiency of estimators and tests. [Chapter 15](chapter-15.qmd#sec-chapter-15-lan-power) turns the shifted Gaussian limit into local-power bounds. [Lemma 25.23](chapter-25.qmd#lemma-25-23) and [§25.6](chapter-25.qmd#sec-testing) repeat the same change-of-measure argument along each semiparametric tangent direction.
 
 ---
 
-## 7.6 Local Asymptotic Normality
+## 7.6 Local Asymptotic Normality {#sec-local-asymptotic-normality}
 
 The preceding results begin with i.i.d. observations, but LAN can be defined for general sequences of statistical models.
 
 Let $\{P_{n,\theta}:\theta\in\Theta\}$ be a sequence of models.
 
-::: {.callout-note title="Result"}
+::: {.callout-note title="Definition"}
 ### Definition 7.14
 
 The sequence $\{P_{n,\theta}:\theta\in\Theta\}$ is locally asymptotically normal at $\theta$ if there exist norming matrices $r_n$, a matrix $I_\theta$, and random vectors $\Delta_{n,\theta}$ such that $\Delta_{n,\theta}\rightsquigarrow N(0,I_\theta)$ under $P_{n,\theta}$, and for every sequence $h_n\to h$,
 
-$\log\frac{dP_{n,\theta+r_n^{-1}h_n}}{dP_{n,\theta}}=h^T\Delta_{n,\theta}-\frac12h^TI_\theta h+o_{P_{n,\theta}}(1)$.
+$$
+\log\frac{dP_{n,\theta+r_n^{-1}h_n}}{dP_{n,\theta}}
+=h_n^T\Delta_{n,\theta}-\frac12h_n^TI_\theta h_n+o_{P_{n,\theta}}(1).
+$$
 
 Here $r_n$ determines the local rate at which parameters approach $\theta$.
 
@@ -404,3 +643,9 @@ If $\{P_\theta:\theta\in\Theta\}$ is differentiable in quadratic mean, then $\{P
 The local experiments $\{P_{n,\theta+r_n^{-1}h}:h\in\mathbb R^k\}$ converge to $\{N(h,I_\theta^{-1}):h\in\mathbb R^k\}$ in the sense of Theorem 7.10.
 
 :::
+
+::: {.callout-note title="Coverage note"}
+Examples 7.16--7.18 develop LAN for dependent observations and other non-i.i.d. experiments. They are useful when the sampling structure itself is the main subject, but are not needed for the i.i.d. pathwise argument used in Chapter 25 and are omitted here.
+:::
+
+---

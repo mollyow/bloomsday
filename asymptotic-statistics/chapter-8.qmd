@@ -1,14 +1,33 @@
 # Chapter 8: Efficiency of Estimators
 
+This chapter asks how well an estimator can perform asymptotically and develops several forms of the lower bound obtained from the [Gaussian shift experiment](glossary.qmd#glossary-limit-experiment).
+
 [Worked problems for Chapter 8](problems.qmd#problems-chapter-8)
 
-How well can estimator can perform asymptotically?
+::: {.callout-tip title="Why this chapter is here"}
 
-- develops several versions of an asymptotic lower bound.
-- estimation in a smooth parametric model is locally equivalent to estimation in a Gaussian shift experiment.
+- **Prerequisites:** [LAN in Chapter 7](chapter-7.qmd#theorem-lan-iid) and the [Gaussian limit experiment](chapter-7.qmd#theorem-normal-limit-experiment).
+- **Purpose:** replace pointwise comparisons by comparisons that remain valid over $n^{-1/2}$-local alternatives.
+- **Chapter 25 payoff:** Chapter 25 replaces the parametric score space by a tangent space. The [semiparametric convolution theorem](chapter-25.qmd#theorem-25-20) and [local asymptotic minimax theorem](chapter-25.qmd#theorem-25-21) are the direct analogues of Sections 8.5 and 8.7.
 
-::: {.callout-note title="Definition"}
-## Summary {.unnumbered}
+:::
+
+::: {.callout-note title="Companion readings"}
+
+For alternative treatments of convolution, minimax bounds, and superefficiency, see [@bailie2021, §§13.2--14.2], [@dasgupta2008, §§16.7--16.8], and [@tsybakov2009, §3.4.3]. For the broader limit-experiment perspective behind the chapter, see @leCamYang2000.
+
+:::
+
+## Reading guide
+
+- **Sections 8.3--8.5 and 8.7 are essential:** representation in the Gaussian experiment leads to the convolution and local asymptotic minimax bounds.
+- **Section 8.9 is essential for construction:** Lemma 8.14 identifies the asymptotic linear expansion that attains the bound. It is the parametric prototype for [Lemma 25.23](chapter-25.qmd#lemma-25-23).
+- **Section 8.1 is essential motivation:** Hodges' estimator explains why efficiency cannot be a pointwise comparison.
+- **Sections 8.2 and 8.6 are useful but not needed for the Chapter 25 proofs:** they cover relative efficiency and an almost-everywhere alternative to regularity.
+- **Section 8.8 is retained as a caveat:** Stein shrinkage can improve quadratic risk without contradicting the regular convolution bound.
+- **Section 8.10 is omitted:** its large-deviation comparison concerns a different asymptotic scale.
+
+::: {.callout-note title="Chapter roadmap"}
 
 Suppose that $T_n$ estimates $\psi(\theta)$ and that $\sqrt{n}\bigl(T_n-\psi(\theta)\bigr)$ has a **limiting distribution**.
 
@@ -22,38 +41,43 @@ The bound can be expressed through regularity, almost-everywhere results, or loc
 
 :::
 
-## 8.1 Asymptotic concentration
+## 8.1 Asymptotic Concentration
 
-- The goal is to compare the concentration near zero of possible limiting distributions of $\sqrt{n}\bigl(T_n-\psi(\theta)\bigr)$.
-    - Assume the sequence converges in distribution under every possible value of $\theta$.
-    - If the limiting distribution is normal, $N\bigl(\mu(\theta),\sigma^2(\theta)\bigr)$, then the estimator is approximately distributed as $T_n\approx N\left(\psi(\theta)+\frac{\mu(\theta)}{\sqrt{n}},\frac{\sigma^2(\theta)}{n}\right)$.
+The goal is to compare how tightly possible limiting distributions of $\sqrt n\{T_n-\psi(\theta)\}$ concentrate near zero. If the limit at $\theta$ is $N\bigl(\mu(\theta),\sigma^2(\theta)\bigr)$, then, approximately,
 
-What is best? Desirable choices are:
+$$
+T_n\approx N\left(\psi(\theta)+\frac{\mu(\theta)}{\sqrt n},\frac{\sigma^2(\theta)}{n}\right).
+$$
+
+A desirable limit has
 
 - asymptotic bias $\mu(\theta)=0$;
 - asymptotic variance $\sigma^2(\theta)$ as small as possible.
-- Ensure asymptotic mse is small, limit distribution of the scaled estimator $N\bigl(\mu(\theta),\sigma^2(\theta)\bigr)$ is maximally concentrated near zero.
 
-For example, the probability of the interval $(-a, a)$ is maximized by choosing $\mu(\theta) = 0$ and $\sigma^2(\theta)$ minimal.
+Within the normal family, these two choices also minimize asymptotic mean squared error.
 
-- Let $Z\sim N(\mu(\theta),\sigma^2(\theta))$. Then $P(-a<Z<a)$ measures how much of the limiting estimation-error distribution lies close to zero.
-- For fixed variance, this probability is largest when $\mu(\theta)=0$ because the normal distribution is then centered on the interval $(-a,a)$. Any nonzero mean shifts probability mass away from zero.
-- Once $\mu(\theta)=0$, making $\sigma^2(\theta)$ smaller squeezes more of the distribution into $(-a,a)$. Thus, zero mean and minimal variance make the limiting error most concentrated near zero.
+For $Z\sim N\bigl(\mu(\theta),\sigma^2(\theta)\bigr)$, the probability $P(-a<Z<a)$ is largest at $\mu(\theta)=0$ for a fixed variance, and then increases as the variance decreases. Figure @eightfig-ch8-normal-concentration shows these two effects.
 
-![Chapter 8 figure 1](images/chapter-8-figure-1.png)
+::: {#eightfig-ch8-normal-concentration}
 
-For general, possibly nonnormal limits, concentration is measured through a nonnegative loss function $\ell$. If the limit distribution is $L_\theta$, its asymptotic risk is $\int \ell,dL_\theta$.
+![](images/generated/chapter-8-normal-concentration.svg){fig-alt="Two pairs of normal density curves compare a shifted mean with mean zero and a smaller variance with variance one. The interval from minus one to one is shaded."}
+
+Centering and reducing the variance both increase the mass of a normal estimation-error distribution near zero.
+
+:::
+
+For general, possibly nonnormal limits, concentration is measured through a nonnegative loss function $\ell$. If the limit distribution is $L_\theta$, its asymptotic risk is $\int \ell\,dL_\theta$. The book uses the visually similar symbols $L_\theta$ for the limiting law and $\ell$ for the loss; this chapter retains that convention.
 
 Examples include:
 
-- quadratic loss: $\int x^2,dL_\theta(x)$;
-- absolute loss: $\int |x|,dL_\theta(x)$;
-- tail probability loss: $\int 1_{\{|x|>a\}}\,dL_\theta(x)$.
+- quadratic loss: $\int x^2\,dL_\theta(x)$;
+- absolute loss: $\int |x|\,dL_\theta(x)$;
+- tail-probability loss: $\int \mathbf 1\{|x|>a\}\,dL_\theta(x)$.
 
-A distribution is more concentrated near zero (i.e., better) when these risks are smaller.
+A distribution is more concentrated near zero when these risks are smaller.
 
-::: {.callout-note title="Definition"}
-### 8.1 Hodges’ estimator
+::: {.callout-tip title="Example"}
+### Example 8.1: Hodges’ estimator
 
 Suppose that $T_n$ is a sequence of estimators for a real parameter $\theta$ with standard root-$n$ behavior,
 
@@ -61,13 +85,13 @@ $$
 \sqrt n(T_n-\theta)\rightsquigarrow L_\theta.
 $$
 
-E.g., let $T_n$ be the mean of a sample size $n$ from a $N(\theta, 1)$ distribution.
+For example, $T_n$ may be the mean of a size-$n$ sample from $N(\theta,1)$.
 
 Define $S_n=\begin{cases}T_n&\text{if }|T_n|\geq n^{-1/4},\\ 0&\text{if }|T_n|<n^{-1/4}.\end{cases}$
 
 - For every fixed $\theta\neq 0$, truncation eventually occurs with negligible probability, so $\sqrt{n}(S_n-\theta)\rightsquigarrow L_\theta$.
 - At $\theta=0$, however, $S_n$ is set equal to zero with probability tending to one. It therefore converges faster than the usual root-$n$ rate.
-- This appears to make $S_n$ better than $T_n$ at $\theta=0$ without making it worse elsewhere. But  pointwise limits hide:
+- This appears to make $S_n$ better than $T_n$ at $\theta=0$ without making it worse elsewhere. Pointwise limits, however, hide the fact that
     - the risk has large peaks near zero;
     - the peaks move toward zero as $n$ increases;
     - their widths shrink, but their heights diverge.
@@ -75,33 +99,45 @@ Define $S_n=\begin{cases}T_n&\text{if }|T_n|\geq n^{-1/4},\\ 0&\text{if }|T_n|<n
 
 **Pointwise asymptotic comparisons at fixed parameter values are too weak. Efficiency must account for neighboring parameter values simultaneously.**
 
-![Chapter 8 figure 2](images/chapter-8-figure-2.png)
+::: {#eightfig-ch8-hodges-risk}
+
+![](images/generated/chapter-8-hodges-risk.svg){fig-alt="Risk curves for sample sizes 10, 100, and 1000 have symmetric peaks approaching zero; the ordinary sample mean has constant scaled risk one."}
+
+The scaled quadratic risk of Hodges' estimator develops higher, narrower peaks that move toward zero as the sample size grows.
 
 :::
 
-## 8.2 Relative efficiency
+:::
 
-::: {.callout-note title="Definition"}
-####
+## 8.2 Relative Efficiency
 
-To choose between two estimators, we can compare the concentration of their limit distributions.
+::: {.callout-note title="Relative efficiency"}
 
-- Suppose that an estimator $T_n$ has the asymptotic distribution $\sqrt{n}\bigl(T_n-\psi(\theta)\bigr)\rightsquigarrow N\bigl(0,\sigma^2(\theta)\bigr)$.
-- To obtain a targeted asymptotic variance of $1/\nu$, the required sample size needs to satisfy $\frac{n_\nu}{\nu}\longrightarrow \sigma^2(\theta)$.
-    - i.e., we need $n_\nu$ observations such that, as $\nu\to\infty$,
+Suppose
+
+$$
+\sqrt n\{T_n-\psi(\theta)\}\rightsquigarrow N\bigl(0,\sigma^2(\theta)\bigr).
+$$
+
+To attain asymptotic variance $1/\nu$, the required sample size $n_\nu$ satisfies
 
 $$
 \frac{n_\nu}{\nu}\longrightarrow\sigma^2(\theta).
 $$
 
-- For two estimator sequences with asymptotic variances $\sigma_1^2(\theta)$ and $\sigma_2^2(\theta)$, their relative sample-size requirement is $\underset{\nu\to\infty}{\lim}\frac{n_{\nu,2}}{n_{\nu,1}}=\frac{\sigma_2^2(\theta)}{\sigma_1^2(\theta)}$.
-- **If this ratio exceeds one, the second estimator needs proportionally more observations than the first to achieve the same asymptotic precision.**
+For two estimator sequences, the relative sample-size requirement is
+
+$$
+\lim_{\nu\to\infty}\frac{n_{\nu,2}}{n_{\nu,1}}
+=\frac{\sigma_2^2(\theta)}{\sigma_1^2(\theta)}.
+$$
+
+If this ratio exceeds one, the second estimator needs proportionally more observations to attain the same asymptotic precision. The [worked problems](problems.qmd#problems-chapter-8) retain this chapter's ordering convention and also give the reciprocal convention commonly called asymptotic relative efficiency.
 :::
 
-## 8.3 Lower bound for experiments {#sec-lower-bound-experiments}
+## 8.3 Lower Bound for Experiments {#sec-lower-bound-experiments}
 
-- Because Hodges’ example defeats pointwise lower bounds, we consider local alternatives of the form $\theta+\frac{h}{\sqrt{n}}$, where $h\in\mathbb{R}^k$ remains fixed.
-- Suppose that, for certain limit distributions $L_{\theta,h}$, for every $h$,
+Because Hodges’ example defeats pointwise lower bounds, consider local alternatives $\theta+h/\sqrt n$, where $h\in\mathbb R^k$ remains fixed. Suppose that, for some limit distributions $L_{\theta,h}$ and every $h$,
 
 <span id="eq-local-regularity"></span>
 
@@ -109,74 +145,109 @@ $$
 (8.2)\qquad  \sqrt{n}\left(T_n-\psi\left(\theta+\frac{h}{\sqrt{n}}\right)\right)\overset{\theta+h/\sqrt{n}}{\rightsquigarrow}L_{\theta,h}.
 $$
 
-- The estimator is locally good at $\theta$ if the family of distributions $L_{\theta,h}$ is concentrated near zero for all $h$.
-- If the limit distributions are **maximally concentrated**, for every $h$ and some fixed $\theta$, then $T_n$ is **locally optimal** at $\theta$.
+The estimator is locally good at $\theta$ if the family $\{L_{\theta,h}:h\in\mathbb R^k\}$ is concentrated near zero, and it is **locally optimal** if these limits are maximally concentrated for every $h$.
 
 For the rest of the chapter, assume:
 
-- $\Theta$ is an open subset of $\mathbb R^k$ and $\psi$ maps $\Theta$ into $\mathbb R^m$.
-- The derivative of $\theta \mapsto \psi(\theta)$ is $\dot \psi_\theta$.
-
-- Under differentiability in quadratic mean at $\theta$, the local experiments converge to $\bigl(N(h,I_\theta^{-1}):h\in\mathbb{R}^k\bigr)$ (see the result from the representation in the limit experiment, [Theorem 7.10](chapter-7.qmd#theorem-normal-limit-experiment)).
+- $\Theta$ is an open subset of $\mathbb R^k$, and $\psi:\Theta\to\mathbb R^m$.
+- The derivative $\dot\psi_\theta$ follows the book's row-gradient convention: it is an $m\times k$ matrix, so $\dot\psi_\theta h$ is an $m$-vector.
+- The model is differentiable in quadratic mean at $\theta$, so the local experiments converge to $\{N(h,I_\theta^{-1}):h\in\mathbb R^k\}$ by [Theorem 7.10](chapter-7.qmd#theorem-normal-limit-experiment).
 
 ::: {.callout-note title="Theorem"}
-### Theorem 8.3: reduction to the limit experiment {#theorem-limit-experiment-reduction}
+### Theorem 8.3: Reduction to the limit experiment {#theorem-limit-experiment-reduction}
 
-- Assume the experiment $\left( P_\theta: \theta \in \Theta\right)$ is differentiable in quadratic mean ([7.1](chapter-7.qmd#eq-differentiability-quadratic-mean)) at $\theta$ with non-singular Fisher information matrix $I_\theta$.
-- Let $\psi$ be differentiable at $\theta$.
-- Let $T_n$ be estimators in the experiments $(P^n_{\theta + h/\sqrt n}: h \in \mathbb R^k)$ s.t. [(8.2)](#eq-local-regularity) holds for every $h$.
-- Then the local limiting behavior of any estimator sequence can be reproduced by a randomized estimator $T$ in the Gaussian shift experiment.
-    - That is, there is an estimator $T$ based on $X\sim N(h,I_\theta^{-1})$ such that $T-\dot\psi_\theta h\sim L_{\theta,h}$ for every $h$.
+Assume the experiment $\{P_\theta:\theta\in\Theta\}$ is differentiable in quadratic mean at $\theta$, with nonsingular Fisher information $I_\theta$, and let $\psi$ be differentiable at $\theta$. If $T_n$ satisfies (8.2) for every $h$, then there is a randomized estimator $T$ based on $X\sim N(h,I_\theta^{-1})$ such that
 
-Thus, the original asymptotic estimation problem is reduced to the finite-sample problem:
+$$
+T-\dot\psi_\theta h\sim L_{\theta,h}
+$$
 
-- observe $X\sim N(h,I_\theta^{-1})$;
-- estimate $\dot\psi_\theta h$.
-- The natural estimator is $\dot\psi_\theta X$, with error distribution $\dot\psi_\theta X-\dot\psi_\theta h\sim N\bigl(0,\dot\psi_\theta I_\theta^{-1}\dot\psi_\theta^T\bigr)$.
-- This covariance matrix is also the parametric Cramér–Rao bound for estimating $\psi(\theta)$.
+for every $h$.
+
+Thus, the original asymptotic estimation problem reduces to observing $X\sim N(h,I_\theta^{-1})$ and estimating $\dot\psi_\theta h$. The natural estimator is $\dot\psi_\theta X$, with error distribution
+
+$$
+\dot\psi_\theta X-\dot\psi_\theta h
+\sim N\bigl(0,\dot\psi_\theta I_\theta^{-1}\dot\psi_\theta^T\bigr).
+$$
+
+This covariance matrix is also the parametric Cramér–Rao bound for estimating $\psi(\theta)$.
 :::
 
-**Proof:**
+::: {.callout-important title="The parametric prototype of an efficient influence function"}
 
-$S_n = \sqrt n \left(T_n - \psi(\theta)\right)$.
-
-Add and subtract $\textcolor{teal}{\psi \left( \theta + \frac{h}{\sqrt n} \right)}$:
+Let $\dot\ell_\theta$ be the score vector and let
 
 $$
-S_n = \sqrt n \left( T_n \textcolor{teal}{- \psi \left( \theta + \frac{h}{\sqrt n} \right)} \right) + \sqrt n \left(\textcolor{teal}{ \psi \left( \theta + \frac{h}{\sqrt n} \right)}  -\psi(\theta)\right)
+\widetilde\psi_\theta
+=\dot\psi_\theta I_\theta^{-1}\dot\ell_\theta.
 $$
 
-- by assumption under [(8.2)](#eq-local-regularity), the first part, $\sqrt n \left( T_n - \psi \left( \theta + \frac{h}{\sqrt n} \right) \right)$,  converges in distribution under $h$ to $L_{\theta,h}$.
+Then
 
 $$
-\sqrt n\left(T_n-\psi\left(\theta+\frac{h}{\sqrt n}\right)\right)\overset{\theta+h/\sqrt n}{\rightsquigarrow}L_{\theta,h}
+P_\theta\widetilde\psi_\theta\dot\ell_\theta^T=\dot\psi_\theta,
+\qquad
+P_\theta\widetilde\psi_\theta\widetilde\psi_\theta^T
+=\dot\psi_\theta I_\theta^{-1}\dot\psi_\theta^T.
 $$
 
-- Differentiability gives that the second part converges to a constant $\sqrt n\left(\psi\left(\theta+\frac{h}{\sqrt n}\right)-\psi(\theta)\right)\to\dot\psi_\theta h$.
-- Therefore, by [Slutsky’s lemma 2.8](chapter-2.qmd#lemma-slutsky),
+The first identity says that $\widetilde\psi_\theta$ represents the derivative of the target in every parametric score direction; the second recovers the covariance bound. In [Chapter 25](chapter-25.qmd#sec-pathwise-differentiability), score vectors become an infinite-dimensional tangent space, and this normalized score becomes the **efficient influence function**.
+
+:::
+
+**Proof roadmap.** Recenter the estimator at $\psi(\theta)$, use differentiability to identify its translated local limits, and invoke Theorem 7.10 to reproduce those limits in the Gaussian experiment.
+
+<details>
+<summary>Complete proof of Theorem 8.3</summary>
+
+Define $S_n=\sqrt n\{T_n-\psi(\theta)\}$ and add and subtract the target at the local alternative:
+
+$$
+\begin{aligned}
+S_n
+&=\sqrt n\left\{T_n-\psi\left(\theta+\frac{h}{\sqrt n}\right)\right\}\\
+&\quad+\sqrt n\left\{\psi\left(\theta+\frac{h}{\sqrt n}\right)-\psi(\theta)\right\}.
+\end{aligned}
+$$
+
+Under $P_{\theta+h/\sqrt n}^n$, the first term converges to $L_{\theta,h}$ by (8.2), while differentiability gives convergence of the second term to $\dot\psi_\theta h$. Hence [Slutsky’s lemma](chapter-2.qmd#lemma-slutsky) yields
 
 $$
 S_n\overset{\theta+h/\sqrt n}{\rightsquigarrow}L_{\theta,h}*\delta_{\dot\psi_\theta h}
 $$
 
-where $*\delta_{\dot\psi_\theta h}$ is a point mass at $\dot\psi_\theta h$. Convolution with it simply shifts the distribution:
+where $\delta_{\dot\psi_\theta h}$ is the point mass at $\dot\psi_\theta h$. Convolution with this measure shifts the distribution:
 
 $$
 X\sim L_{\theta,h}\quad\Longrightarrow\quad X+\dot\psi_\theta h\sim L_{\theta,h}*\delta_{\dot\psi_\theta h}.
 $$
 
-- [Theorem 7.10](chapter-7.qmd#theorem-normal-limit-experiment) (representation theorem in the limit experiment) then produces a statistic $T$ in the Gaussian limit experiment such that
+[Theorem 7.10](chapter-7.qmd#theorem-normal-limit-experiment) then produces a statistic $T$ in the Gaussian limit experiment such that
 
 $$
 T-\dot\psi_\theta h\sim L_{\theta,h}.
 $$
 
-## 8.4 Estimating normal means
+</details>
 
-Some facts about Gaussian models.
+The theorem does not itself impose regularity. The family $L_{\theta,h}$ may depend on $h$. Regularity in [Section 8.5](#sec-convolution-theorem) is the additional requirement that this error law be the same for every local direction.
 
-- Consider the general Gaussian experiment $X\sim N(h,\Sigma)$, where $\Sigma$ is known and nonsingular, and suppose the target is $Ah$.
-- The natural estimator is $AX$, whose error distribution is $AX-Ah\sim N(0,A\Sigma A^T)$.
+## 8.4 Estimating Normal Means
+
+Consider the Gaussian experiment $X\sim N(h,\Sigma)$, where $\Sigma$ is known and nonsingular, and suppose the target is $Ah$. The natural estimator is $AX$, whose error distribution is $AX-Ah\sim N(0,A\Sigma A^T)$.
+
+::: {.callout-tip title="The Gaussian core of the chapter"}
+
+The results in this section do three distinct jobs.
+
+1. Proposition 8.4 shows that every equivariant error law is the unavoidable Gaussian error convolved with extra noise.
+2. Anderson's lemma shows that extra independent noise cannot improve risk for a bowl-shaped loss.
+3. Proposition 8.6 removes equivariance by a diffuse-prior argument and proves minimaxity among all estimators.
+
+Theorem 8.8 and Theorem 8.11 transfer these two Gaussian conclusions back to the original local experiments.
+
+:::
 
 ::: {.callout-note title="Definition"}
 ### Equivariance in law
@@ -185,40 +256,91 @@ An estimator $T$ is **equivariant in law** if the distribution of $T-Ah$ under $
 
 :::
 
-::: {.callout-note title="Theorem"}
-### 8.4 Proposition
+::: {.callout-note title="Proposition"}
+### Proposition 8.4 {#proposition-8-4}
 
 The invariant distribution of any randomized equivariant-in-law estimator can be decomposed as $L=N(0,A\Sigma A^T)*M$ for some probability measure $M$.
 
-Thus, every equivariant-in-law estimator behaves like:
+Thus, every equivariant-in-law estimator behaves like
 
-- the natural estimator $AX$;
-- plus an independent noise term with distribution $M$.
+- the natural estimator $AX$, plus
+- an independent noise term with distribution $M$.
 
-The estimator $AX$ corresponds to the case in which $M$ is degenerate at zero.
+The estimator $AX$ corresponds to the case in which $M$ is degenerate at zero, and it is the only randomized equivariant-in-law estimator with this property, up to changes on null sets.
 
 :::
 
-- Convolution means the distribution of a sum of independent variables. Thus, we can represent the error in distribution as $T-Ah\overset{d}{=}Z+W,$ where $Z\sim N(0,A\Sigma A^T),\qquad W\sim M,$ and $Z$ and $W$ are independent.
-- So every equivariant-in-law estimator has:
-    - the unavoidable Gaussian error $Z$ already present in $AX$;
-    - possibly some additional noise $W$.
-- For example, if $T=AX+U$ for independent noise $U\sim M$, then $T-Ah=A(X-h)+U,$ which has exactly this convolution distribution.
-    - If $M=\delta_0$, then $W=0$ with probability one, so $L=N(0,A\Sigma A^T).$
-- Every equivariant estimator’s error has the same law as the error of $AX$ plus independent noise.
+**Proof roadmap.** Introduce an increasingly diffuse Gaussian prior, separate posterior noise from the estimator's remaining error, and pass to the limit through characteristic functions.
+
+<details>
+<summary>Complete proof of Proposition 8.4</summary>
+
+Under a Gaussian prior $H\sim N(0,\Lambda)$, conditionally let $X\mid H=h\sim N(h,\Sigma)$. Write
+
+$$
+m_\Lambda(X)=(\Sigma^{-1}+\Lambda^{-1})^{-1}\Sigma^{-1}X
+$$
+
+for the posterior mean and decompose
+
+$$
+T-AH=\underbrace{T-Am_\Lambda(X)}_{W_\Lambda}
++\underbrace{-A\{H-m_\Lambda(X)\}}_{G_\Lambda}.
+$$
+
+The posterior residual is Gaussian and independent of every function of $(X,U)$. Hence $G_\Lambda$ and $W_\Lambda$ are independent and
+
+$$
+G_\Lambda\sim
+N\!\left(0,A(\Sigma^{-1}+\Lambda^{-1})^{-1}A^T\right).
+$$
+
+If $T$ is equivariant in law with invariant law $L$, then $G_\Lambda+W_\Lambda=T-AH$ has law $L$ for every $\Lambda$. Set $\Lambda=\lambda I$ and let $\lambda\to\infty$. Their characteristic functions satisfy
+
+$$
+\widehat L(t)=\widehat G_\lambda(t)\widehat W_\lambda(t).
+$$
+
+The first factor converges to the everywhere-positive characteristic function of $G\sim N(0,A\Sigma A^T)$. Thus $\widehat W_\lambda(t)$ converges to a function continuous at zero. Lévy's continuity theorem gives $W_\lambda\rightsquigarrow W$ for some law $M$. Independence is preserved in the joint limit, and therefore
+
+$$
+L=\mathcal L(G+W)=N(0,A\Sigma A^T)*M.
+$$
+
+For uniqueness, let $t(X)=E\{T(X,U)\mid X\}$. Equivariance implies that $E_h\{t(X)-AX\}$ is constant in $h$. Completeness of the normal location family forces $t(X)-AX$ itself to be constant almost surely. If $M=\delta_0$, then $T-Ah$ has the same law as $AX-Ah$; equality of means makes the constant zero. Since conditional expectation cannot increase the second moment, equality of the second moments forces $T=t(X)=AX$ almost surely.
+
+</details>
+
+The same diffuse-prior construction, followed by Anderson's lemma, proves Proposition 8.6 below.
+
+Equivalently, $T-Ah\overset d=Z+W$, where $Z\sim N(0,A\Sigma A^T)$, $W\sim M$, and $Z$ and $W$ are independent. The Gaussian component $Z$ is unavoidable; $W$ is any additional noise. When $M=\delta_0$, the additional term vanishes and $L=N(0,A\Sigma A^T)$.
+
+::: {#eightfig-ch8-efficient-noise}
+
+![](images/generated/chapter-8-efficient-noise.svg){fig-alt="A narrow efficient density and a wider density produced by adding centered Gaussian noise appear beside the general schematic equation: efficient Gaussian part plus independent remainder equals regular limit."}
+
+A regular limit distribution consists of the efficient Gaussian component plus an independent remainder. The density panel uses a centered Gaussian remainder as one concrete convolution; the theorem does not require the remainder to be Gaussian.
+
+:::
 
 ### Bowl-shaped loss
 
-- A loss function $\ell$ is **bowl-shaped** if every sublevel set ${x:\ell(x)\leq c}$ is convex and symmetric around zero.
+- A loss function $\ell$ is **bowl-shaped** if every sublevel set $\{x:\ell(x)\leq c\}$ is convex and symmetric around zero.
 - It is **subconvex** if these sublevel sets are also closed.
 - Typical examples include squared-error loss, norm loss, and indicators of complements of symmetric convex sets.
 
-![Chapter 8 figure 3](images/chapter-8-figure-3.png)
+::: {#eightfig-ch8-bowl-shaped-loss}
+
+![](images/generated/chapter-8-bowl-shaped-loss.svg){fig-alt="A circular and diamond-shaped pair of symmetric convex sublevel sets is shown beside squared and absolute loss curves."}
+
+Squared and absolute losses are bowl-shaped because their sublevel sets are closed, convex, and symmetric about zero.
+
+:::
 
 ::: {.callout-important title="Lemma"}
-### 8.5 Lemma (Anderson’s lemma) {#lemma-anderson}
+### Lemma 8.5: Anderson’s lemma {#lemma-anderson}
 
-- For a bowl-shaped loss function, adding independent noise cannot improve the normal distribution:
+For a bowl-shaped loss function, adding independent noise cannot improve the normal distribution:
 
 $$
 E\ell(Z+W)\geq E\ell(Z),
@@ -226,119 +348,287 @@ $$
 
 where $Z\sim N(0,A\Sigma A^T)$ and $W$ is independent of $Z$.
 
-- Therefore, among equivariant-in-law estimators, $AX$ is optimal.
+Therefore, among equivariant-in-law estimators, $AX$ is optimal.
 :::
 
 ::: {.callout-note title="Definition"}
 ### Minimaxity
 
-- The maximum risk of an estimator $T$ is
+The maximum risk of an estimator $T$ is
 
 $$
 \sup_h R(h,T)=\sup_h E_h\ell(T-Ah).
 $$
 
-- For bowl-shaped loss, every randomized estimator satisfies $\sup_h \text E_h\ell(T-Ah)\geq \text E_0\ell(AX)$.
-- Because the risk of $AX$ is constant in $h$, it attains this lower bound and is minimax.
+For bowl-shaped loss, every randomized estimator satisfies $\sup_h E_h\ell(T-Ah)\geq E_0\ell(AX)$. Because the risk of $AX$ is constant in $h$, it attains this lower bound and is minimax.
 :::
 
-::: {.callout-note title="Theorem"}
-### 8.6 Proposition
+::: {.callout-note title="Proposition"}
+### Proposition 8.6 {#proposition-8-6}
 
-For any bowl-shaped loss function $\ell$, the maximum risk of any randomized estimator $T$ of $Ah$ is bounded below by $\text E_0 \ell (AX)$. Consequently $AX$ is a minimax estimator for $Ah$. If $Ah$ is real and $\text E_0 (AX)^2 \ell (AX) < \infty$ then $AX$ is the only minimax estimator for $Ah$ up to changes on sets of probability zero.
+For any bowl-shaped loss function $\ell$, the maximum risk of any randomized estimator $T$ of $Ah$ is bounded below by $E_0\ell(AX)$. Consequently, $AX$ is a minimax estimator for $Ah$. If $Ah$ is real and $E_0\{(AX)^2\ell(AX)\}<\infty$, then $AX$ is the only minimax estimator for $Ah$ up to changes on sets of probability zero.
 
 :::
 
-**Proof.**
+::: {.callout-warning title="Caveat about the printed uniqueness clause"}
 
-- Suppose$X\sim N(h,\Sigma),$ and the target is $Ah$. Let $T=T(X,U)$ be any possibly randomized estimator, where $U$ is independent randomization.
-- The risk of $T$ at $h$ is $R(h,T)=\text E_h\ell(T-Ah).$
-    - Its maximum risk is $\sup_h \text E_h\ell(T-Ah).$
-    - The proof shows $\sup_h E_h\ell(T-Ah)\geq E_0\ell(AX).$
-1. Step 1: Introduce a normal prior on $h$
-    - Let the unknown parameter be represented by a random vector
-    - Conditional on $H=h$, let $X\mid H=h\sim N(h,\Sigma).$
-    - Thus, the original model is recovered by conditioning on a particular value $H=h$.
-    - The average risk under this prior is $\text E\ell(T-AH)=\int \text{E}_h\ell(T-Ah),dN(0,\Lambda)(h).$
-        - Because a supremum is at least as large as any average, $\sup_h \text{E}_h\ell(T-Ah)\geq E\ell(T-AH).$
-2. Step 2: Find the posterior distribution of $H$
-    - Under the normal prior and normal model,$H\mid X\sim N\left((\Sigma^{-1}+\Lambda^{-1})^{-1}\Sigma^{-1}X,;(\Sigma^{-1}+\Lambda^{-1})^{-1}\right).$
-    - Define the posterior mean$m_\Lambda(X)=(\Sigma^{-1}+\Lambda^{-1})^{-1}\Sigma^{-1}X.$
-    - Then $H-m_\Lambda(X)\mid X\sim N\left(0,(\Sigma^{-1}+\Lambda^{-1})^{-1}\right).$
-3. Step 3: Decompose the estimation error
-    - Define $W_\Lambda=T-Am_\Lambda(X),$ and $G_\Lambda=-A\bigl(H-m_\Lambda(X)\bigr).$
-    - Then $G_\Lambda+W_\Lambda=-A\bigl(H-m_\Lambda(X)\bigr)+T-Am_\Lambda(X)=T-AH.$
-    - Therefore, $T-AH=G_\Lambda+W_\Lambda.$
-        - The term $W_\Lambda$ is the estimator’s error relative to the posterior mean. The term $G_\Lambda$ is the residual uncertainty about $AH$ after observing $X$.
-4. Step 4: Show that the two terms are independent
-    - The variable $W_\Lambda$ depends only on $X$ and $U$.
-    - Conditional on $X$, $G_\Lambda\mid X\sim N\left(0,A(\Sigma^{-1}+\Lambda^{-1})^{-1}A^T\right).$
-    - This conditional distribution does not depend on $X$. Therefore, $G_\Lambda$ is independent of $X$ and hence independent of $W_\Lambda$.
-5. Step 5: [Apply Anderson’s lemma](#lemma-anderson)
-    - Because $T-AH=G_\Lambda+W_\Lambda,$ we have $\text E\ell(T-AH)=E\ell(G_\Lambda+W_\Lambda).$
-        - [Anderson’s lemma 8.5](#lemma-anderson) says that adding independent noise cannot reduce expected bowl-shaped loss. Therefore, $\text E\ell(G_\Lambda+W_\Lambda)\geq \text E\ell(G_\Lambda).$
-    - Combining the inequalities, $\sup_h \text{E}_h\ell(T-Ah)\geq \text E\ell(T-AH)\geq \text E\ell(G_\Lambda).$
-    - This is true for every prior covariance matrix $\Lambda$.
-6. Step 6: Let the prior become diffuse
-    - Set $\Lambda=\lambda I$ and let$\lambda\to\infty.$
-    - Then $\Lambda^{-1}=\frac{1}{\lambda}I\to 0,$ so $\left(\Sigma^{-1}+\Lambda^{-1}\right)^{-1}\to\Sigma.$
-    - Consequently, $G_\Lambda\rightsquigarrow G,$ where $G\sim N(0,A\Sigma A^T).$
-    - Because $\ell$ is nonnegative and lower semicontinuous, the [Portmanteau lemma](chapter-2.qmd#lemma-portmanteau) gives $\liminf_{\lambda\to\infty}\text E\ell(G_\Lambda)\geq \text E\ell(G).$
-    - Thus, $\sup_h \text{E}_h\ell(T-Ah)\geq \text E\ell(G).$
-7. Step 7: Recognize the risk of $AX$
-    - Under parameter $h$, $AX-Ah=A(X-h).$
-    - Since $X-h\sim N(0,\Sigma),$ we have $AX-Ah\sim N(0,A\Sigma A^T).$
-    - This is exactly the distribution of $G$.
-    - Therefore, $\text E\ell(G)=\text{E}_h\ell(AX-Ah)=\text{E}_0\ell(AX).$
-    - Hence, for every estimator $T$, $\sup_h \text{E}_h\ell(T-Ah)\geq \text{E}_0\ell(AX).$
-8. Step 8: Conclude that $AX$ is minimax
-    - The risk of $AX$ does not depend on $h$: $\text{E}_h\ell(AX-Ah)=\text{E}_0\ell(AX).$
-    - Therefore, $\sup_h \text{E}_h\ell(AX-Ah)=\text{E}_0\ell(AX).$
-    - Because every estimator has maximum risk at least this large and $AX$ attains the lower bound, $\boxed{AX\text{ is minimax for estimating }Ah.}$
+The printed proposition does not exclude a loss that is constant up to null sets or a degenerate scalar target. Taken literally, its uniqueness clause is then false: under a constant loss every estimator is minimax. The qualified uniqueness argument below therefore makes explicit what that clause needs: $A\Sigma A^T>0$ and a scalar bowl-shaped loss whose Gaussian concentration inequality is strict away from zero (equivalently here, the loss is not Lebesgue-almost-everywhere constant). The lower bound and minimaxity assertions do not need these qualifications.
 
-Uniqueness: The proposition also states that, when $Ah$ is real and $\text{E}_0(AX)^2\ell(AX)<\infty,$ then $AX$ is the unique minimax estimator up to changes on probability-zero sets.
+:::
 
-- The chapter does **not** prove this uniqueness result; it refers the reader to other sources.
+**Proof roadmap.** Average the risk under an increasingly diffuse Gaussian prior, use the normal posterior to split the estimation error into posterior Gaussian noise and an independent remainder, and apply Anderson's lemma. As the prior becomes diffuse, the Gaussian term approaches the error of $AX$; because $AX$ has constant risk, the lower bound is attained. For qualified uniqueness, reduce to a one-dimensional least-favorable normal submodel and use the rate of convergence of diffuse-prior Bayes risks together with strict Anderson concentration.
 
-## 8.5 Convolution theorem {#sec-convolution-theorem}
+<details>
+<summary>Complete proof of the minimax bound in Proposition 8.6</summary>
 
-- An estimator sequence $T_n$ is **regular** at $\theta$ for estimating $\psi(\theta)$ if, for every $h$,
+Let $T=T(X,U)$ be any possibly randomized estimator, with $U$ independent of $X$. The proof compares maximum risk with a sequence of Bayes risks. Van der Vaart writes the limiting step for subconvex losses; the radial argument below also covers the stated bowl-shaped case.
+
+#### Introduce a Gaussian prior
+
+Let $H\sim N(0,\Lambda)$ and, conditionally on $H=h$, let $X\sim N(h,\Sigma)$. Since a supremum is at least any average,
+
+$$
+\sup_h E_h\ell(T-Ah)\geq E\ell(T-AH).
+$$
+
+The posterior distribution is
+
+$$
+H\mid X\sim N\left((\Sigma^{-1}+\Lambda^{-1})^{-1}\Sigma^{-1}X,
+(\Sigma^{-1}+\Lambda^{-1})^{-1}\right).
+$$
+
+Write its mean as $m_\Lambda(X)$ and define
+
+$$
+W_\Lambda=T-Am_\Lambda(X),
+\qquad
+G_\Lambda=-A\{H-m_\Lambda(X)\}.
+$$
+
+Then $T-AH=G_\Lambda+W_\Lambda$. The conditional distribution of $G_\Lambda$ does not depend on $X$, so $G_\Lambda$ is independent of $W_\Lambda$ and
+
+$$
+G_\Lambda\sim N\left(0,A(\Sigma^{-1}+\Lambda^{-1})^{-1}A^T\right).
+$$
+
+#### Apply Anderson’s lemma and diffuse the prior
+
+By [Anderson’s lemma](#lemma-anderson),
+
+$$
+\sup_h E_h\ell(T-Ah)
+\geq E\ell(G_\Lambda+W_\Lambda)
+\geq E\ell(G_\Lambda).
+$$
+
+Set $\Lambda=\lambda\Sigma$. The posterior covariance is then
+
+$$
+(\Sigma^{-1}+\Lambda^{-1})^{-1}
+=\frac{\lambda}{\lambda+1}\Sigma,
+$$
+
+so $G_\Lambda$ has the same distribution as $a_\lambda G$, where $G\sim N(0,A\Sigma A^T)$ and $a_\lambda=\{\lambda/(\lambda+1)\}^{1/2}\uparrow1$. Bowl-shapedness makes $r\mapsto\ell(rx)$ nondecreasing for $r\geq0$ along every ray. Such a one-dimensional monotone function has only countably many discontinuities, while the Gaussian radial distribution is continuous on the range of $A$. Thus $\ell(a_\lambda G)\uparrow\ell(G)$ almost surely. The monotone convergence theorem gives
+
+$$
+\sup_h E_h\ell(T-Ah)\geq E\ell(G)=E_0\ell(AX).
+$$
+
+Because $AX-Ah=A(X-h)$ has the same distribution as $G$ for every $h$, the risk of $AX$ is constant and attains this lower bound. Thus $AX$ is minimax for estimating $Ah$.
+
+</details>
+
+**Derivation in these notes.** Van der Vaart refers elsewhere for uniqueness. The following argument proves the corrected, nondegenerate version needed when uniqueness is invoked later.
+
+<details>
+<summary>Complete proof of the qualified uniqueness clause</summary>
+
+Assume that $Ah$ is real, write $\sigma^2=A\Sigma A^T>0$, and suppose that $\ell$ is not Lebesgue-almost-everywhere constant and
+
+$$
+E\{Z^2\ell(Z)\}<\infty,
+\qquad Z\sim N(0,\sigma^2).
+$$
+
+Let $T$ be any minimax estimator. Because $AX$ has constant risk $R_0=E\ell(Z)$ and is minimax, necessarily
+
+$$
+E_h\ell(T-Ah)\leq R_0,
+\qquad h\in\mathbb R^k.
+$$
+
+#### Reduce to one normal location coordinate
+
+Choose $v=\Sigma A^T/\sigma^2$, so $Av=1$, and restrict to the submodel $h=tv$. Then
+
+$$
+Y=AX\sim N(t,\sigma^2).
+$$
+
+Moreover, $Y$ is independent of $X-vY$, whose distribution does not depend on $t$. Thus the residual and the original randomization variable together act only as an auxiliary randomizer. It is enough to prove that every randomized estimator $\delta(Y,U)$ satisfying
+
+$$
+\sup_t E_t\ell\{\delta(Y,U)-t\}\leq R_0
+$$
+
+must equal $Y$ almost surely.
+
+#### Compare with diffuse normal Bayes problems
+
+Give $t$ the prior $N(0,\tau^2)$. If $c_\tau=\tau^2/(\tau^2+\sigma^2)$, then the posterior mean is $c_\tau Y$ and the posterior residual has variance
+
+$$
+v_\tau=\frac{\sigma^2\tau^2}{\sigma^2+\tau^2}.
+$$
+
+Let $Z_\tau\sim N(0,v_\tau)$ be independent of $(Y,U)$ and put $W_\tau=\delta(Y,U)-c_\tau Y$. Averaging the maximum-risk bound over the prior and applying Anderson's lemma conditionally on $(Y,U)$ gives
+
+$$
+0\leq E\!\left[
+E\{\ell(Z_\tau+W_\tau)\mid W_\tau\}-E\ell(Z_\tau)
+\right]
+\leq R_0-E\ell(Z_\tau).
+\tag{8.6a}
+$$
+
+The density of $Z_\tau$ differs from the density of $Z$ by
+
+$$
+O(\tau^{-2})(1+z^2)
+$$
+
+times a fixed Gaussian density. The displayed integrability assumption therefore yields
+
+$$
+R_0-E\ell(Z_\tau)=O(\tau^{-2}).
+\tag{8.6b}
+$$
+
+#### Strict concentration forces zero remainder
+
+For a scalar bowl-shaped loss that is not almost everywhere constant, strict Anderson concentration says
+
+$$
+d(w):=E\ell(Z+w)-E\ell(Z)>0
+\qquad(w\neq0).
+$$
+
+Gaussian convolution makes this gap lower semicontinuous; consequently it is bounded away from zero on every compact set $\{w:\varepsilon\leq |w|\leq M\}$. The same lower bound, reduced if necessary, holds with $Z_\tau$ for all sufficiently large $\tau$.
+
+Suppose that $\delta(y,u)\neq y$ on a set of positive Lebesgue-times-randomization measure. For some $K,M<\infty$ and $\varepsilon>0$, the set
+
+$$
+S=\{(y,u):|y|\leq K,\ \varepsilon\leq|\delta(y,u)-y|\leq M\}
+$$
+
+then has positive measure. Because $c_\tau y\to y$ uniformly on $[-K,K]$, $W_\tau$ remains in a compact set bounded away from zero on $S$. The marginal density of $Y\sim N(0,\tau^2+\sigma^2)$ is bounded below by a positive multiple of $\tau^{-1}$ on $[-K,K]$. Hence the left side of (8.6a) is bounded below by $C/\tau$ for some $C>0$. This contradicts the $O(\tau^{-2})$ upper bound in (8.6b).
+
+Therefore $\delta(Y,U)=Y$ for Lebesgue-almost every $(y,u)$. Every normal location law has a positive density, so the equality holds almost surely under every $t$. Returning to the least-favorable submodel gives $T=AX$ almost surely there; because its normal laws have positive densities on the original sample space, the equality holds up to a common probability-zero set. This proves qualified uniqueness.
+
+</details>
+
+## 8.5 Convolution Theorem {#sec-convolution-theorem}
+
+An estimator sequence $T_n$ is **regular** at $\theta$ for estimating $\psi(\theta)$ if, for every $h$,
 
 $$
 \sqrt n\left(T_n-\psi\left(\theta+\frac{h}{\sqrt n}\right)\right)\overset{\theta+h/\sqrt n}{\rightsquigarrow}L_\theta,
 $$
 
-where the same distribution $L_\theta$ appears for every $h$.
-
-- **Regularity** means that a local perturbation of the parameter does not change the limiting error distribution.
-- Equivalently, regular estimators are asymptotically equivariant in law.
-- According to [Theorem 8.3](#theorem-limit-experiment-reduction), every estimator sequence is matched by an estimator $T$ in the limit experiment $\left( N(h, I_\theta^{-1}): h \in \mathbb R^k\right)$.
-    - For a regular estimator, the matching estimator has the property $T - \dot \psi_\theta h \overset{h}{\sim} L_\theta$, for every $h$.
-    - A regular estimator sequence is matched by an equivariant-in-law estimator for $\dot \psi_\theta h$.
-- A **best regular estimator** has $M_\theta$ degenerate at zero and hence limiting distribution $N\bigl(0,\dot\psi_\theta I_\theta^{-1}\dot\psi_\theta^T\bigr)$.
+where the same distribution $L_\theta$ appears for every $h$. Thus local perturbations do not change the limiting error law. By [Theorem 8.3](#theorem-limit-experiment-reduction), the matching estimator in the Gaussian limit experiment is equivariant in law for $\dot\psi_\theta h$. A **best regular estimator** has no additional convolution noise and hence has limiting distribution $N\bigl(0,\dot\psi_\theta I_\theta^{-1}\dot\psi_\theta^T\bigr)$.
 
 ::: {.callout-note title="Theorem"}
-### 8.8 Theorem (Convolution)
+### Theorem 8.8: Convolution {#theorem-8-8}
 
-- Experiment $(P_\theta : \theta \in \Theta)$ is differentiable in quadratic mean [(7.1)](chapter-7.qmd#eq-differentiability-quadratic-mean) at $\theta$ with non-singular Fisher information $I_\theta$.
-- Let $\psi$ be differentiable at $\theta$.
-- Let $T_n$ be a regular estimator sequence in the experiments with limit distribution $L_\theta$.
-- For every regular estimator sequence, its limiting distribution has the form $L_\theta=N\bigl(0,\dot\psi_\theta I_\theta^{-1}\dot\psi_\theta^T\bigr)*M_\theta$ for some probability measure $M_\theta$.
-    - The limiting error is therefore the efficient normal error plus additional independent noise.
-    - If $L_\theta$ has covariance matrix $\Sigma_\theta$, then $\Sigma_\theta-\dot\psi_\theta I_\theta^{-1}\dot\psi_\theta^T$ is nonnegative definite.
+Suppose $\{P_\theta:\theta\in\Theta\}$ is differentiable in quadratic mean at $\theta$, with nonsingular Fisher information $I_\theta$, and $\psi$ is differentiable at $\theta$. For every regular estimator sequence with limiting distribution $L_\theta$,
+
+$$
+L_\theta=N\bigl(0,\dot\psi_\theta I_\theta^{-1}\dot\psi_\theta^T\bigr)*M_\theta
+$$
+
+for some probability measure $M_\theta$. Thus the limiting error is the efficient normal error plus additional independent noise. If $L_\theta$ has covariance matrix $\Sigma_\theta$, then $\Sigma_\theta-\dot\psi_\theta I_\theta^{-1}\dot\psi_\theta^T$ is nonnegative definite.
+
+This result becomes [Theorem 25.20](chapter-25.qmd#theorem-25-20) after finite-dimensional score directions are replaced by tangent directions and the normalized score is replaced by the efficient influence function.
 :::
 
+**Proof roadmap.** Regularity makes the local error law independent of $h$. Theorem 8.3 therefore represents it by an equivariant-in-law estimator in the Gaussian experiment, and Proposition 8.4 decomposes that invariant law into the efficient Gaussian component and independent noise. Covariances then add.
+
+<details>
+<summary>Complete proof of Theorem 8.8</summary>
+
+Regularity says that (8.2) holds with $L_{\theta,h}=L_\theta$ for every $h$. By [Theorem 8.3](#theorem-limit-experiment-reduction), there is a randomized estimator $T$ in the Gaussian experiment
+
+$$
+X\sim N(h,I_\theta^{-1})
+$$
+
+such that
+
+$$
+T-\dot\psi_\theta h\sim L_\theta,
+\qquad h\in\mathbb R^k.
+$$
+
+Because the error distribution is the same for every $h$, $T$ is equivariant in law for estimating $\dot\psi_\theta h$. Apply [Proposition 8.4](#proposition-8-4) with $A=\dot\psi_\theta$ and $\Sigma=I_\theta^{-1}$. It gives a probability measure $M_\theta$ for which
+
+$$
+L_\theta
+=N\bigl(0,\dot\psi_\theta I_\theta^{-1}\dot\psi_\theta^T\bigr)*M_\theta.
+$$
+
+Equivalently, on a product probability space the limiting error has the distribution of $Z+W$, where
+
+$$
+Z\sim N\bigl(0,\dot\psi_\theta I_\theta^{-1}\dot\psi_\theta^T\bigr),
+\qquad W\sim M_\theta,
+$$
+
+and $Z$ and $W$ are independent. If $L_\theta$ has covariance matrix $\Sigma_\theta$, then $W=(Z+W)-Z$ has finite second moments as well. Independence gives
+
+$$
+\Sigma_\theta
+=\dot\psi_\theta I_\theta^{-1}\dot\psi_\theta^T
++\operatorname{Cov}(W).
+$$
+
+Hence
+
+$$
+\Sigma_\theta-\dot\psi_\theta I_\theta^{-1}\dot\psi_\theta^T
+=\operatorname{Cov}(W)
+$$
+
+is nonnegative definite.
+
+</details>
+
+The convolution remainder is the parametric version of the orthogonal noise that appears in the [semiparametric convolution theorem](chapter-25.qmd#theorem-25-20).
+
+## 8.6 Almost-Everywhere Convolution Theorem
+
+Regularity is a substantive restriction, and Hodges’ estimator is not regular at the point where it is superefficient. The almost-everywhere theorem removes that assumption.
+
 ::: {.callout-note title="Theorem"}
-### 8.6 Almost-everywhere convolution theorem
+<span id="theorem-8.9-almost-everywhere-convolution"></span>
 
-- Regularity is a substantive restriction, and Hodges’ estimator is not regular at the point where it is superefficient.
-- The almost-everywhere theorem removes the regularity assumption.
+### Theorem 8.9: Almost-everywhere convolution {#theorem-8-9-almost-everywhere-convolution}
 
-### 8.9 Theorem
+Suppose the model is differentiable in quadratic mean at every $\theta$, with nonsingular information matrix $I_\theta$, and $\psi$ is differentiable at every $\theta$. If $\sqrt n\{T_n-\psi(\theta)\}\rightsquigarrow L_\theta$ under every $\theta$, then, for Lebesgue-almost every $\theta$,
 
-- Suppose that $\sqrt{n}\bigl(T_n-\psi(\theta)\bigr)\rightsquigarrow L_\theta$ under every $\theta$.
-- Then, for Lebesgue almost every $\theta$, $L_\theta=N\bigl(0,\dot\psi_\theta I_\theta^{-1}\dot\psi_\theta^T\bigr)*M_\theta$.
-    - Consequently, an estimator can beat the efficient normal limit only on a Lebesgue null set of parameter values.
+$$
+L_\theta=N\bigl(0,\dot\psi_\theta I_\theta^{-1}\dot\psi_\theta^T\bigr)*M_\theta.
+$$
+
+If $L_\theta$ has covariance matrix $\Sigma_\theta$, then
+
+$$
+\Sigma_\theta-\dot\psi_\theta I_\theta^{-1}\dot\psi_\theta^T
+$$
+
+is nonnegative definite for Lebesgue-almost every $\theta$.
+
+Consequently, an estimator can beat the efficient normal limit only on a Lebesgue null set of parameter values.
 
 This explains Hodges’ estimator:
 
@@ -349,8 +639,10 @@ The supporting lemma shows that any estimator sequence possessing pointwise limi
 
 :::
 
+**Supporting-result dependency.** Van der Vaart obtains Theorem 8.9 by combining the convolution theorem with Lemma 8.10. This almost-everywhere route explains superefficiency but is not needed for the Chapter 25 proof chain, so the notes retain the exact result and its supporting lemma without adding a second full convolution argument.
+
 ::: {.callout-important title="Lemma"}
-### 8.10 Lemma
+### Lemma 8.10: Almost-everywhere local regularity {#lemma-8-10}
 
 Let $T_n$ be estimators in experiments $\left(P_{n,\theta}:\theta\in\Theta\right),$ where $\Theta$ is a measurable subset of $\mathbb{R}^k$.
 
@@ -359,121 +651,443 @@ Assume:
 - For every measurable set $A$ and every $n$, the map $\theta\mapsto P_{n,\theta}(A)$ is measurable.
 - The map $\theta\mapsto\psi(\theta)$ is measurable.
 - There exist distributions $L_\theta$ such that, for Lebesgue almost every $\theta$, $r_n\left(T_n-\psi(\theta)\right)\overset{\theta}{\rightsquigarrow}L_\theta.$
-- Then, for every sequence $\gamma_n\to 0$, there exists a subsequence ${n_j}$ such that, for Lebesgue almost every pair $(\theta,h)$,
+
+Then, for every sequence $\gamma_n\to0$, there exists a subsequence $\{n_j\}$ such that, for Lebesgue-almost every pair $(\theta,h)$,
 
 $$
 r_{n_j}\left(T_{n_j}-\psi\left(\theta+\gamma_{n_j}h\right)\right)\overset{\theta+\gamma_{n_j}h}{\rightsquigarrow}L_\theta.
 $$
 
-- If an estimator has a pointwise limit distribution at almost every parameter value, then along some subsequence it is automatically regular under vanishing perturbations $\theta+\gamma_n h$ for almost every $\theta$ and almost every direction $h$. The local limiting distribution remains $L_\theta$.
+Thus an estimator with pointwise limits at almost every parameter is, along a subsequence, automatically regular under vanishing perturbations $\theta+\gamma_nh$ for almost every $(\theta,h)$. Its local limiting distribution remains $L_\theta$.
 :::
 
-**Proof.**
+**Supporting-proof roadmap.** Express weak convergence through a countable determining class, reduce the problem to bounded measurable functions evaluated at perturbed arguments, prove convergence in mean under an auxiliary Gaussian law, and extract one subsequence by diagonalization.
 
-- The assumption is that, for Lebesgue almost every fixed parameter value $\theta$, $r_n\bigl(T_n-\psi(\theta)\bigr)\overset{\theta}{\rightsquigarrow}L_\theta.$
-- The lemma wants to show that, along a subsequence, this convergence also holds when the true parameter moves toward $\theta$: $r_{n_j}\bigl(T_{n_j}-\psi(\theta+\gamma_{n_j}h)\bigr)\overset{\theta+\gamma_{n_j}h}{\rightsquigarrow}L_\theta$ for Lebesgue almost every pair $(\theta,h)$.
-- The central idea is that pointwise convergence of measurable functions can be upgraded, along a subsequence, to convergence after small perturbations of the argument.
-1. Step 1: Extend the parameter space to all of $\mathbb{R}^k$
-    - The proof assumes without loss of generality that $\Theta=\mathbb{R}^k.$
-    - If the original parameter space is only a measurable subset of $\mathbb{R}^k$, choose some fixed $\theta_0\in\Theta$ and define, outside $\Theta$, $P_{n,\theta}=P_{n,\theta_0}.$
-    - This extension lets the proof consider every point of the form $\theta+\gamma_n h$ without worrying about whether it lies inside the original parameter space.
-2. Step 2: Define the standardized estimator
-    - Write $T_{n,\theta}=r_n\bigl(T_n-\psi(\theta)\bigr).$
-    - The assumption of the lemma becomes $T_{n,\theta}\overset{\theta}{\rightsquigarrow}L_\theta$ for Lebesgue almost every $\theta$.
-    - The desired conclusion is $T_{n_j,\theta+\gamma_{n_j}h}\overset{\theta+\gamma_{n_j}h}{\rightsquigarrow}L_\theta$ for Lebesgue almost every $(\theta,h)$.
-3. Step 3: Replace weak convergence by convergence of expectations
-    - Choose a countable collection $\mathcal F$ of bounded test functions such that weak convergence is equivalent to convergence of expectations for every $f\in\mathcal F$.
-    - Thus, $T_{n,\theta}\overset{\theta}{\rightsquigarrow}L_\theta$ is equivalent to $E_\theta f(T_{n,\theta})\longrightarrow\int f,dL_\theta$ for every $f\in\mathcal F$.
-    - The countability of $\mathcal F$ will later allow the proof to choose one subsequence that works for every test function simultaneously.
-4. Step 4: Reduce the problem to ordinary functions of $\theta$
-    - Fix one test function $f\in\mathcal F$ and define $g_n(\theta)=E_\theta f(T_{n,\theta})$ and $g(\theta)=\int f,dL_\theta.$
-    - The original convergence assumption gives $g_n(\theta)\longrightarrow g(\theta)$ for Lebesgue almost every $\theta$.
-    - To establish the desired local weak convergence, it is enough to show that there is a subsequence along which $g_n(\theta+\gamma_nh)\longrightarrow g(\theta)$ for Lebesgue almost every $(\theta,h)$.
-    - Indeed, $g_n(\theta+\gamma_nh)=E_{\theta+\gamma_nh}f\left(r_n\bigl(T_n-\psi(\theta+\gamma_nh)\bigr)\right).$
-    - Thus, this convergence is exactly the convergence of test-function expectations required for the lemma.
-5. Step 5: The key analytic claim
-    - The proof now reduces to the following statement:
+<details>
+<summary>Supporting proof of Lemma 8.10</summary>
 
-> If bounded measurable functions $g_n$ satisfy $g_n(\theta)\to g(\theta)$ almost everywhere, then for every $\gamma_n\to0$ there is a subsequence such that $g_n(\theta+\gamma_nh)\longrightarrow g(\theta)$ for Lebesgue almost every $(\theta,h)$.
->
+The proof upgrades pointwise convergence of measurable functions to convergence after small perturbations of their arguments.
 
-- There are two differences to control:
-1. the difference between $g_n$ and $g$ at the perturbed point;
-2. the difference between $g$ at the perturbed and unperturbed points.
-- That is, $g_n(\theta+\gamma_nh)-g(\theta)=\bigl[g_n(\theta+\gamma_nh)-g(\theta+\gamma_nh)\bigr]+\bigl[g(\theta+\gamma_nh)-g(\theta)\bigr].$
-1. Step 6: Introduce random Gaussian points
-    - Let $\Theta$ and $H$ be independent standard normal vectors: $\Theta,H\sim N(0,I).$
-    - Then $\Theta+\gamma_nH\sim N\bigl(0,(1+\gamma_n^2)I\bigr).$
-    - Let $p$ be the density of $N(0,I)$ and let $p_n$ be the density of $N\bigl(0,(1+\gamma_n^2)I\bigr).$
-    - Because $\gamma_n\to0$, $p_n(u)\longrightarrow p(u).$
-    - Scheffé’s lemma gives the stronger conclusion $\int|p_n(u)-p(u)|,du\longrightarrow0.$
-    - Thus, the distribution of the perturbed point $\Theta+\gamma_nH$ approaches the distribution of $\Theta$.
-2. Step 7: Control the difference between $g_n$ and $g$
-    - Consider $E\left|g_n(\Theta+\gamma_nH)-g(\Theta+\gamma_nH)\right|.$
-    - Because $\Theta+\gamma_nH$ has density $p_n$, $E\left|g_n(\Theta+\gamma_nH)-g(\Theta+\gamma_nH)\right|=\int|g_n(u)-g(u)|p_n(u),du.$
-    - Let $C$ be a uniform bound on $|g_n-g|$. Then $\int|g_n-g|p_n\leq\int|g_n-g|p+C\int|p_n-p|.$
-    - The first term converges to zero by dominated convergence, since $g_n(u)\longrightarrow g(u)$ almost everywhere.
-    - The second term converges to zero by Scheffé’s lemma. Therefore, $E\left|g_n(\Theta+\gamma_nH)-g(\Theta+\gamma_nH)\right|\longrightarrow0.$
-    - This handles the fact that $g_n$ approximates $g$.
-3. Step 8: Control the change in $g$ under a small perturbation
-    - Next, the proof shows $E\left|g(\Theta+\gamma_nH)-g(\Theta)\right|\longrightarrow0.$
-    - This is immediate if $g$ is bounded and continuous, because $\Theta+\gamma_nH\longrightarrow\Theta$ almost surely, and hence $g(\Theta+\gamma_nH)\longrightarrow g(\Theta).$
-    - For a general measurable $g$, choose a bounded continuous function $g_\varepsilon$ that approximates $g$ in $L_1$.
-    - By the triangle inequality, $E|g(\Theta+\gamma_nH)-g(\Theta)|\leq E|g(\Theta+\gamma_nH)-g_\varepsilon(\Theta+\gamma_nH)|+E|g_\varepsilon(\Theta+\gamma_nH)-g_\varepsilon(\Theta)|+E|g_\varepsilon(\Theta)-g(\Theta)|.$
-    - The middle term converges to zero because $g_\varepsilon$ is continuous and bounded.
-    - The first and third terms can be written as $\int|g-g_\varepsilon|(u)\bigl(p_n(u)+p(u)\bigr),du.$
-    - Since $p_n\to p$ in $L_1$, $\int|g-g_\varepsilon|(u)\bigl(p_n(u)+p(u)\bigr),du=2\int|g-g_\varepsilon|(u)p(u),du+o(1).$
-    - The continuous approximation $g_\varepsilon$ can be chosen so that this is arbitrarily small. Therefore, $E\left|g(\Theta+\gamma_nH)-g(\Theta)\right|\longrightarrow0.$
-    - This handles the fact that a small change in the argument does not substantially change $g$ on average.
-4. Step 9: Combine the two differences
-    - By the triangle inequality, $E|g_n(\Theta+\gamma_nH)-g(\Theta)|\leq E|g_n(\Theta+\gamma_nH)-g(\Theta+\gamma_nH)|+E|g(\Theta+\gamma_nH)-g(\Theta)|.$
-    - Both terms on the right converge to zero. Hence, $E|g_n(\Theta+\gamma_nH)-g(\Theta)|\longrightarrow0.$
-    - Thus, $g_n(\Theta+\gamma_nH)-g(\Theta)\longrightarrow0$ in mean and therefore in probability.
-5. Step 10: Extract an almost-surely convergent subsequence
-- Every sequence that converges in probability has a subsequence that converges almost surely.
-- Therefore, there exists a subsequence ${n_j}$ such that $g_{n_j}(\Theta+\gamma_{n_j}H)\longrightarrow g(\Theta)$ almost surely.
-- The joint distribution of $(\Theta,H)$ has a strictly positive density on $\mathbb{R}^{2k}$. Therefore, a set has probability zero under this distribution if and only if it has Lebesgue measure zero.
-- Consequently, $g_{n_j}(\theta+\gamma_{n_j}h)\longrightarrow g(\theta)$ for $\lambda^{2k}$almost every $(\theta,h)$.
-6. Step 11: Obtain one subsequence for every test function
-- So far, the subsequence may depend on the chosen test function $f$.
-- Because $\mathcal F={f_1,f_2,\ldots}$ is countable, use diagonalization:
-    - choose a subsequence that works for $f_1$;
-    - from that subsequence, choose a further subsequence that works for $f_2$;
-    - continue for every $f_j$;
-    - take the diagonal subsequence.
-        - Along the resulting subsequence, for every $f\in\mathcal F$, $E_{\theta+\gamma_{n_j}h}f(T_{n_j,\theta+\gamma_{n_j}h})\longrightarrow\int f,dL_\theta$ for Lebesgue almost every $(\theta,h)$.
-        - Because $\mathcal F$ determines weak convergence, $T_{n_j,\theta+\gamma_{n_j}h}\overset{\theta+\gamma_{n_j}h}{\rightsquigarrow}L_\theta.$
-        - Equivalently, $r_{n_j}\left(T_{n_j}-\psi(\theta+\gamma_{n_j}h)\right)\overset{\theta+\gamma_{n_j}h}{\rightsquigarrow}L_\theta.$
-- The proof starts with pointwise convergence at almost every fixed $\theta$. It then:
-1. rewrites weak convergence using test functions;
-2. averages over random Gaussian values of $(\theta,h)$;
-3. shows that the small perturbation $\theta+\gamma_nh$ is asymptotically negligible;
-4. extracts a subsequence with almost-everywhere convergence;
-5. diagonalizes over a countable collection of test functions.
+#### Reduce weak convergence to measurable functions
 
-Thus, although the estimator was not assumed to be regular, it becomes regular at almost every parameter value along a subsequence.
+Extend the model to $\mathbb R^k$ if necessary, and write $T_{n,\theta}=r_n\{T_n-\psi(\theta)\}$. Choose a countable convergence-determining class $\mathcal F$ of bounded test functions. For fixed $f\in\mathcal F$, define
+
+$$
+g_n(\theta)=E_\theta f(T_{n,\theta}),
+\qquad
+g(\theta)=\int f\,dL_\theta.
+$$
+
+The assumption gives $g_n(\theta)\to g(\theta)$ almost everywhere. It remains to find a subsequence for which $g_n(\theta+\gamma_nh)\to g(\theta)$ for almost every $(\theta,h)$.
+
+#### Control a randomly perturbed argument
+
+Let $\Theta$ and $H$ be independent $N(0,I)$ vectors. If $p$ is the density of $\Theta$ and $p_n$ is the density of $\Theta+\gamma_nH$, then Scheffé’s lemma gives $\int|p_n-p|\to0$. For bounded $g_n$,
+
+$$
+\begin{aligned}
+E|g_n(\Theta+\gamma_nH)-g(\Theta)|
+&\leq E|g_n(\Theta+\gamma_nH)-g(\Theta+\gamma_nH)|\\
+&\quad+E|g(\Theta+\gamma_nH)-g(\Theta)|.
+\end{aligned}
+$$
+
+The first term tends to zero by dominated convergence and $\int|p_n-p|\to0$. For the second, approximate the bounded measurable function $g$ in $L_1(p)$ by a bounded continuous function. Continuity controls the perturbation, and the $L_1$ approximation controls the remaining terms. Hence
+
+$$
+g_n(\Theta+\gamma_nH)-g(\Theta)\longrightarrow0
+$$
+
+in probability.
+
+#### Extract and diagonalize
+
+Choose an almost-surely convergent subsequence. Because $(\Theta,H)$ has a strictly positive density on $\mathbb R^{2k}$, its null sets are exactly the Lebesgue null sets. Thus, for the chosen $f$,
+
+$$
+g_{n_j}(\theta+\gamma_{n_j}h)\longrightarrow g(\theta)
+$$
+
+for Lebesgue-almost every $(\theta,h)$. Diagonalizing over the countable class $\mathcal F$ gives one subsequence for which
+
+$$
+r_{n_j}\left\{T_{n_j}-\psi(\theta+\gamma_{n_j}h)\right\}
+\overset{\theta+\gamma_{n_j}h}{\rightsquigarrow}L_\theta
+$$
+
+for Lebesgue-almost every $(\theta,h)$, which is the required almost-everywhere local regularity.
+
+</details>
 
 ---
 
-## 8.7 Local asymptotic minimax theorem {#sec-local-asymptotic-minimax}
+## 8.7 Local Asymptotic Minimax Theorem {#sec-local-asymptotic-minimax}
 
-- The convolution theorem applies only to regular estimators. The almost-everywhere theorem leaves open a null set of parameter values.
-- The local asymptotic minimax theorem instead evaluates the worst risk over shrinking neighborhoods.
+The convolution theorem applies only to regular estimators, while the almost-everywhere theorem leaves open a null set of parameter values. The local asymptotic minimax theorem instead evaluates the worst risk over shrinking neighborhoods.
 
-For any estimator sequence and bowl-shaped loss $\ell$,
+::: {.callout-note title="Theorem"}
+### Theorem 8.11: Local asymptotic minimax bound {#theorem-8-11}
+
+Suppose the model is differentiable in quadratic mean at $\theta$, with nonsingular Fisher information $I_\theta$, and $\psi$ is differentiable at $\theta$. For every estimator sequence $T_n$ and every bowl-shaped loss $\ell$,
 
 $$
-\sup_I\liminf_{n\to\infty}\sup_{h\in I}E_{\theta+h/\sqrt{n}}\ell\left(\sqrt{n}\left[T_n-\psi\left(\theta+\frac{h}{\sqrt{n}}\right)\right]\right)\geq\int\ell,dN\bigl(0,\dot\psi_\theta I_\theta^{-1}\dot\psi_\theta^T\bigr),
+\sup_I\liminf_{n\to\infty}\sup_{h\in I}E_{\theta+h/\sqrt{n}}\ell\left(\sqrt{n}\left[T_n-\psi\left(\theta+\frac{h}{\sqrt{n}}\right)\right]\right)\geq\int\ell\,dN\bigl(0,\dot\psi_\theta I_\theta^{-1}\dot\psi_\theta^T\bigr),
 $$
 
 where the first supremum ranges over finite subsets $I\subset\mathbb{R}^k$.
 
-- The theorem says that no estimator can have uniformly smaller asymptotic risk over all local directions $h$.
-- An estimator may perform exceptionally well at one point or along selected directions, but this improvement cannot persist uniformly over a shrinking neighborhood.
+:::
+
+No estimator can have uniformly smaller asymptotic risk over all local directions $h$. Exceptional performance at one point or along selected directions cannot persist uniformly over a shrinking neighborhood. [Theorem 25.21](chapter-25.qmd#theorem-25-21) uses the same argument after replacing $h\in\mathbb R^k$ by finitely many directions from the semiparametric tangent set.
+
+**Proof roadmap.** First approximate the loss from below by bounded continuous bowl-shaped losses. For one such loss, compactify the estimator through all loss profiles at rational local directions; this forces tightness without restricting the estimator. LAN then produces a randomized compact-action rule in the Gaussian experiment. Finite-prior Bayes risks show that boundary actions cannot improve the problem, and diffuse Gaussian priors recover the normal lower bound. Finally remove the loss approximation.
+
+**Derivation in these notes.** Van der Vaart proves the result under auxiliary tightness and lower-semicontinuity conditions and points to [@vanDerVaartWellner1996, §3.11] for the general compactification argument. The reconstruction below exposes that argument for the present finite-dimensional setting.
+
+<details>
+<summary>Complete proof of Theorem 8.11</summary>
+
+Write
+
+$$
+A=\dot\psi_\theta,
+\qquad
+V=AI_\theta^{-1}A^T,
+\qquad
+Z\sim N(0,V),
+$$
+
+and let $R(\ell)$ denote the left side of the theorem.
+
+#### Approximate the loss from below
+
+For $q\geq0$, let
+
+$$
+C_q=\operatorname{cl}\{x:\ell(x)\leq q\}.
+$$
+
+These sets are nested, closed, convex, and symmetric. For integers $j\geq1$, take the nested dyadic grids
+
+$$
+G_j=\left\{\frac r{2^j}:r=0,1,\ldots,j2^j\right\}
+\subset[0,j]
+$$
+
+and define
+
+$$
+\ell_j(x)
+=\max_{q\in G_j}
+q\min\{1,j\,\operatorname{dist}(x,C_q)\},
+\tag{8.11a}
+$$
+
+with the convention $\operatorname{dist}(x,\varnothing)=\infty$. For fixed $q>0$ and $0\leq c<q$, the $c$-sublevel set of the corresponding term is
+
+$$
+C_q+\overline B\!\left(0,\frac{c}{qj}\right);
+$$
+
+for $c\geq q$ it is all of $\mathbb R^m$. Thus each term is bounded, continuous, and bowl-shaped. A sublevel set of their maximum is the intersection of the corresponding sublevel sets, so $\ell_j$ is also bounded, continuous, and bowl-shaped.
+
+If $\ell(x)\leq q$, then $x\in C_q$ and the $q$-term vanishes; if $q<\ell(x)$, that term is at most $q$. Hence $\ell_j\leq\ell$. Moreover, $G_j\subset G_{j+1}$ and the distance multiplier increases from $j$ to $j+1$, so $\ell_j\leq\ell_{j+1}$.
+
+Let $\ell_*$ be the lower-semicontinuous envelope of $\ell$. Every $\ell_j$ is a continuous minorant, so $\ell_j\leq\ell_*$. Conversely, if $q<\ell_*(x)$ is dyadic, then $x\notin C_q$; once $j$ is large enough that $q\in G_j$ and $j\operatorname{dist}(x,C_q)\geq1$, the $q$-term equals $q$. Density of the dyadic rationals therefore gives $\ell_j(x)\uparrow\ell_*(x)$.
+
+Finally, a point at which $\ell_*<\ell$ lies on the relative boundary, in the linear support of $Z$, of $C_q$ for some rational $q$. Boundaries of proper convex sets have Gaussian measure zero, and there are only countably many rational $q$. Therefore
+
+$$
+\ell_j(Z)\uparrow\ell(Z)
+\quad\text{almost surely}.
+\tag{8.11b}
+$$
+
+Because $R(\ell)\geq R(\ell_j)$, it is enough to prove
+
+$$
+R(\ell_j)\geq E\ell_j(Z)
+\tag{8.11c}
+$$
+
+for every $j$ and then use monotone convergence. Fix one $j$ and abbreviate $l=\ell_j$. Let $B<\infty$ bound $l$, and let $L<\infty$ be a Lipschitz constant.
+
+#### Compactify the action by its rational loss profile
+
+Enumerate $\mathbb Q^k$ as $h_1,h_2,\ldots$, and put
+
+$$
+a(h)=Ah,
+\qquad
+a_n(h)=\sqrt n\left\{\psi\left(\theta+\frac h{\sqrt n}\right)-\psi(\theta)\right\}.
+$$
+
+Differentiability of $\psi$ gives $a_n(h)\to a(h)$. Embed an action $t\in\mathbb R^m$ into the compact product cube by
+
+$$
+e(t)=\bigl(l\{t-a(h_1)\},l\{t-a(h_2)\},\ldots\bigr)
+\in[0,B]^{\mathbb N},
+$$
+
+and let $K$ be the closure of $e(\mathbb R^m)$. The space $K$ is compact and metrizable. Its $i$th coordinate map $L_i:K\to[0,B]$ is the continuous extension of $t\mapsto l\{t-a(h_i)\}$.
+
+Set
+
+$$
+Y_n=\sqrt n\{T_n-\psi(\theta)\},
+\qquad
+D_n=e(Y_n).
+$$
+
+This transformation is the compactification step: $D_n$ is automatically tight even if $Y_n$ is not.
+
+Let $I_s=\{h_1,\ldots,h_s\}$. If $R(l)=\infty$, there is nothing to prove. Otherwise, the definition of the liminf permits a sequence $n_s\uparrow\infty$ such that
+
+$$
+\max_{i\leq s}
+E_{\theta+h_i/\sqrt{n_s}}
+l\{Y_{n_s}-a_{n_s}(h_i)\}
+\leq R(l)+s^{-1}.
+\tag{8.11d}
+$$
+
+#### Extract the Gaussian kernel
+
+Let
+
+$$
+\Delta_n=\frac1{\sqrt n}\sum_{r=1}^n\dot\ell_\theta(X_r)
+$$
+
+be the central sequence. Under $P_\theta^n$, $\Delta_n\rightsquigarrow N(0,I_\theta)$. Compactness of $K$ makes the joint laws of $(D_{n_s},\Delta_{n_s})$ tight, so a further subsequence converges to some $(D,\Delta)$ with $D\in K$ and $\Delta\sim N(0,I_\theta)$.
+
+For every fixed rational direction $h_i$, LAN and Le Cam's third lemma tilt this joint limit by
+
+$$
+\exp\left(h_i^T\Delta-\frac12h_i^TI_\theta h_i\right).
+$$
+
+Because $l$ is Lipschitz and $a_n(h_i)\to a(h_i)$,
+
+$$
+\left|l\{Y_n-a_n(h_i)\}-L_i(D_n)\right|
+\leq L\|a_n(h_i)-a(h_i)\|\longrightarrow0.
+$$
+
+The coordinate $L_i$ is bounded and continuous. Combining this observation with (8.11d) gives, under the tilted limit law,
+
+$$
+E_{h_i}L_i(D)\leq R(l),
+\qquad i=1,2,\ldots.
+\tag{8.11e}
+$$
+
+Disintegrate the null-limit law of $D$ given $\Delta$. The resulting Markov kernel is unchanged by each tilt, because the likelihood ratio depends only on $\Delta$. With $X=I_\theta^{-1}\Delta$, it is therefore a randomized $K$-valued decision rule in the Gaussian experiment
+
+$$
+X\sim N(h,I_\theta^{-1}).
+$$
+
+Equation (8.11e) bounds this rule's risk at every rational $h_i$.
+
+#### Boundary actions do not reduce finite-prior Bayes risk
+
+Let $\pi$ be any prior with finite support among the rational directions. Given the Gaussian observation $x$, let $w_i(x)$ be its posterior weights. The posterior loss of an action $z\in K$ is
+
+$$
+z\longmapsto\sum_iw_i(x)L_i(z).
+$$
+
+This function is continuous on $K$. Since $e(\mathbb R^m)$ is dense in $K$, its infimum over $K$ equals its infimum over ordinary actions $t\in\mathbb R^m$. A countable dense subset of ordinary actions supplies measurable $\varepsilon$-minimizers, so the compactified and ordinary Gaussian decision problems have the same Bayes risk $b(\pi)$. Averaging (8.11e) over $\pi$ now yields
+
+$$
+R(l)\geq b(\pi)
+\tag{8.11f}
+$$
+
+for every finite rational prior.
+
+#### Pass from finite priors to a diffuse normal prior
+
+Fix $\lambda>0$ and let $\Pi_\lambda=N(0,\lambda I_k)$. Finite rational priors can approximate $\Pi_\lambda$ by first truncating to a large compact set and then quantizing on a fine rational grid. This approximation also preserves Bayes risks. Indeed, uniformly over all decision rules $d$,
+
+$$
+\begin{aligned}
+|R_h(d)-R_{h'}(d)|
+&\leq L\|A(h-h')\|\\
+&\quad+B\left\|N(h,I_\theta^{-1})-N(h',I_\theta^{-1})\right\|_{\mathrm{TV}},
+\end{aligned}
+\tag{8.11g}
+$$
+
+and the right side tends to zero with $\|h-h'\|$. The bounded loss controls the discarded prior tail. Hence (8.11f) passes to $\Pi_\lambda$.
+
+Under this normal prior, the posterior covariance of $h$ is
+
+$$
+C_\lambda=(I_\theta+\lambda^{-1}I_k)^{-1}.
+$$
+
+Conditionally on $X$, Anderson's lemma shows that the posterior mean is Bayes for estimating $Ah$. Its posterior error is $N(0,AC_\lambda A^T)$, so
+
+$$
+R(l)\geq b(\Pi_\lambda)
+=\int l\,dN(0,AC_\lambda A^T).
+$$
+
+Letting $\lambda\to\infty$ and using bounded continuity of $l$ gives
+
+$$
+R(l)\geq\int l\,dN(0,AI_\theta^{-1}A^T),
+$$
+
+which proves (8.11c). Finally, (8.11b) and monotone convergence give
+
+$$
+R(\ell)\geq E\ell(Z).
+$$
+
+This is the exact bound in Theorem 8.11, with neither tightness of the original estimator sequence nor lower semicontinuity or boundedness of the original loss imposed.
+
+</details>
+
+The finite-set formulation is deliberate: it avoids assuming that risk converges uniformly over a continuum of directions. The proof only needs to defeat each finite collection, then lets those collections exhaust the local parameter space.
+
+## 8.8* Shrinkage Estimators
+
+Stein's phenomenon is an important qualification, not a contradiction. For $k\geq3$, let $\bar X_n$ be the mean of a sample from $N_k(\theta,I_k)$ and define
+
+$$
+T_n=\bar X_n-(k-2)\frac{\bar X_n}{n\|\bar X_n\|^2}.
+$$
+
+At every fixed $\theta\neq0$, the correction is $O_{P_\theta}(n^{-1})$, so $T_n$ has the same regular first-order limit as $\bar X_n$. At $\theta=0$ and under local alternatives $\theta=h/\sqrt n$, however,
+
+$$
+\sqrt nT_n
+=X-(k-2)\frac{X}{\|X\|^2},
+\qquad X\sim N_k(h,I_k),
+$$
+
+whose centered distribution depends on $h$. The estimator is therefore not regular at the origin, even though it improves joint quadratic risk throughout the local Gaussian experiment. This does not contradict the convolution theorem, which assumes regularity, or the local asymptotic minimax theorem, which controls worst risk over local directions rather than risk at a single point.
+
+Indeed, for the joint quadratic loss, the Stein estimator satisfies
+
+$$
+E_h\left\|X-(k-2)\frac X{\|X\|^2}-h\right\|^2<k
+=E_h\|X-h\|^2
+$$
+
+for every $h$. The gain is loss-specific and is accompanied by nonregular local behavior.
+
+::: {.callout-note title="Coverage note"}
+Lemma 8.13, which shows for a real-valued target that local asymptotic minimaxity under a suitable bowl-shaped loss forces best regularity, is omitted from the main route. It refines the caveat but is not used by Chapter 25.
+:::
+
+## 8.9* Achieving the Bound {#sec-achieving-efficiency-bound}
+
+The lower bound becomes operational once an estimator's first-order expansion is identified.
+
+::: {.callout-important title="Lemma"}
+### Lemma 8.14: Characterization of best regular estimators {#lemma-8-14}
+
+Suppose the model is differentiable in quadratic mean at $\theta$, $I_\theta$ is nonsingular, and $\psi$ is differentiable at $\theta$. If
+
+$$
+\sqrt n\{T_n-\psi(\theta)\}
+=\frac1{\sqrt n}\sum_{i=1}^n
+\dot\psi_\theta I_\theta^{-1}\dot\ell_\theta(X_i)
++o_{P_\theta}(1),
+$$
+
+then $T_n$ is best regular for estimating $\psi(\theta)$ at $\theta$. Conversely, every best regular estimator satisfies this expansion.
+
+:::
+
+**Proof roadmap.** Joint asymptotic normality with the log likelihood ratio proves regularity and efficiency in the forward direction. For the converse, compare any best regular estimator with the canonical score-based estimator and use uniqueness in the Gaussian experiment.
+
+<details>
+<summary>Complete proof of Lemma 8.14</summary>
+
+Let
+
+$$
+\Delta_n=\frac1{\sqrt n}\sum_{i=1}^n\dot\ell_\theta(X_i),
+\qquad
+\Delta_n\rightsquigarrow\Delta\sim N(0,I_\theta).
+$$
+
+Under $P_\theta^n$, the assumed expansion and LAN give the joint limit
+
+$$
+\left(
+\sqrt n\{T_n-\psi(\theta)\},
+\log\frac{dP_{\theta+h/\sqrt n}^n}{dP_\theta^n}
+\right)
+\rightsquigarrow
+\left(
+\dot\psi_\theta I_\theta^{-1}\Delta,
+h^T\Delta-\frac12h^TI_\theta h
+\right).
+$$
+
+This is jointly Gaussian. Its first component has covariance $\dot\psi_\theta I_\theta^{-1}\dot\psi_\theta^T$, and its covariance with the second component is $\dot\psi_\theta h$. Le Cam's third lemma therefore shifts the first-component mean to $\dot\psi_\theta h$ under $P_{\theta+h/\sqrt n}^n$ without changing its covariance. Since
+
+$$
+\sqrt n\left\{\psi\left(\theta+\frac h{\sqrt n}\right)-\psi(\theta)\right\}
+\longrightarrow\dot\psi_\theta h,
+$$
+
+the locally centered error converges for every $h$ to
+
+$$
+N\bigl(0,\dot\psi_\theta I_\theta^{-1}\dot\psi_\theta^T\bigr).
+$$
+
+Hence $T_n$ is regular and attains the convolution bound.
+
+Conversely, let $T_n$ be any best regular estimator and define the canonical score-based sequence
+
+$$
+S_n=\psi(\theta)+\frac1{\sqrt n}
+\dot\psi_\theta I_\theta^{-1}\Delta_n.
+$$
+
+The first part shows that $S_n$ is best regular. To justify comparison of the two estimators, begin with an arbitrary subsequence. Regularity of each estimator makes the pair
+
+$$
+\bigl(\sqrt n\{T_n-\psi(\theta)\},
+      \sqrt n\{S_n-\psi(\theta)\}\bigr)
+$$
+
+tight under $P_\theta^n$, so a further subsequence has a joint weak limit. Apply the representation argument to that joint limit. In the Gaussian limit experiment, both coordinates estimate $\dot\psi_\theta h$ equivariantly in law and both have error distribution
+
+$$
+N\bigl(0,\dot\psi_\theta I_\theta^{-1}\dot\psi_\theta^T\bigr).
+$$
+
+[Proposition 8.4](#proposition-8-4) decomposes each such coordinate as the efficient Gaussian estimator $\dot\psi_\theta X$ plus independent extra noise. Equality with the efficient covariance forces that extra noise to be zero almost surely. Thus both coordinates of every joint subsequential limit equal $\dot\psi_\theta X$ almost surely, and their difference is zero. Since every subsequence has a further subsequence with this property, the subsequence criterion gives
+
+$$
+\sqrt n(T_n-S_n)\overset{P_\theta}\longrightarrow0,
+$$
+
+which is exactly the asserted asymptotic linear expansion.
+
+</details>
+
+The summand
+
+$$
+\widetilde\psi_\theta(X)
+=\dot\psi_\theta I_\theta^{-1}\dot\ell_\theta(X)
+$$
+
+is the parametric efficient influence function introduced in [Section 8.3](#theorem-limit-experiment-reduction). Chapter 25 keeps this characterization but replaces the finite-dimensional normalized score by the efficient influence function in the tangent space; see [Lemma 25.23](chapter-25.qmd#lemma-25-23).
 
 ---
 
-::: {.callout-note title="Definition"}
+::: {.callout-tip title="Chapter takeaway"}
 ### Main points
 
 - Pointwise asymptotics are not enough because of superefficient estimators such as Hodges’ estimator.
@@ -483,7 +1097,4 @@ where the first supremum ranges over finite subsets $I\subset\mathbb{R}^k$.
 - Every regular estimator’s limit is the efficient normal distribution convolved with additional noise.
 - Without regularity, the same conclusion holds at almost every parameter.
 - Without any estimator restriction, the efficient normal risk remains a lower bound in the local asymptotic minimax sense.
-- Shrinkage estimators show that “optimality” depends on the loss function and whether the target is scalar or multivariate.
-- Best regular estimators are exactly those that are asymptotically linear in the score.
-- Under standard conditions, maximum likelihood estimators achieve the bound.
 :::

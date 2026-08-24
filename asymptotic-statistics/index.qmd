@@ -1,16 +1,98 @@
 # Asymptotic Statistics {.unnumbered}
 
+## Route to Chapter 25
+
+Van der Vaart's preface Figure 0.1 shows two solid prerequisite routes into Chapter 25:
+
+$$
+2\longrightarrow6\longrightarrow7\longrightarrow8\longrightarrow25,
+\qquad
+2\longrightarrow18\longrightarrow19\longrightarrow25.
+$$
+
+In the preface caption, solid arrows mark prerequisites, dotted arrows mark natural continuations, and spatial position has no independent meaning. Figure 0.1 also contains solid source branches $2\to3$, $2\to5$, $2\to11$, $7\to15$, and $19\to20$, together with the dotted continuation $19\dashrightarrow5$. These chapters supply transformations, estimator construction, projection geometry, testing, and functional calculus that make Chapter 25 easier to verify even when Figure 0.1 does not draw a direct prerequisite arrow from them to Chapter 25. In the diagram below, **solid and gray-dotted arrows reproduce the included edges in Figure 0.1**; **blue dashed arrows are pedagogical bridges added by these notes**.
+
+```{mermaid}
+%%| label: fig-route-to-chapter-25
+%%| fig-cap: "The included prerequisite and natural-continuation edges from van der Vaart's Figure 0.1, together with blue dashed teaching bridges showing where supporting branches return in Chapter 25. Every box links to the corresponding chapter or section."
+%%| fig-alt: "Flow chart with solid source paths from Chapter 2 through Chapters 6, 7, and 8 to Chapter 25 and through Chapters 18 and 19 to Chapter 25. Solid supporting branches lead to Chapters 3, 5, 11, 15, and 20; a gray dotted source continuation runs from Chapter 19 to Chapter 5. Blue dashed teaching links connect supporting chapters to the Chapter 25 sections where their ideas return."
+flowchart LR
+  C2["Chapter 2"] --> C6["Chapter 6"] --> C7["Chapter 7"] --> C8["Chapter 8"] --> C25["Chapter 25"]
+  C2 --> C18["Chapter 18"] --> C19["Chapter 19"] --> C25
+  C2 --> C3["Chapter 3"]
+  C2 --> C5["Chapter 5"]
+  C2 --> C11["Chapter 11"]
+  C7 --> C15["Chapter 15"]
+  C19 --> C20["Chapter 20"]
+  C19 -. "source continuation" .-> C5
+
+  C3 -. "finite delta method" .-> DELTA["§25.7"]
+  C5 -. "estimators and rates" .-> EST["§§25.8–25.11"]
+  C11 -. "projection geometry" .-> GEOM["§§25.2–25.5"]
+  C15 -. "bridge in these notes" .-> TEST["§25.6 testing"]
+  C20 -. "functional delta method" .-> DELTA
+
+  linkStyle 12 stroke:#555,stroke-width:1.5px,stroke-dasharray:2 3
+  linkStyle 13,14,15,16,17 stroke:#2c7fb8,stroke-width:1.7px,stroke-dasharray:7 4
+
+  click C2 "chapter-2.html" "Open Chapter 2"
+  click C3 "chapter-3.html" "Open Chapter 3"
+  click C5 "chapter-5.html" "Open Chapter 5"
+  click C6 "chapter-6.html" "Open Chapter 6"
+  click C7 "chapter-7.html" "Open Chapter 7"
+  click C8 "chapter-8.html" "Open Chapter 8"
+  click C11 "chapter-11.html" "Open Chapter 11"
+  click C15 "chapter-15.html" "Open Chapter 15"
+  click C18 "chapter-18.html" "Open Chapter 18"
+  click C19 "chapter-19.html" "Open Chapter 19"
+  click C20 "chapter-20.html" "Open Chapter 20"
+  click DELTA "chapter-25.html#sec-efficiency-delta-method" "Open Section 25.7"
+  click EST "chapter-25.html#sec-efficient-score-equations" "Open Sections 25.8–25.11"
+  click GEOM "chapter-25.html#banach-and-hilbert-spaces" "Open Sections 25.2–25.5"
+  click TEST "chapter-25.html#sec-testing" "Open Section 25.6"
+  click C25 "chapter-25.html" "Open Chapter 25"
+```
+
+The chapter list retains the source order, while this diagram distinguishes source prerequisites from the notes' teaching connections. Within each chapter, the sidebar displays the numbered sections and explanatory subsections.
+
+| Role | Linked route | What it contributes to Chapter 25 |
+|---|---|---|
+| Source prerequisite: local experiments | [Chapter 2](chapter-2.qmd) $\rightarrow$ [Chapter 6](chapter-6.qmd) $\rightarrow$ [Chapter 7](chapter-7.qmd) $\rightarrow$ [Chapter 8](chapter-8.qmd) $\rightarrow$ [Chapter 25](chapter-25.qmd) | Stochastic remainders, contiguity, LAN, Gaussian limit experiments, and efficiency lower bounds |
+| Testing side branch | [Chapter 7](chapter-7.qmd) $\rightarrow$ [Chapter 15](chapter-15.qmd), then the notes' bridge to [§25.6](chapter-25.qmd#sec-testing) | Gaussian testing, local power, and the efficient direction for a test |
+| Source prerequisite: empirical processes | [Chapter 2](chapter-2.qmd) $\rightarrow$ [Chapter 18](chapter-18.qmd) $\rightarrow$ [Chapter 19](chapter-19.qmd) $\rightarrow$ [Chapter 25](chapter-25.qmd) | Weak convergence of random functions, tightness, Donsker control, and infinite-dimensional estimating equations |
+| Supporting estimator branch | [Chapter 2](chapter-2.qmd) $\rightarrow$ [Chapter 5](chapter-5.qmd), with Figure 0.1's dotted continuation from [Chapter 19](chapter-19.qmd) | Consistency, Z-estimator linearization, estimated nuisance drift, one-step correction, and nuisance rates |
+| Supporting projection branch | [Chapter 2](chapter-2.qmd) $\rightarrow$ [Chapter 11](chapter-11.qmd) | Orthogonal projection, conditional expectation, residualization, and Hájek projection |
+| Transformation branches | [Chapter 2](chapter-2.qmd) $\rightarrow$ [Chapter 3](chapter-3.qmd), and [Chapter 19](chapter-19.qmd) $\rightarrow$ [Chapter 20](chapter-20.qmd) | Finite- and infinite-dimensional delta methods, von Mises calculus, and product-limit functionals |
+| Semiparametric synthesis inside Chapter 25 | [geometry and lower bounds in §§25.2–25.7](chapter-25.qmd#banach-and-hilbert-spaces) $\rightarrow$ [estimating equations in §§25.8–25.9](chapter-25.qmd#sec-efficient-score-equations) $\rightarrow$ [likelihood constructions in §§25.10–25.12](chapter-25.qmd#sec-maximum-likelihood-estimators) | Turns the two prerequisite routes into tangent spaces, efficient influence functions, score operators, and estimators |
+
+The two strands meet in Chapter 25: the first says what a regular procedure can achieve under local alternatives, while the second supplies the uniform stochastic control needed when the nuisance parameter is a function or distribution.
+
+### Fast track to the main argument
+
+For a first pass aimed specifically at Chapter 25, focus on:
+
+1. [stochastic order, continuous mapping, and Slutsky](chapter-2.qmd#sec-stochastic-order), followed by the [finite-dimensional delta method](chapter-3.qmd#theorem-3-1);
+2. [M- and Z-estimator construction](chapter-5.qmd#sec-m-z-estimators), especially estimated nuisance drift and one-step estimation;
+3. [contiguity and Le Cam's third lemma](chapter-6.qmd#sec-contiguity), then [DQM, LAN, and local alternatives](chapter-7.qmd#sec-differentiability-quadratic-mean);
+4. [Theorem 8.3](chapter-8.qmd#theorem-limit-experiment-reduction), the [convolution theorem](chapter-8.qmd#sec-convolution-theorem), and [local asymptotic minimaxity](chapter-8.qmd#sec-local-asymptotic-minimax);
+5. [projection and conditional expectation](chapter-11.qmd#sec-projections), followed by the [Chapter 15 testing branch](chapter-15.qmd#sec-chapter-15-lan-power) before §25.6;
+6. return to the infinite-dimensional route through [weak convergence of stochastic processes](chapter-18.qmd#theorem-weak-convergence-processes), [Donsker classes](chapter-19.qmd#donsker-classes), and the [functional delta method](chapter-20.qmd#theorem-20-8);
+7. follow the Chapter 25 sequence [tangent spaces](chapter-25.qmd#tangent-spaces-and-information) $\rightarrow$ [efficient scores](chapter-25.qmd#efficient-score-functions) $\rightarrow$ [score operators](chapter-25.qmd#sec-semiparametric-score-operators) $\rightarrow$ [construction of efficient estimators](chapter-25.qmd#sec-efficient-score-equations).
+
+Readers coming from modern machine learning or DML can follow the [modern-ML route through Chapter 25](chapter-25.qmd#sec-modern-ml-route), which connects tangent paths and influence-function construction to orthogonal, one-step, and cross-fitted estimators.
+
 ## Reading plan
 
-- Week 1: [Chapter 2: Stochastic Convergence](chapter-2.qmd)
-- Week 2: Continue [Chapter 2](chapter-2.qmd), including little $o$/big $O$ notation; [Chapter 6: Contiguity](chapter-6.qmd)
-- Week 3: [Chapter 7: Local Asymptotic Normality](chapter-7.qmd)
-- Week 4: Continue Chapter 7.12; [Chapter 8: Efficiency of Estimators](chapter-8.qmd)
-- Week 5:
-    - Briefly continue [the convolution theorem in Chapter 8](chapter-8.qmd#sec-convolution-theorem)
-    - [Chapter 18: Stochastic Convergence in Metric Spaces](chapter-18.qmd)
-    - [Chapter 19: Empirical Processes](chapter-19.qmd), through Donsker classes
-- Week 6: [Chapter 15: Efficiency of Tests](chapter-15.qmd), then [Chapter 25: Semiparametric Models](chapter-25.qmd), part 1
-- Week 7: [Chapter 25: Semiparametric Models](chapter-25.qmd), part 2 🎉
+- Week 1: [Chapter 2: Stochastic Convergence](chapter-2.qmd) and [Chapter 3: Delta Method](chapter-3.qmd)
+- Week 2: [Chapter 5: M- and Z-Estimators](chapter-5.qmd)
+- Week 3: [Chapter 6: Contiguity](chapter-6.qmd)
+- Week 4: [Chapter 7: Local Asymptotic Normality](chapter-7.qmd)
+- Week 5: [Chapter 8: Efficiency of Estimators](chapter-8.qmd)
+- Week 6: [Chapter 11: Projections](chapter-11.qmd) and [Chapter 15: Efficiency of Tests](chapter-15.qmd)
+- Week 7: [Chapter 18: Stochastic Convergence in Metric Spaces](chapter-18.qmd)
+- Week 8: [Chapter 19: Empirical Processes](chapter-19.qmd) and [Chapter 20: Functional Delta Method](chapter-20.qmd)
+- Week 9: [Chapter 25, §§25.1–25.7](chapter-25.qmd#semiparametric-models): geometry, bounds, testing, and transformed efficiency
+- Week 10: [Chapter 25, §§25.8–25.9](chapter-25.qmd#sec-efficient-score-equations): efficient and general estimating equations
+- Week 11: [Chapter 25, §§25.10–25.12](chapter-25.qmd#sec-maximum-likelihood-estimators): likelihood construction, least-favorable paths, and joint equations
 
 See also the [worked problems](problems.qmd).

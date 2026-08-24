@@ -4,7 +4,7 @@
 
 See [Chapter 8: Efficiency of Estimators](chapter-8.qmd).
 
-#### Relative-efficiency convention
+### Relative-efficiency convention
 
 The chapter defines the relative efficiency of estimator 1 and estimator 2 as $\operatorname{RE}(T^{(1)},T^{(2)})=\lim_{\nu\to\infty}\frac{n_{\nu,2}}{n_{\nu,1}}=\frac{\sigma_2^2}{\sigma_1^2},$
 
@@ -28,7 +28,7 @@ Thus, the asymptotic variance is $\sigma_{\mathrm{mean}}^2=1.$
 
 #### Sample median
 
-For a distribution with density evaluated at its median, the [empirical median satisfies](https://en.wikipedia.org/wiki/Median#Sampling_distribution) $\sqrt n(\widehat\theta_{\mathrm{med}}-\theta)\rightsquigarrow N\left(0,\frac{1}{4f(\theta)^2}\right).$
+For a distribution with density evaluated at its median, the [empirical-quantile argument in §25.7](chapter-25.qmd#sec-25-7-quantile) gives $\sqrt n(\widehat\theta_{\mathrm{med}}-\theta)\rightsquigarrow N\left(0,\frac{1}{4f(\theta)^2}\right).$
 
 - (the general result is $\sqrt n(\widehat q_p-q_p)\rightsquigarrow N\left(0,\frac{p(1-p)}{f(q_p)^2}\right),$ with the median obtained by setting $p=1/2$.)
 
@@ -136,7 +136,7 @@ and the target is the distribution function at a fixed point: $F_\theta(x)=P_\th
 
 Let $z=x-\theta.$
 
-The two estimators are the empirical distribution function $\widehat F_n(x)=\frac1n\sum_{i=1}^n1{X_i\leq x},$
+The two estimators are the empirical distribution function $\widehat F_n(x)=\frac1n\sum_{i=1}^n\mathbf 1\{X_i\leq x\},$
 
 and the parametric estimator $\widetilde F_n(x)=\Phi(x-\overline X_n).$
 
@@ -231,7 +231,7 @@ with $\widetilde S_n^2=\frac1n\sum_{i=1}^n(X_i-\overline X_n)^2=\frac{n-1}{n}S_n
 
 Their difference is $\widetilde S_n^2-S_n^2=-\frac1nS_n^2.$
 
-If the sample variance is consistent, then $S_n^2=O_P(1).$
+If the sample variance is consistent, then $S_n^2=O_P(1)$; see the [stochastic-order convention](glossary.qmd#glossary-stochastic-order).
 
 Therefore, $\sqrt n\left(\widetilde S_n^2-S_n^2\right)=-\frac{S_n^2}{\sqrt n}\overset{P}{\longrightarrow}0.$
 
@@ -341,7 +341,7 @@ Thus, $n(T_n-\theta)\rightsquigarrow\theta(E_1-E_2).$
 
 The estimator converges at rate $n,$
 
-which is faster than the usual root-(n) rate.
+which is faster than the usual $\sqrt n$ rate.
 
 #### Comparison with a corrected maximum
 
@@ -351,7 +351,7 @@ Its variance is $\operatorname{Var}_\theta(\widetilde\theta_n)=\frac{\theta^2}{n
 
 The variance of the sum of the minimum and maximum is $\operatorname{Var}_\theta(T_n)=\frac{2\theta^2}{(n+1)(n+2)}.$
 
-Therefore, $\frac{\operatorname{Var}*\theta(T_n)}{\operatorname{Var}*\theta(\widetilde\theta_n)}=\frac{2n}{n+1}\longrightarrow2.$
+Therefore, $\frac{\operatorname{Var}_\theta(T_n)}{\operatorname{Var}_\theta(\widetilde\theta_n)}=\frac{2n}{n+1}\longrightarrow2.$
 
 Thus, although $T_n$
 
@@ -495,7 +495,7 @@ Suppose $\ell$
 
 is bowl-shaped. For each $c,$
 
-the sublevel set $C_c={x:\ell(x)\leq c}$
+the sublevel set $C_c=\{x:\ell(x)\leq c\}$
 
 is convex and symmetric around zero.
 
@@ -553,7 +553,7 @@ is nondecreasing.
 
 For any $c,$
 
-the sublevel set is $C_c={x:\ell_0(|x|)\leq c}.$
+the sublevel set is $C_c=\{x:\ell_0(|x|)\leq c\}.$
 
 Because $\ell_0$
 
@@ -589,7 +589,7 @@ We show that every sublevel set is convex and symmetric.
 
 Fix $c$
 
-and define $C_c={x:\ell_0(|x|)\leq c}.$
+and define $C_c=\{x:\ell_0(|x|)\leq c\}.$
 
 #### Symmetry
 
@@ -703,7 +703,7 @@ Since the distribution of $Z+Y$
 
 is $N(0,1)*M,$
 
-this proves $\boxed{\int\ell,dN(0,1)\leq\int\ell,d[N(0,1)*M].}$
+this proves $\boxed{\int \ell\,dN(0,1)\leq\int \ell\,d[N(0,1)*M].}$
 
 #### Does this proof generalize to higher dimensions?
 
@@ -759,7 +759,14 @@ At fixed nonzero parameter values, the shrinkage term becomes asymptotically neg
 
 ### Problem 13
 
-Chapter 7 defines a sequence of experiments $\left(P_{n,\theta}:\theta\in\Theta\right)$ to be locally asymptotically normal at $\theta$ if there exist norming matrices $r_n,$ central sequences $\Delta_{n,\theta},$ and nonsingular information matrices $I_\theta$ such that $\Delta_{n,\theta}\overset{P_{n,\theta}}{\rightsquigarrow}N(0,I_\theta),$ and, for every sequence $h_n\to h,$ $\log\frac{dP_{n,\theta+r_n^{-1}h_n}}{dP_{n,\theta}}=h^T\Delta_{n,\theta}-\frac12h^TI_\theta h+o_{P_{n,\theta}}(1).$
+[Chapter 7](chapter-7.qmd#sec-local-asymptotic-normality) defines a sequence of experiments $\left(P_{n,\theta}:\theta\in\Theta\right)$ to be [locally asymptotically normal](glossary.qmd#glossary-lan) at $\theta$ if there exist norming matrices $r_n$, central sequences $\Delta_{n,\theta}$, and nonsingular information matrices $I_\theta$ such that $\Delta_{n,\theta}\overset{P_{n,\theta}}{\rightsquigarrow}N(0,I_\theta)$ and, for every sequence $h_n\to h$,
+
+$$
+\log\frac{dP_{n,\theta+r_n^{-1}h_n}}{dP_{n,\theta}}
+=h_n^T\Delta_{n,\theta}-\frac12h_n^TI_\theta h_n+o_{P_{n,\theta}}(1).
+$$
+
+Here $P_{n,\theta}$ denotes a probability law in the experiment, not the empirical measure $\mathbb P_n$. The source uses $I_\theta$ for information and $I_k$ below for the $k\times k$ identity matrix.
 
 The corresponding local experiments converge to the Gaussian shift experiment $\left(N(h,I_\theta^{-1}):h\in\mathbb R^k\right).$
 
@@ -767,11 +774,11 @@ This is the general LAN setup introduced in Chapter 7.
 
 For a general target, introduce target norming matrices $s_n$ and suppose that $s_n\left[\psi\left(\theta+r_n^{-1}h\right)-\psi(\theta)\right]\longrightarrow\dot\psi_\theta h.$
 
-In the usual i.i.d. case, $r_n=\sqrt nI_k,$ and $s_n=\sqrt nI_m.$
+In the usual i.i.d. case, $r_n=\sqrt nI_k$ and $s_n=\sqrt nI_m$.
 
 ---
 
-#### General LAN version of Theorem 8.9
+#### General LAN version of [Theorem 8.9](chapter-8.qmd#theorem-8.9-almost-everywhere-convolution)
 
 Assume that:
 
@@ -853,7 +860,7 @@ See [Chapter 18: Stochastic Convergence in Metric Spaces](chapter-18.qmd).
 - Let $K$ be compact.
 - Recall that $K$ is totally bounded if, for every $\varepsilon>0$, it can be covered by finitely many $\varepsilon$-balls.
 - Suppose instead that $K$ is **not** totally bounded.
-- Then there exists some $\varepsilon>0$ such that no finite collection of $\varepsilon-$balls covers $K$.
+- Then there exists some $\varepsilon>0$ such that no finite collection of $\varepsilon$-balls covers $K$.
 - We can recursively choose points $x_1,x_2,\ldots\in K$ such that $x_{n+1}\notin\bigcup_{j=1}^nB(x_j,\varepsilon)$.
 - Therefore, for every $i\neq j$, $d(x_i,x_j)\geq\varepsilon$.
 - Because $K$ is compact, the sequence $x_n$ has a convergent subsequence $x_{n_j}\to x\in K$.
@@ -871,7 +878,7 @@ Therefore, $K$ is totally bounded.
 - Each $A_m$ is finite, so $A$ is countable.
 - To show that $A$ is dense in $K$, fix $x\in K$ and $\varepsilon>0$.
 - Choose $m$ such that $1/m<\varepsilon$.
-- Because $A_m$ is a $1/m-$net, there exists $a\in A_m\subset A$ such that $d(x,a)<1/m<\varepsilon$.
+- Because $A_m$ is a $1/m$-net, there exists $a\in A_m\subset A$ such that $d(x,a)<1/m<\varepsilon$.
 - Thus every neighborhood of every point in $K$ contains a point of $A$.
 
 Therefore, $K$ has a countable dense subset and is separable.
@@ -886,67 +893,82 @@ This is useful later because Theorem 18.14 and Lemma 18.15 turn tight stochastic
 
 ---
 
+### Problem 2: Continuity and inverse images
+
+The result is
+
+$$
+f:\mathbb D\to\mathbb E\text{ is continuous}
+\quad\Longleftrightarrow\quad
+f^{-1}(G)\text{ is open for every open }G\subseteq\mathbb E.
+$$
+
+- $\Rightarrow$: If $f$ is continuous and $x\in f^{-1}(G)$, then, because $G$ is open, there is a ball around $f(x)$ contained in $G$. Continuity gives a neighborhood of $x$ mapped into that ball, so $f^{-1}(G)$ is open.
+- $\Leftarrow$: If inverse images of open sets are open, take any neighborhood $G$ of $f(x)$. Then $f^{-1}(G)$ is an open neighborhood of $x$, which is exactly continuity at $x$.
+
+This is the topological fact used in [Lemma 18.2](chapter-18.qmd#lemma-18.2): continuous maps between metric spaces are Borel measurable.
+
+---
+
 ### Problem 3: Projection $\sigma$-field
 
-Show that the $$\sigma$$-field generated by the coordinate projections $$z\mapsto z(t)$$ on $$C[a,b]$$ equals the Borel $$\sigma$$-field generated by the uniform norm.
+Show that the $\sigma$-field generated by the coordinate projections $z\mapsto z(t)$ on $C[a,b]$ equals the Borel $\sigma$-field generated by the uniform norm.
 
-Let $$\mathcal A=\sigma{\pi_t:t\in[a,b]}$$ where $$\pi_t(z)=z(t)$$, and let $$\mathcal B$$ be the Borel $$\sigma$$-field generated by $$|z|*\infty=\sup*{t\in[a,b]}|z(t)|$$.
+Let $\mathcal A=\sigma\{\pi_t:t\in[a,b]\}$, where $\pi_t(z)=z(t)$, and let $\mathcal B$ be the Borel $\sigma$-field generated by $\lVert z\rVert_\infty=\sup_{t\in[a,b]}|z(t)|$.
 
-We need to prove $$\mathcal A=\mathcal B$$.
+We need to prove $\mathcal A=\mathcal B$. This is a concrete instance of the [measurability convention in the glossary](glossary.qmd#glossary-measurability).
 
-#### Step 1: Show $$\mathcal A\subseteq\mathcal B$$
+#### Step 1: Show $\mathcal A\subseteq\mathcal B$
 
-- For every fixed $$t$$, the coordinate map $$\pi_t:C\to\mathbb R$$ is continuous.
-- Indeed, $$|\pi_t(z)-\pi_t(w)|=|z(t)-w(t)|\leq|z-w|_\infty$$.
+- For every fixed $t$, the coordinate map $\pi_t:C[a,b]\to\mathbb R$ is continuous.
+- Indeed, $|\pi_t(z)-\pi_t(w)|=|z(t)-w(t)|\leq\lVert z-w\rVert_\infty$.
 - By Lemma 18.2, every continuous map is Borel measurable.
-- Thus every $$\pi_t$$ is measurable with respect to $$\mathcal B$$.
-- Therefore the $$\sigma$$-field they generate satisfies $$\mathcal A\subseteq\mathcal B$$.
+- Thus every $\pi_t$ is measurable with respect to $\mathcal B$.
+- Therefore the $\sigma$-field they generate satisfies $\mathcal A\subseteq\mathcal B$.
 
 ---
 
-#### Step 2: Show that $$C[a,b]$$ is separable
+#### Step 2: Show that $C[a,b]$ is separable
 
 - Construct piecewise-linear functions using:
-- a finite grid on $$[a,b]$$;
+- a finite grid on $[a,b]$;
 - rational values at each grid point.
 - There are only countably many such functions.
-- Call this collection $$D$$.
-- Every continuous function on $$[a,b]$$ is uniformly continuous.
-- Therefore, given $$z\in C[a,b]$$ and $$\varepsilon>0$$, choose a sufficiently fine grid so that $$|z(s)-z(t)|<\varepsilon/2$$ whenever $$s$$ and $$t$$ lie in the same grid interval.
-- Approximate the value of $$z$$ at every grid point by a rational number to within $$\varepsilon/2$$.
-- The resulting piecewise-linear function $$q\in D$$ then satisfies $$|z-q|_\infty<\varepsilon$$.
-- Hence $$D$$ is countable and dense.
+- Call this collection $D$.
+- Every continuous function on $[a,b]$ is uniformly continuous.
+- Therefore, given $z\in C[a,b]$ and $\varepsilon>0$, choose a sufficiently fine grid so that $|z(s)-z(t)|<\varepsilon/2$ whenever $s$ and $t$ lie in the same grid interval.
+- Approximate the value of $z$ at every grid point by a rational number to within $\varepsilon/2$.
+- The resulting piecewise-linear function $q\in D$ then satisfies $\lVert z-q\rVert_\infty<\varepsilon$.
+- Hence $D$ is countable and dense.
 
-Therefore, $$C[a,b]$$ is separable.
+Therefore, $C[a,b]$ is separable.
 
 ---
 
-#### Step 3: Show that uniform-norm balls are in $$\mathcal A$$
+#### Step 3: Show that uniform-norm balls are in $\mathcal A$
 
-- Let $$T_0$$ be a countable dense subset of $$[a,b]$$.
-- Because $$z-w$$ is continuous, $$|z-w|*\infty=\sup*{t\in T_0}|z(t)-w(t)|$$.
-- Therefore the closed ball of radius $$r$$ around $$z_0$$ can be written as $$\overline B(z_0,r)=\bigcap_{t\in T_0}{z:|z(t)-z_0(t)|\leq r}$$.
-- Each set in the intersection depends on only one coordinate projection and hence belongs to $$\mathcal A$$.
-- The intersection is countable, so $$\overline B(z_0,r)\in\mathcal A$$.
-- An open ball can then be written as a countable union of smaller closed balls: $$B(z_0,r)=\bigcup_{m:1/m<r}\overline B(z_0,r-1/m)$$.
-- Hence every open ball belongs to $$\mathcal A$$.
+- Let $T_0$ be a countable dense subset of $[a,b]$.
+- Because $z-w$ is continuous, $\lVert z-w\rVert_\infty=\sup_{t\in T_0}|z(t)-w(t)|$.
+- Therefore the closed ball of radius $r$ around $z_0$ can be written as $\overline B(z_0,r)=\bigcap_{t\in T_0}\{z:|z(t)-z_0(t)|\leq r\}$.
+- Each set in the intersection depends on only one coordinate projection and hence belongs to $\mathcal A$.
+- The intersection is countable, so $\overline B(z_0,r)\in\mathcal A$.
+- An open ball can then be written as a countable union of smaller closed balls: $B(z_0,r)=\bigcup_{m:\,1/m<r}\overline B(z_0,r-1/m)$.
+- Hence every open ball belongs to $\mathcal A$.
 
 ---
 
 #### Step 4: Use separability
 
 - In a separable metric space, there is a countable basis of open balls.
-- Therefore every open subset of $$C[a,b]$$ is a countable union of open balls.
-- Since every open ball is in $$\mathcal A$$, every open set is in $$\mathcal A$$.
-- The Borel $$\sigma$$-field is generated by the open sets, so $$\mathcal B\subseteq\mathcal A$$.
+- Therefore every open subset of $C[a,b]$ is a countable union of open balls.
+- Since every open ball is in $\mathcal A$, every open set is in $\mathcal A$.
+- The Borel $\sigma$-field is generated by the open sets, so $\mathcal B\subseteq\mathcal A$.
 
-Combining the two inclusions gives $$\boxed{\mathcal A=\mathcal B}$$.
+Combining the two inclusions gives $\boxed{\mathcal A=\mathcal B}$.
 
 #### Why this matters
 
-This tells us that for a continuous stochastic process, measurability of the whole random function can essentially be understood through its coordinates $$X_t$$.
-
----
+This tells us that, for a continuous stochastic process, measurability of the whole random function can be understood through its coordinates $X_t$.
 
 ---
 
@@ -954,7 +976,7 @@ This tells us that for a continuous stochastic process, measurability of the who
 
 Let $h\in D[-\infty,\infty]$ and $\varepsilon>0$. Show that there is a finite grid $-\infty=u_0<u_1<\cdots<u_m=\infty$ such that $h$ varies by less than $\varepsilon$ on each interval $[u_i,u_{i+1})$.
 
-This is a useful deterministic version of the **finite approximation** idea in Theorem 18.14.
+This is a useful deterministic version of the **finite approximation** idea in [Theorem 18.14](chapter-18.qmd#theorem-weak-convergence-processes).
 
 #### Step 1: Start at a point
 
@@ -962,11 +984,15 @@ This is a useful deterministic version of the **finite approximation** idea in T
 - Because $h$ is right continuous at $u_i$, there exists some $v>u_i$ such that $h$ varies by less than $\varepsilon/2$ on $[u_i,v)$.
 - Thus we can always move some positive distance to the right while keeping the oscillation small.
 
-Define the oscillation over a set $A$ by $\operatorname{osc}*h(A)=\sup*{s,t\in A}|h(s)-h(t)|$.
+Define the oscillation over a set $A$ by
 
-Now define $u_{i+1}=\sup{v>u_i:\operatorname{osc}_h([u_i,v))<\varepsilon/2}$.
+$$
+\operatorname{osc}_h(A)=\sup_{s,t\in A}|h(s)-h(t)|.
+$$
 
-Then $u_{i+1}>u_i$ and, by taking limits from below, $\operatorname{osc}*h([u_i,u*{i+1}))\leq\varepsilon/2<\varepsilon$.
+Now define $u_{i+1}=\sup\{v>u_i:\operatorname{osc}_h([u_i,v))<\varepsilon/2\}$.
+
+Then $u_{i+1}>u_i$ and, by taking limits from below, $\operatorname{osc}_h([u_i,u_{i+1}))\leq\varepsilon/2<\varepsilon$.
 
 ---
 
@@ -975,8 +1001,8 @@ Then $u_{i+1}>u_i$ and, by taking limits from below, $\operatorname{osc}*h([u_i,
 - Suppose instead that it produces infinitely many points $u_0<u_1<u_2<\cdots$.
 - Because the extended real line $[-\infty,\infty]$ is compact, the increasing sequence has a limit $u_i\uparrow u^*$.
 - Since $h$ is cadlag, the left limit $h(u^*-)$ exists.
-- Hence, for sufficiently small $\delta>0$, all values of $h$ on $(u^*\delta,u^*)$ are arbitrarily close to $h(u^*-)$.
-- In particular, we can choose $\delta$ such that $\operatorname{osc}_h((u^*\delta,u^*))<\varepsilon/2$.
+- Hence, for sufficiently small $\delta>0$, all values of $h$ on $(u^*-\delta,u^*)$ are arbitrarily close to $h(u^*-)$.
+- In particular, we can choose $\delta$ such that $\operatorname{osc}_h((u^*-\delta,u^*))<\varepsilon/2$.
 - For sufficiently large $i$, $u_i>u^*-\delta$.
 - Therefore $h$ varies by less than $\varepsilon/2$ throughout $[u_i,u^*)$.
 - By the definition of $u_{i+1}$, this forces $u_{i+1}\geq u^*$.
@@ -986,7 +1012,7 @@ Then $u_{i+1}>u_i$ and, by taking limits from below, $\operatorname{osc}*h([u_i,
 
 Thus the construction terminates after finitely many steps, eventually reaching $u_m=\infty$.
 
-Therefore we obtain a finite grid satisfying $\operatorname{osc}*h([u_i,u*{i+1}))<\varepsilon$ for every $i$.
+Therefore we obtain a finite grid satisfying $\operatorname{osc}_h([u_i,u_{i+1}))<\varepsilon$ for every $i$.
 
 ---
 
@@ -1006,7 +1032,7 @@ $$
 \boxed{\text{cadlag}+\text{compact domain}\Longrightarrow\text{finite approximation at every }\varepsilon.}
 $$
 
-This is very close to the intuition behind condition (ii) of Theorem 18.14.
+This is very close to the intuition behind condition (ii) of [Theorem 18.14](chapter-18.qmd#theorem-weak-convergence-processes).
 
 ---
 
@@ -1016,9 +1042,9 @@ The problem asks us to show that, when $H_n\to H_0$ appropriately and $\Lambda_n
 
 #### Small technical issue with the printed statement
 
-As printed, the two conditions on $H_n$ do **not quite prevent points of** $H_n$ **from escaping without a convergent subsequence**. For example, take $H=\mathbb R$, $H_0={0}$ and $H_n={0,n}$. The two stated conditions hold, but a bounded uniformly continuous function can have different limiting suprema over $H_n$ and $H_0$.
+As printed, the two conditions on $H_n$ do **not quite prevent points of** $H_n$ **from escaping without a convergent subsequence**. For example, take $H=\mathbb R$, $H_0=\{0\}$, and $H_n=\{0,n\}$. The two stated conditions hold, but a bounded uniformly continuous function can have different limiting suprema over $H_n$ and $H_0$.
 
-The intended argument works if $H$ is compact, or more generally if every sequence $h_n\in H_n$ has a convergent subsequence. This is exactly the type of precompact setting produced around Theorem 18.14/Lemma 18.15.
+The intended argument works if $H$ is compact, or more generally if every sequence $h_n\in H_n$ has a convergent subsequence. This is exactly the type of precompact setting produced around [Theorem 18.14](chapter-18.qmd#theorem-weak-convergence-processes) and Lemma 18.15.
 
 Under that intended condition:
 
@@ -1026,11 +1052,11 @@ Under that intended condition:
 
 Define $g_n(z)=\sup_{h\in H_n}z(h)$ and $g_0(z)=\sup_{h\in H_0}z(h)$.
 
-We want to apply the changing-map version of the Continuous Mapping Theorem 18.11.
+We want to apply the changing-map version of [Theorem 18.11](chapter-18.qmd#theorem-18.11-continuous-mapping-theorem).
 
 Suppose $z_n\to z$ uniformly and $z$ is uniformly continuous.
 
-First, $|g_n(z_n)-g_n(z)|\leq|z_n-z|_H\to0$.
+First, $|g_n(z_n)-g_n(z)|\leq\lVert z_n-z\rVert_H\to0$.
 
 Thus it remains to show $\sup_{h\in H_n}z(h)\to\sup_{h\in H_0}z(h)$.
 
@@ -1073,7 +1099,7 @@ $$
 
 #### Why Problem 7 is especially useful
 
-This is a very clean example of why Van der Vaart states the **changing-map** version of the continuous mapping theorem. The statistic itself changes with $n$ because the set over which we maximize changes:
+This is a very clean example of why van der Vaart states the **changing-map** version of the continuous mapping theorem. The statistic itself changes with $n$ because the set over which we maximize changes:
 
 $$
 g_n(z)=\sup_{h\in H_n}z(h).
@@ -1085,14 +1111,9 @@ $$
 \boxed{\text{uniform convergence of random functions}+\text{uniform continuity of the limit}.}
 $$
 
-### Problem 2 — worth knowing, but not worth group time
+### Reading-group priority
 
-The result is $$f:\mathbb D\to\mathbb E\text{ is continuous}\Longleftrightarrow f^{-1}(G)\text{ is open for every open }G\subseteq\mathbb E$$.
-
-- $$\Rightarrow$$: if $$f$$ is continuous and $$x\in f^{-1}(G)$$, then because $$G$$ is open there is a ball around $$f(x)$$ contained in $$G$$; continuity gives a neighborhood of $$x$$ mapped into that ball, so $$f^{-1}(G)$$ is open.
-- $$\Leftarrow$$: if inverse images of open sets are open, take any neighborhood $$G$$ of $$f(x)$$. Then $$f^{-1}(G)$$ is an open neighborhood of $$x$$, which is exactly continuity at $$x$$.
-
-For the reading group, I would rank the exercises $$\boxed{7>6>3>1}$$ in terms of payoff for Chapters 19 and 25.
+For Chapters 19 and 25, the suggested order is $\boxed{7>6>3>1}$; Problem 2 is useful background but need not take group time.
 
 ## Chapter 19 {#problems-chapter-19}
 
@@ -1146,13 +1167,13 @@ $$
 Define
 
 $$
-l(x)=\max{0,k_j\delta-|x-x_j|}
+l(x)=\max\{0,k_j\delta-|x-x_j|\}
 $$
 
 and
 
 $$
-u(x)=\min{1,(k_j+1)\delta+|x-x_j|}.
+u(x)=\min\{1,(k_j+1)\delta+|x-x_j|\}.
 $$
 
 Then $l(x)\leq f(x)\leq u(x)$.
@@ -1166,13 +1187,13 @@ $$
 Therefore,
 
 $$
-|u-l|_\infty\leq\varepsilon.
+\lVert u-l\rVert_\infty\leq\varepsilon.
 $$
 
 In particular, for any probability measure $P$,
 
 $$
-|u-l|_{P,2}\leq\varepsilon.
+\lVert u-l\rVert_{P,2}\leq\varepsilon.
 $$
 
 So this is an $\varepsilon$-bracket.
@@ -1185,19 +1206,19 @@ So this is an $\varepsilon$-bracket.
 Thus,
 
 $$
-N_{[]}(\varepsilon,\mathcal F,|\cdot|_\infty)\leq (1/\delta+1)3^m.
+N_{[]}(\varepsilon,\mathcal F,\lVert\cdot\rVert_\infty)\leq (1/\delta+1)3^m.
 $$
 
 Taking logs,
 
 $$
-\log N_{[]}(\varepsilon,\mathcal F,|\cdot|_\infty)\leq\log(1/\delta+1)+m\log3.
+\log N_{[]}(\varepsilon,\mathcal F,\lVert\cdot\rVert_\infty)\leq\log(1/\delta+1)+m\log3.
 $$
 
 Since $m=O(1/\delta)$ and $\delta=\varepsilon/3$,
 
 $$
-\log N_{[]}(\varepsilon,\mathcal F,|\cdot|_\infty)\leq C/\varepsilon
+\log N_{[]}(\varepsilon,\mathcal F,\lVert\cdot\rVert_\infty)\leq C/\varepsilon
 $$
 
 for some constant $C$.
@@ -1205,7 +1226,7 @@ for some constant $C$.
 Hence,
 
 $$
-\boxed{N_{[]}(\varepsilon,\mathcal F,|\cdot|_\infty)\leq\exp(C/\varepsilon).}
+\boxed{N_{[]}(\varepsilon,\mathcal F,\lVert\cdot\rVert_\infty)\leq\exp(C/\varepsilon).}
 $$
 
 #### Why this matters
@@ -1219,23 +1240,67 @@ $$
 And because $\log N_{[]}(\varepsilon)=O(1/\varepsilon)$,
 
 $$
-\int_0^1\sqrt{\log N_{[]}(\varepsilon)},d\varepsilon\lesssim\int_0^1\varepsilon^{-1/2}d\varepsilon<\infty.
+\int_0^1\sqrt{\log N_{[]}(\varepsilon)}\,d\varepsilon
+\lesssim\int_0^1\varepsilon^{-1/2}\,d\varepsilon<\infty.
 $$
 
-So this class satisfies the bracketing entropy condition for Theorem 19.5 and is Donsker.
+So this class satisfies the bracketing entropy condition in [Theorem 19.5](chapter-19.qmd#theorem-19.5-donsker-via-bracketing-entropy) and is [Donsker](glossary.qmd#glossary-donsker).
+
+---
+
+### Problem 6(i): VC index of intervals $(a,b]$
+
+Let
+
+$$
+\mathcal C=\{(a,b]:a<b\}.
+$$
+
+Recall van der Vaart's convention: the **VC index** $V(\mathcal C)$ is the smallest $n$ such that no set of $n$ points can be shattered.
+
+#### Step 1: Two points can be shattered
+
+Take $x_1<x_2$.
+
+The four subsets can all be picked out by intervals:
+
+- $\varnothing$: choose an interval containing neither point.
+- $\{x_1\}$: choose a small interval around $x_1$.
+- $\{x_2\}$: choose a small interval around $x_2$.
+- $\{x_1,x_2\}$: choose an interval containing both.
+
+Therefore a two-point set can be shattered. Thus,
+
+$$
+V(\mathcal C)>2.
+$$
+
+#### Step 2: Three points cannot be shattered
+
+Take any $x_1<x_2<x_3$.
+
+There is no interval $(a,b]$ that contains $x_1$ and $x_3$ but excludes $x_2$. Thus the subset $\{x_1,x_3\}$ cannot be picked out, and no three-point set is shattered.
+
+Hence,
+
+$$
+\boxed{V(\mathcal C)=3.}
+$$
+
+Under the more common convention in which “VC dimension” is the largest shattered-set size, this class has VC dimension $2$. The numerical difference is only a convention; the source's $V(\mathcal C)$ is used here.
 
 ---
 
 ### Problem 9: Pointwise convergence of CDFs implies uniform convergence
 
-#### (i) Suppose $F_n(x)\to F(x)$ for every $x$ and $F$ is continuous. Show $|F_n-F|_\infty\to0$.
+#### (i) Suppose $F_n(x)\to F(x)$ for every $x$ and $F$ is continuous. Show $\lVert F_n-F\rVert_\infty\to0$.
 
-#### Step 1: Construct a finite grid
+##### Step 1: Construct a finite grid
 
 - Fix $\varepsilon>0$.
 - Because $F$ is a continuous distribution function, choose finitely many points $-\infty=t_0<t_1<\cdots<t_k=\infty$ such that $F(t_i)-F(t_{i-1})<\varepsilon$ for every $i$.
 
-#### Step 2: Use monotonicity
+##### Step 2: Use monotonicity
 
 For $t_{i-1}\leq t<t_i$,
 
@@ -1264,10 +1329,10 @@ $$
 Thus,
 
 $$
-|F_n-F|_\infty\leq\max_i|F_n(t_i)-F(t_i)|+\varepsilon.
+\lVert F_n-F\rVert_\infty\leq\max_i|F_n(t_i)-F(t_i)|+\varepsilon.
 $$
 
-#### Step 3: Use pointwise convergence at finitely many points
+##### Step 3: Use pointwise convergence at finitely many points
 
 Since there are only finitely many $t_i$,
 
@@ -1278,18 +1343,18 @@ $$
 Therefore,
 
 $$
-\limsup_{n\to\infty}|F_n-F|_\infty\leq\varepsilon.
+\limsup_{n\to\infty}\lVert F_n-F\rVert_\infty\leq\varepsilon.
 $$
 
 Since $\varepsilon>0$ is arbitrary,
 
 $$
-\boxed{|F_n-F|_\infty\to0.}
+\boxed{\lVert F_n-F\rVert_\infty\to0.}
 $$
 
 #### Takeaway
 
-This is the deterministic analogue of the proof strategy behind Glivenko–Cantelli:
+This is the deterministic analogue of the proof strategy behind [Glivenko–Cantelli](glossary.qmd#glossary-glivenko-cantelli):
 
 $$
 \boxed{\text{pointwise convergence}+\text{finite approximation}+\text{monotonicity}\Rightarrow\text{uniform convergence}.}
@@ -1297,27 +1362,29 @@ $$
 
 ---
 
-#### (ii) Suppose $F_n(x)\to F(x)$ and $F_n{x}\to F{x}$ for every $x$. Show $|F_n-F|_\infty\to0$.
+#### (ii) Suppose $F_n(x)\to F(x)$ and $F_n\{x\}\to F\{x\}$ for every $x$. Show $\lVert F_n-F\rVert_\infty\to0$.
+
+Following the source, $F\{x\}:=F(x)-F(x-)$ denotes the jump of the distribution function at $x$; the braces do not denote function evaluation.
 
 The complication is that $F$ may now have jumps.
 
-#### Step 1: Obtain convergence of left limits
+##### Step 1: Obtain convergence of left limits
 
 Since
 
 $$
-F_n(x-)=F_n(x)-F_n{x},
+F_n(x-)=F_n(x)-F_n\{x\},
 $$
 
 the assumptions imply
 
 $$
-F_n(x-)\to F(x)-F{x}=F(x-).
+F_n(x-)\to F(x)-F\{x\}=F(x-).
 $$
 
 Thus we have convergence of both $F_n(x)$ and $F_n(x-)$.
 
-#### Step 2: Choose a grid controlling the variation of $F$
+##### Step 2: Choose a grid controlling the variation of $F$
 
 - For any $\varepsilon>0$, choose $-\infty=t_0<t_1<\cdots<t_k=\infty$ such that $F(t_i-)-F(t_{i-1})<\varepsilon$.
 - Large jumps of $F$ are put at grid points.
@@ -1349,13 +1416,13 @@ $$
 Because convergence holds at the finitely many quantities $F_n(t_{i-1})$ and $F_n(t_i-)$,
 
 $$
-\limsup_{n\to\infty}|F_n-F|_\infty\leq\varepsilon.
+\limsup_{n\to\infty}\lVert F_n-F\rVert_\infty\leq\varepsilon.
 $$
 
 Hence,
 
 $$
-\boxed{|F_n-F|_\infty\to0.}
+\boxed{\lVert F_n-F\rVert_\infty\to0.}
 $$
 
 #### Why the extra assumption is needed
@@ -1365,7 +1432,7 @@ If $F$ has jumps, pointwise convergence alone does not force the jumps of $F_n$ 
 The condition
 
 $$
-F_n{x}\to F{x}
+F_n\{x\}\to F\{x\}
 $$
 
 ensures that the jump sizes converge at every point.
@@ -1380,6 +1447,8 @@ $$
 M_n=\frac1n\sum_{i=1}^n|X_i-\widehat m_n|=\mathbb P_n|X-\widehat m_n|.
 $$
 
+Here $\mathbb P_n$ is the [empirical measure](glossary.qmd#glossary-empirical-measure), and $\mathbb G_n=\sqrt n(\mathbb P_n-P)$ below is the [empirical process](glossary.qmd#glossary-empirical-process).
+
 Let $m$ denote the population median.
 
 Under standard regularity conditions, including $EX^2<\infty$, $F(m)=1/2$, and sufficient regularity near $m$ so that $\widehat m_n-m=O_P(n^{-1/2})$, find the asymptotic distribution of $M_n$.
@@ -1391,13 +1460,13 @@ This is the analogue of Example 19.25, but with the **sample median** replacing 
 Write
 
 $$
-\sqrt n(M_n-P|X-m|)=\sqrt n{P|X-\widehat m_n|-P|X-m|}+\mathbb G_n|X-\widehat m_n|.
+\sqrt n(M_n-P|X-m|)=\sqrt n\bigl\{P|X-\widehat m_n|-P|X-m|\bigr\}+\mathbb G_n|X-\widehat m_n|.
 $$
 
 Add and subtract $\mathbb G_n|X-m|$:
 
 $$
-\sqrt n(M_n-P|X-m|)=\sqrt n{P|X-\widehat m_n|-P|X-m|}+\mathbb G_n|X-m|+\mathbb G_n(|X-\widehat m_n|-|X-m|).
+\sqrt n(M_n-P|X-m|)=\sqrt n\bigl\{P|X-\widehat m_n|-P|X-m|\bigr\}+\mathbb G_n|X-m|+\mathbb G_n(|X-\widehat m_n|-|X-m|).
 $$
 
 We analyze the three pieces.
@@ -1409,10 +1478,10 @@ We analyze the three pieces.
 Consider the class
 
 $$
-\mathcal F={x\mapsto|x-\theta|:\theta\text{ near }m}.
+\mathcal F=\{x\mapsto|x-\theta|:\theta\text{ near }m\}.
 $$
 
-As in Example 19.25, this is a Donsker class under the relevant moment condition.
+As in Example 19.25 of the source, this is a Donsker class under the relevant moment condition.
 
 Also,
 
@@ -1423,10 +1492,12 @@ $$
 Hence,
 
 $$
-P\left(|X-\widehat m_n|-|X-m|\right)^2\leq|\widehat m_n-m|^2\overset P\to0.
+P\left(|X-\widehat m_n|-|X-m|\right)^2\leq|\widehat m_n-m|^2\overset{P}{\longrightarrow}0.
 $$
 
-Lemma 19.24 therefore gives
+As in the source, $Ph^2$ means $\int h^2\,dP$; it does not mean $(Ph)^2$.
+
+[Lemma 19.24](chapter-19.qmd#lemma-19.24) therefore gives
 
 $$
 \boxed{\mathbb G_n(|X-\widehat m_n|-|X-m|)=o_P(1).}
@@ -1465,7 +1536,7 @@ $$
 Since $\widehat m_n-m=O_P(n^{-1/2})$,
 
 $$
-\sqrt n{P|X-\widehat m_n|-P|X-m|}=o_P(1).
+\sqrt n\bigl\{P|X-\widehat m_n|-P|X-m|\bigr\}=o_P(1).
 $$
 
 This is the key simplification: **estimating the median has no first-order effect because the population median minimizes absolute loss.**
@@ -1516,71 +1587,16 @@ $$
 
 ---
 
-### Problem 6(i): VC index of intervals $(a,b]$
+### Suggested priority
 
-Let
-
-$$
-\mathcal C={(a,b]:a<b}.
-$$
-
-Recall Van der Vaart's convention: the **VC index** $V(\mathcal C)$ is the smallest $n$ such that no set of $n$ points can be shattered.
-
-#### Step 1: Two points can be shattered
-
-Take $x_1<x_2$.
-
-The four subsets can all be picked out by intervals:
-
-- $\varnothing$: choose an interval containing neither point.
-- ${x_1}$: choose a small interval around $x_1$.
-- ${x_2}$: choose a small interval around $x_2$.
-- ${x_1,x_2}$: choose an interval containing both.
-
-Therefore a two-point set can be shattered.
-
-Thus,
-
-$$
-V(\mathcal C)>2.
-$$
-
-#### Step 2: Three points cannot be shattered
-
-Take any $x_1<x_2<x_3$.
-
-There is no interval $(a,b]$ that contains $x_1$ and $x_3$ but excludes $x_2$.
-
-Thus the subset
-
-$$
-{x_1,x_3}
-$$
-
-cannot be picked out.
-
-Therefore no three-point set is shattered.
-
-Hence,
-
-$$
-\boxed{V(\mathcal C)=3.}
-$$
-
-Under the more common convention where “VC dimension” is the largest shattered-set size, this class has VC dimension $2$.
-
----
-
-#### What I would actually assign
-
-For your reading group, my order would be:
+For a discussion focused on the empirical-process tools used in Chapter 25, the most useful order is:
 
 1. **Problem 10** — most directly relevant to §19.4 and Chapter 25.
 2. **Problem 5** — makes bracketing/entropy real rather than purely definitional.
 3. **Problem 9** — short and reinforces pointwise versus uniform convergence.
-4. **Problem 6(i)** — quick exercise if you cover VC classes at all.
+4. **Problem 6(i)** — a short extension when VC classes are included.
 
-So if time is limited, I would assign just:
+If time is limited, prioritize
 
 $$
 \boxed{\text{Problems 5 and 10}.}
@@ -1590,11 +1606,13 @@ $$
 
 See [Chapter 25: Semiparametric Models](chapter-25.qmd).
 
+Notation follows the source locally. Here $Pf=\int f\,dP$, $1_C$ and $1\{\cdot\}$ denote indicator functions, and $\dot{\mathcal P}_P$ denotes a tangent set. See the [global notation guide](glossary.qmd#global-notation) when a symbol is reused.
+
 ### Problem 1: Known mean-zero distribution
 
 #### (i) Tangent set
 
-The model consists of distributions $P$ on $\mathbb R$ satisfying $PX=0$. For a differentiable path $dP_t=(1+tg)\,dP$, preservation of total mass and the mean-zero restriction require $Pg=0$ and $P(Xg)=0$. Thus a tangent set is
+The model consists of distributions $P$ on $\mathbb R$ satisfying $PX=0$. For a differentiable path $dP_t=(1+tg)\,dP$, preservation of total mass and the mean-zero restriction require $Pg=0$ and $P(Xg)=0$. Thus a [tangent set](glossary.qmd#glossary-tangent-space) is
 
 $$
 \dot{\mathcal P}_P=\left\{g\in L_2(P):Pg=0,\ P(Xg)=0\right\}.
@@ -1604,7 +1622,7 @@ Its closure is the orthogonal complement of the span of $1$ and $X$ in $L_2(P)$.
 
 #### (ii) Efficient influence function for $\psi(P)=P(C)$
 
-In the unrestricted nonparametric model, an influence function is $1_C-P(C)$. The efficient influence function in the restricted model is its projection onto the tangent space. Assuming $0<PX^2<\infty$,
+In the unrestricted nonparametric model, an influence function is $1_C-P(C)$. The [efficient influence function](glossary.qmd#glossary-efficient-influence-function) in the restricted model is its projection onto the tangent space. Assuming $0<PX^2<\infty$,
 
 $$
 \widetilde\psi_P(X)=1_C(X)-P(C)-\frac{P[X1_C(X)]}{PX^2}X.
@@ -1623,14 +1641,14 @@ $$
 Because the true mean is known to be zero, the second term uses the sample deviation from that restriction as a control variate. Under the usual moment and denominator conditions,
 
 $$
-\sqrt n\{T_n-P(C)\}=\frac1{\sqrt n}\sum_{i=1}^n\widetilde\psi_P(X_i)+o_P(1),
+\sqrt n\bigl\{T_n-P(C)\bigr\}=\frac1{\sqrt n}\sum_{i=1}^n\widetilde\psi_P(X_i)+o_P(1),
 $$
 
 so $T_n$ attains the efficiency bound $P\widetilde\psi_P^2$.
 
 ### Problem 2: Symmetric location model
 
-Write $U=X-\theta$. The ordinary location score is $\dot\ell_{\theta,p}(X)=-\nabla\log p(X-\theta)$. Because $p(u)=p(-u)$, the location score is odd in $u$. Nuisance paths that preserve symmetry have even scores. Odd and even functions are orthogonal under a symmetric density, so projection onto the nuisance tangent space removes nothing: $\widetilde\ell_{\theta,p}=\dot\ell_{\theta,p}$.
+Write $U=X-\theta$. The ordinary location score is $\dot\ell_{\theta,p}(X)=-\nabla\log p(X-\theta)$. Because $p(u)=p(-u)$, the location score is odd in $u$. Nuisance paths that preserve symmetry have even scores. Odd and even functions are orthogonal under a symmetric density, so projection onto the [nuisance tangent space](glossary.qmd#glossary-nuisance-tangent-space) removes nothing: $\widetilde\ell_{\theta,p}=\dot\ell_{\theta,p}$.
 
 Let $I_p=P_{\theta,p}[\dot\ell_{\theta,p}\dot\ell_{\theta,p}^T]$. Provided $I_p$ is nonsingular, the efficient influence function is
 
@@ -1642,7 +1660,7 @@ The key point is that symmetry makes the parametric location score automatically
 
 ### Problem 3: Regression with independent errors
 
-Suppose $Y=g_\theta(X)+e$, where $e$ is independent of $X$, $Ee=0$, $\operatorname{Var}(e)=\sigma^2$, and $e$ has density $f$. Write $\dot g_\theta(X)=\partial g_\theta(X)/\partial\theta$ and $\ell_f(e)=f'(e)/f(e)$. The ordinary score is $\dot\ell_\theta(X,Y)=-\dot g_\theta(X)\ell_f(e)$.
+Suppose $Y=g_\theta(X)+e$, where $e$ is independent of $X$, $Ee=0$, $\operatorname{Var}(e)=\sigma^2$, and $e$ has density $f$. Write $\dot g_\theta(X)=\partial g_\theta(X)/\partial\theta$ and $\ell_f(e)=f'(e)/f(e)$. Here $\ell_f$ is the error density's log derivative, not the loss function $\ell$ used in the Chapter 8 problems. The ordinary score is $\dot\ell_\theta(X,Y)=-\dot g_\theta(X)\ell_f(e)$.
 
 Scores for the unknown distribution of $X$ are already orthogonal to this score because $E\{\ell_f(e)\}=0$. Scores for the unknown error density satisfy $Eb(e)=0$ and $E\{eb(e)\}=0$.
 
@@ -1652,11 +1670,11 @@ $$
 \widetilde\ell_\theta(X,Y)=-\{\dot g_\theta(X)-\mu_g\}\ell_f(e)+\frac{\mu_g}{\sigma^2}e.
 $$
 
-This is the efficient score. When $E\dot g_\theta(X)=0$, it simplifies to $-\dot g_\theta(X)\ell_f(e)$.
+This is the [efficient score](glossary.qmd#glossary-efficient-score). When $E\dot g_\theta(X)=0$, it simplifies to $-\dot g_\theta(X)\ell_f(e)$.
 
 ### Problem 4: Uniform mixtures
 
-The mixture density is $p_F(x)=\int 1_{\{z\leq x\leq z+1\}}\,dF(z)$. For a path $dF_t=(1+tb)\,dF$ with $Fb=0$, the observed-data score is
+The mixture density is $p_F(x)=\int 1\{z\leq x\leq z+1\}\,dF(z)$. For a path $dF_t=(1+tb)\,dF$ with $Fb=0$, the observed-data score is
 
 $$
 A_Fb(x)=E\{b(Z)\mid X=x\}=\frac{\int_{[x-1,x]}b(z)\,dF(z)}{p_F(x)}.
@@ -1670,7 +1688,7 @@ $$
 A_F^*h(z)=E\{h(X)\mid Z=z\}=\int_z^{z+1}h(x)\,dx.
 $$
 
-This adjoint has a nontrivial kernel. For example, $h(x)=\sin(2\pi x)$ gives $A_F^*h(z)=0$. Hence $N(A_F^*)$ is nontrivial and $\overline{R(A_F)}=N(A_F^*)^\perp$ is a proper subspace of the nonparametric tangent space. Therefore, the closed linear span of the mixture-model tangent set is not the entire nonparametric tangent space.
+Here $R(A_F)$ and $N(A_F^*)$ denote the range and kernel, respectively, following the source's operator notation. This [adjoint](glossary.qmd#glossary-score-operator) has a nontrivial kernel. For example, $h(x)=\sin(2\pi x)$ gives $A_F^*h(z)=0$. Hence $N(A_F^*)$ is nontrivial and $\overline{R(A_F)}=N(A_F^*)^\perp$ is a proper subspace of the nonparametric tangent space. Therefore, the closed linear span of the mixture-model tangent set is not the entire nonparametric tangent space.
 
 ### Problem 5: Neyman–Scott problem
 
@@ -1704,4 +1722,4 @@ Therefore it is asymptotically linear in the efficient influence function and is
 
 #### (iii) Is $T_n$ the semiparametric MLE?
 
-Generally, no. $T_n$ maximizes the likelihood based only on the differences $D_i$. The full semiparametric likelihood also contains the distribution of the sums $S_i$, whose Gaussian-mixture form depends on both $\theta$ and the unknown mixing distribution $\eta$. Profiling that likelihood over $\eta$ need not give the same finite-sample maximizer. The sums contribute no first-order efficient information after nuisance projection, so a regular full semiparametric MLE can nevertheless be asymptotically equivalent to $T_n$.
+Generally, no. $T_n$ maximizes the likelihood based only on the differences $D_i$. The full semiparametric likelihood also contains the distribution of the sums $S_i$, whose Gaussian-mixture form depends on both $\theta$ and the unknown mixing distribution $\eta$. [Profiling](glossary.qmd#glossary-profile-likelihood) that likelihood over $\eta$ need not give the same finite-sample maximizer. The sums contribute no first-order efficient information after nuisance projection, so a regular full semiparametric MLE can nevertheless be asymptotically equivalent to $T_n$.

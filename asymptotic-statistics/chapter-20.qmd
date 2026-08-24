@@ -1,0 +1,865 @@
+# Chapter 20: Functional Delta Method {#sec-functional-delta-method}
+
+Chapter 3 transforms finite-dimensional limits. Chapter 20 performs the same operation when an estimator and its limit are functions, measures, or other elements of a normed space. It is the final link on the empirical-process route to Chapter 25: Chapter 19 supplies a random-function limit, and this chapter passes that limit through a statistical functional.
+
+::: {.callout-tip title="Why this chapter is here"}
+
+- **Prerequisites:** weak convergence of random elements from [Chapter 18](chapter-18.qmd#theorem-18-11) and empirical-process limits from [Chapter 19](chapter-19.qmd#donsker-classes).
+- **Purpose:** make von Mises expansions rigorous through Hadamard differentiability, a functional delta method, and a chain rule.
+- **Chapter 25 payoff:** the same calculus supports influence-function construction in [§25.3](chapter-25.qmd#sec-influence-functions), efficiency under transformations in [§25.7](chapter-25.qmd#sec-efficiency-delta-method), Wilcoxon in [Example 25.46](chapter-25.qmd#example-25-46), and Kaplan--Meier efficiency in [Example 25.51](chapter-25.qmd#example-25-51).
+
+:::
+
+::: {.callout-note title="Companion readings"}
+
+For visual and geometric accounts of first-order functional approximation, see [@fisherKennedy2021, §§2--4] and [@kennedy2022, §§3.1--3.4]. For the product-integral differentiability used in Lemma 20.14(ii), see [@gillJohansen1990, Theorem 8].
+
+:::
+
+::: {.callout-note title="Source coverage and omissions"}
+
+- **Heuristic foundation:** §20.1 through Examples 20.2, 20.4, and 20.5 is retained to connect contamination derivatives with influence functions.
+- **Core theory:** §20.2 and Theorems 20.8--20.9 are stated and proved in full.
+- **Core applications:** §20.3, Lemma 20.10, Example 20.11, Lemma 20.14, and Example 20.15 are retained. Example 20.11 supplies the independent two-sample Wilcoxon calculation needed later.
+- **Deliberately omitted:** Example 20.3's same-size bivariate-sample heuristic, §20.1.1 on higher-order expansions, Example 20.6 on Cramér--von Mises, and Example 20.12 on general pooled rank statistics are not prerequisites for Chapter 25.
+- **Source-deferred proof:** van der Vaart proves Lemma 20.14(i) but refers elsewhere for part (ii). These notes reduce part (ii) precisely to [@gillJohansen1990, Theorem 8]; they do not present the shorter Volterra sketch as a stand-alone proof of the product-integral differentiability theorem.
+
+:::
+
+## 20.1 von Mises Calculus {#sec-von-mises-calculus}
+
+Let $X_1,\ldots,X_n$ be i.i.d. from $P$, and let $\mathbb P_n$ be the empirical distribution. A statistic of the form $\phi(\mathbb P_n)$ can be studied by expanding $\phi$ around $P$:
+
+$$
+\phi(P+H)-\phi(P)=\phi'_P(H)+\text{remainder}.
+$$
+
+If the first derivative is continuous and linear, substituting $H=\mathbb P_n-P$ gives the source's first-order von Mises calculation
+
+$$
+\begin{aligned}
+\phi'_P(\mathbb P_n-P)
+&=\phi'_P\left\{\frac1n\sum_{i=1}^n(\delta_{X_i}-P)\right\}\\
+&=\frac1n\sum_{i=1}^n\phi'_P(\delta_{X_i}-P).
+\end{aligned}
+\tag{20.1}
+$$
+
+The function
+
+$$
+x\longmapsto\phi'_P(\delta_x-P)
+=\left.\frac{d}{dt}\right|_{t=0}
+\phi\{(1-t)P+t\delta_x\}
+$$
+
+is the contamination-path influence function of $\phi$ at $P$. Linearity gives mean zero whenever differentiation and integration can be interchanged.
+
+::: {.callout-warning title="Contamination paths are a construction device"}
+
+The point-mass path may fail to be dominated, DQM, or admissible in a restricted model. It produces a candidate derivative in the unrestricted nonparametric model. Chapter 25 instead verifies a representative against every admissible score and projects it into the model's tangent space; see the [influence-function construction recipe](chapter-25.qmd#sec-if-construction).
+
+:::
+
+### Example 20.2: Mean {#example-20-2}
+
+For $\phi(P)=\int x\,dP(x)$,
+
+$$
+\phi\{(1-t)P+t\delta_x\}=(1-t)PX+tx,
+$$
+
+so the influence function is $x-PX$. Because the mean functional is linear, (20.1) is an identity:
+
+$$
+\phi(\mathbb P_n)-\phi(P)
+=\frac1n\sum_{i=1}^n(X_i-PX).
+$$
+
+This is the prototype for [Example 25.24](chapter-25.qmd#example-25-24).
+
+### Example 20.4: Z-functions {#example-20-4}
+
+For each $\theta$ in an open subset of $\mathbb R^k$, let $x\mapsto\psi_\theta(x)$ be a measurable $\mathbb R^k$-valued map. The Z-functional $\theta(P)$ is the unique solution of
+
+$$
+P\psi_\theta=0.
+$$
+
+Along $P_t=(1-t)P+t\delta_x$, differentiate $P_t\psi_{\theta(P_t)}=0$. If
+
+$$
+V_{\theta(P)}
+=\left.\frac{\partial}{\partial\theta}P\psi_\theta
+\right|_{\theta=\theta(P)}
+$$
+
+is nonsingular, then
+
+$$
+0=V_{\theta(P)}
+\left.\frac{d}{dt}\right|_{0}\theta(P_t)
++\psi_{\theta(P)}(x),
+$$
+
+because $P\psi_{\theta(P)}=0$. Therefore
+
+$$
+\operatorname{IF}(x;\theta,P)
+=-V_{\theta(P)}^{-1}\psi_{\theta(P)}(x).
+$$
+
+[Chapter 5](chapter-5.qmd#theorem-5-21) turns this formal derivative into an estimator expansion; [§25.9](chapter-25.qmd#sec-general-estimating-equations) asks which estimating function makes the resulting influence function efficient.
+
+### Example 20.5: Quantiles {#example-20-5}
+
+Let $q_p=F^{-1}(p)$ be a unique $p$th quantile, where $p\in(0,1)$, and suppose that $F$ has density $f$ with $f(q_p)>0$. Along the point-mass path
+
+$$
+F_t=(1-t)F+t\mathbf1_{[x,\infty)},
+$$
+
+differentiate $F_t\{F_t^{-1}(p)\}=p$ to obtain
+
+$$
+\operatorname{IF}(x;q_p,F)
+=\frac{p-\mathbf1\{x\leq q_p\}}{f(q_p)}.
+$$
+
+The numerator records which side of the quantile receives the added mass; the denominator converts a probability perturbation into horizontal displacement. The influence function has variance
+
+$$
+\frac{p(1-p)}{f(q_p)^2}.
+$$
+
+At $x=q_p$ the point-mass calculation is convention-sensitive, as the source notes; under the stated density assumption that single point has $P$-probability zero. Chapter 21 supplies the rigorous inverse-map argument, while [§25.7](chapter-25.qmd#theorem-25-47) explains why smooth transformations preserve efficiency.
+
+## 20.2 Hadamard-Differentiable Functions {#sec-hadamard-differentiability}
+
+Let $\phi:\mathbb D_\phi\subset\mathbb D\to\mathbb E$ map a subset of one normed space into another, and let $\theta\in\mathbb D_\phi$.
+
+- **Gâteaux differentiability** fixes a direction $h$ and requires a continuous linear derivative $\phi'_\theta$ such that
+
+  $$
+  \frac{\|\phi(\theta+th)-\phi(\theta)-t\phi'_\theta(h)\|_{\mathbb E}}{t}
+  \longrightarrow0
+  \qquad(t\downarrow0).
+  \tag{20.7}
+  $$
+
+- **Hadamard differentiability** permits the direction to move: for every $h_t\to h$ with $\theta+th_t\in\mathbb D_\phi$,
+
+  $$
+  \frac{\phi(\theta+th_t)-\phi(\theta)}{t}
+  \longrightarrow\phi'_\theta(h)
+  \qquad(t\downarrow0).
+  $$
+
+- **Tangential Hadamard differentiability** restricts the limiting directions to $h\in\mathbb D_0$. Locally, $\phi'_\theta$ is defined on $\mathbb D_0$; Theorem 20.8 states separately when it must extend continuously to all of $\mathbb D$.
+- **Fréchet differentiability** requires the stronger norm-uniform remainder
+
+  $$
+  \|\phi(\theta+h)-\phi(\theta)-\phi'_\theta(h)\|_{\mathbb E}
+  =o(\|h\|_{\mathbb D}).
+  $$
+
+Hadamard differentiability is also called compact differentiability because its remainder is uniform over compact sets of directions. It is strong enough for random directions governed by weak convergence but weaker than Fréchet differentiability in infinite-dimensional spaces.
+
+::: {.callout-note title="Theorem"}
+### Theorem 20.8: Delta method {#theorem-20-8}
+
+Let $\mathbb D$ and $\mathbb E$ be normed linear spaces. Suppose
+
+$$
+\phi:\mathbb D_\phi\subset\mathbb D\to\mathbb E
+$$
+
+is Hadamard differentiable at $\theta$ tangentially to $\mathbb D_0$. Let $T_n:\Omega_n\to\mathbb D_\phi$ be maps such that
+
+$$
+r_n(T_n-\theta)\rightsquigarrow T
+$$
+
+for numbers $r_n\to\infty$ and a random element $T$ taking its values in $\mathbb D_0$. Then
+
+$$
+r_n\{\phi(T_n)-\phi(\theta)\}
+\rightsquigarrow\phi'_\theta(T).
+$$
+
+If $\phi'_\theta$ is defined and continuous on all of $\mathbb D$, then also
+
+$$
+r_n\{\phi(T_n)-\phi(\theta)\}
+=\phi'_\theta\{r_n(T_n-\theta)\}+o_P(1).
+$$
+:::
+
+**Proof roadmap.**
+
+Turn the delta-method expression into a sequence of maps acting on $r_n(T_n-\theta)$, then apply the varying-map continuous mapping theorem. For the stronger statement, apply the first conclusion jointly to $\phi$ and its fixed derivative map and subtract the two coordinates.
+
+<details><summary>Complete proof</summary>
+
+For each $n$, define
+
+$$
+g_n(h)=r_n\{\phi(\theta+r_n^{-1}h)-\phi(\theta)\}
+$$
+
+on
+
+$$
+\mathbb D_n=\{h:\theta+r_n^{-1}h\in\mathbb D_\phi\}.
+$$
+
+Consider any subsequence $h_{n'}\to h\in\mathbb D_0$ with $h_{n'}\in\mathbb D_{n'}$. Since $r_{n'}^{-1}\downarrow0$, Hadamard differentiability gives
+
+$$
+g_{n'}(h_{n'})\to\phi'_\theta(h).
+$$
+
+The hypotheses of the varying-map [Theorem 18.11](chapter-18.qmd#theorem-18-11) therefore hold. Applying it to $r_n(T_n-\theta)$ gives
+
+$$
+\begin{aligned}
+g_n\{r_n(T_n-\theta)\}
+&=r_n\{\phi(T_n)-\phi(\theta)\}\\
+&\rightsquigarrow\phi'_\theta(T).
+\end{aligned}
+$$
+
+For the stronger assertion, suppose $\phi'_\theta$ is defined and continuous on all of $\mathbb D$, and define
+
+$$
+\Psi(x)=\{\phi(x),\phi'_\theta(x)\},
+\qquad x\in\mathbb D_\phi.
+$$
+
+This map is Hadamard differentiable at $\theta$ with derivative
+
+$$
+\Psi'_\theta(h)=\{\phi'_\theta(h),\phi'_\theta(h)\}.
+$$
+
+The first part of the theorem, now applied to $\Psi$, yields joint convergence of
+
+$$
+\begin{aligned}
+r_n\{\Psi(T_n)-\Psi(\theta)\}
+=\Bigl(&r_n\{\phi(T_n)-\phi(\theta)\},\\
+&\phi'_\theta\{r_n(T_n-\theta)\}\Bigr)
+\end{aligned}
+$$
+
+to $(\phi'_\theta(T),\phi'_\theta(T))$. Subtraction is continuous, so the difference of the two coordinates converges weakly to zero. Weak convergence to a constant is convergence in probability, proving the $o_P(1)$ assertion.
+
+</details>
+
+The theorem does not add tightness as a separate hypothesis on $T$; the source requires only that $T$ be a random element taking values in $\mathbb D_0$. This theorem is the analytic input to [Theorem 25.47](chapter-25.qmd#theorem-25-47), where semiparametric geometry first identifies the efficient derivative representative.
+
+::: {.callout-note title="Theorem"}
+### Theorem 20.9: Chain rule {#theorem-20-9}
+
+Let
+
+$$
+\phi:\mathbb D_\phi\to\mathbb E_\psi,
+\qquad
+\psi:\mathbb E_\psi\to\mathbb F,
+$$
+
+be maps defined on subsets $\mathbb D_\phi$ and $\mathbb E_\psi$ of normed spaces $\mathbb D$ and $\mathbb E$, respectively. If $\phi$ is Hadamard differentiable at $\theta$ tangentially to $\mathbb D_0$ and $\psi$ is Hadamard differentiable at $\phi(\theta)$ tangentially to $\phi'_\theta(\mathbb D_0)$, then $\psi\circ\phi$ is Hadamard differentiable at $\theta$ tangentially to $\mathbb D_0$, with derivative
+
+$$
+(\psi\circ\phi)'_\theta
+=\psi'_{\phi(\theta)}\circ\phi'_\theta.
+$$
+:::
+
+**Proof roadmap.**
+
+The difference quotient for the inner map becomes a moving direction for the outer map. Hadamard, rather than merely Gâteaux, differentiability is exactly what permits that movement.
+
+<details><summary>Complete proof</summary>
+
+Take $t\downarrow0$ and $h_t\to h\in\mathbb D_0$, with $\theta+th_t\in\mathbb D_\phi$. Define
+
+$$
+g_t
+=\frac{\phi(\theta+th_t)-\phi(\theta)}{t}.
+$$
+
+Hadamard differentiability of $\phi$ gives
+
+$$
+g_t\to\phi'_\theta(h)
+\in\phi'_\theta(\mathbb D_0).
+$$
+
+Because $\phi(\theta+th_t)=\phi(\theta)+tg_t$ belongs to $\mathbb E_\psi$, rewrite
+
+$$
+\frac{\psi\circ\phi(\theta+th_t)-\psi\circ\phi(\theta)}{t}
+=\frac{\psi\{\phi(\theta)+tg_t\}-\psi\{\phi(\theta)\}}{t}.
+$$
+
+Hadamard differentiability of $\psi$ sends the last display to
+
+$$
+\psi'_{\phi(\theta)}\{\phi'_\theta(h)\}.
+$$
+
+The composition of the two continuous linear derivative maps is continuous and linear, completing the definition of the derivative.
+
+</details>
+
+The chain rule is what makes Hadamard differentiability a usable calculus: complicated statistical maps can be decomposed into elementary maps with known derivatives.
+
+## 20.3 Some Examples
+
+For $M>0$, let $BV_M[a,b]$ denote the cadlag functions $z:[a,b]\to[-M,M]$ whose total variation is at most $M$. All function spaces below carry the uniform norm.
+
+::: {.callout-important title="Lemma"}
+### Lemma 20.10: Integration against a changing distribution {#lemma-20-10}
+
+Let $\varphi:[0,1]\to\mathbb R$ be twice continuously differentiable. As in the source, consider
+
+$$
+\Phi(F_1,F_2)=\int\varphi(F_1)\,dF_2
+$$
+
+on the domain
+
+$$
+D[-\infty,\infty]\times BV_1[-\infty,\infty]
+\subset D[-\infty,\infty]\times D[-\infty,\infty],
+$$
+
+with the first coordinate understood to take values in $[0,1]$ so that $\varphi\circ F_1$ is defined. The map is Hadamard differentiable into $\mathbb R$ at every pair of bounded-variation functions $(F_1,F_2)$. Its derivative is
+
+$$
+\Phi'_{(F_1,F_2)}(h_1,h_2)
+=\left[h_2(\varphi\circ F_1)\right]_{-\infty}^{\infty}
+-\int h_{2-}\,d(\varphi\circ F_1)
++\int\varphi'(F_1)h_1\,dF_2.
+\tag{20.10.1}
+$$
+
+Here $h_-$ is the left-continuous version of a cadlag $h$. Furthermore,
+
+$$
+(F_1,F_2)
+\longmapsto
+\left[t\mapsto\int_{(-\infty,t]}\varphi(F_1)\,dF_2\right]
+$$
+
+is Hadamard differentiable as a map into $D[-\infty,\infty]$, with (20.10.1) truncated at the upper endpoint $t$.
+:::
+
+**Proof roadmap.**
+
+Expand in the first argument, integrate by parts in the second, and use the fixed variation bound on $F_{2t}$. A finite grid converts uniform convergence of $F_{2t}$ into convergence of integrals against a cadlag integrand. The same grid bounds the indefinite integrals uniformly in their upper endpoint.
+
+<details><summary>Complete proof</summary>
+
+Let $h_{1t}\to h_1$ and $h_{2t}\to h_2$ uniformly, with
+
+$$
+F_{1t}=F_1+th_{1t},
+\qquad
+F_{2t}=F_2+th_{2t}
+$$
+
+remaining in the stated domain. In particular, $F_{2t}$ has total variation at most one. Divide the increment by $t$ and add and subtract $\varphi'(F_1)h_1$:
+
+$$
+\begin{aligned}
+\frac{\Phi(F_{1t},F_{2t})-\Phi(F_1,F_2)}{t}
+={}&\int\left\{
+\frac{\varphi(F_{1t})-\varphi(F_1)}{t}
+-\varphi'(F_1)h_1
+\right\}\,dF_{2t}\\
+&+\int\varphi(F_1)\,dh_{2t}
++\int\varphi'(F_1)h_1\,dF_{2t}.
+\tag{20.10.2}
+\end{aligned}
+$$
+
+Taylor's theorem bounds the supremum norm of the first integrand by
+
+$$
+\frac12\|\varphi''\|_\infty
+t\|h_{1t}\|_\infty^2
++\|\varphi'\|_\infty\|h_{1t}-h_1\|_\infty,
+$$
+
+which tends to zero. Since the total variations of $F_{2t}$ are at most one, the first integral in (20.10.2) vanishes.
+
+Integration by parts gives
+
+$$
+\int\varphi(F_1)\,dh_{2t}
+=\left[h_{2t}(\varphi\circ F_1)\right]_{-\infty}^{\infty}
+-\int h_{2t-}\,d(\varphi\circ F_1).
+$$
+
+The function $\varphi\circ F_1$ has bounded variation because $F_1$ does and $\varphi'$ is bounded on $[0,1]$. Uniform convergence of $h_{2t}$, and therefore of its left-continuous version, gives the first two terms in (20.10.1).
+
+For the third integral, put
+
+$$
+u=\varphi'(F_1)h_1\in D[-\infty,\infty].
+$$
+
+Given $\epsilon>0$, choose a grid
+
+$$
+-\infty=u_0<u_1<\cdots<u_m=\infty
+$$
+
+such that $u$ varies by at most $\epsilon$ on each interval $[u_{i-1},u_i)$. The finite-partition approximation is [Problem 18.6](problems.qmd#problems-chapter-18). Approximating $u$ on each cell by $u(u_{i-1})$ yields
+
+$$
+\begin{aligned}
+\left|\int u\,d(F_{2t}-F_2)\right|
+\leq{}&
+\epsilon\left(\int d|F_{2t}|+\int d|F_2|\right)\\
+&+\sum_{i=1}^{m}|u(u_{i-1})|
+\left|F_{2t}[u_{i-1},u_i)-F_2[u_{i-1},u_i)\right|.
+\end{aligned}
+\tag{20.10.3}
+$$
+
+The first line is bounded by $2\epsilon$. For a fixed grid, every term in the finite sum tends to zero because $F_{2t}\to F_2$ uniformly, including their left limits. Let $t\downarrow0$ and then $\epsilon\downarrow0$. This proves
+
+$$
+\int\varphi'(F_1)h_1\,dF_{2t}
+\to\int\varphi'(F_1)h_1\,dF_2,
+$$
+
+and hence (20.10.1).
+
+For the indefinite-integral map, apply the same decomposition on $(-\infty,x]$. The Taylor bound is unchanged, the integration-by-parts boundary term converges uniformly in $x$, and the grid bound (20.10.3) remains valid when its last cell is cut at an arbitrary $x$. Taking the supremum over $x$ therefore gives convergence in the uniform norm on $D[-\infty,\infty]$.
+
+</details>
+
+For $\varphi(u)=u$ and distribution-function tangents whose endpoint term vanishes,
+
+$$
+\Phi'_{(F,G)}(h_1,h_2)
+=-\int h_{2-}\,dF+\int h_1\,dG.
+\tag{20.10-W}
+$$
+
+::: {.callout-tip title="Example"}
+### Example 20.11: Wilcoxon {#example-20-11}
+
+Let $\mathbb F_m$ and $\mathbb G_n$ be the empirical distribution functions of independent samples $X_1,\ldots,X_m\sim F$ and $Y_1,\ldots,Y_n\sim G$. Let $N=m+n$, regard $m$ and $n$ as indexed by a common parameter $\nu$, and suppose
+
+$$
+\frac mN\to\lambda\in(0,1).
+$$
+
+Then
+
+$$
+\sqrt N(\mathbb F_m-F,\mathbb G_n-G)
+\rightsquigarrow
+\left(
+\frac{\mathbb G_F}{\sqrt\lambda},
+\frac{\mathbb G_G}{\sqrt{1-\lambda}}
+\right)
+$$
+
+in $D[-\infty,\infty]\times D[-\infty,\infty]$, where $\mathbb G_F$ and $\mathbb G_G$ are independent Brownian bridges. Consequently,
+
+$$
+\begin{aligned}
+\sqrt N\left\{
+\int\mathbb F_m\,d\mathbb G_n-\int F\,dG
+\right\}
+\rightsquigarrow{}&
+-\int\frac{\mathbb G_{G-}}{\sqrt{1-\lambda}}\,dF\\
+&+\int\frac{\mathbb G_F}{\sqrt\lambda}\,dG.
+\end{aligned}
+\tag{20.11.1}
+$$
+:::
+
+**Proof roadmap.**
+
+Apply Lemma 20.10 with $\varphi(u)=u$. The endpoint term vanishes for differences of distribution functions, leaving one term from each sample. The stronger delta-method expansion rewrites those terms as independent sample averages and makes the tie convention explicit.
+
+<details><summary>Complete calculation</summary>
+
+The functional is
+
+$$
+\Phi(F,G)=\int F\,dG.
+$$
+
+By (20.10-W),
+
+$$
+\Phi'_{(F,G)}(h_1,h_2)
+=-\int h_{2-}\,dF+\int h_1\,dG.
+$$
+
+Theorem 20.8 applied to the joint Donsker limit gives (20.11.1). Its stronger assertion gives
+
+$$
+\begin{aligned}
+\sqrt N\left\{
+\int\mathbb F_m\,d\mathbb G_n-\int F\,dG
+\right\}
+={}&-\int\sqrt N(\mathbb G_n-G)_-\,dF\\
+&+\int\sqrt N(\mathbb F_m-F)\,dG+o_P(1).
+\tag{20.11.2}
+\end{aligned}
+$$
+
+Let
+
+$$
+\vartheta=\int F\,dG=P(X\leq Y),
+$$
+
+for independent $X\sim F$ and $Y\sim G$. Direct integration gives
+
+$$
+\int(\mathbb F_m-F)\,dG
+=\frac1m\sum_{i=1}^m
+\{1-G_-(X_i)-\vartheta\},
+$$
+
+because $\int\mathbf1\{X_i\leq y\}\,dG(y)=P(Y\geq X_i)=1-G_-(X_i)$. Integration by parts, with zero endpoint term, also gives
+
+$$
+-\int(\mathbb G_n-G)_-\,dF
+=\int F\,d(\mathbb G_n-G)
+=\frac1n\sum_{j=1}^n\{F(Y_j)-\vartheta\}.
+$$
+
+Thus (20.11.2) becomes
+
+$$
+\begin{aligned}
+\sqrt N(\widehat\vartheta-\vartheta)
+={}&\frac{\sqrt N}{m}\sum_{i=1}^m
+\{1-G_-(X_i)-\vartheta\}\\
+&+\frac{\sqrt N}{n}\sum_{j=1}^n
+\{F(Y_j)-\vartheta\}+o_P(1),
+\end{aligned}
+$$
+
+where $\widehat\vartheta=\int\mathbb F_m\,d\mathbb G_n$. The two sums are independent, so the ordinary central limit theorem also verifies normality of (20.11.1).
+
+</details>
+
+::: {.callout-warning title="Which Wilcoxon statistic and how ties are counted"}
+
+Here
+
+$$
+\int\mathbb F_m\,d\mathbb G_n
+=\frac1{mn}\sum_{i=1}^m\sum_{j=1}^n
+\mathbf1\{X_i\leq Y_j\}.
+$$
+
+This is the two-sample Wilcoxon rank-sum/Mann--Whitney functional, not the signed-rank statistic. The source uses the weak inequality $X_i\leq Y_j$: a tie is counted in favor of that event. This is why the first projection contains $1-G_-(X)$ rather than $1-G(X)$. A half-tie convention defines a different finite-sample functional and must be adjusted separately.
+
+:::
+
+This calculation returns as the efficient two-sample test in [Example 25.46](chapter-25.qmd#example-25-46). Chapter 11 supplies the corresponding Hájek-projection perspective.
+
+### Cumulative hazards and product integrals
+
+For a distribution function $F$ on $[0,\infty)$, define its cumulative hazard by
+
+$$
+A_F(t)=\int_{[0,t]}\frac{1}{1-F_-}\,dF.
+$$
+
+Conversely, for a nondecreasing cadlag $A$ with $A(0)=0$, define $F_A$ by
+
+$$
+1-F_A(t)
+=\prod_{0<s\leq t}\{1-A\{s\}\}\exp\{-A^c(t)\},
+\tag{20.13}
+$$
+
+where $A\{s\}=A(s)-A(s-)$ and $A^c$ is the continuous part. Equation (20.13) is the scalar product integral of $-A$.
+
+::: {.callout-important title="Lemma"}
+### Lemma 20.14: Cumulative hazards and product integrals {#lemma-20-14}
+
+Let $\mathbb D_\phi$ be the set of nondecreasing cadlag functions $F:[0,\tau]\to\mathbb R$ with $F(0)=0$ and
+
+$$
+1-F(\tau)\geq\epsilon>0
+$$
+
+for some $\epsilon>0$. Let $\mathbb E_\psi$ be the set of nondecreasing cadlag functions $A:[0,\tau]\to\mathbb R$ with $A(0)=0$ and
+
+$$
+A(\tau)\leq M
+$$
+
+for some $M\in\mathbb R$. Then:
+
+1. the map $\phi:\mathbb D_\phi\subset D[0,\tau]\to D[0,\tau]$ defined by $\phi(F)=A_F$ is Hadamard differentiable;
+2. the map $\psi:\mathbb E_\psi\subset D[0,\tau]\to D[0,\tau]$ defined by $\psi(A)=F_A$ is Hadamard differentiable.
+:::
+
+**Proof roadmap.**
+
+For part 1, decompose the cumulative-hazard map into subtraction, inversion away from zero, and bounded-variation integration. For part 2, specialize the compact differentiability theorem for product integrals on a fixed variation-bounded set. Every admissible Hadamard path through $A$ lies in one such set, so the cited theorem applies without imposing an extra restriction on jump sizes.
+
+<details><summary>Complete proof of part 1 and precise reduction of part 2</summary>
+
+**Part 1.** Use the decomposition printed in the source:
+
+$$
+F
+\longmapsto(F,1-F_-)
+\longmapsto\left(F,\frac1{1-F_-}\right)
+\longmapsto
+\left[t\mapsto\int_{[0,t]}\frac1{1-F_-}\,dF\right].
+$$
+
+The first map is continuous and linear. Because $1-F_-$ is bounded below by $\epsilon$, inversion is Hadamard differentiable, and its derivative in direction $h$ is
+
+$$
+h\longmapsto\frac{h_-}{(1-F_-)^2}.
+$$
+
+The indefinite-integral assertion in [Lemma 20.10](#lemma-20-10) handles the final map. The chain rule therefore gives
+
+$$
+\dot A_F(h)(t)
+=\int_{[0,t]}\frac1{1-F_-}\,dh
++\int_{[0,t]}\frac{h_-}{(1-F_-)^2}\,dF.
+\tag{20.14.1}
+$$
+
+The first Stieltjes integral is interpreted by integration by parts, making (20.14.1) continuous in $h$ under the uniform norm.
+
+**Derivation in these notes.**
+
+**Part 2: source-deferred reduction.** Van der Vaart refers to the product-integral literature rather than printing this proof. The needed result is [@gillJohansen1990, Theorem 8]. In scalar notation, let
+
+$$
+\mathcal P(\alpha)(s,t)
+=\prod_{s<u\leq t}\{1+\alpha\{u\}\}
+\exp\{\alpha^c(t)-\alpha^c(s)\}.
+$$
+
+On every set of additive interval functions with total variation bounded by a fixed constant, Gill and Johansen prove that $\mathcal P$ is Hadamard differentiable in the supremum norm, with derivative
+
+$$
+d\mathcal P_\alpha(k)(s,t)
+=\int_{(s,t]}
+\mathcal P(\alpha)(s,u-)\,dk(u)\,
+\mathcal P(\alpha)(u,t).
+\tag{20.14.2}
+$$
+
+The integral with respect to the possibly non-bounded-variation direction $k$ is defined by their integration-by-parts construction.
+
+Apply (20.14.2) with $\alpha=-A$ and $k=-h$. If $A_t=A+th_t\in\mathbb E_\psi$ and $h_t\to h$ uniformly, then $A_t(\tau)\to A(\tau)$; since every $A_t$ is nondecreasing with $A_t(0)=0$, the variations of $A_t$ are uniformly bounded. Thus the entire path lies eventually in one fixed variation-bounded set, exactly the domain required by the cited theorem.
+
+Writing
+
+$$
+S_A(s,t)=\mathcal P(-A)(s,t),
+\qquad S_A(t)=S_A(0,t)=1-F_A(t),
+$$
+
+the continuous endpoint map $\mu\mapsto\{t\mapsto\mu(0,t)\}$ and (20.14.2) give
+
+$$
+\dot S_A(h)(t)
+=-\int_{(0,t]}S_A(0,u-)S_A(u,t)\,dh(u).
+$$
+
+Finally, $F_A=1-S_A$, so
+
+$$
+\dot F_A(h)(t)
+=\int_{(0,t]}S_A(0,u-)S_A(u,t)\,dh(u).
+\tag{20.14.3}
+$$
+
+This proves part 2 as a direct corollary of the cited product-integral theorem. It does not claim to reprove Gill and Johansen's differentiability bound inside these notes.
+
+</details>
+
+The lemma's source domain does not add an "all jumps below one" hypothesis. Product-integral differentiability on the stated bounded-variation paths already covers the map in (20.13); adding a jump restriction would change the printed result.
+
+::: {.callout-tip title="Example"}
+### Example 20.15: Nelson--Aalen estimator {#example-20-15}
+
+Under independent right censoring, let failure time $T\sim F$, censoring time $C\sim G$, and observe
+
+$$
+X=T\wedge C,
+\qquad
+\Delta=\mathbf1\{T\leq C\}.
+$$
+
+Define
+
+$$
+H(x)=P(X\leq x),
+\qquad
+H_1(x)=P(X\leq x,\Delta=1).
+$$
+
+Then
+
+$$
+1-H=(1-F)(1-G),
+\qquad
+dH_1=(1-G_-)\,dF,
+$$
+
+and hence
+
+$$
+A(t)
+=\int_{[0,t]}\frac1{1-F_-}\,dF
+=\int_{[0,t]}\frac1{1-H_-}\,dH_1.
+\tag{20.15.1}
+$$
+
+For empirical subdistribution functions
+
+$$
+\mathbb H_n(x)=\frac1n\sum_{i=1}^n\mathbf1\{X_i\leq x\},
+\qquad
+\mathbb H_{1n}(x)=\frac1n\sum_{i=1}^n
+\mathbf1\{X_i\leq x,\Delta_i=1\},
+$$
+
+substitution into (20.15.1) gives the Nelson--Aalen estimator
+
+$$
+\widehat A_n(t)
+=\int_{[0,t]}\frac1{1-\mathbb H_{n-}}\,d\mathbb H_{1n}.
+$$
+:::
+
+**Proof roadmap.**
+
+Independence identifies the observed subdistributions and rewrites the failure hazard using only observed quantities. A bivariate empirical-process limit and Lemma 20.10 give the Nelson--Aalen process limit. Lemma 20.14 then transfers that limit through the product integral to Kaplan--Meier.
+
+<details><summary>Complete calculation</summary>
+
+For every $x$,
+
+$$
+P(X>x)=P(T>x,C>x)=\{1-F(x)\}\{1-G(x)\},
+$$
+
+which gives the first identity in (20.15.1). Moreover, under the convention $\Delta=\mathbf1\{T\leq C\}$,
+
+$$
+\begin{aligned}
+H_1(x)
+&=P(T\leq x,T\leq C)\\
+&=\int_{[0,x]}P(C\geq t)\,dF(t)\\
+&=\int_{[0,x]}\{1-G(t-)\}\,dF(t).
+\end{aligned}
+$$
+
+Thus $dH_1=(1-G_-)dF$. Since
+
+$$
+1-H_-=(1-F_-)(1-G_-),
+$$
+
+the factors $1-G_-$ cancel and yield the second representation of $A$ in (20.15.1).
+
+The pair $(\mathbb H_n,\mathbb H_{1n})$ is a continuous finite-coordinate transformation of the empirical distribution of $(X,\Delta)$ and has a joint Gaussian process limit, say
+
+$$
+\sqrt n(\mathbb H_n-H,\mathbb H_{1n}-H_1)
+\rightsquigarrow(\mathbb G_H,\mathbb G_{H_1}).
+$$
+
+On $[0,\tau]$ with $H(\tau)<1$, the map
+
+$$
+\Gamma(H,H_1)(t)
+=\int_{[0,t]}\frac1{1-H_-}\,dH_1
+$$
+
+is Hadamard differentiable. Lemma 20.10 and the chain rule give
+
+$$
+\dot\Gamma_{(H,H_1)}(h,h_1)(t)
+=\int_{[0,t]}\frac1{1-H_-}\,dh_1
++\int_{[0,t]}\frac{h_-}{(1-H_-)^2}\,dH_1.
+\tag{20.15.2}
+$$
+
+Therefore Theorem 20.8 yields
+
+$$
+\sqrt n(\widehat A_n-A)
+\rightsquigarrow
+\dot\Gamma_{(H,H_1)}(\mathbb G_H,\mathbb G_{H_1})
+$$
+
+in $D[0,\tau]$.
+
+Apply the product integral in (20.13) to $\widehat A_n$. Since $\widehat A_n$ is purely discontinuous,
+
+$$
+1-\widehat F_n(t)
+=\prod_{0<s\leq t}\{1-\widehat A_n\{s\}\}.
+$$
+
+Lemma 20.14(ii), Theorem 20.8, and the chain rule transfer the Gaussian limit of $\widehat A_n$ to the Kaplan--Meier estimator $\widehat F_n$.
+
+</details>
+
+::: {.callout-warning title="Failure-censoring ties and grouped event-time ties"}
+
+The convention $T\leq C$ assigns a failure-censoring tie to $\Delta=1$, which is why $1-G_-$ appears in $dH_1$. At an observed time $s$, let
+
+$$
+d_n(s)=\#\{i:X_i=s,\Delta_i=1\},
+\qquad
+Y_n(s)=\#\{i:X_i\geq s\}.
+$$
+
+Then
+
+$$
+\widehat A_n\{s\}=\frac{d_n(s)}{Y_n(s)},
+\qquad
+1-\widehat F_n(t)
+=\prod_{s\leq t}\left\{1-\frac{d_n(s)}{Y_n(s)}\right\}.
+$$
+
+Grouping all failures at the same time gives the correct product-limit factor when observed event times are tied.
+
+:::
+
+[Example 25.51](chapter-25.qmd#example-25-51) adds the efficiency conclusion: the empirical subdistributions are efficient, and these Hadamard-differentiable transformations preserve that efficiency. [§25.10](chapter-25.qmd#sec-25-10-random-censoring) gives the complementary likelihood derivation of the same grouped product-limit formula.
+
+## Chapter takeaway {.unnumbered}
+
+The reusable chain is
+
+$$
+\text{empirical-process limit}
+\longrightarrow
+\text{Hadamard derivative}
+\longrightarrow
+\text{transformed limit and influence function}.
+$$
+
+Chapter 25 uses this chain after first identifying the efficient derivative representative. The analytic delta method transforms the limit; semiparametric geometry determines whether that limit is efficient.

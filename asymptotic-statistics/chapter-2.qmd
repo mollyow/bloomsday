@@ -1,205 +1,546 @@
 # Chapter 2: Stochastic Convergence {#sec-convergence}
 
+Stochastic convergence is the language for separating a stable first-order limit from terms that vanish asymptotically. This chapter develops the parts of van der Vaart's Chapter 2 that are used repeatedly on the route to semiparametric efficiency.
+
+::: {.callout-tip title="Why this chapter is here"}
+- **Prerequisites:** elementary probability, expectations, and ordinary convergence of deterministic sequences.
+- **Purpose:** move limits through transformations, combine weak and probability limits, and control stochastic remainders.
+- **Chapter 25 payoff:** the same tools justify the asymptotically linear representations and negligible remainders used in [Lemma 25.23](chapter-25.qmd#lemma-25-23). Before then, they support [contiguity](chapter-6.qmd#sec-contiguity), [LAN expansions](chapter-7.qmd#theorem-lan-iid), and function-valued convergence in [Chapters 18](chapter-18.qmd#theorem-weak-convergence-processes) and [19](chapter-19.qmd#donsker-classes).
+:::
+
+::: {.callout-note title="Companion readings"}
+
+For a systematic review of convergence and stochastic order, see [@jiang2022, §§2.1–2.7 and §3.4]. For a compact treatment centered on weak convergence, see [@dasgupta2008, §1.1].
+
+:::
+
+::: {.callout-note title="Reading guide"}
+
+The route through van der Vaart's chapter is deliberately selective.
+
+- **Core:** §2.1 through Lemma 2.8 supplies Portmanteau, continuous mapping, the Euclidean Prohorov–Helly compactness step, relations among convergence modes, and Slutsky's lemma.
+- **Core:** §2.2 supplies the stochastic $o_P/O_P$ calculus and Lemma 2.12, which converts deterministic remainder bounds into stochastic ones.
+- **Illustration:** Example 2.9 shows how weak convergence and a random normalizer combine in a $t$ statistic.
+- **Deferred:** Example 2.10 and Lemma 2.11, characteristic functions, almost-sure representations, moment convergence, convergence-determining classes, the law of the iterated logarithm, Lindeberg--Feller theory, and total variation are not needed for the direct route to Chapter 25. [Chapter 18](chapter-18.qmd#sec-tightness) generalizes Prohorov's theorem and tightness to metric spaces.
+
+:::
+
 ## 2.1 Basic Theory
 
-Convergences:
+For random vectors in $\mathbb R^k$:
 
-- **convergence in distribution/weak convergence/convergence in law**
-$X_n \rightsquigarrow X$ iff :
-$\text{P}(X_n \leq x) \rightarrow \text{P}(X\leq x)$ for every **x** at which the limit distribution function $x \mapsto \text{P}(X\le x)$ is continuous
-- **convergence in probability**
-$X_n \overset{\text{P}}{\to} X$ iff :
-$\text{P}(d(X_n, X) > \epsilon) \to 0$
-Equivalently, $d(X_n, X) \overset{\text{P}}{\to} 0$
-- **almost sure convergence**
-$X_n \overset{\text{a.s.}}{\to}X$ iff $\text{P}(\lim_{n\to\infty} d(X_n,X)=0)=1$.
+- **Convergence in distribution**, also called weak convergence or convergence in law, is written $X_n\rightsquigarrow X$. It means
 
-Convergence in probability and almost-sure convergence require $X_n$ and $X$ to be defined on the same probability space; convergence in distribution does not.
+  $$
+  P(X_n\leq x)\to P(X\leq x)
+  $$
 
-![Relationships among modes of convergence](images/chapter-2-figure-1.png)
+  at every continuity point of the distribution function of $X$.
+- **Convergence in probability** is written $X_n\overset P\to X$. It means
+
+  $$
+  P\{d(X_n,X)>\epsilon\}\to0
+  $$
+
+  for every $\epsilon>0$.
+- **Almost-sure convergence** is written $X_n\overset{\mathrm{a.s.}}\longrightarrow X$. It means $d(X_n,X)\to0$ with probability one.
+
+Convergence in probability and almost-sure convergence require $X_n$ and $X$ to live on the same probability space. Weak convergence depends only on their laws.
+
+::: {#twofig-ch2-convergence-map}
+
+![](images/generated/chapter-2-convergence-map.svg){fig-alt="A diagram shows almost-sure convergence implying convergence in probability, which implies convergence in distribution. L1 convergence also implies convergence in probability. A separate note states that every subsequence has a further subsequence converging almost surely to X, and uniform integrability provides a route from convergence in probability to L1."}
+
+The main implications among modes of stochastic convergence. The extra moment conditions shown in the diagram are not part of the route developed in this chapter.
+
+:::
 
 ::: {.callout-important title="Lemma"}
-### 2.2 Lemma (Portmanteau) {#lemma-portmanteau}
+### Lemma 2.2: Portmanteau {#lemma-portmanteau}
 
-Let $X_n$ and $X$ be random elements in a metric space, here random vectors in $\mathbb R^k$. The following are equivalent:
+For random vectors $X_n$ and $X$, the following statements are equivalent:
 
-- (i) $\text{P}(X_n \leq x) \rightarrow \text{P}(X\leq x)$ for all continuity points of $x \mapsto P(X\le x)$
-- (ii) $\text{E}f(X_n) \to \text{E}f(X)$ for all bounded continuous functions $f$.
-- (iii) $\text{E}f(X_n) \to \text{E}f(X)$ for all bounded, Lipschitz$^*$, functions $f$
-- (iv) $\liminf_{n\to\infty}\text{E}f(X_n) \ge \text{E}f(X)$ for all nonnegative, continuous functions $f$.
-- (v) $\liminf_{n\to\infty}\text{P}(X_n\in G)\geq \text{P}(X\in G)$ for every open set $G$.
-- (vi) $\limsup_{n\to\infty}\text{P}(X_n\in F)\leq \text{P}(X\in F)$ for every closed set $F$.
-- (vii) $\text{P}(X_n\in B)\to\text{P}(X\in B)$ for every Borel set $B$ such that $\text{P}(X\in\partial B)=0$.
+1. $P(X_n\leq x)\to P(X\leq x)$ at every continuity point of $x\mapsto P(X\leq x)$;
+2. $Ef(X_n)\to Ef(X)$ for every bounded continuous function $f$;
+3. $Ef(X_n)\to Ef(X)$ for every bounded Lipschitz function $f$;
+4. $\liminf_n Ef(X_n)\geq Ef(X)$ for every nonnegative continuous function $f$;
+5. $\liminf_nP(X_n\in G)\geq P(X\in G)$ for every open set $G$;
+6. $\limsup_nP(X_n\in F)\leq P(X\in F)$ for every closed set $F$; and
+7. $P(X_n\in B)\to P(X\in B)$ for every Borel set $B$ with $P(X\in\partial B)=0$.
 :::
 
-Working through the proofs :
+**Proof roadmap.**
 
-(i) this is the definition we started with.
+Approximate a bounded continuous function by step functions on continuity rectangles to obtain (1) $\Rightarrow$ (2). The remaining implications pass between test functions and sets: Lipschitz approximations approach indicators of open sets, complements exchange open and closed sets, and the interior and closure squeeze continuity sets. Truncation supplies the equivalence of (2) and (4).
 
-(i) $\to$ (ii) reframe this as indicator functions over rectangles; this is basically starting to move us into the orientation of taking expectations over indicator functions
+<details>
+<summary>Complete proof</summary>
+
+**(1) $\Rightarrow$ (2).** First suppose the distribution function of $X$ is continuous. Choose a compact rectangle $I$ with $P(X\notin I)<\epsilon$. Partition $I$ into finitely many rectangles $I_j$ so finely that a bounded continuous $f$, rescaled if necessary to have $|f|\leq1$, varies by at most $\epsilon$ on each cell. With $x_j\in I_j$, set
 
 $$
-1_A(x)=\begin{cases}1, & \text{if } x \in A,\\0, & \text{if } x \in A^c.\end{cases}
+f_\epsilon=\sum_j f(x_j)\mathbf 1_{I_j}.
 $$
 
-(iii) $\to$(v):
+Condition (1) gives $P(X_n\in I_j)\to P(X\in I_j)$, so $Ef_\epsilon(X_n)\to Ef_\epsilon(X)$. Tightness of the single vector $X$, together with convergence on $I$, gives $P(X_n\notin I)<2\epsilon$ eventually. The two step-function approximation errors are therefore uniformly small, and $Ef(X_n)\to Ef(X)$.
 
-For an open set $G$, we define Lipschitz functions with $0 \le f_m \uparrow 1_G$.
+For a general distribution, use rectangles whose faces have zero $X$-probability. For each coordinate, only countably many levels can have positive probability, so such rectangle endpoints form a dense set. The same step-function argument then applies.
 
-E.g., $f_m(x) = m d(x, G^C) \wedge 1$
+**(2) $\Rightarrow$ (3).** Every bounded Lipschitz function is bounded and continuous.
 
-$^*$ for (iii) why does it matter that the function is Lipschitz? We think primarily to drive this kind of example
+**(3) $\Rightarrow$ (5).** For open $G$, define
 
-For all x $f_m(x)$ is going to be 0 if x is outside of $G$, in $G^C$, and then if it’s inside of $G$, it’s going to be the minimum of the scaled distance from $x$ to $G^C$ and 1. So:
+$$
+f_m(x)=m\,d(x,G^c)\wedge1.
+$$
 
-$0 \le f_m(x) \le 1_G(x)$.
+Then $f_m$ is bounded and Lipschitz, $0\leq f_m\leq\mathbf1_G$, and $f_m\uparrow\mathbf1_G$. Hence, for every fixed $m$,
 
-Then, for every fixed $m$,
+$$
+\liminf_nP(X_n\in G)
+\geq\lim_nEf_m(X_n)
+=Ef_m(X).
+$$
 
-$\underset{n \to \infty}{\liminf}  \text{P} (X_n \in G) \ge \underset{n \to \infty}{\liminf} \text{E} f_m (X_n)= \text{E}f_m(X).$
+Letting $m\to\infty$ and using monotone convergence gives (5).
 
-- The first inequality is true because we’ve chosen the function so that for all $x$, it’s less than or equal to the indicator function.
-- The equality on the right-hand side holds because we said $X_n\rightsquigarrow X$ and our function is bounded and continuous so this holds by (ii). This then is equivalent to $\text{P}(X\in G)$ by the monotone convergence theorem, i.e., we can take the limit inside the expectation.
+**(5) $\Leftrightarrow$ (6).** Take complements, since a set is open exactly when its complement is closed.
+
+**(5) and (6) $\Rightarrow$ (7).** For any Borel set $B$,
+
+$$
+P(X\in B^\circ)
+\leq\liminf_nP(X_n\in B)
+\leq\limsup_nP(X_n\in B)
+\leq P(X\in\overline B).
+$$
+
+If $P(X\in\partial B)=0$, the outside probabilities agree, proving (7).
+
+**(7) $\Rightarrow$ (1).** If $x$ is a continuity point of the distribution function, the lower orthant $(-\infty,x]$ has boundary of $X$-probability zero. Apply (7).
+
+It remains to connect (2) and (4). **(2) $\Rightarrow$ (4):** for nonnegative continuous $f$, each $f\wedge M$ is bounded and continuous, so
+
+$$
+\liminf_nEf(X_n)\geq E\{f(X)\wedge M\}.
+$$
+
+Let $M\to\infty$. **(4) $\Rightarrow$ (2):** if $|f|\leq M$, apply (4) to the two nonnegative continuous functions $M+f$ and $M-f$. The first bounds the limiting expectation from below and the second bounds it from above. Thus $Ef(X_n)\to Ef(X)$.
+
+The source leaves this last equivalence as an exercise; the truncation argument above completes it here.
+
+</details>
+
+Portmanteau allows a proof to switch to whichever characterization best matches the problem. The open-set form is central in weak-convergence arguments; the test-function form drives the change-of-measure result in [Theorem 6.6](chapter-6.qmd#theorem-change-of-measure).
 
 ::: {.callout-note title="Theorem"}
-### Monotone convergence theorem for integrals
+### Theorem 2.3: Continuous mapping {#theorem-continuous-mapping}
 
-Let $(f_m)_{m\in\mathbb{N}}$ be a sequence of measurable functions such that  $0 \leq f_1(x) \leq f_2(x) \leq \cdots$ and $f_m(x) \to f(x)$ for every $x$. Then
+Let $g:\mathbb R^k\to\mathbb R^m$ be continuous at every point of a set $C$ such that $P(X\in C)=1$. Then:
 
-$$
-\lim_{m\to\infty}\int f_m\,d\mu
-=
-\int \lim_{m\to\infty}f_m\,d\mu
-=
-\int f\,d\mu.
-$$
-
-Equivalently, for random variables,
-
-$$
-0 \leq Y_n \uparrow Y
-\quad \Longrightarrow \quad
-\lim_{n\to\infty}\text{E}[Y_n]=\text{E}[Y].
-$$
-
+1. if $X_n\rightsquigarrow X$, then $g(X_n)\rightsquigarrow g(X)$;
+2. if $X_n\overset P\to X$, then $g(X_n)\overset P\to g(X)$; and
+3. if $X_n\overset{\mathrm{a.s.}}\longrightarrow X$, then $g(X_n)\overset{\mathrm{a.s.}}\longrightarrow g(X)$.
 :::
 
-- (v) $\to$(vi) similar to the above, follows by complements
-- (v) + (vi) $\to$ (vii) Basically we approach the open and closed sets from opposite directions; as we close in, the inequalities become equalities.
-    - UGMTP: “Theorems that work for lim sups of sequences of functions automatically carry over to theorems about sets”
+**Proof roadmap.**
+
+For weak convergence, pull a closed set back through $g$ and apply Portmanteau. For convergence in probability, separate failure of continuity near the random limit from failure of $X_n$ to approach $X$. The almost-sure statement then follows pointwise.
+
+<details>
+<summary>Complete proof</summary>
+
+For a closed set $F$, continuity of $g$ on $C$ implies
+
+$$
+g^{-1}(F)
+\subseteq\overline{g^{-1}(F)}
+\subseteq g^{-1}(F)\cup C^c.
+$$
+
+Indeed, if $x_j\to x\in C$ and $g(x_j)\in F$, then $g(x_j)\to g(x)$ and closedness gives $g(x)\in F$. If $X_n\rightsquigarrow X$, Portmanteau therefore yields
+
+$$
+\begin{aligned}
+\limsup_nP\{g(X_n)\in F\}
+&\leq \limsup_nP\{X_n\in\overline{g^{-1}(F)}\}\\
+&\leq P\{X\in\overline{g^{-1}(F)}\}\\
+&\leq P\{g(X)\in F\}+P(X\notin C)\\
+&=P\{g(X)\in F\}.
+\end{aligned}
+$$
+
+Another application of Portmanteau proves the weak-convergence claim.
+
+For convergence in probability, fix $\epsilon>0$. For $\delta>0$, let $B_\delta$ contain those $x$ for which some $y$ satisfies $d(x,y)<\delta$ but $d\{g(x),g(y)\}>\epsilon$. Then
+
+$$
+P\bigl[d\{g(X_n),g(X)\}>\epsilon\bigr]
+\leq P(X\in B_\delta)+P\{d(X_n,X)\geq\delta\}.
+$$
+
+For fixed $\delta$, the second term tends to zero. As $\delta\downarrow0$, the sets $B_\delta\cap C$ decrease to the empty set by continuity, while $P(X\in C)=1$; hence the first term tends to zero. This proves convergence in probability.
+
+Finally, on the probability-one event where $X_n\to X$ and $X\in C$, ordinary continuity gives $g(X_n)\to g(X)$. This proves the almost-sure claim.
+
+</details>
+
+The theorem passes a known limit through a statistic. Its discontinuity caveat is substantive: if $X_n=1/n$, $X=0$, and $g(x)=\mathbf1\{x>0\}$, then $X_n\to0$ but $g(X_n)=1\not\to g(0)=0$.
+
+### Tightness and subsequences
+
+A sequence of random vectors is **uniformly tight** if, for every $\varepsilon>0$, there is an $M<\infty$ such that
+
+$$
+\sup_nP(\|X_n\|>M)<\varepsilon.
+\tag{2.4-tightness}
+$$
+
+Thus all laws place arbitrarily high probability in one common compact ball. In Euclidean spaces this is equivalent to boundedness in probability. The source spells the next result *Prohorov's theorem*; *Prokhorov* is another common transliteration.
 
 ::: {.callout-note title="Theorem"}
-### 2.3 Theorem (Continuous mapping theorem) {#theorem-continuous-mapping}
-
-This is what gives us convergence of statistics.
-
-Let $g:\mathbb{R}^k\to\mathbb{R}^m$ be continuous at every point of a set $C$ such that $\text{P}(X\in C)=1.$
-
-Then:
-
-- If $X_n\rightsquigarrow X$, then $g(X_n)\rightsquigarrow g(X)$.
-- If $X_n\overset{\text{P}}{\to}X$, then $g(X_n)\overset{\text{P}}{\to}g(X)$.
-- If $X_n\overset{\text{a.s.}}{\to}X$, then $g(X_n)\overset{\text{a.s.}}{\to}g(X)$.
-
-I.e., if $X_n$ gets close to $X$, and $g$ is continuous where $X$ takes values, then $g(X_n)$ gets close to $g(X)$ in the same kind of convergence.
-
-:::
-
-- Continuity means that small changes in the input produce small changes in the output: $x_n\to x \quad\Longrightarrow\quad g(x_n)\to g(x)$.
-Without continuity, $X_n$ can approach $X$, while $g(X_n)$ fails to approach $g(X)$ (trees vs. forests)
-    - Counter-example: let $X_n=\frac{1}{n},\  X=0$, and $g(x)=1_{\{x>0\}}$. Then $X_n\to 0$, but $g(X_n)=1$ for every $n$, while $g(X)=0$. The problem is that $g$ is discontinuous at 0.
-
-If $X_n\overset{\text{P}}{\to}X$, then for continuous operations:
-
-- $X_n^2\overset{\text{P}}{\to}X^2$,
-- $\exp(X_n)\overset{\text{P}}{\to}\exp(X)$,
-- and, if $X\neq 0$ with probability one, $\frac{1}{X_n}\overset{\text{P}}{\to}\frac{1}{X}$.
-
-**Proof.**
-
-(i) By the Portmanteau lemma, it is enough to show that for every closed set $F,$ we have $\limsup_{n\to\infty} \text{P}\bigl(g(X_n)\in F\bigr) \leq \text{P}\bigl(g(X)\in F\bigr).$
-
-- ${g(X_n)\in F}$ and ${X_n\in g^{-1}(F)}$ are identical by the definition of a pre-image. But we don’t assume $g^{-1}(F)$ is closed/that the function is continuous everywhere.
-- Instead, use $g^{-1}(F) \subseteq \overline{g^{-1}(F)} \subseteq g^{-1}(F)\cup C^c.$
-    - For the second inclusion, take $x\in\overline{g^{-1}(F)}.$ By the definition of closure, there is a sequence $x_m\to x$ such that $g(x_m)\in F$ for every $m.$ There are two possibilities.
-        - If $x\in C,$ then continuity gives $g(x_m)\to g(x).$ Because $F$ is closed, this implies $g(x)\in F.$ Therefore, $x\in g^{-1}(F).$
-        - If$x\notin C,$ then$x\in C^c.$ Thus every point in the closure belongs either to the pre-image or to the set where continuity is not assumed.
-- Then apply the closed-set condition from the Portmanteau lemma:
-$\begin{aligned} \limsup_{n\to\infty} \text{P}\bigl(g(X_n)\in F\bigr) &= \limsup_{n\to\infty} \text{P}\bigl(X_n\in g^{-1}(F)\bigr)\\ &\leq \limsup_{n\to\infty} \text{P}\bigl(X_n\in\overline{g^{-1}(F)}\bigr)\\ &\leq \text{P}\bigl(X\in\overline{g^{-1}(F)}\bigr)\\ &\leq \text{P}\bigl(X\in g^{-1}(F)\cup C^c\bigr). \end{aligned}$
-- Because $\text{P}(X\in C^c)=0,$ the last expression equals $\text{P}\bigl(X\in g^{-1}(F)\bigr).$
-By the definition of a pre-image, $\text{P}\bigl(X\in g^{-1}(F)\bigr)= \text{P}\bigl(g(X)\in F\bigr).$
-Therefore, $\limsup_{n\to\infty} \text{P}\bigl(g(X_n)\in F\bigr) \leq \text{P}\bigl(g(X)\in F\bigr).$
-By the Portmanteau lemma, $g(X_n)\rightsquigarrow g(X).$
-
-(ii) Convergence in probability
-
-- Fix $\epsilon>0.$
-For each $\delta>0,$ define $B_\delta = \{ x: \text{there exists }y\text{ such that } d(x,y)<\delta \text{ and } d\bigl(g(x),g(y)\bigr)>\epsilon \}.$
-This is the set of points around which the function can change by more than $\epsilon$ even when the input changes by less than $\delta.$
-- Suppose $X\notin B_\delta$ but $d\bigl(g(X_n),g(X)\bigr)>\epsilon.$
-Because $X\notin B_\delta,$ the inputs cannot be within $\delta$ of one another.
-Therefore, $d(X_n,X)\geq\delta.$ This gives the probability bound: $\text{P}\left( d\bigl(g(X_n),g(X)\bigr)>\epsilon \right) \leq \text{P}(X\in B_\delta) + \text{P}\bigl(d(X_n,X)\geq\delta\bigr).$
-- Consider the two terms separately.
-For every fixed positive value of $\delta,$ we have $\text{P}\bigl(d(X_n,X)\geq\delta\bigr)\to0$ because $X_n\overset{\text{P}}{\to}X.$
-Also, as $\delta\downarrow0,$ continuity implies $B_\delta\cap C\downarrow\varnothing.$
-Since $\text{P}(X\in C)=1,$ then $\text{P}(X\in B_\delta)\to0.$
-So both terms on the right can be made arbitrarily small.
-- Therefore, $\text{P}\left( d\bigl(g(X_n),g(X)\bigr)>\epsilon \right)\to0.$ So, $g(X_n)\overset{\text{P}}{\to}g(X).$
-
-(iii) Almost-sure convergence
-
-- Suppose $X_n\overset{\text{a.s.}}{\to}X.$ Then, with probability one, $X_n\to X.$ Also, with probability one, $X\in C.$
-- Because the function is continuous at every point in $C,$ ordinary continuity gives $g(X_n)\to g(X)$ with probability one.
-- Therefore,$g(X_n)\overset{\text{a.s.}}{\to}g(X).$
-
-::: {.callout-note title="Theorem"}
-### 2.4 Theorem (Prokhorov’s theorem)
+### Theorem 2.4: Prohorov's theorem {#theorem-2-4}
 
 Let $X_n$ be random vectors in $\mathbb R^k$.
 
-1. If $X_n \rightsquigarrow X$ for some $X$, then $\{X_n:n\in\mathbb N\}$ is uniformly tight.
-2. If $X_n$ is uniformly tight, then there exists a subsequence with $X_{n_j} \rightsquigarrow X$ as $j \to \infty$ for some $X$.
+1. If $X_n\rightsquigarrow X$, then $(X_n)$ is uniformly tight.
+2. If $(X_n)$ is uniformly tight, then some subsequence $X_{n_j}$ converges weakly to a random vector $X$.
+
 :::
+
+**Proof roadmap.** Portmanteau puts a weakly convergent sequence inside one large ball. Conversely, Helly's lemma extracts a subsequential limit of the distribution functions; uniform tightness prevents that limit from losing probability mass at infinity.
+
+<details>
+<summary>Complete proof</summary>
+
+**Part 1.** Fix $\varepsilon>0$. Choose $M$ so large that
+
+$$
+P(\|X\|\geq M)<\varepsilon.
+$$
+
+The set $\{x:\|x\|\geq M\}$ is closed, so Portmanteau gives
+
+$$
+\limsup_{n\to\infty}P(\|X_n\|\geq M)
+\leq P(\|X\|\geq M)<\varepsilon.
+$$
+
+Hence the same tail probability is below $2\varepsilon$ for all sufficiently large $n$. Each of the finitely many remaining random vectors is tight; enlarging $M$ once more makes their tail probabilities smaller than $2\varepsilon$ as well. Since $\varepsilon$ was arbitrary, the sequence is uniformly tight.
+
+**Part 2.** Let $F_n$ be the distribution function of $X_n$. [Lemma 2.5](#lemma-2-5) supplies a subsequence $F_{n_j}$ converging at continuity points to a possibly defective distribution function $F$. It remains to show that $F$ has total mass one.
+
+Fix $\varepsilon>0$. Uniform tightness gives $M$ such that
+
+$$
+P(\|X_n\|\leq M)>1-\varepsilon
+\quad\text{for every }n.
+$$
+
+Choose a continuity point $x_M$ of $F$ whose every coordinate exceeds $M$; continuity points of a multivariate distribution function are dense from above. Then
+
+$$
+F(x_M)
+=\lim_{j\to\infty}F_{n_j}(x_M)
+\geq1-\varepsilon.
+$$
+
+Letting $M\to\infty$ and then $\varepsilon\downarrow0$ shows that $F(x)\to1$ as every coordinate of $x$ tends to $+\infty$. The same tightness bound applied to the event that any coordinate is below $-M$ shows that $F(x)\to0$ when any coordinate tends to $-\infty$. Thus $F$ is a proper distribution function. It is therefore the distribution function of some random vector $X$, and convergence at all continuity points gives $X_{n_j}\rightsquigarrow X$.
+
+</details>
 
 ::: {.callout-important title="Lemma"}
-### 2.5 Lemma (Helly’s lemma)
+### Lemma 2.5: Helly's lemma {#lemma-2-5}
 
-Each given sequence $F_n$ of cumulative distribution functions on $\mathbb R^k$ possesses a subsequence $F_n,$ with the property that $F_{n_j} (x) \to F(x)$ at each continuity point $x$ of a possibly defective distribution function $F$.
+Every sequence $F_n$ of distribution functions on $\mathbb R^k$ has a subsequence $F_{n_j}$ such that
+
+$$
+F_{n_j}(x)\longrightarrow F(x)
+$$
+
+at every continuity point $x$ of a possibly defective distribution function $F$.
 
 :::
 
-::: {.callout-tip title="Example"}
-### 2.6 Example (Markov’s inequality)
+**Proof roadmap.** Diagonalize over the rational grid, extend the rational limits by right-continuity, prove convergence by rational squeezing, and pass nonnegative cell probabilities to the limit.
 
-A sequence $X_n$ of random variables with $\text E {|X_n|}^p = O(1)$ for some $p>0$ is uniformly tight. This follows because, by Markov’s inequality,
+<details>
+<summary>Complete proof</summary>
+
+Enumerate $\mathbb Q^k$ as $q_1,q_2,\ldots$. Since $0\leq F_n(q_1)\leq1$, choose a subsequence on which $F_n(q_1)$ converges. From it choose a further subsequence on which $F_n(q_2)$ converges, and continue. The diagonal subsequence, still denoted $F_{n_j}$, then satisfies
 
 $$
-P(|X_n|>M)\leq \frac{E|X_n|^p}{M^p}=O(M^{-p})\to0\qquad(M\to\infty).
+F_{n_j}(q)\longrightarrow G(q)
+\qquad\text{for every }q\in\mathbb Q^k.
 $$
 
-:::
+Each $F_n$ is coordinatewise nondecreasing, so $G(q)\leq G(q')$ whenever $q\leq q'$ coordinatewise. Define
+
+$$
+F(x)=\inf_{\substack{q\in\mathbb Q^k\\q>x}}G(q),
+\tag{2.5-extension}
+$$
+
+where $q>x$ means strict inequality in every coordinate. This definition makes $F$ coordinatewise nondecreasing. It is right-continuous: given $\varepsilon>0$, choose rational $q>x$ with $G(q)<F(x)+\varepsilon$. Whenever $x\leq y<q$ coordinatewise,
+
+$$
+F(x)\leq F(y)\leq G(q)<F(x)+\varepsilon.
+$$
+
+Now let $x$ be a continuity point of $F$. Rational points $q<x<q'$ can be chosen sufficiently close to $x$ that
+
+$$
+G(q')-G(q)<\varepsilon.
+$$
+
+Monotonicity gives
+
+$$
+F_{n_j}(q)\leq F_{n_j}(x)\leq F_{n_j}(q').
+$$
+
+After taking lower and upper limits in $j$,
+
+$$
+G(q)\leq\liminf_jF_{n_j}(x)
+\leq\limsup_jF_{n_j}(x)\leq G(q').
+$$
+
+The definition of $F$ and the continuity of $F$ at $x$ place $F(x)$ between the same two bounds. Since their gap is smaller than $\varepsilon$, and $\varepsilon$ is arbitrary, $F_{n_j}(x)\to F(x)$.
+
+For $k=1$, monotonicity and right-continuity are all the finite-point requirements for a possibly defective distribution function. In higher dimensions one must also verify that every half-open rectangle has nonnegative $F$-mass. If all $2^k$ corners of a rectangle are continuity points, its alternating corner sum is the limit of the corresponding nonnegative corner sums for $F_{n_j}$ and is therefore nonnegative. For an arbitrary rectangle, move each face downward through continuity points and use right-continuity. Hence $F$ is $k$-increasing and so is a possibly defective distribution function.
+
+</details>
+
+Example 2.6 gives a quick sufficient condition for (2.4-tightness): if $\sup_nE\|X_n\|^p<\infty$ for some $p>0$, then Markov's inequality yields
+
+$$
+\sup_nP(\|X_n\|>M)
+\leq M^{-p}\sup_nE\|X_n\|^p
+\longrightarrow0.
+$$
+
+The compactness step reappears in [Chapter 18](chapter-18.qmd#sec-tightness), where closed balls need not be compact and tightness must be formulated with general compact sets.
 
 ::: {.callout-note title="Theorem"}
-### 2.7 Theorem
+### Theorem 2.7: Relations among modes of convergence {#theorem-2-7}
 
 Let $X_n$, $X$, and $Y_n$ be random vectors. Then:
 
-1. $X_n \overset{a.s.}{\to} X$ implies $X_n \overset{P}{\to} X$;
-2. $X_n \overset{P}{\to} X$ implies $X_n \rightsquigarrow X$;
-3. $X_n \overset{P}{\to} c$ for a constant $c$ iff $X_n \rightsquigarrow c$;
-4. if $X_n \rightsquigarrow X$  and $d(X_n, Y_n) \overset{P}{\to} 0$, then $Y_n \rightsquigarrow X$;
-5. if $X_n \rightsquigarrow X$ and $Y_n \overset{P}{\to} c$ for a constant $c$, then $(X_n, Y_n) \rightsquigarrow (X, c)$;
-6. if $X_n \overset{P}{\to} X$ and $Y_n \overset{P}{\to} Y$, then $(X_n, Y_n) \overset{P}{\to} (X, Y)$.
+1. $X_n\overset{\mathrm{a.s.}}\longrightarrow X$ implies $X_n\overset P\to X$;
+2. $X_n\overset P\to X$ implies $X_n\rightsquigarrow X$;
+3. $X_n\overset P\to c$ for a constant $c$ if and only if $X_n\rightsquigarrow c$;
+4. if $X_n\rightsquigarrow X$ and $d(X_n,Y_n)\overset P\to0$, then $Y_n\rightsquigarrow X$;
+5. if $X_n\rightsquigarrow X$ and $Y_n\overset P\to c$ for a constant $c$, then $(X_n,Y_n)\rightsquigarrow(X,c)$; and
+6. if $X_n\overset P\to X$ and $Y_n\overset P\to Y$, then $(X_n,Y_n)\overset P\to(X,Y)$.
 :::
 
+**Proof roadmap.**
+
+Almost-sure convergence controls the tail supremum and hence gives convergence in probability. A bounded-Lipschitz comparison shows that a probability-small perturbation does not change a weak limit. The other statements follow by specializing that comparison or by applying it jointly.
+
+<details>
+<summary>Complete proof</summary>
+
+For (1), fix $\epsilon>0$ and define
+
+$$
+A_n=\left\{\sup_{m\geq n}d(X_m,X)>\epsilon\right\}.
+$$
+
+On the event of almost-sure convergence, $A_n$ decreases to the empty set. Thus
+
+$$
+P\{d(X_n,X)>\epsilon\}\leq P(A_n)\to0.
+$$
+
+For (4), let $f$ take values in $[0,1]$ and have Lipschitz constant at most one. For every $\epsilon>0$,
+
+$$
+|Ef(X_n)-Ef(Y_n)|
+\leq \epsilon+2P\{d(X_n,Y_n)>\epsilon\}.
+$$
+
+The right side has limiting upper bound $\epsilon$, and $\epsilon$ is arbitrary. Hence $Ef(X_n)$ and $Ef(Y_n)$ have the same limit. Portmanteau and $X_n\rightsquigarrow X$ give $Y_n\rightsquigarrow X$.
+
+For (2), apply (4) with the constant sequence equal to $X$ and the other sequence equal to $X_n$. For (3), the forward direction is (2). Conversely, if $X_n\rightsquigarrow c$, Portmanteau applied to the closed complement of an open ball about $c$ gives $X_n\overset P\to c$.
+
+For (5), $d\{(X_n,Y_n),(X_n,c)\}=d(Y_n,c)\overset P\to0$. Moreover, for every bounded continuous $f$, the map $x\mapsto f(x,c)$ is bounded and continuous, so $(X_n,c)\rightsquigarrow(X,c)$. Apply (4).
+
+For (6), use a product-space metric bounded by the sum of component distances:
+
+$$
+P\{d((X_n,Y_n),(X,Y))>\epsilon\}
+\leq P\{d(X_n,X)>\epsilon/2\}+P\{d(Y_n,Y)>\epsilon/2\}\to0.
+$$
+
+</details>
+
+Part 5 is the joint-convergence step behind Slutsky's lemma and many later plug-in arguments.
+
 ::: {.callout-important title="Lemma"}
-### 2.8 Lemma (Slutsky) {#lemma-slutsky}
+### Lemma 2.8: Slutsky {#lemma-slutsky}
 
-Let $X_n$, $X$, and $Y_n$ be random vectors or variables.
+If $X_n\rightsquigarrow X$ and $Y_n\overset P\to c$ for a constant $c$, then:
 
-If $X_n \rightsquigarrow X$ and $Y_n \rightsquigarrow c$ for a constant $c$, then:
+1. $X_n+Y_n\rightsquigarrow X+c$;
+2. $Y_nX_n\rightsquigarrow cX$; and
+3. $Y_n^{-1}X_n\rightsquigarrow c^{-1}X$, provided $c\neq0$.
 
-1. $X_n + Y_n \rightsquigarrow X + c$;
-2. $Y_nX_n \rightsquigarrow cX$;
-3. $Y_n^{-1}X_n \rightsquigarrow c^{-1}X$ provided $c \neq 0$.
+The statements also cover conformable matrices; in the third statement, $c\neq0$ then means that $c$ is invertible.
+:::
+
+**Proof roadmap.**
+
+First form the joint limit $(X_n,Y_n)\rightsquigarrow(X,c)$ using Theorem 2.7. Then apply the continuous mapping theorem to addition, multiplication, or inversion followed by multiplication.
+
+<details>
+<summary>Complete derivation in these notes</summary>
+
+By [Theorem 2.7](#theorem-2-7),
+
+$$
+(X_n,Y_n)\rightsquigarrow(X,c).
+$$
+
+The maps $(x,y)\mapsto x+y$ and $(x,y)\mapsto yx$ are continuous, so [Theorem 2.3](#theorem-continuous-mapping) gives the first two conclusions. If $c$ is nonzero, or invertible in the matrix case, the map $(x,y)\mapsto y^{-1}x$ is continuous in a neighborhood of every point $(x,c)$. The continuous mapping theorem gives the third conclusion.
+
+Van der Vaart states Slutsky's lemma as an immediate consequence of the two preceding results; the derivation is made explicit here.
+
+</details>
+
+The recurring asymptotic pattern is
+
+$$
+T_n=A_n+R_n,\qquad A_n\rightsquigarrow A,\qquad R_n=o_P(1).
+$$
+
+Slutsky removes $R_n$. The LAN remainder in [Theorem 7.2](chapter-7.qmd#theorem-lan-iid), the empirical-process remainder in [Theorem 19.26](chapter-19.qmd#theorem-19.26-infinite-dimensional-z-estimation), and the efficient-estimator expansion in [Lemma 25.23](chapter-25.qmd#lemma-25-23) all have this structure.
+
+::: {.callout-tip title="Example"}
+### Example 2.9: The $t$ statistic {#example-2-9}
+
+Let $Y_1,Y_2,\ldots$ be i.i.d. with $EY_1=0$ and $EY_1^2<\infty$, and let
+
+$$
+S_n^2=\frac{1}{n-1}\sum_{i=1}^n(Y_i-\overline Y_n)^2.
+$$
+
+The weak law and continuous mapping give $S_n^2\overset P\to\operatorname{var}(Y_1)$ and hence $S_n\overset P\to\operatorname{sd}(Y_1)$. The central limit theorem gives $\sqrt n\,\overline Y_n\rightsquigarrow N\{0,\operatorname{var}(Y_1)\}$. Slutsky then yields
+
+$$
+\frac{\sqrt n\,\overline Y_n}{S_n}\rightsquigarrow N(0,1).
+$$
+
+The denominator is a **random normalizer**. Its probability limit is enough to replace it asymptotically by the fixed standard deviation.
+:::
+
+## 2.2 Stochastic $o$ and $O$ Symbols {#sec-stochastic-order}
+
+The source defines stochastic order relative to a possibly random sequence $R_n$ by factorization:
+
+$$
+\begin{aligned}
+X_n=o_P(R_n)
+&\quad\text{means}\quad X_n=Y_nR_n\ \text{for some }Y_n\overset P\to0,\\
+X_n=O_P(R_n)
+&\quad\text{means}\quad X_n=Y_nR_n\ \text{for some }Y_n=O_P(1).
+\end{aligned}
+$$
+
+Here $O_P(1)$ means bounded in probability. This factorization remains meaningful when $R_n$ is random or can equal zero. When $R_n$ is strictly positive and division is valid, it reduces to the familiar shorthand $X_n/R_n=o_P(1)$ or $O_P(1)$.
+
+For deterministic $a_n>0$, a root-$n$ consistent estimator satisfies
+
+$$
+\widehat\theta_n-\theta=O_P(n^{-1/2}).
+$$
+
+Frequently used rules include
+
+$$
+\begin{gathered}
+o_P(1)+o_P(1)=o_P(1),\qquad
+o_P(1)+O_P(1)=O_P(1),\\
+O_P(1)o_P(1)=o_P(1),\qquad
+\{1+o_P(1)\}^{-1}=O_P(1),\\
+o_P(R_n)=R_no_P(1),\qquad
+O_P(R_n)=R_nO_P(1),\qquad
+o_P\{O_P(1)\}=o_P(1).
+\end{gathered}
+$$
+
+These displays are implications read from left to right, not algebraic identities. Each occurrence of $o_P(1)$ or $O_P(1)$ may denote a different sequence. In particular, $O_P(1)o_P(1)=o_P(1)$ says that the product of a bounded-in-probability sequence and a sequence converging to zero in probability also converges to zero in probability.
+
+The product rule is especially important in semiparametric problems. Two nuisance errors may each be larger than $n^{-1/2}$ while their product is $o_P(n^{-1/2})$, so the product disappears from the target estimator's first-order expansion; see the [no-bias condition in §25.8](chapter-25.qmd#sec-25-8-no-bias).
+
+::: {.callout-important title="Lemma"}
+### Lemma 2.12: Deterministic remainders at random arguments {#lemma-2-12}
+
+Let $R$ be defined on a subset of $\mathbb R^k$, with $R(0)=0$, and let $X_n$ take values in that domain with $X_n\overset P\to0$. For every $p>0$:
+
+1. if $R(h)=o(\|h\|^p)$ as $h\to0$, then $R(X_n)=o_P(\|X_n\|^p)$; and
+2. if $R(h)=O(\|h\|^p)$ as $h\to0$, then $R(X_n)=O_P(\|X_n\|^p)$.
+:::
+
+**Proof roadmap.**
+
+Factor the remainder as $R(h)=g(h)\|h\|^p$. A deterministic little-$o$ assumption makes $g$ continuous at zero; a deterministic big-$O$ assumption makes $g$ locally bounded. Continuous mapping or tightness then gives the corresponding stochastic order.
+
+<details>
+<summary>Complete proof</summary>
+
+Define
+
+$$
+g(h)=
+\begin{cases}
+R(h)/\|h\|^p,&h\neq0,\\
+0,&h=0.
+\end{cases}
+$$
+
+Then $R(X_n)=g(X_n)\|X_n\|^p$.
+
+Under the first assumption, $g(h)\to0=g(0)$ as $h\to0$. The continuous mapping theorem gives $g(X_n)\overset P\to0$, proving
+
+$$
+R(X_n)=o_P(\|X_n\|^p).
+$$
+
+Under the second assumption, there are finite $M$ and $\delta>0$ such that $|g(h)|\leq M$ whenever $\|h\|\leq\delta$. Therefore
+
+$$
+P\{|g(X_n)|>M\}\leq P(\|X_n\|>\delta)\to0.
+$$
+
+Thus $g(X_n)=O_P(1)$ and
+
+$$
+R(X_n)=O_P(\|X_n\|^p).
+$$
+
+</details>
+
+Lemma 2.12 is the bridge from ordinary differentiability to stochastic expansions. It supplies the remainder step in the [delta method](chapter-3.qmd#theorem-3-1), and the same mechanism reappears in likelihood and estimating-equation expansions throughout Chapters 7, 19, and 25.
+
+<span id="sec-uniform-integrability"></span>
+
+::: {.callout-note title="Optional bridge: uniform integrability" collapse="true"}
+
+Weak convergence controls bounded continuous test functions, but it does not by itself justify taking limits of expectations or risks. A sequence of integrable random variables is **uniformly integrable** if
+
+$$
+\lim_{M\to\infty}
+\sup_nE\bigl[|X_n|\mathbf 1\{|X_n|>M\}\bigr]=0.
+$$
+
+If $X_n\rightsquigarrow X$ and $(X_n)$ is uniformly integrable, then $X$ is integrable and $EX_n\to EX$. A convenient sufficient condition is
+
+$$
+\sup_nE|X_n|^{1+\delta}<\infty
+$$
+
+for some $\delta>0$. This extra tail control is what turns a distributional efficiency statement into convergence of mean loss when the loss is unbounded. It is optional for the first-order Chapter 25 route, whose principal conclusions are weak limits and local risk lower bounds stated with their own regularity conditions.
+
 :::
