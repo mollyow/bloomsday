@@ -126,7 +126,15 @@ The model $\{P_\theta:\theta\in\Theta\}$ is differentiable in quadratic mean at 
 <span id="eq-differentiability-quadratic-mean"></span>
 
 $$
-(7.1) \qquad \int\left[\sqrt{p_{\theta+h}}-\sqrt{p_\theta}-\frac12h^T\dot\ell_\theta\sqrt{p_\theta}\right]^2\,d\mu=o(\|h\|^2), \qquad h\to0.
+\begin{aligned}
+\int\biggl[
+&\sqrt{p_{\theta+h}}-\sqrt{p_\theta}\\
+&\quad-\frac12h^T\dot\ell_\theta\sqrt{p_\theta}
+\biggr]^2\,d\mu
+&=o(\|h\|^2),
+\qquad h\to0.
+\end{aligned}
+\tag{7.1}
 $$
 
 :::
@@ -554,13 +562,21 @@ Parts (ii) and (iii) are one-sided approximations reflecting the distinction bet
 From [Theorem 7.2](#theorem-lan-iid), LAN gives the expansion
 
 $$
-\log\frac{dP_{\theta+h/\sqrt n}^n}{dP_\theta^n}=h^T\Delta_{n,\theta}-\frac12h^TI_\theta h+o_{P_\theta}(1).
+\begin{aligned}
+\log\frac{dP_{\theta+h/\sqrt n}^n}{dP_\theta^n}
+&=h^T\Delta_{n,\theta}-\frac12h^TI_\theta h
++o_{P_\theta}(1).
+\end{aligned}
 $$
 
 Under $P_\theta^n$, $\Delta_{n,\theta}\rightsquigarrow N(0,I_\theta)$, so $h^T\Delta_{n,\theta}\rightsquigarrow N(0,h^TI_\theta h)$. Therefore,
 
 $$
-\log\frac{dP_{\theta+h/\sqrt n}^n}{dP_\theta^n}\rightsquigarrow N\left(-\frac12h^TI_\theta h,\,h^TI_\theta h\right).
+\begin{aligned}
+\log\frac{dP_{\theta+h/\sqrt n}^n}{dP_\theta^n}
+&\rightsquigarrow
+N\left(-\frac12h^TI_\theta h,\,h^TI_\theta h\right).
+\end{aligned}
 $$
 
 Let $v=h^TI_\theta h$. If $Z\sim N(-v/2,v)$, then $e^Z>0$ almost surely and $E(e^Z)=1$. The limiting likelihood ratio is therefore positive with expectation one. By [Le Cam’s first lemma](chapter-6.qmd#lemma-le-cam-first),

@@ -628,13 +628,15 @@ Here $T$ is Fisher and Kennedy's symbol for the target functional; it is not the
 
 When a suitable distributional expansion is available, Kennedy writes the same first-order idea as a distributional Taylor, or [von Mises expansion](glossary.qmd#glossary-von-mises). Choose the derivative representative at each law to be centered under that law, so $Q\psi_Q^\dagger=0$:
 
+<span id="equation-25-3-von-mises"></span>
+
 $$
 \psi(Q)-\psi(P)
 =(Q-P)\psi_Q^\dagger+R_2(Q,P),
 \qquad
 (Q-P)\psi_Q^\dagger
 =\int\psi_Q^\dagger\,d(Q-P).
-\tag{25.3-von-Mises}
+\tag{25.3a}
 $$
 
 This is Kennedy's **reverse** convention: the derivative representative is evaluated at the first distribution $Q$, which is convenient when $Q$ will be an estimate and $Q\psi_Q^\dagger=0$. Other texts expand about $P$ and use $\psi_P^\dagger$ instead; that choice changes the definition, and sometimes the sign, of the remainder.
@@ -691,12 +693,14 @@ Kennedy's §3.4 gives two useful ways to generate a candidate before the general
 
 - **Point-mass contamination.** Pretend the data are discrete and differentiate
 
+    <span id="equation-25-3-contamination"></span>
+
     $$
     \left.
     \frac{d}{d\varepsilon}
     \psi\{(1-\varepsilon)P+\varepsilon\delta_z\}
     \right|_{\varepsilon=0}.
-    \tag{25.3-contamination}
+    \tag{25.3b}
     $$
 
     For a mean-zero derivative representative, this often returns its value at $z$ directly.
@@ -716,7 +720,12 @@ Kennedy's §3.4 gives two useful ways to generate a candidate before the general
 The contamination calculation is a shortcut, not the final proof: in a continuous or restricted model, the point-mass path may fail to be dominated, DQM, or even admissible. Likewise, Kennedy's $\operatorname{IF}$ here is a heuristic differentiation operator, not the score operator $A_\eta$ introduced in [§25.5](#score-and-information-operators). The safe pattern is
 
 $$
-\boxed{\text{derive a candidate}\;\longrightarrow\;\text{verify every score identity}\;\longrightarrow\;\text{project if necessary}.}
+\boxed{
+\begin{gathered}
+\text{derive a candidate}\;\longrightarrow\;\text{verify every score identity}\\
+\longrightarrow\;\text{project if necessary}
+\end{gathered}
+}
 $$
 
 [Example 25.24](#example-25-24) gives the elementary mean-functional calculation; [Example 25.67](#example-25-67) later uses the building-block strategy to derive the AIPW influence function.
@@ -758,7 +767,13 @@ $$
 Suppose $P_\theta$ is differentiable in quadratic mean with vector score $\dot\ell_\theta$:
 
 $$
-\int\left[p_{\theta+h}^{1/2}-p_\theta^{1/2}-\frac12h^T\dot\ell_\theta p_\theta^{1/2}\right]^2d\mu=o(|h|^2).
+\begin{aligned}
+\int\biggl[
+&p_{\theta+h}^{1/2}-p_\theta^{1/2}\\
+&\quad-\frac12h^T\dot\ell_\theta p_\theta^{1/2}
+\biggr]^2d\mu
+&=o(|h|^2).
+\end{aligned}
 $$
 
 Here $\theta\in\mathbb R^m$. The tangent space is
@@ -895,7 +910,11 @@ Again, the nuisance score is an operator acting on a direction $a$.
 For a scalar target and a path with score $g$, the parametric Cramér–Rao bound is
 
 $$
-\frac{\left(\left.\frac{d}{dt}\right|_{t=0}\psi(P_t)\right)^2}{Pg^2}=\frac{\langle\widetilde\psi_P,g\rangle_P^2}{\langle g,g\rangle_P}.
+\begin{aligned}
+\frac{\left(\left.\frac{d}{dt}\right|_{t=0}\psi(P_t)\right)^2}{Pg^2}
+&=\frac{\langle\widetilde\psi_P,g\rangle_P^2}
+{\langle g,g\rangle_P}.
+\end{aligned}
 $$
 
 Taking the supremum over all available tangent directions gives the semiparametric lower bound.
@@ -904,7 +923,11 @@ Taking the supremum over all available tangent directions gives the semiparametr
 ### Lemma 25.19: the tangent-space information bound {#lemma-25.19}
 
 $$
-\sup_{\substack{g\in\overline{\operatorname{lin}}\dot{\mathcal P}_P\\g\neq0}}\frac{\langle\widetilde\psi_P,g\rangle_P^2}{\langle g,g\rangle_P}=P\widetilde\psi_P^2.
+\begin{aligned}
+\sup_{\substack{g\in\overline{\operatorname{lin}}\dot{\mathcal P}_P\\g\neq0}}
+\frac{\langle\widetilde\psi_P,g\rangle_P^2}{\langle g,g\rangle_P}
+&=P\widetilde\psi_P^2.
+\end{aligned}
 $$
 
 :::
@@ -997,7 +1020,13 @@ Thus every regular estimator has:
 If the tangent cone is convex, then for any estimator sequence and subconvex loss $\ell$,
 
 $$
-\sup_I\liminf_{n\to\infty}\sup_{g\in I}E_{P_{1/\sqrt n,g}^n}\ell\left(\sqrt n\left(T_n-\psi(P_{1/\sqrt n,g})\right)\right)\geq\int\ell\,dN\left(0,P\widetilde\psi_P\widetilde\psi_P^T\right),
+\begin{aligned}
+&\sup_I\liminf_{n\to\infty}\sup_{g\in I}
+E_{P_{1/\sqrt n,g}^n}
+\ell\left(\sqrt n\left[T_n-\psi(P_{1/\sqrt n,g})\right]\right)\\
+&\qquad\geq
+\int\ell\,dN\left(0,P\widetilde\psi_P\widetilde\psi_P^T\right),
+\end{aligned}
 $$
 
 where the first supremum is over finite subsets $I$ of the tangent set.
@@ -1105,7 +1134,12 @@ $$
 An estimator is regular and efficient if and only if
 
 $$
-\sqrt n\left(T_n-\psi(P)\right)=\frac{1}{\sqrt n}\sum_{i=1}^n\widetilde\psi_P(X_i)+o_P(1). \tag{25.22}
+\begin{aligned}
+\sqrt n\left[T_n-\psi(P)\right]
+&=\frac{1}{\sqrt n}\sum_{i=1}^n\widetilde\psi_P(X_i)
++o_P(1).
+\end{aligned}
+\tag{25.22}
 $$
 
 :::
@@ -1275,13 +1309,15 @@ $$
 
 Neyman orthogonality requires
 
+<span id="equation-25-4-dml-orthogonality"></span>
+
 $$
 \left.
 \frac{\partial}{\partial r}
 P\psi\{W;\theta_0,\eta_0+r(\eta-\eta_0)\}
 \right|_{r=0}
 =0.
-\tag{25.4-DML-orthogonality}
+\tag{25.4a}
 $$
 
 Thus the population moment is locally insensitive to first-order nuisance perturbations. In regular likelihood settings, a coherently extended target score that has been projected off the nuisance tangent space often produces this cancellation. Under the required differentiability and remainder conditions, the resulting efficient-score moment is therefore a particularly important Neyman-orthogonal score, although a score can be Neyman orthogonal without attaining the semiparametric efficiency bound [@chernozhukovEtAl2018].
@@ -1336,7 +1372,13 @@ $$
 Therefore, an efficient estimator satisfies
 
 $$
-\sqrt n(T_n-\theta)=\frac{1}{\sqrt n}\sum_{i=1}^n\widetilde I_{\theta,\eta}^{-1}\widetilde\ell_{\theta,\eta}(X_i)+o_{P_{\theta,\eta}}(1)
+\begin{aligned}
+\sqrt n(T_n-\theta)
+&=\frac{1}{\sqrt n}\sum_{i=1}^n
+\widetilde I_{\theta,\eta}^{-1}
+\widetilde\ell_{\theta,\eta}(X_i)\\
+&\quad+o_{P_{\theta,\eta}}(1).
+\end{aligned}
 $$
 
 **Builds on.** This is the semiparametric version of the normalized-score representation arising from the [Gaussian-shift reduction in Theorem 8.3](chapter-8.qmd#theorem-limit-experiment-reduction).
@@ -1583,21 +1625,25 @@ If every coordinate of $\widetilde\chi_\eta$ belongs to $R(A_\eta^*A_\eta)$, the
 
 Suppress the subscript $\eta$ and let $\mathbb H=\overline{\operatorname{lin}}\dot H_\eta$. For a direction $b\in\dot H_\eta$, the assumed path has observed-data score $Ab$, while differentiability of $\chi$ in the underlying model gives
 
+<span id="equation-25-31-underlying-derivative"></span>
+
 $$
 \left.\frac{d}{dt}\right|_{t=0}\chi(\eta_t)
 =\langle\widetilde\chi,b\rangle_{\mathbb H}.
-\tag{25.31-underlying-derivative}
+\tag{25.31a}
 $$
 
 If the observed-data target is pathwise differentiable with influence function $h\in L_2(P_\eta)$, the same derivative must equal
 
+<span id="equation-25-31-observed-derivative"></span>
+
 $$
 \langle h,Ab\rangle_{P_\eta}
 =\langle A^*h,b\rangle_{\mathbb H}.
-\tag{25.31-observed-derivative}
+\tag{25.31b}
 $$
 
-Equations (25.31-underlying-derivative)--(25.31-observed-derivative) agree for every direction in a dense linear span if and only if
+Equations [(25.31a)](#equation-25-31-underlying-derivative)–[(25.31b)](#equation-25-31-observed-derivative) agree for every direction in a dense linear span if and only if
 
 $$
 A^*h=\widetilde\chi.
@@ -1713,15 +1759,17 @@ $$
 
 where $T\sim L$ and $Z\sim N(0,P_\eta u^2)$. Such a subsequence exists because both coordinates are tight. Le Cam's third lemma and regularity imply, for every fixed local scalar $s$,
 
+<span id="equation-25-32-characteristic-identity"></span>
+
 $$
 E\exp\left\{itT+sZ-\frac{s^2}{2}P_\eta u^2\right\}
 =e^{itsd(b)}\varphi_L(t),
-\tag{25.32-characteristic-identity}
+\tag{25.32a}
 $$
 
 where $\varphi_L$ is the characteristic function of $L$. Indeed, the exponential factor on the left performs the Gaussian likelihood tilt, while regularity says that the uncentered statistic gains exactly the target shift $sd(b)$.
 
-Differentiate (25.32-characteristic-identity) at $s=0$. Gaussian exponential integrability justifies differentiation and gives
+Differentiate [(25.32a)](#equation-25-32-characteristic-identity) at $s=0$. Gaussian exponential integrability justifies differentiation and gives
 
 $$
 E\{e^{itT}Z\}
@@ -1730,10 +1778,12 @@ $$
 
 Choose a fixed nonzero $t$ sufficiently close to zero that $\varphi_L(t)\neq0$. Cauchy--Schwarz yields a constant $C<\infty$, independent of $b$, such that
 
+<span id="equation-25-32-continuity"></span>
+
 $$
 |d(b)|
 \leq C\{P_\eta(Ab)^2\}^{1/2}.
-\tag{25.32-continuity}
+\tag{25.32b}
 $$
 
 In particular, $Ab=0$ implies $d(b)=0$. Therefore
@@ -1742,7 +1792,7 @@ $$
 D(Ab)=d(b)
 $$
 
-defines a linear functional on $R(A)$, and (25.32-continuity) makes it continuous in the $L_2(P_\eta)$ norm. Extend $D$ to $\overline{R(A)}$. By the Riesz representation theorem, there exists $h\in\overline{R(A)}$ such that
+defines a linear functional on $R(A)$, and [(25.32b)](#equation-25-32-continuity) makes it continuous in the $L_2(P_\eta)$ norm. Extend $D$ to $\overline{R(A)}$. By the Riesz representation theorem, there exists $h\in\overline{R(A)}$ such that
 
 $$
 d(b)=\langle h,Ab\rangle_{P_\eta}
@@ -1804,7 +1854,13 @@ $$
 Therefore
 
 $$
-\widetilde\ell_{\theta,\eta}=\left[I-B_{\theta,\eta}(B_{\theta,\eta}^*B_{\theta,\eta})^{-1}B_{\theta,\eta}^*\right]\dot\ell_{\theta,\eta}. \tag{25.33}
+\begin{aligned}
+\widetilde\ell_{\theta,\eta}
+&=\left[I-B_{\theta,\eta}
+(B_{\theta,\eta}^*B_{\theta,\eta})^{-1}
+B_{\theta,\eta}^*\right]\dot\ell_{\theta,\eta}.
+\end{aligned}
+\tag{25.33}
 $$
 
 The corresponding least favorable nuisance direction is
@@ -1826,7 +1882,14 @@ $$
 The information operator has block form
 
 $$
-A_{\theta,\eta}^*A_{\theta,\eta}=\begin{pmatrix} I_{\theta,\eta} & P_{\theta,\eta}\dot\ell_{\theta,\eta}B_{\theta,\eta} \\ B_{\theta,\eta}^*\dot\ell_{\theta,\eta} & B_{\theta,\eta}^*B_{\theta,\eta} \end{pmatrix}
+A_{\theta,\eta}^*A_{\theta,\eta}
+=
+\begin{pmatrix}
+I_{\theta,\eta}
+&P_{\theta,\eta}\dot\ell_{\theta,\eta}B_{\theta,\eta}\\
+B_{\theta,\eta}^*\dot\ell_{\theta,\eta}
+&B_{\theta,\eta}^*B_{\theta,\eta}
+\end{pmatrix}
 $$
 
 The diagonal blocks are:
@@ -1850,7 +1913,19 @@ $$
 If the required inverses exist, a solution is
 
 $$
-\widetilde\psi_{P_{\theta,\eta}}=B_{\theta,\eta}(B_{\theta,\eta}^*B_{\theta,\eta})^{-}\widetilde\chi_\eta-\left\langle B_{\theta,\eta}(B_{\theta,\eta}^*B_{\theta,\eta})^{-}\widetilde\chi_\eta,\dot\ell_{\theta,\eta}\right\rangle_{P_{\theta,\eta}}^T\widetilde I_{\theta,\eta}^{-1}\widetilde\ell_{\theta,\eta}
+\begin{aligned}
+\widetilde\psi_{P_{\theta,\eta}}
+&=B_{\theta,\eta}
+(B_{\theta,\eta}^*B_{\theta,\eta})^{-}\widetilde\chi_\eta\\
+&\quad-
+\left\langle
+B_{\theta,\eta}(B_{\theta,\eta}^*B_{\theta,\eta})^{-}
+\widetilde\chi_\eta,
+\dot\ell_{\theta,\eta}
+\right\rangle_{P_{\theta,\eta}}^T
+\widetilde I_{\theta,\eta}^{-1}
+\widetilde\ell_{\theta,\eta}.
+\end{aligned}
 $$
 
 The first term is the influence function that would apply if $\theta$ were known. The second corrects for estimating $\theta$; because the two terms are orthogonal, this correction increases variance.
@@ -2267,9 +2342,11 @@ Conditioning on $Y$ shows $E\{b(X)\mid Y\}=u(Y)-u(Y)=0$, giving the required and
 
 Lemma 25.41 supplies the geometric starting point for augmented inverse-probability weighting. Under the binary MAR specialization in [Example 25.43](#example-25-43), its affine family becomes
 
+<span id="equation-25-41-aipw"></span>
+
 $$
 c(V)+\frac{\Delta}{\pi(V)}\{\dot\chi_Q(Y)-c(V)\},
-\tag{25.41-AIPW}
+\tag{25.41a}
 $$
 
 where $V=\phi(Y,0)$ is observed for everyone. The inverse-probability term transports the full-data influence function to the observed-data model; the augmentation $c(V)$ uses the information available even when the full data are missing. Choosing
@@ -2280,7 +2357,9 @@ $$
 
 gives the minimum-variance augmentation for a fixed full-data influence function.
 
-Lemma 25.41 by itself is therefore not yet a double-robustness theorem: it holds $R$ fixed and characterizes influence functions. There are two further steps to **double robustness**. First specialize to MAR, which gives the observable representation (25.41-AIPW). Then replace $(\pi,c_0)$ by working functions $(\bar\pi,\bar c)$. At the true target,
+Lemma 25.41 by itself is therefore not yet a double-robustness theorem: it holds $R$ fixed and characterizes influence functions. There are two further steps to **double robustness**. First specialize to MAR, which gives the observable representation [(25.41a)](#equation-25-41-aipw). Then replace $(\pi,c_0)$ by working functions $(\bar\pi,\bar c)$. At the true target,
+
+<span id="equation-25-41-dr-bias"></span>
 
 $$
 P\left[
@@ -2292,7 +2371,7 @@ E\left[
 \left\{1-\frac{\pi_0(V)}{\bar\pi(V)}\right\}
 \{\bar c(V)-c_0(V)\}
 \right].
-\tag{25.41-DR-bias}
+\tag{25.41b}
 $$
 
 The mean is therefore zero if either the observation-probability model is correct, $\bar\pi=\pi_0$, or the augmentation model is correct, $\bar c=c_0$. This union-model guarantee is stronger than local orthogonality, though the same product identity also produces orthogonality and rate tradeoffs near the truth.
@@ -2419,7 +2498,13 @@ Let $\psi:\mathcal P\to\mathbb R$ be differentiable at $P$, relative to the tang
 For every $g$ satisfying $P\widetilde\psi_Pg>0$ and every $h>0$,
 
 $$
-\limsup_{n\to\infty}\pi_n(P_{h/\sqrt n,g})\leq1-\Phi\left(z_\alpha-h\frac{P\widetilde\psi_Pg}{(P\widetilde\psi_P^2)^{1/2}}\right)
+\begin{aligned}
+\limsup_{n\to\infty}\pi_n(P_{h/\sqrt n,g})
+&\leq1-\Phi\left(
+z_\alpha-h\frac{P\widetilde\psi_Pg}
+{(P\widetilde\psi_P^2)^{1/2}}
+\right).
+\end{aligned}
 $$
 
 Here $z_\alpha$ is the upper standard-normal critical value:
@@ -2495,14 +2580,16 @@ for all sufficiently large $n$. These distributions therefore belong to the orig
 
 Proposition 15.2 now gives, for $a^Tv>0$,
 
+<span id="equation-25-44-finite-bound"></span>
+
 $$
 \pi(h,a)
 \leq
 1-\Phi\left(z_\alpha-h\frac{a^Tv}{\|v\|}\right).
-\tag{25.44-finite-bound}
+\tag{25.44a}
 $$
 
-The orthogonal projection of $\widetilde\psi_P$ onto $\operatorname{lin}(g_1,\ldots,g_m)$ is $v^Tg_P$, whose squared norm is $\|v\|^2$. Set $(h,a)=(h_1,e_1)$ in (25.44-finite-bound). The numerator is $P\widetilde\psi_Pg_1$, while the denominator is the norm of that projection. Because $\widetilde\psi_P$ lies in the closed tangent space, we may enlarge the finite-dimensional subspace so that
+The orthogonal projection of $\widetilde\psi_P$ onto $\operatorname{lin}(g_1,\ldots,g_m)$ is $v^Tg_P$, whose squared norm is $\|v\|^2$. Set $(h,a)=(h_1,e_1)$ in [(25.44a)](#equation-25-44-finite-bound). The numerator is $P\widetilde\psi_Pg_1$, while the denominator is the norm of that projection. Because $\widetilde\psi_P$ lies in the closed tangent space, we may enlarge the finite-dimensional subspace so that
 
 $$
 \|v\|\uparrow\|\widetilde\psi_P\|_{P,2}
@@ -2518,12 +2605,14 @@ Taking this limit yields the asserted bound for $(h_1,g_1)$. Since the pair was 
 
 Let $T_n$ be a regular, efficient estimator of the scalar functional $\psi(P)$ at a boundary point satisfying $\psi(P)=0$. Suppose $S_n\geq0$ and $S_n^2\overset P\to P\widetilde\psi_P^2>0$. Then, for every $h\geq0$ and $g\in\dot{\mathcal P}_P$,
 
+<span id="equation-25-45-power"></span>
+
 $$
 \lim_{n\to\infty}P_{h/\sqrt n,g}^{\,n}
 \left(\frac{\sqrt nT_n}{S_n}\geq z_\alpha\right)
 =1-\Phi\left(z_\alpha-h\frac{P\widetilde\psi_Pg}
 {(P\widetilde\psi_P^2)^{1/2}}\right).
-\tag{25.45-power}
+\tag{25.45a}
 $$
 
 :::
@@ -2599,7 +2688,7 @@ h\frac{P\widetilde\psi_Pg}{(P\widetilde\psi_P^2)^{1/2}},1
 \right).
 $$
 
-The normal distribution has no mass at $z_\alpha$, so convergence of rejection probabilities gives (25.45-power).
+The normal distribution has no mass at $z_\alpha$, so convergence of rejection probabilities gives [(25.45a)](#equation-25-45-power).
 
 </details>
 
@@ -2742,10 +2831,12 @@ $$
 
 Thus the transformed estimator is asymptotically linear with candidate influence function
 
+<span id="equation-25-7-chain-rule"></span>
+
 $$
 \widetilde{(\phi\circ\psi)}_P
 =D\phi_{\psi(P)}\widetilde\psi_P.
-\tag{25.7-chain-rule}
+\tag{25.7a}
 $$
 
 There are two checks behind the word *efficient*.
@@ -2763,7 +2854,7 @@ There are two checks behind the word *efficient*.
 
 2. **It lies in the efficient subspace.** The coordinates of $D\phi_{\psi(P)}\widetilde\psi_P$ are linear combinations of the coordinates of $\widetilde\psi_P$, so they remain in the closed linear span of the tangent set.
 
-The candidate in (25.7-chain-rule) is therefore the efficient influence function, not merely an arbitrary influence function. Consequently, the efficient covariance bound transforms as
+The candidate in [(25.7a)](#equation-25-7-chain-rule) is therefore the efficient influence function, not merely an arbitrary influence function. Consequently, the efficient covariance bound transforms as
 
 $$
 P\widetilde{(\phi\circ\psi)}_P
@@ -2807,12 +2898,14 @@ $$
 
 such that, for every $g\in\dot{\mathcal P}_P$ and every path $t\mapsto P_t$ with score $g$,
 
+<span id="equation-25-7-banach-path"></span>
+
 $$
 \left\|
 \frac{\psi(P_t)-\psi(P)}{t}-\dot\psi_Pg
 \right\|_{\mathbb D}
 \longrightarrow 0.
-\tag{25.7-Banach-path}
+\tag{25.7b}
 $$
 
 This is the pathwise differentiability of the **statistical parameter** $\psi$. It should not be confused with the Hadamard differentiability imposed below on the **outer transformation** $\phi$.
@@ -2876,9 +2969,11 @@ Thus $\phi\circ\psi$ is differentiable at $P$, with derivative $\phi'_{\psi(P)}\
 
 Set $Z_n=\sqrt n\{T_n-\psi(P)\}$, and let $Z$ denote its tight weak limit. We first show that
 
+<span id="equation-25-47-support"></span>
+
 $$
 P(Z\in\mathbb D_0)=1.
-\tag{25.47-support}
+\tag{25.47a}
 $$
 
 Because the law of $Z$ is tight, it is concentrated on a separable subset $S\subset\mathbb D$. The [Hahn--Banach separation theorem](#hahn-banach-consequences), with a countable subcollection on $S$, gives
@@ -2891,7 +2986,7 @@ d^*\dot\psi_P=0}}
 \{d\in S:d^*d=0\}.
 $$
 
-If $d^*\dot\psi_P=0$, the scalar parameter $d^*\psi$ has zero derivative and hence zero efficient influence function. Efficiency of $d^*T_n$ therefore gives $d^*Z_n\to0$ in probability. The continuous mapping theorem gives $d^*Z=0$ almost surely. Applying this to the countable separating subcollection proves (25.47-support).
+If $d^*\dot\psi_P=0$, the scalar parameter $d^*\psi$ has zero derivative and hence zero efficient influence function. Efficiency of $d^*T_n$ therefore gives $d^*Z_n\to0$ in probability. The continuous mapping theorem gives $d^*Z=0$ almost surely. Applying this to the countable separating subcollection proves [(25.47a)](#equation-25-47-support).
 
 The functional delta method, Theorem 20.8, is now applicable tangentially to $\mathbb D_0$:
 
@@ -2903,10 +2998,12 @@ $$
 
 The right side is a tight $\mathbb E$-valued random element. It remains to check all scalar views. Fix $e^*\in\mathbb E^*$. The functional $e^*\phi'_{\psi(P)}$ is continuous and linear on $\mathbb D_0$; by Hahn--Banach, extend it without increasing its norm to some $d^*\in\mathbb D^*$. The scalar delta expansion is
 
+<span id="equation-25-47-scalar-delta"></span>
+
 $$
 \sqrt n\,e^*[\phi(T_n)-\phi\{\psi(P)\}]
 =d^*Z_n+o_P(1).
-\tag{25.47-scalar-delta}
+\tag{25.47b}
 $$
 
 By efficiency of $T_n$, the right side is asymptotically linear in the efficient influence function $\widetilde\psi_{P,d^*}$ of $d^*\psi$. This same function represents the derivative of $e^*\phi\circ\psi$, because, for every tangent $g$,
@@ -2917,7 +3014,7 @@ e^*\phi'_{\psi(P)}\dot\psi_Pg
 =P\widetilde\psi_{P,d^*}g.
 $$
 
-It belongs to the closed tangent space, so it is the efficient influence function of $e^*\phi\circ\psi$. Equation (25.47-scalar-delta) proves that every scalar view $e^*\phi(T_n)$ is efficient. Together with the tight transformed limit, this is precisely Banach-valued efficiency.
+It belongs to the closed tangent space, so it is the efficient influence function of $e^*\phi\circ\psi$. Equation [(25.47b)](#equation-25-47-scalar-delta) proves that every scalar view $e^*\phi(T_n)$ is efficient. Together with the tight transformed limit, this is precisely Banach-valued efficiency.
 
 </details>
 
@@ -2974,7 +3071,7 @@ $$
 =\sup_{s\in S}|\pi_s(d)|.
 $$
 
-Thus $\mathbb D'=\{\pi_s:s\in S\}$ satisfies the norming condition (25.49-norming) with $C=1$. By hypothesis, $\pi_sT_n=T_n(s)$ is efficient for $\pi_s\psi(P)=\psi(P)(s)$ for every $s$, and the displayed weak convergence makes $\sqrt n\{T_n-\psi(P)\}$ asymptotically tight. [Lemma 25.49](#lemma-25-49) therefore implies efficiency of $T_n$ in $\ell^\infty(S)$.
+Thus $\mathbb D'=\{\pi_s:s\in S\}$ satisfies the norming condition [(25.49a)](#equation-25-49-norming) with $C=1$. By hypothesis, $\pi_sT_n=T_n(s)$ is efficient for $\pi_s\psi(P)=\psi(P)(s)$ for every $s$, and the displayed weak convergence makes $\sqrt n\{T_n-\psi(P)\}$ asymptotically tight. [Lemma 25.49](#lemma-25-49) therefore implies efficiency of $T_n$ in $\ell^\infty(S)$.
 
 </details>
 
@@ -2991,13 +3088,15 @@ Thus the sup norm can detect no direction invisible to all the coordinates. This
 
 Let $\mathbb D'\subset\mathbb D^*$ be a collection of continuous linear functionals such that, for some finite constant $C$,
 
+<span id="equation-25-49-norming"></span>
+
 $$
 \|d\|_{\mathbb D}
 \leq
 C\sup_{\substack{d^*\in\mathbb D'\\\|d^*\|\leq1}}
 |d^*(d)|
 \qquad\text{for every }d\in\mathbb D.
-\tag{25.49-norming}
+\tag{25.49a}
 $$
 
 Suppose $\psi:\mathcal P\to\mathbb D$ is differentiable at $P$ and $d^*T_n$ is efficient for $d^*\psi(P)$ for every $d^*\in\mathbb D'$. If $\sqrt n\{T_n-\psi(P)\}$ is asymptotically tight under $P$, then $T_n$ is efficient.
@@ -3034,10 +3133,12 @@ $$
 
 Then $J:\mathbb D\to\ell^\infty(\mathcal S)$ is linear and
 
+<span id="equation-25-49-embedding"></span>
+
 $$
 \|Jd\|_{\mathcal S}\leq\|d\|_{\mathbb D}
 \leq C\|Jd\|_{\mathcal S}.
-\tag{25.49-embedding}
+\tag{25.49b}
 $$
 
 Hence $J$ is a norm homeomorphism onto its range. It is therefore enough to prove the assertion after viewing $Z$ as a tight random element of $\ell^\infty(\mathcal S)$, with $\mathbb D'$ represented by the coordinate evaluations.
@@ -3071,12 +3172,14 @@ $$
 
 Thus $J\dot\psi_Pg\in UC(\mathcal S,\rho)$ for every tangent $g$, and hence for their closed linear span.
 
-Now fix an arbitrary $d^*\in\mathbb D^*$. Through the embedding (25.49-embedding), extend it by Hahn--Banach to a continuous functional on $\ell^\infty(\mathcal S)$. Restricted to $UC(\mathcal S,\rho)$, it is integration against a finite signed Borel measure on the completion of the totally bounded space $\mathcal S$. Approximate that measure by finite discrete measures. This produces $d_j^*\in\operatorname{lin}\mathbb D'$ such that
+Now fix an arbitrary $d^*\in\mathbb D^*$. Through the embedding [(25.49b)](#equation-25-49-embedding), extend it by Hahn--Banach to a continuous functional on $\ell^\infty(\mathcal S)$. Restricted to $UC(\mathcal S,\rho)$, it is integration against a finite signed Borel measure on the completion of the totally bounded space $\mathcal S$. Approximate that measure by finite discrete measures. This produces $d_j^*\in\operatorname{lin}\mathbb D'$ such that
+
+<span id="equation-25-49-discrete"></span>
 
 $$
 d_j^*z\longrightarrow d^*z
 \quad\text{for every }z\in UC(\mathcal S,\rho).
-\tag{25.49-discrete}
+\tag{25.49c}
 $$
 
 In particular, $d_j^*Z\to d^*Z$ almost surely and
@@ -3092,18 +3195,20 @@ P\bigl(
 \longrightarrow0.
 $$
 
-The influence functions have an $L_2(P)$ limit. Passing to the limit in their derivative identities and using (25.49-discrete) shows that this limit represents $d^*\dot\psi_P$; because it lies in the closed tangent space, it is $\widetilde\psi_{P,d^*}$. Hence
+The influence functions have an $L_2(P)$ limit. Passing to the limit in their derivative identities and using [(25.49c)](#equation-25-49-discrete) shows that this limit represents $d^*\dot\psi_P$; because it lies in the closed tangent space, it is $\widetilde\psi_{P,d^*}$. Hence
+
+<span id="equation-25-49-all-duals"></span>
 
 $$
 d^*Z\sim
 N\!\left(0,P\widetilde\psi_{P,d^*}^2\right)
 \qquad\text{for every }d^*\in\mathbb D^*.
-\tag{25.49-all-duals}
+\tag{25.49d}
 $$
 
 The characteristic functional $d^*\mapsto E\exp\{id^*Z\}$ determines the law of a tight Borel random element. Thus every baseline subsequential limit has the same law, and the full sequence $Z_n$ converges to that efficient Gaussian limit.
 
-Finally, this identification must also hold under local alternatives. Along any differentiable path $P_{h/\sqrt n,g}$, [Le Cam's third lemma](chapter-6.qmd#lemma-le-cam-third) and contiguity preserve tightness of $Z_n$, and differentiability of $\psi$ preserves tightness after centering at $\psi(P_{h/\sqrt n,g})$. Scalar regularity for the functionals in $\mathbb D'$ gives the same centered coordinate limits. Repeating the preceding extension for each subsequential local limit proves (25.49-all-duals) with the required centered law under every local path. Thus $d^*T_n$ is regular and efficient for every $d^*\in\mathbb D^*$. Together with asymptotic tightness, this is exactly efficiency of $T_n$.
+Finally, this identification must also hold under local alternatives. Along any differentiable path $P_{h/\sqrt n,g}$, [Le Cam's third lemma](chapter-6.qmd#lemma-le-cam-third) and contiguity preserve tightness of $Z_n$, and differentiability of $\psi$ preserves tightness after centering at $\psi(P_{h/\sqrt n,g})$. Scalar regularity for the functionals in $\mathbb D'$ gives the same centered coordinate limits. Repeating the preceding extension for each subsequential local limit proves [(25.49d)](#equation-25-49-all-duals) with the required centered law under every local path. Thus $d^*T_n$ is regular and efficient for every $d^*\in\mathbb D^*$. Together with asymptotic tightness, this is exactly efficiency of $T_n$.
 
 </details>
 
@@ -3151,7 +3256,7 @@ d_i^*\in\mathbb D_i^*,\,\|d_i^*\|\leq1}}
 |d_i^*(d_i)|.
 $$
 
-Thus $\mathbb D'$ satisfies (25.49-norming) with $C=1$. [Lemma 25.49](#lemma-25-49) applied in the product space proves joint efficiency.
+Thus $\mathbb D'$ satisfies [(25.49a)](#equation-25-49-norming) with $C=1$. [Lemma 25.49](#lemma-25-49) applied in the product space proves joint efficiency.
 
 </details>
 
@@ -3226,10 +3331,12 @@ $$
 
 [§25.3](#sec-pathwise-differentiability), [§25.4](#efficient-score-functions), and [§25.5](#sec-semiparametric-score-operators) identify the efficiency bound. §25.8 turns that bound into an estimator. Its main proposal is the semiparametric analogue of the likelihood score equation:
 
+<span id="equation-25-8-score"></span>
+
 $$
 \sum_{i=1}^n
 \widetilde\ell_{\theta,\widehat\eta_n}(X_i)=0.
-\tag{25.8-score}
+\tag{25.8a}
 $$
 
 Here $\widetilde\ell_{\theta,\eta}$ is the [efficient score](#efficient-score), and the unknown nuisance parameter is replaced by an estimate $\widehat\eta_n$. If the equation can be solved and the estimated score is accurate enough, its solution has influence function
@@ -3334,13 +3441,15 @@ Suppose:
 
 Then $\widehat\theta_n$ is asymptotically efficient at $(\theta,\eta)$ and
 
+<span id="equation-25-54-expansion"></span>
+
 $$
 \sqrt n(\widehat\theta_n-\theta)
 =\widetilde I_{\theta,\eta}^{-1}
 \frac1{\sqrt n}\sum_{i=1}^n
 \widetilde\ell_{\theta,\eta}(X_i)
 +o_P(1).
-\tag{25.54-expansion}
+\tag{25.54a}
 $$
 
 :::
@@ -3373,10 +3482,12 @@ $$
 
 The Donsker assumption, $L_2(P)$ consistency in (25.53), and [Lemma 19.24](chapter-19.qmd#lemma-19.24) give
 
+<span id="equation-25-54-equicontinuity"></span>
+
 $$
 \mathbb G_n(\widehat\theta_n,\widehat\eta_n)
 =\mathbb G_nf+o_P(1).
-\tag{25.54-equicontinuity}
+\tag{25.54b}
 $$
 
 The approximate score equation says
@@ -3396,32 +3507,38 @@ P\widehat f
 $$
 
 and (25.52) makes the first term
-$o_P(n^{-1/2}+\|\delta_n\|)$, (25.54-equicontinuity) yields
+$o_P(n^{-1/2}+\|\delta_n\|)$, [(25.54b)](#equation-25-54-equicontinuity) yields
+
+<span id="equation-25-54-population-side"></span>
 
 $$
 \sqrt n(\widehat P-P)\widehat f
 =\mathbb G_nf
 +o_P\{1+\sqrt n\|\delta_n\|\}.
-\tag{25.54-population-side}
+\tag{25.54c}
 $$
 
 It remains to linearize the left side. Choose a common dominating measure $\mu$, and write $p$ and $\widehat p$ for the densities of $P$ and $\widehat P$. Differentiability in quadratic mean gives
+
+<span id="equation-25-54-dqm"></span>
 
 $$
 \sqrt{\widehat p}-\sqrt p
 =\frac12\delta_n^T\dot\ell_{\theta,\eta}\sqrt p+r_n,
 \qquad
 \|r_n\|_{\mu,2}=o_P(\|\delta_n\|).
-\tag{25.54-DQM}
+\tag{25.54d}
 $$
 
 The efficient score is the projection of the ordinary score, so
+
+<span id="equation-25-54-information-identity"></span>
 
 $$
 P f\dot\ell_{\theta,\eta}^T
 =Pff^T
 =\widetilde I_{\theta,\eta}.
-\tag{25.54-information-identity}
+\tag{25.54e}
 $$
 
 Use
@@ -3433,9 +3550,11 @@ $$
 (\sqrt{\widehat p}-\sqrt p)\,d\mu
 $$
 
-and substitute (25.54-DQM). After subtracting
+and substitute [(25.54d)](#equation-25-54-dqm). After subtracting
 $\widetilde I_{\theta,\eta}\delta_n$, the difference is exactly
 $R_{1n}+R_{2n}+R_{3n}$, where
+
+<span id="equation-25-54-three-remainders"></span>
 
 $$
 \begin{aligned}
@@ -3450,10 +3569,10 @@ R_{3n}
 &=\int(\widehat f-f)
 \dot\ell_{\theta,\eta}^Tp\,d\mu\,\delta_n.
 \end{aligned}
-\tag{25.54-three-remainders}
+\tag{25.54f}
 $$
 
-The first part of (25.53) gives $P\|\widehat f-f\|^2=o_P(1)$ and hence $P\|\widehat f\|^2=O_P(1)$; its last part gives $\widehat P\|\widehat f\|^2=O_P(1)$. Cauchy--Schwarz, (25.54-DQM), and these two bounds imply
+The first part of (25.53) gives $P\|\widehat f-f\|^2=o_P(1)$ and hence $P\|\widehat f\|^2=O_P(1)$; its last part gives $\widehat P\|\widehat f\|^2=O_P(1)$. Cauchy--Schwarz, [(25.54d)](#equation-25-54-dqm), and these two bounds imply
 
 $$
 \|R_{1n}\|=o_P(\|\delta_n\|),
@@ -3486,27 +3605,31 @@ The first factor is $O_P(1)$ by (25.53), and the second tends to zero because
 $\dot\ell_{\theta,\eta}\in L_2(P)$. Thus
 $R_{2n}=o_P(\|\delta_n\|)$ as well. We have proved
 
+<span id="equation-25-54-linearization"></span>
+
 $$
 \sqrt n(\widehat P-P)\widehat f
 =\{\widetilde I_{\theta,\eta}+o_P(1)\}
 \sqrt n\,\delta_n.
-\tag{25.54-linearization}
+\tag{25.54g}
 $$
 
-Combining (25.54-population-side) and (25.54-linearization),
+Combining [(25.54c)](#equation-25-54-population-side) and [(25.54g)](#equation-25-54-linearization),
+
+<span id="equation-25-54-preliminary"></span>
 
 $$
 \widetilde I_{\theta,\eta}\sqrt n\,\delta_n
 =\mathbb G_nf
 +o_P\{1+\sqrt n\|\delta_n\|\}.
-\tag{25.54-preliminary}
+\tag{25.54h}
 $$
 
 Because $\widetilde I_{\theta,\eta}$ is nonsingular and
 $\mathbb G_nf=O_P(1)$, the remainder can be absorbed into the left side, proving
 $\sqrt n\delta_n=O_P(1)$. Substitute this rate back into
-(25.54-preliminary) and multiply by
-$\widetilde I_{\theta,\eta}^{-1}$ to obtain (25.54-expansion).
+[(25.54h)](#equation-25-54-preliminary) and multiply by
+$\widetilde I_{\theta,\eta}^{-1}$ to obtain [(25.54a)](#equation-25-54-expansion).
 [Lemma 25.23](#lemma-25-23) then proves efficiency.
 
 </details>
@@ -3536,13 +3659,15 @@ $$
 
 and take the one-step update
 
+<span id="equation-25-8-one-step"></span>
+
 $$
 \widehat\theta_n
 =\widetilde\theta_n
 +\widehat I_n^{-1}
 \frac1n\sum_{i=1}^n
 \widetilde\ell_{\widetilde\theta_n,\widehat\eta_{n,i}}(X_i).
-\tag{25.8-one-step}
+\tag{25.8b}
 $$
 
 This is one Newton--Raphson step toward solving the efficient score equation. The sign is positive because the derivative of the score mean with respect to $\theta$ is $-\widetilde I_{\theta,\eta}$ under the usual score convention.
@@ -3551,13 +3676,17 @@ This is one Newton--Raphson step toward solving the efficient score equation. Th
 
 Kennedy starts from a plug-in estimate $\psi(\widehat P)$ and corrects its first-order bias with an estimated influence function:
 
+<span id="equation-25-8-functional-one-step"></span>
+
 $$
 \widehat\psi_{\mathrm{1step}}
 =\psi(\widehat P)+\mathbb P_n\psi_{\widehat P}^\dagger.
-\tag{25.8-functional-one-step}
+\tag{25.8c}
 $$
 
-This uses the notation of [§25.3](#sec-influence-functions); @kennedy2022 writes $\varphi(\,\cdot\,;\widehat P)$ in place of $\psi_{\widehat P}^\dagger$. Choose the centered representative, so $\widehat P\psi_{\widehat P}^\dagger=0$. The reverse expansion (25.3-von-Mises) then rewrites the plug-in error as $-P\psi_{\widehat P}^\dagger+R_2(\widehat P,P)$. Adding and subtracting the true centered influence function gives the reusable decomposition
+This uses the notation of [§25.3](#sec-influence-functions); @kennedy2022 writes $\varphi(\,\cdot\,;\widehat P)$ in place of $\psi_{\widehat P}^\dagger$. Choose the centered representative, so $\widehat P\psi_{\widehat P}^\dagger=0$. The reverse expansion [(25.3a)](#equation-25-3-von-mises) then rewrites the plug-in error as $-P\psi_{\widehat P}^\dagger+R_2(\widehat P,P)$. Adding and subtracting the true centered influence function gives the reusable decomposition
+
+<span id="equation-25-8-one-step-decomposition"></span>
 
 $$
 \begin{aligned}
@@ -3567,7 +3696,7 @@ $$
 \bigl(\psi_{\widehat P}^\dagger-\psi_P^\dagger\bigr)}_{T_1}
 +\underbrace{R_2(\widehat P,P)}_{T_2}.
 \end{aligned}
-\tag{25.8-one-step-decomposition}
+\tag{25.8d}
 $$
 
 | Term | Role in this chapter |
@@ -3576,7 +3705,7 @@ $$
 | $T_1$ | An estimated-function empirical-process term, handled by [Chapter 19](chapter-19.qmd) and a Donsker condition, or by sample splitting together with $L_2$ and moment control |
 | $T_2$ | The [von Mises remainder](#sec-von-mises-expansion), controlled by the no-bias, orthogonality, and product-rate arguments below |
 
-Fisher and Kennedy's Figure 1B draws (25.8-functional-one-step) as a tangent-line correction. The plug-in value $T(\widetilde P)$ is at one endpoint of the path, the tangent line is extrapolated toward the truth, and the remaining vertical gap is $R_2$. Equation (25.8-one-step) above starts instead from a finite-dimensional $\widetilde\theta_n$ and takes one Newton step on the efficient-score equation. Because $\widetilde I^{-1}\widetilde\ell$ is the efficient influence function, the two formulas have the same first-order architecture; see §3 and fig. 1 of @fisherKennedy2021 and §§4.1–4.3 of @kennedy2022.
+Fisher and Kennedy's Figure 1B draws [(25.8c)](#equation-25-8-functional-one-step) as a tangent-line correction. The plug-in value $T(\widetilde P)$ is at one endpoint of the path, the tangent line is extrapolated toward the truth, and the remaining vertical gap is $R_2$. Equation [(25.8b)](#equation-25-8-one-step) above starts instead from a finite-dimensional $\widetilde\theta_n$ and takes one Newton step on the efficient-score equation. Because $\widetilde I^{-1}\widetilde\ell$ is the efficient influence function, the two formulas have the same first-order architecture; see §3 and fig. 1 of @fisherKennedy2021 and §§4.1–4.3 of @kennedy2022.
 
 Conditional on a training sample, sample splitting makes the fixed-endpoint picture operational: the nuisance fit is held fixed while the other observations average its estimated correction. Machine learning supplies that nuisance fit; the derivative and projection calculations in §§25.3–25.5 determine the correction; and sample splitting supplies the conditional independence used to control $T_1$. The conclusion $T_1=o_P(n^{-1/2})$ still needs $L_2$ convergence, integrability, and the relevant regularity conditions. Orthogonality similarly removes first-order nuisance drift from $T_2$ only when the target-specific remainder calculation verifies it.
 
@@ -3615,7 +3744,7 @@ $$
 
 ### Theorem 25.57: efficiency of the sample-split one-step estimator {#theorem-25-57}
 
-If the model is differentiable in quadratic mean in $\theta$, $\widetilde I_{\theta,\eta}$ is nonsingular, and (25.55)--(25.56) hold, then the sample-split one-step estimator (25.8-one-step) is asymptotically efficient.
+If the model is differentiable in quadratic mean in $\theta$, $\widetilde I_{\theta,\eta}$ is nonsingular, and (25.55)--(25.56) hold, then the sample-split one-step estimator [(25.8b)](#equation-25-8-one-step) is asymptotically efficient.
 
 :::
 
@@ -3656,18 +3785,22 @@ $$
 
 Both right sides converge to zero in probability by (25.55), because the true score has mean zero under $P_{\theta_n,\eta}$. Conditional Chebyshev therefore gives convergence to zero for the first-half average. The same argument with the halves reversed gives
 
+<span id="equation-25-57-split-error"></span>
+
 $$
 \sqrt n\,\mathbb P_n
 \{\widetilde\ell_{\theta_n,\widehat\eta_{n,i}}
 -\widetilde\ell_{\theta_n,\eta}\}
 \overset{P_{\theta_n,\eta}}\longrightarrow0.
-\tag{25.57-split-error}
+\tag{25.57a}
 $$
 
 Differentiability in quadratic mean makes
-$P_{\theta_n,\eta}^{\,n}$ contiguous to $P_{\theta,\eta}^{\,n}$, so (25.57-split-error) also holds under the true sample law.
+$P_{\theta_n,\eta}^{\,n}$ contiguous to $P_{\theta,\eta}^{\,n}$, so [(25.57a)](#equation-25-57-split-error) also holds under the true sample law.
 
 The remaining true-score linearization is the technical implication of DQM and (25.56) used in the source:
+
+<span id="equation-25-57-score-continuity"></span>
 
 $$
 \sqrt n\,\mathbb P_n
@@ -3676,15 +3809,17 @@ $$
 +\widetilde I_{\theta,\eta}
 \sqrt n(\theta_n-\theta)
 \overset P\longrightarrow0.
-\tag{25.57-score-continuity}
+\tag{25.57b}
 $$
 
-**Source-deferred technical step.** Van der Vaart's printed proof cites the score-continuity argument in @vanDerVaart1991Differentiable, p. 185, for (25.57-score-continuity). Its two ingredients are visible here: (25.56) makes the score-weighted square-root densities $L_2$-continuous, which controls the centered empirical difference under contiguous local laws; DQM gives the population drift, and the projection identity
+**Source-deferred technical step.** Van der Vaart's printed proof cites the score-continuity argument in @vanDerVaart1991Differentiable, p. 185, for [(25.57b)](#equation-25-57-score-continuity). Its two ingredients are visible here: (25.56) makes the score-weighted square-root densities $L_2$-continuous, which controls the centered empirical difference under contiguous local laws; DQM gives the population drift, and the projection identity
 $P_{\theta,\eta}\widetilde\ell_{\theta,\eta}
 \dot\ell_{\theta,\eta}^T=\widetilde I_{\theta,\eta}$
-identifies that drift. Thus (25.57-score-continuity) is exactly the technical score lemma invoked by the source, not an additional smooth Taylor assumption.
+identifies that drift. Thus [(25.57b)](#equation-25-57-score-continuity) is exactly the technical score lemma invoked by the source, not an additional smooth Taylor assumption.
 
-Combining (25.57-split-error) and (25.57-score-continuity),
+Combining [(25.57a)](#equation-25-57-split-error) and [(25.57b)](#equation-25-57-score-continuity),
+
+<span id="equation-25-57-local-expansion"></span>
 
 $$
 \sqrt n\,\mathbb P_n
@@ -3693,10 +3828,12 @@ $$
 +\widetilde I_{\theta,\eta}
 \sqrt n(\theta_n-\theta)
 \overset P\longrightarrow0.
-\tag{25.57-local-expansion}
+\tag{25.57c}
 $$
 
-The preliminary estimator is root-$n$ consistent and lies on a grid of mesh $n^{-1/2}$. On every bounded root-$n$ neighborhood, that grid contains only finitely many possible offsets, with a number bounded independently of $n$. If (25.57-local-expansion) failed after replacing $\theta_n$ by $\widetilde\theta_n$, one of those grid values would define a deterministic local sequence along which it failed, contradicting the display. This is precisely the finite-grid argument proved in Theorem 5.48. Hence
+The preliminary estimator is root-$n$ consistent and lies on a grid of mesh $n^{-1/2}$. On every bounded root-$n$ neighborhood, that grid contains only finitely many possible offsets, with a number bounded independently of $n$. If [(25.57c)](#equation-25-57-local-expansion) failed after replacing $\theta_n$ by $\widetilde\theta_n$, one of those grid values would define a deterministic local sequence along which it failed, contradicting the display. This is precisely the finite-grid argument proved in Theorem 5.48. Hence
+
+<span id="equation-25-57-score-expansion"></span>
 
 $$
 \sqrt n\,\mathbb P_n
@@ -3706,7 +3843,7 @@ $$
 -\widetilde I_{\theta,\eta}
 \sqrt n(\widetilde\theta_n-\theta)
 +o_P(1).
-\tag{25.57-score-expansion}
+\tag{25.57d}
 $$
 
 It remains to estimate information. For every fixed $a\in\mathbb R^k$, the triangle inequality in empirical $L_2$ gives
@@ -3737,7 +3874,7 @@ $$
 
 The same discretization argument replaces $\theta_n$ by
 $\widetilde\theta_n$, so $\widehat I_n\to_P\widetilde I_{\theta,\eta}$.
-Finally, substitute (25.57-score-expansion) into the one-step definition:
+Finally, substitute [(25.57d)](#equation-25-57-score-expansion) into the one-step definition:
 
 $$
 \begin{aligned}
@@ -3927,12 +4064,14 @@ $$
 
 With two nuisance functions, orthogonality often gives the sharper product remainder
 
+<span id="equation-25-8-dml-product-rate"></span>
+
 $$
 \sqrt n\,
 \|\widehat\eta_1-\eta_{1,0}\|_2
 \|\widehat\eta_2-\eta_{2,0}\|_2
 =o_P(1).
-\tag{25.8-DML-product-rate}
+\tag{25.8e}
 $$
 
 The two estimators need not have the same rate: one may converge slowly if the other is sufficiently accurate. These conditions do not replace (25.55) or (25.58); they are convenient, model-specific ways to verify the required $o_P(n^{-1/2})$ population mean [@chernozhukovEtAl2018].
@@ -4016,11 +4155,13 @@ $$
 
 If $\widehat k_n$ estimates the logarithmic derivative $g'/g$, define the odd score estimate
 
+<span id="equation-25-61-score"></span>
+
 $$
 \widehat\ell_{n,\theta}(x)
 =-\widehat k_n(|x-\theta|)
 \operatorname{sign}(x-\theta).
-\tag{25.61-score}
+\tag{25.61a}
 $$
 
 This construction separates the problem into two pieces:
@@ -4028,7 +4169,7 @@ This construction separates the problem into two pieces:
 - estimate the magnitude of the score on $[0,\infty)$;
 - restore its sign by an odd extension around $\theta$.
 
-Because every symmetric distribution integrates an odd function to zero, (25.61-score) has **exactly zero bias**. The difficult part of (25.58) reduces to
+Because every symmetric distribution integrates an odd function to zero, [(25.61a)](#equation-25-61-score) has **exactly zero bias**. The difficult part of (25.58) reduces to
 
 $$
 \int_0^\infty
@@ -4130,13 +4271,15 @@ $$
 
 The pointwise variances satisfy
 
+<span id="equation-25-64-var"></span>
+
 $$
 \operatorname{var}\{\widehat g_n(s)\}
 \leq\frac{\|\omega\|_\infty^2}{n\sigma_n^2},
 \qquad
 \operatorname{var}\{\widehat g_n'(s)\}
 \leq\frac{\|\omega'\|_\infty^2}{n\sigma_n^4}.
-\tag{25.64-var}
+\tag{25.64a}
 $$
 
 For $s\geq\gamma_n\geq\sigma_n$,
@@ -4148,13 +4291,17 @@ $$
 
 Consequently, $\widehat g_n(s)\to g(s)$ in probability at every continuity point. Translation continuity in $L_1$ also gives
 
+<span id="equation-25-64-l1"></span>
+
 $$
 \mathbf 1_{[\sigma_n,\infty)}g_n'\longrightarrow g'
 \qquad\text{in }L_1.
-\tag{25.64-L1}
+\tag{25.64b}
 $$
 
 Consider first the complement of $\widehat B_n$. Its expected contribution to (25.62) is
+
+<span id="equation-25-64-discard"></span>
 
 $$
 \int
@@ -4166,10 +4313,10 @@ P\!\left\{
 \quad\text{or}\quad
 s<\gamma_n
 \right\}ds.
-\tag{25.64-discard}
+\tag{25.64c}
 $$
 
-For every $s$ with $g(s)>0$, the density event has probability tending to zero. By (25.64-var),
+For every $s$ with $g(s)>0$, the density event has probability tending to zero. By [(25.64a)](#equation-25-64-var),
 
 $$
 P\{|\widehat g_n'(s)|>\alpha_n\}
@@ -4177,9 +4324,11 @@ P\{|\widehat g_n'(s)|>\alpha_n\}
 \mathbf 1\{|g_n'(s)|>\alpha_n/2\}+o(1).
 $$
 
-The Lebesgue measure of the displayed level set tends to zero by (25.64-L1) and $\alpha_n\to\infty$. Since $\gamma_n\to0$, dominated convergence applied to (25.64-discard) proves that the discarded contribution tends to zero.
+The Lebesgue measure of the displayed level set tends to zero by [(25.64b)](#equation-25-64-l1) and $\alpha_n\to\infty$. Since $\gamma_n\to0$, dominated convergence applied to [(25.64c)](#equation-25-64-discard) proves that the discarded contribution tends to zero.
 
 On $\widehat B_n$, decompose
+
+<span id="equation-25-64-decomp"></span>
 
 $$
 \begin{aligned}
@@ -4194,10 +4343,12 @@ $$
 +\left(\frac{g_n'}{g_n^{1/2}}
 -\frac{g'}{g^{1/2}}\right).
 \end{aligned}
-\tag{25.64-decomp}
+\tag{25.64d}
 $$
 
-Up to a universal multiplicative constant, the square of (25.64-decomp) is bounded there by
+Up to a universal multiplicative constant, the square of [(25.64d)](#equation-25-64-decomp) is bounded there by
+
+<span id="equation-25-64-bound"></span>
 
 $$
 \frac{\alpha_n^2}{\beta_n^2}|g_n-g|
@@ -4208,7 +4359,7 @@ $$
 +\left(
 \frac{g_n'}{g_n^{1/2}}-\frac{g'}{g^{1/2}}
 \right)^2.
-\tag{25.64-bound}
+\tag{25.64e}
 $$
 
 The integrated expectation of the first term is bounded by
@@ -4219,7 +4370,9 @@ $$
 \int |y|\omega(y)\,dy,
 $$
 
-which tends to zero. By (25.64-var), the second and third terms contribute at most
+which tends to zero. By [(25.64a)](#equation-25-64-var), the second and third terms contribute at most
+
+<span id="equation-25-64-stochastic"></span>
 
 $$
 \frac{\|\omega'\|_\infty^2}
@@ -4228,12 +4381,14 @@ $$
 \frac{\|\omega\|_\infty^2}
 {n\sigma_n^2\beta_n^2}
 \int\left(\frac{g_n'}{g_n^{1/2}}\right)^2ds.
-\tag{25.64-stochastic}
+\tag{25.64f}
 $$
 
-The first expression in (25.64-stochastic) vanishes by $n\sigma_n^4\beta_n^2\to\infty$; the second does too once the last integral is shown uniformly bounded.
+The first expression in [(25.64f)](#equation-25-64-stochastic) vanishes by $n\sigma_n^4\beta_n^2\to\infty$; the second does too once the last integral is shown uniformly bounded.
 
 That bound and convergence of the fourth term follow from one Cauchy–Schwarz inequality:
+
+<span id="equation-25-64-information"></span>
 
 $$
 \frac{\left\{\int g'(s-\sigma_n y)\omega(y)\,dy\right\}^2}
@@ -4242,27 +4397,31 @@ $$
 \int
 \frac{g'(s-\sigma_n y)^2}{g(s-\sigma_n y)}
 \omega(y)\,dy.
-\tag{25.64-information}
+\tag{25.64g}
 $$
 
 If $B^{\sigma_n}$ is the $\sigma_n$-enlargement of a measurable set $B$, Fubini's theorem gives
+
+<span id="equation-25-64-contraction"></span>
 
 $$
 \int_B\left(\frac{g_n'}{g_n^{1/2}}\right)^2ds
 \leq
 \int_{B^{\sigma_n}}
 \left(\frac{g'}{g^{1/2}}\right)^2ds.
-\tag{25.64-contraction}
+\tag{25.64h}
 $$
 
 Taking $B=\mathbb R$ gives the exact norm bound
+
+<span id="equation-25-64-norm-bound"></span>
 
 $$
 \limsup_{n\to\infty}
 \int\left(\frac{g_n'}{g_n^{1/2}}\right)^2ds
 \leq
 \int\left(\frac{g'}{g^{1/2}}\right)^2ds.
-\tag{25.64-norm-bound}
+\tag{25.64i}
 $$
 
 Here is the convergence criterion used at this final step, stated locally so that no result from an omitted part of Chapter 2 is hidden: if $f_n\to f$ in measure and, for some $p\geq1$,
@@ -4274,7 +4433,7 @@ $$
 
 then $\int|f_n-f|^p\,d\mu\to0$. This is Proposition 2.29 of the source, proved by applying Fatou's lemma to $2^p|f_n|^p+2^p|f|^p-|f_n-f|^p$.
 
-To verify its hypotheses with $p=2$, let $B=\{g=0\}$. Finite Fisher information makes $g$ continuous, so the enlargements $B^{\sigma_n}$ decrease to $B$; moreover $g'=0$ almost everywhere on $B$. Equation (25.64-contraction) therefore shows that the squared $L_2$ mass of $g_n'/g_n^{1/2}$ on $B$ tends to zero. On $B^c=\{g>0\}$, convolution approximation gives
+To verify its hypotheses with $p=2$, let $B=\{g=0\}$. Finite Fisher information makes $g$ continuous, so the enlargements $B^{\sigma_n}$ decrease to $B$; moreover $g'=0$ almost everywhere on $B$. Equation [(25.64h)](#equation-25-64-contraction) therefore shows that the squared $L_2$ mass of $g_n'/g_n^{1/2}$ on $B$ tends to zero. On $B^c=\{g>0\}$, convolution approximation gives
 
 $$
 \frac{g_n'}{g_n^{1/2}}
@@ -4282,7 +4441,7 @@ $$
 \frac{g'}{g^{1/2}}
 $$
 
-in Lebesgue measure. Thus convergence holds in measure on all of $\mathbb R$, while (25.64-norm-bound) verifies the required limsup inequality. The stated criterion now gives
+in Lebesgue measure. Thus convergence holds in measure on all of $\mathbb R$, while [(25.64i)](#equation-25-64-norm-bound) verifies the required limsup inequality. The stated criterion now gives
 
 $$
 \int
@@ -4291,7 +4450,7 @@ $$
 \right)^2ds\longrightarrow0.
 $$
 
-Every term in (25.64-bound) therefore has integrated expectation tending to zero. Together with the discarded-region bound and Markov's inequality, this proves (25.62).
+Every term in [(25.64e)](#equation-25-64-bound) therefore has integrated expectation tending to zero. Together with the discarded-region bound and Markov's inequality, this proves (25.62).
 
 </details>
 
@@ -4330,6 +4489,8 @@ is sufficient and complete for $\eta$. Here $\psi_\theta(X,Y)$ names a complete 
 
 Let $\dot\ell_{\theta,\eta}$ be the ordinary finite-dimensional score and define the conditional score
 
+<span id="equation-25-8-conditional-score"></span>
+
 $$
 \widetilde\ell_{\theta,\eta}(X,Y)
 =\dot\ell_{\theta,\eta}(X,Y)
@@ -4337,10 +4498,10 @@ $$
 \dot\ell_{\theta,\eta}(X,Y)
 \mid\psi_\theta(X,Y)
 \right].
-\tag{25.8-conditional-score}
+\tag{25.8f}
 $$
 
-This subtraction is an orthogonal projection, just as in the [projection lemma](#projection-lemma). The closed nuisance-score space consists of the mean-zero square-integrable functions of the complete sufficient statistic $\psi_\theta(X,Y)$. Conditional expectation projects the ordinary score onto that space, so the residual in (25.8-conditional-score) is the efficient score.
+This subtraction is an orthogonal projection, just as in the [projection lemma](#projection-lemma). The closed nuisance-score space consists of the mean-zero square-integrable functions of the complete sufficient statistic $\psi_\theta(X,Y)$. Conditional expectation projects the ordinary score onto that space, so the residual in [(25.8f)](#equation-25-8-conditional-score) is the efficient score.
 
 Even better, the conditional score is unbiased across nuisance values:
 
@@ -4368,13 +4529,15 @@ the remaining Donsker and envelope conditions in [Theorem 25.54](#theorem-25-54)
 
 For every $0<\alpha\leq1$, every probability distribution $\eta_0$ on $\mathbb R$, and every compact $K\subset(0,\infty)$, there is a weakly open neighborhood $U$ of $\eta_0$ such that the following holds. Let $\mathcal F$ contain the functions
 
+<span id="equation-25-65-class"></span>
+
 $$
 (x,y)\longmapsto
 (a_0+a_1x+a_2y)
 \frac{
 \int z e^{z(b_0+b_1x+b_2y)}e^{-cz^2}\,d\eta(z)}
 {\int e^{z(b_0+b_1x+b_2y)}e^{-cz^2}\,d\eta(z)},
-\tag{25.65-class}
+\tag{25.65a}
 $$
 
 where $\eta\in U$, $c\in K$, and $a=(a_0,a_1,a_2)$ and $b=(b_0,b_1,b_2)$ range over fixed compact subsets of $\mathbb R^3$. For every $V\geq1/\alpha$, every measure $P$ on $\mathbb R^2$, and every $\delta>0$,
@@ -4393,7 +4556,7 @@ where $C$ depends only on $\alpha,\eta_0,U,V$, the compact coefficient sets, and
 
 :::
 
-**How the lemma is used.** The conditional-score coordinates are a quadratic polynomial in $(x,y)$ plus a linear polynomial times a conditional moment of $Z$, and that conditional moment has the ratio form (25.65-class). Choose $\alpha$ just above $1/2$ and $V<2$ close enough to $2$ while retaining $V\geq1/\alpha$. Then the entropy integral is finite and the envelope exponent can be taken below $9$ by choosing $\delta$ small. The assumed ninth moment and [Theorem 19.5](chapter-19.qmd#theorem-19-5) therefore make the local conditional-score class Donsker.
+**How the lemma is used.** The conditional-score coordinates are a quadratic polynomial in $(x,y)$ plus a linear polynomial times a conditional moment of $Z$, and that conditional moment has the ratio form [(25.65a)](#equation-25-65-class). Choose $\alpha$ just above $1/2$ and $V<2$ close enough to $2$ while retaining $V\geq1/\alpha$. Then the entropy integral is finite and the envelope exponent can be taken below $9$ by choosing $\delta$ small. The assumed ninth moment and [Theorem 19.5](chapter-19.qmd#theorem-19-5) therefore make the local conditional-score class Donsker.
 
 **Proof roadmap.** First bracket a one-dimensional family of exponentially tilted conditional means on consecutive unit intervals. Transfer those brackets to $(x,y)$ through the affine index $b_0+b_1x+b_2y$ and weight $a_0+a_1x+a_2y$. Finally discretize the finite-dimensional coefficients; this adds only polynomially many grid points and does not change the leading entropy exponent.
 
@@ -4406,27 +4569,31 @@ The following argument adapts the detailed calculation in @murphyVanDerVaart1996
 
 Write
 
+<span id="equation-25-65-g"></span>
+
 $$
 g_{c,\eta}(t)
 =
 \frac{\int z e^{zt}e^{-cz^2}\,d\eta(z)}
 {\int e^{zt}e^{-cz^2}\,d\eta(z)}.
-\tag{25.65-g}
+\tag{25.65b}
 $$
 
 Uniformly for $c$ in the fixed compact set, Jensen's inequality and exponential-tilting bounds give a weak neighborhood $U$ of $\eta_0$ and a constant $C$ such that
+
+<span id="equation-25-65-growth"></span>
 
 $$
 |g_{c,\eta}(t)|\leq C(1+|t|),
 \qquad
 |g_{c,\eta}'(t)|\leq C(1+|t|)^2,
 \qquad \eta\in U.
-\tag{25.65-growth}
+\tag{25.65c}
 $$
 
 The second derivative identity is especially transparent: $g_{c,\eta}'(t)$ is the variance of $z$ under the probability measure proportional to $e^{zt-cz^2}d\eta(z)$. The nontrivial uniformity over $\eta\in U$ is the specialized analytic estimate imported from the cited lemma.
 
-Partition $\mathbb R$ into $I_j=[j,j+1)$. On $I_j$, (25.65-growth) places the restrictions of all $g_{c,\eta}$ in a class with both sup norm and derivative sup norm bounded by
+Partition $\mathbb R$ into $I_j=[j,j+1)$. On $I_j$, [(25.65c)](#equation-25-65-growth) places the restrictions of all $g_{c,\eta}$ in a class with both sup norm and derivative sup norm bounded by
 
 $$
 M_j\lesssim(1+|j|)^2.
@@ -4440,12 +4607,14 @@ $$
 
 for the measure $Q$ used below, taking a single coarse bracket in all sufficiently remote intervals. Optimizing this allocation with the polynomial growth $M_j$ gives, for every $V\geq1/\alpha$ and $\delta>0$, the weighted entropy bound whose substitution below is
 
+<span id="equation-25-65-weighted-bound"></span>
+
 $$
 C\varepsilon^{-V}
 \left[
 P(1+|x|+|y|)^{5+2\alpha+4/V+\delta}
 \right]^{V/2}.
-\tag{25.65-weighted-bound}
+\tag{25.65d}
 $$
 
 This interval allocation is where the otherwise opaque exponent in (25.65) comes from.
@@ -4458,7 +4627,9 @@ A(x,y)=a_0+a_1x+a_2y,
 T(x,y)=b_0+b_1x+b_2y.
 $$
 
-If $[l,u]$ brackets the functions $g_{c,\eta}$, then the functions in (25.65-class) are bracketed by
+If $[l,u]$ brackets the functions $g_{c,\eta}$, then the functions in [(25.65a)](#equation-25-65-class) are bracketed by
+
+<span id="equation-25-65-transfer-bracket"></span>
 
 $$
 \left[
@@ -4466,19 +4637,21 @@ A^+l(T)-A^-u(T),
 \;
 A^+u(T)-A^-l(T)
 \right].
-\tag{25.65-transfer-bracket}
+\tag{25.65e}
 $$
 
-The squared $L_2(P)$ size of (25.65-transfer-bracket) equals the squared $L_2(Q)$ size of $[l,u]$ for
+The squared $L_2(P)$ size of [(25.65e)](#equation-25-65-transfer-bracket) equals the squared $L_2(Q)$ size of $[l,u]$ for
+
+<span id="equation-25-65-q"></span>
 
 $$
 Q(B)
 =\int
 \mathbf 1_B\{T(x,y)\}A(x,y)^2\,dP(x,y).
-\tag{25.65-Q}
+\tag{25.65f}
 $$
 
-Thus the one-dimensional construction gives (25.65-weighted-bound) for fixed $(a,b)$.
+Thus the one-dimensional construction gives [(25.65d)](#equation-25-65-weighted-bound) for fixed $(a,b)$.
 
 It remains to make the brackets uniform over the compact coefficient sets. For fixed $(x,y)$, the map
 
@@ -4541,12 +4714,14 @@ The efficient influence function is the minimum-variance member of a larger fami
 
 Suppose $T_n$ estimates a scalar functional $\psi(P)$ and is root-$n$ consistent, [regular](#regular-estimators), and asymptotically linear:
 
+<span id="equation-25-9-al"></span>
+
 $$
 \sqrt n\{T_n-\psi(P)\}
 =\frac1{\sqrt n}\sum_{i=1}^n
 \psi_P^\dagger(X_i)
 +o_P(1).
-\tag{25.9-AL}
+\tag{25.9a}
 $$
 
 Regularity forces $\psi_P^\dagger$ to be an [influence function](#influence-functions) for $\psi(P)$. If $\widetilde\psi_P$ is the efficient influence function, then
@@ -4576,10 +4751,12 @@ $$
 
 Because $\widetilde\psi_P$ lies in the closed tangent space while $r_P$ is orthogonal to it,
 
+<span id="equation-25-9-variance"></span>
+
 $$
 P(\psi_P^\dagger)^2
 =P\widetilde\psi_P^2+Pr_P^2.
-\tag{25.9-variance}
+\tag{25.9b}
 $$
 
 For a vector target, the same decomposition holds for covariance matrices:
@@ -4617,10 +4794,12 @@ $$
 
 or equivalently
 
+<span id="equation-25-9-ee"></span>
+
 $$
 \sum_{i=1}^n
 \varphi_{\widehat\theta_n,\tau}(X_i)=0.
-\tag{25.9-EE}
+\tag{25.9c}
 $$
 
 An estimating function and the resulting influence function differ by a derivative normalization. To avoid confusion with the score operator $A_\eta$ in §25.5, define the sensitivity matrix by
@@ -4635,13 +4814,15 @@ $$
 
 and assume that it is nonsingular. This convention makes $J_{\theta,\tau}$ a $k\times k$ matrix. The ordinary Z-estimator expansion gives
 
+<span id="equation-25-9-z"></span>
+
 $$
 \sqrt n(\widehat\theta_n-\theta)
 =J_{\theta,\tau}^{-1}
 \frac1{\sqrt n}\sum_{i=1}^n
 \varphi_{\theta,\tau}(X_i)
 +o_P(1).
-\tag{25.9-Z}
+\tag{25.9d}
 $$
 
 Therefore the estimator's influence function is
@@ -4651,7 +4832,7 @@ $$
 =J_{\theta,\tau}^{-1}\varphi_{\theta,\tau}.
 $$
 
-If $\varphi_{\theta,\tau}$ has already been normalized as an influence function, then $J_{\theta,\tau}=I$ and (25.9-EE) can be read directly. Multiplying an estimating equation by a fixed nonsingular matrix does not change its root, which is why the book sometimes identifies influence functions only “up to a constant.” The symbol $J$ is a clarification local to these notes; it does not change van der Vaart's estimating functions.
+If $\varphi_{\theta,\tau}$ has already been normalized as an influence function, then $J_{\theta,\tau}=I$ and [(25.9c)](#equation-25-9-ee) can be read directly. Multiplying an estimating equation by a fixed nonsingular matrix does not change its root, which is why the book sometimes identifies influence functions only “up to a constant.” The symbol $J$ is a clarification local to these notes; it does not change van der Vaart's estimating functions.
 
 **Builds on.** This is the finite-dimensional version of the empirical-process linearization in [Theorem 19.26](chapter-19.qmd#theorem-19-26-infinite-dimensional-z-estimation).
 
@@ -4741,11 +4922,13 @@ $$
 
 and asymptotic variance
 
+<span id="equation-25-66-variance"></span>
+
 $$
 P(\psi_h^\dagger)^2
 =\frac{E\{v(X)h(X)^2\}}
 {\bigl[E\{\dot g_\theta(X)h(X)\}\bigr]^2}.
-\tag{25.66-variance}
+\tag{25.66a}
 $$
 
 Cauchy--Schwarz gives
@@ -4814,12 +4997,14 @@ In this modern notation, $W=(Y,D,X)$ denotes one observed data vector.
 
 The DML partialling-out score is
 
+<span id="equation-25-66-dml"></span>
+
 $$
 \psi(W;\theta,\ell,m)
 =
 \bigl[Y-\ell(X)-\theta\{D-m(X)\}\bigr]
 \{D-m(X)\}.
-\tag{25.66-DML}
+\tag{25.66b}
 $$
 
 The residualized treatment $D-m_0(X)$ plays the role of the weight $h$: it is conditionally centered and hence orthogonal to perturbations of the outcome regression. Estimating $\ell_0$ and $m_0$ by machine learning, cross-fitting them, and solving the resulting equation turns the general regression principle in Example 25.66 into the partially linear DML estimator [@chernozhukovEtAl2018].
@@ -4838,11 +5023,13 @@ To keep the roles clear, let:
 - $V$ denote the part observed for everyone;
 - $\Delta=1$ indicate that $W$ is observed;
 - $\pi(V)=P(\Delta=1\mid V)$ be known and bounded away from zero;
-- $\varphi_{\theta,\tau}(W)$ be a candidate full-data influence function, already given the derivative normalization from (25.9-Z).
+- $\varphi_{\theta,\tau}(W)$ be a candidate full-data influence function, already given the derivative normalization from [(25.9d)](#equation-25-9-z).
 
 Write $O$ for the observed record, consisting of $(V,\Delta)$ together with $W$ when $\Delta=1$.
 
 Under missing at random, an observed-data estimating function is
+
+<span id="equation-25-67-if"></span>
 
 $$
 \Phi_{\theta,\tau,c}(O;\pi)
@@ -4852,7 +5039,7 @@ $$
 -
 \frac{\Delta-\pi(V)}{\pi(V)}
 c(V).
-\tag{25.67-IF}
+\tag{25.67a}
 $$
 
 The corresponding estimating equation is
@@ -4901,12 +5088,14 @@ for every $c$. Hence a fixed or data-dependent augmentation does not create firs
 
 The influence function can also be written
 
+<span id="equation-25-67-augmented"></span>
+
 $$
 \Phi_{\theta,\tau,c}(O;\pi)
 =c(V)
 +\frac{\Delta}{\pi(V)}
 \{\varphi_{\theta,\tau}(W)-c(V)\}.
-\tag{25.67-augmented}
+\tag{25.67b}
 $$
 
 For a fixed full-data influence function, conditional variance is minimized by
@@ -4937,7 +5126,9 @@ $$
 c_0(V)=E\{\varphi_{\theta_0,\tau}(W)\mid V\}.
 $$
 
-For arbitrary working functions $\bar\pi$ and $\bar c$, the mean of (25.67-augmented) at the truth is
+For arbitrary working functions $\bar\pi$ and $\bar c$, the mean of [(25.67b)](#equation-25-67-augmented) at the truth is
+
+<span id="equation-25-67-double-robust"></span>
 
 $$
 P\Phi_{\theta_0,\tau,\bar c}(O;\bar\pi)
@@ -4946,10 +5137,10 @@ E\left[
 \left\{1-\frac{\pi_0(V)}{\bar\pi(V)}\right\}
 \{\bar c(V)-c_0(V)\}
 \right].
-\tag{25.67-double-robust}
+\tag{25.67c}
 $$
 
-It vanishes if either $\bar\pi=\pi_0$ or $\bar c=c_0$. Van der Vaart does not name or develop this union-model robustness result, but his augmented estimating equation already has the required form. Under positivity, the same display bounds the bias by a product of nuisance errors, connecting directly to (25.8-DML-product-rate).
+It vanishes if either $\bar\pi=\pi_0$ or $\bar c=c_0$. Van der Vaart does not name or develop this union-model robustness result, but his augmented estimating equation already has the required form. Under positivity, the same display bounds the bias by a product of nuisance errors, connecting directly to [(25.8e)](#equation-25-8-dml-product-rate).
 
 For the average treatment effect under unconfoundedness, set
 
@@ -4971,6 +5162,8 @@ $$
 
 Kennedy's §3.4.3 first pretends that $X$ is discrete, writes $p(x)=P(X=x)$, and expresses $\theta_d(P)=\sum_x\mu_d(x)p(x)$. The two elementary building blocks are
 
+<span id="equation-25-67-aipw-building-blocks"></span>
+
 $$
 \operatorname{IF}\{\mu_d(x)\}
 =\frac{\mathbf 1\{D=d,X=x\}}{p_d(x)p(x)}
@@ -4978,10 +5171,12 @@ $$
 \qquad
 \operatorname{IF}\{p(x)\}
 =\mathbf 1\{X=x\}-p(x).
-\tag{25.67-AIPW-building-blocks}
+\tag{25.67d}
 $$
 
 The [influence-function product rule](#sec-if-construction) then separates two ways the target changes:
+
+<span id="equation-25-67-treatment-mean-if"></span>
 
 $$
 \begin{aligned}
@@ -4994,18 +5189,20 @@ $$
 \{Y-\mu_d(X)\}
 +\mu_d(X)-\theta_d(P).
 \end{aligned}
-\tag{25.67-treatment-mean-IF}
+\tag{25.67e}
 $$
 
 The inverse-probability residual is the conditional-mean building block: it records perturbations of the conditional outcome law. The term $\mu_d(X)-\theta_d(P)$ records perturbations of the marginal law of $X$. There is no **additional derivative component** for the treatment mechanism because $P(D=d\mid X)$ does not appear in the target functional itself; the propensity $p_d(X)$ still appears as the Riesz-representation weight that transports the conditional residual. This decomposition is worked out by the shortcut in @kennedy2022, §3.4.3, and verified by general score calculations in its Appendix A.1.
 
-The discrete calculation generates the candidate. For continuous $X$, the pointwise regression value $\mu_d(x)$ is generally not itself pathwise differentiable in an unrestricted model, and point-mass contamination need not be a regular path. The averaged target $P\mu_d(X)$ can still be pathwise differentiable under positivity and regularity, but (25.67-treatment-mean-IF) must be checked against arbitrary admissible scores.
+The discrete calculation generates the candidate. For continuous $X$, the pointwise regression value $\mu_d(x)$ is generally not itself pathwise differentiable in an unrestricted model, and point-mass contamination need not be a regular path. The averaged target $P\mu_d(X)$ can still be pathwise differentiable under positivity and regularity, but [(25.67e)](#equation-25-67-treatment-mean-if) must be checked against arbitrary admissible scores.
 
 Finally, the ATE functional is $\theta_1(P)-\theta_0(P)$. Linearity therefore says to subtract the $d=0$ influence function from the $d=1$ influence function, which produces the AIPW score below rather than requiring it to be memorized.
 
 In the following DML display, $W=(Y,D,X)$ again denotes the observed data vector; this is separate from the full-data label $W$ used earlier in Example 25.67.
 
 Taking the difference of the two treatment-specific mean influence functions gives the familiar orthogonal AIPW score
+
+<span id="equation-25-67-ate-dml"></span>
 
 $$
 \begin{aligned}
@@ -5014,10 +5211,10 @@ $$
 +\frac{D}{e(X)}\{Y-\mu_1(X)\}\\
 &-\frac{1-D}{1-e(X)}\{Y-\mu_0(X)\}-\theta.
 \end{aligned}
-\tag{25.67-ATE-DML}
+\tag{25.67f}
 $$
 
-DML estimates $(\mu_0,\mu_1,e)$ on training folds and evaluates this score on held-out folds. In the [one-step decomposition](#sec-25-8-one-step), cross-fitting supplies the conditional independence used to control the estimated-function empirical-process term, together with $L_2$ convergence and moment bounds; the product identity (25.67-double-robust) supplies target-specific remainder control, as discussed in §§4.2–4.3 of @kennedy2022 and @chernozhukovEtAl2018. Causal interpretation additionally requires identification assumptions—most importantly consistency, conditional exchangeability, and overlap—which are not supplied by the missing-data geometry alone.
+DML estimates $(\mu_0,\mu_1,e)$ on training folds and evaluates this score on held-out folds. In the [one-step decomposition](#sec-25-8-one-step), cross-fitting supplies the conditional independence used to control the estimated-function empirical-process term, together with $L_2$ convergence and moment bounds; the product identity [(25.67c)](#equation-25-67-double-robust) supplies target-specific remainder control, as discussed in §§4.2–4.3 of @kennedy2022 and @chernozhukovEtAl2018. Causal interpretation additionally requires identification assumptions—most importantly consistency, conditional exchangeability, and overlap—which are not supplied by the missing-data geometry alone.
 
 :::
 
@@ -5029,7 +5226,7 @@ The reusable strategy is:
 2. select a convenient parametrization $\varphi_{\theta,\tau}$;
 3. solve its estimating equation, including the derivative normalization when necessary;
 4. estimate $\tau$ only as accurately as required for $L_2$ stability and no bias;
-5. compare the resulting variance with the efficient bound using (25.9-variance).
+5. compare the resulting variance with the efficient bound using [(25.9b)](#equation-25-9-variance).
 
 The two examples show the same pattern in different forms:
 
@@ -5084,9 +5281,11 @@ These constructions may overlap. The Cox example uses point masses for a cumulat
 
 Here **empirical likelihood** means the point-mass criterion
 
+<span id="equation-25-10-empirical-likelihood"></span>
+
 $$
 P\longmapsto\prod_{i=1}^nP\{X_i\}.
-\tag{25.10-empirical-likelihood}
+\tag{25.10a}
 $$
 
 This is not the same construction as Owen's moment-constrained empirical likelihood, although both assign probability masses to observed points.
@@ -5144,11 +5343,13 @@ The point-mass likelihood succeeds because it optimizes the probability assigned
 
 For a parameter $(\theta,\eta)$ with finite-dimensional target $\theta$ and nuisance parameter $\eta$, the [profile likelihood](https://en.wikipedia.org/wiki/Profile_likelihood) is defined by
 
+<span id="equation-25-10-profile"></span>
+
 $$
 L_n^{\mathrm{prof}}(\theta)
 =
 \sup_{\eta}L_n(\theta,\eta).
-\tag{25.10-profile}
+\tag{25.10b}
 $$
 
 Maximizing first over $\eta$ and then over $\theta$ gives the same target component $\widehat\theta$ as joint maximization:
@@ -5198,13 +5399,15 @@ $$
 
 To obtain a finite-dimensional empirical likelihood, replace the instantaneous hazard values by jumps $\Lambda\{t_i\}$ at the observed death times:
 
+<span id="equation-25-69-full"></span>
+
 $$
 L_n(\theta,\Lambda)
 =
 \prod_{i=1}^n
 e^{\theta^TZ_i}\Lambda\{T_i\}
 \exp\{-e^{\theta^TZ_i}\Lambda(T_i)\}.
-\tag{25.69-full}
+\tag{25.69a}
 $$
 
 The likelihood itself forces the maximizing $\widehat\Lambda$ to be a step function supported on the observed death times. Assuming distinct death times, let
@@ -5215,15 +5418,19 @@ $$
 
 be the risk set just before $T_k$. For fixed $\theta$, differentiating with respect to the jump at $T_k$ gives
 
+<span id="equation-25-69-baseline"></span>
+
 $$
 \widehat\Lambda_\theta\{T_k\}
 =
 \frac{1}
 {\sum_{j\in R_k}e^{\theta^TZ_j}}.
-\tag{25.69-baseline}
+\tag{25.69b}
 $$
 
 Substitution into the full likelihood yields, up to the constant $e^{-n}$,
+
+<span id="equation-25-69-partial"></span>
 
 $$
 L_n^{\mathrm{prof}}(\theta)
@@ -5231,7 +5438,7 @@ L_n^{\mathrm{prof}}(\theta)
 \prod_{i=1}^n
 \frac{e^{\theta^TZ_i}}
 {\sum_{j:T_j\geq T_i}e^{\theta^TZ_j}}.
-\tag{25.69-partial}
+\tag{25.69c}
 $$
 
 This is the **Cox partial likelihood**.
@@ -5250,7 +5457,7 @@ Thus the partial likelihood can be understood in two equivalent ways:
 - algebraically, it is the profile likelihood after eliminating the baseline-hazard jumps;
 - probabilistically, it is a product of conditional risk-set probabilities.
 
-After maximizing (25.69-partial), the baseline cumulative hazard estimate has jumps
+After maximizing [(25.69c)](#equation-25-69-partial), the baseline cumulative hazard estimate has jumps
 
 $$
 \widehat\Lambda\{T_k\}
@@ -5318,23 +5525,27 @@ Maximum likelihood does not bypass the efficient-score argument. In this example
 
 Let $X=(V,W,Y)$ with $Y\in\{0,1\}$ and
 
+<span id="equation-25-71-model"></span>
+
 $$
 P_{\theta,\eta}(Y=1\mid V,W)
 =
 \Psi\{\theta V+\eta(W)\},
 \qquad
 \Psi(u)=\frac1{1+e^{-u}}.
-\tag{25.71-model}
+\tag{25.71a}
 $$
 
 The scalar $\theta$ is the target and the smooth function $\eta$ is the nuisance parameter. A typical Sobolev roughness measure is
+
+<span id="equation-25-71-roughness"></span>
 
 $$
 J^2(\eta)
 =
 \int_0^1\{\eta^{(k)}(w)\}^2\,dw,
 \qquad k\geq1.
-\tag{25.71-roughness}
+\tag{25.71b}
 $$
 
 #### Why the unrestricted maximum fails
@@ -5364,24 +5575,28 @@ slowly, or over a growing spline space.
 
 **Penalized likelihood.** Maximize
 
+<span id="equation-25-71-penalized"></span>
+
 $$
 (\theta,\eta)
 \longmapsto
 \mathbb P_n\log p_{\theta,\eta}
 -\widehat\lambda_n^2J^2(\eta).
-\tag{25.71-penalized}
+\tag{25.71c}
 $$
 
 A large $\widehat\lambda_n$ forces a smoother nuisance estimate; a small value approaches the ill-posed unrestricted fit. Data-dependent choices such as cross-validation seek a useful intermediate value.
 
 For efficient estimation of $\theta$, the penalty must be strong enough to control $\widehat\eta$ but weak enough to disappear from the root-$n$ target equation. In the notation of the section, a sufficient balance can be expressed as
 
+<span id="equation-25-71-tuning"></span>
+
 $$
 \widehat\lambda_n^2=o_P(n^{-1/2}),
 \qquad
 \widehat\lambda_n^{-1}
 =O_P\!\left(n^{k/(2k+1)}\right).
-\tag{25.71-tuning}
+\tag{25.71d}
 $$
 
 The first condition is an **undersmoothing condition for the target**: the penalty contributes less than the $n^{-1/2}$ scale relevant to $\widehat\theta$. The second prevents $\widehat\lambda_n$ from becoming so small that the nuisance fit is uncontrolled.
@@ -5404,16 +5619,20 @@ $$
 
 where $T$ and $C$ are conditionally independent given $Z$. The conditional distribution of $T$ satisfies
 
+<span id="equation-25-72-model"></span>
+
 $$
 \frac{F(t\mid z)}{1-F(t\mid z)}
 =
 e^{z^T\theta}\eta(t),
-\tag{25.72-model}
+\tag{25.72a}
 $$
 
 where $\eta$ is a nondecreasing cadlag baseline-odds function with $\eta(0)=0$.
 
 An ordinary likelihood based on a derivative $\eta'(t)$ is again unbounded: the derivative can spike at observed failure times. Instead, regard $\eta$ as the cumulative function of a measure and use its jumps $\eta\{y\}$. After dropping factors involving the censoring law and the marginal law of $Z$, which do not involve $(\theta,\eta)$, one observation contributes
+
+<span id="equation-25-72-likelihood"></span>
 
 $$
 \begin{aligned}
@@ -5430,7 +5649,7 @@ $$
 {\eta(y)+e^{-z^T\theta}}
 \right]^{1-\delta}.
 \end{aligned}
-\tag{25.72-likelihood}
+\tag{25.72b}
 $$
 
 The maximizer $\widehat\eta$ is a step function supported on observed uncensored survival times:
@@ -5455,6 +5674,8 @@ $$
 
 where $T\sim F$ and $C\sim G$ are independent and both distributions are unknown. The observed law is described by the two subdistribution functions
 
+<span id="equation-25-73-random-censoring"></span>
+
 $$
 \begin{aligned}
 H_0(x)
@@ -5464,7 +5685,7 @@ H_1(x)
 &=P(X\leq x,\Delta=1)
 =\int_{[0,x]}(1-G_-)\,dF.
 \end{aligned}
-\tag{25.73-random-censoring}
+\tag{25.73a}
 $$
 
 The left limit $G_-$ appears because the convention $T\leq C$ assigns a tie to $\Delta=1$.
@@ -5472,6 +5693,8 @@ The left limit $G_-$ appears because the convention $T\leq C$ assigns a tie to $
 #### Empirical likelihood and factorization
 
 An ordinary Lebesgue-density likelihood is unbounded for the same spiking reason as in Example 25.68. Using point masses gives
+
+<span id="equation-25-10-random-censoring-likelihood"></span>
 
 $$
 \begin{aligned}
@@ -5483,7 +5706,7 @@ L_n(F,G)
 \prod_{i=1}^n
 \bigl[(1-G_-)(X_i)F\{X_i\}\bigr]^{\Delta_i}.
 \end{aligned}
-\tag{25.10-random-censoring-likelihood}
+\tag{25.10c}
 $$
 
 The criterion factorizes into separate likelihoods for $F$ and $G$. In particular, the part involving $F$ is
@@ -5497,12 +5720,14 @@ $$
 
 Its maximizer is the product-limit, or Kaplan--Meier, estimator. Lemma 20.14 develops the cumulative-hazard/product-integral map, and Example 20.15 applies that map to Nelson--Aalen and Kaplan--Meier. If $t_1<\cdots<t_m$ are the distinct observed failure times, $d_j$ is the number of failures at $t_j$, and $r_j$ is the number at risk immediately before $t_j$, then
 
+<span id="equation-25-10-km"></span>
+
 $$
 1-\widehat F(t)
 =
 \prod_{t_j\leq t}
 \left(1-\frac{d_j}{r_j}\right).
-\tag{25.10-KM}
+\tag{25.10d}
 $$
 
 This is the same estimator whose efficiency follows from the functional delta method in [Example 25.51](#example-25-51). §25.10 supplies a complementary likelihood characterization.
@@ -5538,6 +5763,8 @@ $$
 
 Define cumulative hazards
 
+<span id="equation-25-74-hazards"></span>
+
 $$
 \Lambda_0(x)
 =
@@ -5550,10 +5777,12 @@ $$
 \int_{[0,x]}
 \frac{dH_1}
 {1-H_-}.
-\tag{25.74-hazards}
+\tag{25.74a}
 $$
 
 Then define $F_0,F_1$ through the product-integral relation
+
+<span id="equation-25-74-product-integral"></span>
 
 $$
 1-F_i(x)
@@ -5562,7 +5791,7 @@ $$
 \{1-\Delta\Lambda_i(s)\}
 \exp\{-\Lambda_i^c(x)\},
 \qquad i=0,1,
-\tag{25.74-product-integral}
+\tag{25.74b}
 $$
 
 where $\Lambda_i^c$ is the continuous part of $\Lambda_i$. The resulting pair satisfies
@@ -5589,6 +5818,8 @@ Hence every observed-data distribution arises from a latent pair $(F_0,F_1)$. On
 
 For any distribution function $A$ and cumulative hazard $B$, the following statements are equivalent:
 
+<span id="equation-25-74-hazard-survival"></span>
+
 $$
 B(t)=\int_{[0,t]}\frac{dA}{1-A_-}
 \quad\Longleftrightarrow\quad
@@ -5596,7 +5827,7 @@ B(t)=\int_{[0,t]}\frac{dA}{1-A_-}
 =
 \prod_{0\leq s\leq t}\{1-\Delta B(s)\}
 e^{-B^c(t)}.
-\tag{25.74-hazard-survival}
+\tag{25.74c}
 $$
 
 Indeed, both are equivalent to the Volterra equation
@@ -5605,41 +5836,47 @@ $$
 (1-A_-)\,dB=dA
 $$
 
-with the common initial value $A(0-)=B(0-)=0$; the product integral is its unique solution. Applying this equivalence to (25.74-product-integral) gives
+with the common initial value $A(0-)=B(0-)=0$; the product integral is its unique solution. Applying this equivalence to [(25.74b)](#equation-25-74-product-integral) gives
 
 $$
 d\Lambda_i=\frac{dF_i}{1-F_{i-}}.
 $$
 
-The definitions in (25.74-hazards) imply, at every jump time,
+The definitions in [(25.74a)](#equation-25-74-hazards) imply, at every jump time,
+
+<span id="equation-25-74-jumps"></span>
 
 $$
 \Delta\Lambda_0+\Delta\Lambda_1
 -\Delta\Lambda_0\Delta\Lambda_1
 =\frac{\Delta H}{1-H_-},
-\tag{25.74-jumps}
+\tag{25.74d}
 $$
 
 and for the continuous parts,
 
+<span id="equation-25-74-continuous"></span>
+
 $$
 (\Lambda_0+\Lambda_1)^c(t)
 =\int_{[0,t]}\frac{dH^c}{1-H_-}.
-\tag{25.74-continuous}
+\tag{25.74e}
 $$
 
-The left side of (25.74-jumps) is the jump of the cumulative hazard associated with the product of the two survivals, since
+The left side of [(25.74d)](#equation-25-74-jumps) is the jump of the cumulative hazard associated with the product of the two survivals, since
 
 $$
 (1-\Delta\Lambda_0)(1-\Delta\Lambda_1)
 =1-\frac{\Delta H}{1-H_-}.
 $$
 
-Equations (25.74-jumps)--(25.74-continuous) and the hazard/product-integral equivalence therefore give
+Equations [(25.74d)](#equation-25-74-jumps)–[(25.74e)](#equation-25-74-continuous) and the hazard/product-integral equivalence therefore give
+
+<span id="equation-25-74-survival"></span>
 
 $$
 1-H=(1-F_0)(1-F_1).
-\tag{25.74-survival}
+\tag{25.74f}
 $$
 
 For the second subdistribution, use $1-H_-=(1-F_{0-})(1-F_{1-})$:
@@ -5653,7 +5890,7 @@ $$
 \end{aligned}
 $$
 
-For the first subdistribution, the tie convention requires the post-jump survival $1-F_1$. From the definition of $\Lambda_1$ and (25.74-survival),
+For the first subdistribution, the tie convention requires the post-jump survival $1-F_1$. From the definition of $\Lambda_1$ and [(25.74f)](#equation-25-74-survival),
 
 $$
 (1-F_{0-})(1-F_1)
@@ -5738,6 +5975,8 @@ $$
 
 such that
 
+<span id="equation-25-11-exact-path"></span>
+
 $$
 \left.
 \frac{\partial}{\partial t}
@@ -5745,7 +5984,7 @@ $$
 \log \operatorname{lik}
 \{\theta+t,\eta_t(\theta,\eta)\}(x)
 =\widetilde\ell_{\theta,\eta}(x).
-\tag{25.11-exact-path}
+\tag{25.11a}
 $$
 
 If such a path exists through $(\widehat\theta,\widehat\eta)$ and the maximizer is interior along it, then
@@ -5756,6 +5995,8 @@ $$
 
 An **approximately least-favorable submodel** weakens the requirement. For each fixed $(\theta,\eta)$, choose a feasible path $t\mapsto\eta_t(\theta,\eta)$ through $\eta$ and define its proper score
 
+<span id="equation-25-11-kappa"></span>
+
 $$
 \widetilde\kappa_{\theta,\eta}(x)
 =
@@ -5764,23 +6005,27 @@ $$
 \right|_{t=0}
 \log \operatorname{lik}
 \{\theta+t,\eta_t(\theta,\eta)\}(x).
-\tag{25.11-kappa}
+\tag{25.11b}
 $$
 
 The path is approximately least favorable at $(\theta_0,\eta_0)$ if
 
+<span id="equation-25-11-truth-match"></span>
+
 $$
 \widetilde\kappa_{\theta_0,\eta_0}
 =\widetilde\ell_{\theta_0,\eta_0}.
-\tag{25.11-truth-match}
+\tag{25.11c}
 $$
 
 Away from the truth, $\widetilde\kappa_{\theta,\eta}$ need not equal the efficient score. This is the crucial relaxation. Because it is nevertheless the derivative along a genuine submodel, the MLE satisfies
 
+<span id="equation-25-11-stationarity"></span>
+
 $$
 \mathbb P_n
 \widetilde\kappa_{\widehat\theta,\widehat\eta}=0,
-\tag{25.11-stationarity}
+\tag{25.11d}
 $$
 
 or an asymptotically negligible approximation to this equation. The problem has therefore been converted from *construct an exact efficient-score path at every possible estimate* to *construct a feasible likelihood path that has the right derivative at the truth*.
@@ -5822,13 +6067,15 @@ Suppose the model is differentiable in quadratic mean with respect to $\theta$ a
 
 Then the maximum likelihood estimator is asymptotically efficient:
 
+<span id="equation-25-77-expansion"></span>
+
 $$
 \sqrt n(\widehat\theta-\theta_0)
 =
 \widetilde I_{\theta_0,\eta_0}^{-1}
 \mathbb G_n\widetilde\ell_{\theta_0,\eta_0}
 +o_P(1).
-\tag{25.77-expansion}
+\tag{25.77a}
 $$
 
 :::
@@ -5851,50 +6098,60 @@ $$
 Because $\widetilde\kappa_{\theta,\eta}$ is the score of a genuine submodel through $P_{\theta,\eta}$, it is centered under that law. More importantly, maximizing the likelihood along the path through
 $(\widehat\theta,\widehat\eta)$ gives the stationary equation
 
+<span id="equation-25-77-score-equation"></span>
+
 $$
 \mathbb P_n\widehat\kappa=o_P(n^{-1/2}),
-\tag{25.77-score-equation}
+\tag{25.77b}
 $$
 
 with equality for an interior exact maximizer.
 
 The Donsker assumption, the first part of (25.76), and [Lemma 19.24](chapter-19.qmd#lemma-19.24) imply
 
+<span id="equation-25-77-equicontinuity"></span>
+
 $$
 \mathbb G_n\widehat\kappa
 =\mathbb G_n\kappa_0+o_P(1).
-\tag{25.77-equicontinuity}
+\tag{25.77c}
 $$
 
 Let $\widehat P_0=P_{\widehat\theta,\eta_0}$ and
 $\delta=\widehat\theta-\theta_0$. Combining
-(25.77-score-equation), (25.77-equicontinuity), and the no-bias condition (25.75), exactly as in the population-side step of [Theorem 25.54](#theorem-25-54), gives
+[(25.77b)](#equation-25-77-score-equation), [(25.77c)](#equation-25-77-equicontinuity), and the no-bias condition (25.75), exactly as in the population-side step of [Theorem 25.54](#theorem-25-54), gives
+
+<span id="equation-25-77-population-side"></span>
 
 $$
 \sqrt n(\widehat P_0-P_0)\widehat\kappa
 =\mathbb G_n\kappa_0
 +o_P\{1+\sqrt n\|\delta\|\}.
-\tag{25.77-population-side}
+\tag{25.77d}
 $$
 
 The square-root-density argument in the complete proof of Theorem 25.54 applies to any estimated function whose truth-level value is mean zero and satisfies the information identity. Those identities hold here because
 $\kappa_0=\widetilde\ell_{\theta_0,\eta_0}$:
+
+<span id="equation-25-77-information-identity"></span>
 
 $$
 P_0\kappa_0=0,\qquad
 P_0\kappa_0\dot\ell_{\theta_0,\eta_0}^T
 =P_0\kappa_0\kappa_0^T
 =\widetilde I_{\theta_0,\eta_0}.
-\tag{25.77-information-identity}
+\tag{25.77e}
 $$
 
 Condition (25.76) supplies exactly the $L_2(P_0)$ consistency and the two bounded second moments used to control the three DQM remainders there. Consequently,
+
+<span id="equation-25-77-dqm-linearization"></span>
 
 $$
 \sqrt n(\widehat P_0-P_0)\widehat\kappa
 =\{\widetilde I_{\theta_0,\eta_0}+o_P(1)\}
 \sqrt n\,\delta.
-\tag{25.77-DQM-linearization}
+\tag{25.77f}
 $$
 
 Combine the last two displays:
@@ -5907,7 +6164,7 @@ $$
 
 Nonsingularity first allows the last term to be absorbed, proving
 $\sqrt n\delta=O_P(1)$, and then reduces it to $o_P(1)$. Since
-$\kappa_0=\widetilde\ell_{\theta_0,\eta_0}$, multiplication by the inverse information matrix gives (25.77-expansion). The influence function is therefore
+$\kappa_0=\widetilde\ell_{\theta_0,\eta_0}$, multiplication by the inverse information matrix gives [(25.77a)](#equation-25-77-expansion). The influence function is therefore
 $\widetilde I_{\theta_0,\eta_0}^{-1}
 \widetilde\ell_{\theta_0,\eta_0}$, and [Lemma 25.23](#lemma-25-23) proves efficiency.
 
@@ -6018,15 +6275,19 @@ $$
 
 where $T$ and the single inspection time $C$ are conditionally independent given $Z$. Under a Cox model with regression parameter $\theta$ and baseline cumulative hazard $\Lambda$,
 
+<span id="equation-25-11-current-status-likelihood"></span>
+
 $$
 p_{\theta,\Lambda}(x)
 =
 \{1-\exp(-e^{\theta^Tz}\Lambda(c))\}^{\delta}
 \{\exp(-e^{\theta^Tz}\Lambda(c))\}^{1-\delta}.
-\tag{25.11-current-status-likelihood}
+\tag{25.11e}
 $$
 
 Define
+
+<span id="equation-25-11-q"></span>
 
 $$
 Q_{\theta,\Lambda}(x)
@@ -6036,7 +6297,7 @@ Q_{\theta,\Lambda}(x)
 {1-e^{-e^{\theta^Tz}\Lambda(c)}}
 -(1-\delta)
 \right].
-\tag{25.11-Q}
+\tag{25.11f}
 $$
 
 The target and nuisance scores have the parallel forms
@@ -6066,12 +6327,14 @@ $$
 
 and therefore
 
+<span id="equation-25-11-current-status-efficient-score"></span>
+
 $$
 \widetilde\ell_{\theta,\Lambda}(x)
 =
 \{z\Lambda(c)-h_{\theta,\Lambda}(c)\}
 Q_{\theta,\Lambda}(x).
-\tag{25.11-current-status-efficient-score}
+\tag{25.11g}
 $$
 
 #### Why the formal least-favorable path fails
@@ -6095,14 +6358,18 @@ $$
 
 and choose a bounded Lipschitz function $\phi$ that equals one on the range of $\Lambda_0$ over the observation interval and tapers near $0$ and $M$. For fixed $(\theta,\Lambda)$ define
 
+<span id="equation-25-11-current-status-path"></span>
+
 $$
 \Lambda_t(\theta,\Lambda)
 =
 \Lambda-t^T\phi(\Lambda)r_0(\Lambda).
-\tag{25.11-current-status-path}
+\tag{25.11h}
 $$
 
 Because the perturbation is expressed as a Lipschitz transformation of $\Lambda$ itself, it preserves monotonicity for all sufficiently small $t$. The taper $\phi$ keeps the path inside $[0,M]$. Differentiating the likelihood gives
+
+<span id="equation-25-11-current-status-kappa"></span>
 
 $$
 \widetilde\kappa_{\theta,\Lambda}(x)
@@ -6112,10 +6379,10 @@ z\Lambda(c)
 -\phi\{\Lambda(c)\}r_0\{\Lambda(c)\}
 \right]
 Q_{\theta,\Lambda}(x).
-\tag{25.11-current-status-kappa}
+\tag{25.11i}
 $$
 
-At $(\theta_0,\Lambda_0)$, $\phi(\Lambda_0)=1$ and $r_0(\Lambda_0(c))=h_{\theta_0,\Lambda_0}(c)$, so (25.11-current-status-kappa) becomes the efficient score.
+At $(\theta_0,\Lambda_0)$, $\phi(\Lambda_0)=1$ and $r_0(\Lambda_0(c))=h_{\theta_0,\Lambda_0}(c)$, so [(25.11i)](#equation-25-11-current-status-kappa) becomes the efficient score.
 
 ::: {.callout-important title="Lemma"}
 ### Lemma 25.83: current-status Cox rate {#lemma-25-83}
@@ -6139,13 +6406,17 @@ $$
 
 Abbreviate $(\theta_0,\Lambda_0)$ by the index $0$ and define
 
+<span id="equation-25-83-midpoint"></span>
+
 $$
 m_{\theta,\Lambda}
 =\log\left(\frac{p_{\theta,\Lambda}+p_0}{2}\right).
-\tag{25.83-midpoint}
+\tag{25.83a}
 $$
 
-The conditional densities $p_{\theta,\Lambda}$ are bounded above by one, while the assumptions make $p_0$ bounded away from zero. Hence the functions in (25.83-midpoint) are uniformly bounded. Concavity of the logarithm and the definition of the MLE give
+The conditional densities $p_{\theta,\Lambda}$ are bounded above by one, while the assumptions make $p_0$ bounded away from zero. Hence the functions in [(25.83a)](#equation-25-83-midpoint) are uniformly bounded. Concavity of the logarithm and the definition of the MLE give
+
+<span id="equation-25-83-improvement"></span>
 
 $$
 \mathbb P_nm_{\widehat\theta,\widehat\Lambda}
@@ -6155,7 +6426,7 @@ $$
 \geq
 \mathbb P_n\log p_0
 =\mathbb P_nm_0.
-\tag{25.83-improvement}
+\tag{25.83b}
 $$
 
 First establish consistency by the Wald argument in Chapter 5. The target parameter space is compact and the monotone cumulative hazards bounded by $M$ are compact in the weak topology. The distance from $(\widehat\theta,\widehat\Lambda)$ to the Kullback--Leibler maximizers therefore tends to zero. The observed model identifies $\theta_0$ and identifies $\Lambda_0(t)$ for every $\sigma<t<\tau$, so
@@ -6179,19 +6450,23 @@ $$
 
 The usual Hellinger curvature inequality for the midpoint criterion, combined with [Lemma 25.85](#lemma-25-85), yields
 
+<span id="equation-25-83-drift"></span>
+
 $$
 P_0(m_{\theta,\Lambda}-m_0)
 \lesssim-d^2\{(\theta,\Lambda),(\theta_0,\Lambda_0)\}.
-\tag{25.83-drift}
+\tag{25.83c}
 $$
 
 [Lemma 25.84](#lemma-25-84) gives bracketing entropy of order $\varepsilon^{-1}$. Applying [Lemma 19.36](chapter-19.qmd#lemma-19.36) to the bounded localized class verifies (25.80) with
+
+<span id="equation-25-83-modulus"></span>
 
 $$
 \phi_n(\delta)
 =\sqrt\delta
 \left(1+\frac{\sqrt\delta}{\delta^2\sqrt n}\right).
-\tag{25.83-modulus}
+\tag{25.83d}
 $$
 
 For $\delta_n=n^{-1/3}$, both sides of
@@ -6200,7 +6475,7 @@ $$
 \phi_n(\delta_n)\lesssim\sqrt n\,\delta_n^2
 $$
 
-have order $n^{-1/6}$. Equations (25.83-improvement)--(25.83-modulus) and [Theorem 25.81](#theorem-25-81) therefore give the stronger joint rate
+have order $n^{-1/6}$. Equations [(25.83b)](#equation-25-83-improvement)–[(25.83d)](#equation-25-83-modulus) and [Theorem 25.81](#theorem-25-81) therefore give the stronger joint rate
 
 $$
 \|\widehat\theta-\theta_0\|
@@ -6255,6 +6530,8 @@ $$
 
 Fix $\theta$. For each value of $\delta\in\{0,1\}$, $m_{\theta,\Lambda}(c,\delta,z)$ depends monotonically on $\Lambda(c)$. Thus a bracket $\Lambda_1\leq\Lambda\leq\Lambda_2$ induces a pointwise bracket for $m_{\theta,\Lambda}$. The parameter restrictions and the lower bound on $p_0$ make this dependence uniformly Lipschitz, so for a constant $D$,
 
+<span id="equation-25-84-transfer"></span>
+
 $$
 \int
 \{m_{\theta,\Lambda_1}-m_{\theta,\Lambda_2}\}^2
@@ -6262,10 +6539,10 @@ $$
 \leq
 D\int_\sigma^\tau
 \{\Lambda_1(c)-\Lambda_2(c)\}^2dc.
-\tag{25.84-transfer}
+\tag{25.84a}
 $$
 
-The monotone functions $0\leq\Lambda\leq M$ admit $\exp(C/\varepsilon)$ brackets of Lebesgue-$L_2$ size $\varepsilon$ by [Example 19.11](chapter-19.qmd#example-19.11-bounded-variation). Equation (25.84-transfer) transfers those brackets to the midpoint log likelihood.
+The monotone functions $0\leq\Lambda\leq M$ admit $\exp(C/\varepsilon)$ brackets of Lebesgue-$L_2$ size $\varepsilon$ by [Example 19.11](chapter-19.qmd#example-19.11-bounded-variation). Equation [(25.84a)](#equation-25-84-transfer) transfers those brackets to the midpoint log likelihood.
 
 Finally, $\theta$ is finite dimensional and $\partial m_{\theta,\Lambda}/\partial\theta$ is uniformly bounded over $(\theta,\Lambda,x)$. A Euclidean grid in $\theta$ therefore multiplies the bracketing number only by a polynomial in $1/\varepsilon$. Its logarithm is negligible relative to $1/\varepsilon$, proving (25.84).
 
@@ -6300,6 +6577,8 @@ where $\mu=F_{C,Z}\times$ counting measure on $\{0,1\}$.
 
 Because $p_0$ is bounded away from zero and all $p_{\theta,\Lambda}$ are uniformly bounded,
 
+<span id="equation-25-85-equivalence"></span>
+
 $$
 \int(\sqrt{p_{\theta,\Lambda}}-\sqrt{p_0})^2d\mu
 =
@@ -6309,7 +6588,7 @@ $$
 d\mu
 \asymp
 \int(p_{\theta,\Lambda}-p_0)^2d\mu.
-\tag{25.85-equivalence}
+\tag{25.85a}
 $$
 
 For fixed $(c,z)$, put
@@ -6324,11 +6603,13 @@ $$
 
 The two Bernoulli density coordinates differ by $g(1)-g(0)$. The mean-value theorem gives a $t=t(c,z)\in(0,1)$ such that this difference is a bounded, nonzero factor times
 
+<span id="equation-25-85-score-form"></span>
+
 $$
 \{1+t(\theta-\theta_0)^Tz\}
 B_0(\Lambda-\Lambda_0)(x)
 +(\theta-\theta_0)^T\dot\ell_0(x).
-\tag{25.85-score-form}
+\tag{25.85b}
 $$
 
 The omitted multiplicative factor is bounded above and away from zero uniformly when $\theta$ is close to $\theta_0$. Let
@@ -6341,6 +6622,8 @@ $$
 
 Boundedness of $Z$ makes $h$ uniformly close to one. Moreover,
 
+<span id="equation-25-85-correlation"></span>
+
 $$
 \{P_0g_1g_2\}^2
 \leq
@@ -6348,20 +6631,22 @@ P_0g_1^2\,
 (\theta-\theta_0)^T
 (I_0-\widetilde I_0)
 (\theta-\theta_0).
-\tag{25.85-correlation}
+\tag{25.85c}
 $$
 
-Since $\widetilde I_0$ is positive definite, the last quadratic form is at most $cP_0g_2^2$ for some $c<1$. [Lemma 25.86](#lemma-25-86) applied to (25.85-score-form) now gives
+Since $\widetilde I_0$ is positive definite, the last quadratic form is at most $cP_0g_2^2$ for some $c<1$. [Lemma 25.86](#lemma-25-86) applied to [(25.85b)](#equation-25-85-score-form) now gives
+
+<span id="equation-25-85-separated"></span>
 
 $$
 \int(p_{\theta,\Lambda}-p_0)^2d\mu
 \gtrsim
 P_0\{B_0(\Lambda-\Lambda_0)\}^2
 +P_0\{(\theta-\theta_0)^T\dot\ell_0\}^2.
-\tag{25.85-separated}
+\tag{25.85d}
 $$
 
-The conditional weight $E_0(Q_0^2\mid C=c)$ and the density of $C$ are bounded above and away from zero on $[\sigma,\tau]$. Hence the first term in (25.85-separated) is comparable to $\int_\sigma^\tau(\Lambda-\Lambda_0)^2dc$. Nonsingularity of $I_0$ makes the second comparable to $\|\theta-\theta_0\|^2$. Combining this with (25.85-equivalence) proves (25.85).
+The conditional weight $E_0(Q_0^2\mid C=c)$ and the density of $C$ are bounded above and away from zero on $[\sigma,\tau]$. Hence the first term in [(25.85d)](#equation-25-85-separated) is comparable to $\int_\sigma^\tau(\Lambda-\Lambda_0)^2dc$. Nonsingularity of $I_0$ makes the second comparable to $\|\theta-\theta_0\|^2$. Combining this with [(25.85a)](#equation-25-85-equivalence) proves (25.85).
 
 </details>
 
@@ -6395,6 +6680,8 @@ where $C$ depends only on $c,c_1,c_2$ and tends to $1-\sqrt c$ as $c_1\uparrow1$
 
 The bounds on $h$ imply
 
+<span id="equation-25-86-algebra"></span>
+
 $$
 \begin{aligned}
 (hg_1+g_2)^2
@@ -6407,7 +6694,7 @@ c_1(g_1^2+2g_1g_2+g_2^2)
 +(c_1-1)c_2g_1^2
 +(c_2^{-1}-1)c_2g_2^2.
 \end{aligned}
-\tag{25.86-algebra}
+\tag{25.86a}
 $$
 
 After integration, the correlation assumption bounds the cross term below by
@@ -6420,7 +6707,7 @@ $$
 -c_1\sqrt c\{Pg_1^2+Pg_2^2\}.
 $$
 
-Thus (25.86-algebra) is at least
+Thus [(25.86a)](#equation-25-86-algebra) is at least
 
 $$
 \begin{aligned}
@@ -6434,7 +6721,7 @@ Both coefficients are positive when $c_1$ and $c_2$ are sufficiently close to on
 
 </details>
 
-Closure properties of [Donsker classes](chapter-19.qmd#donsker-classes) control (25.11-current-status-kappa), and [Theorem 25.77](#theorem-25-77) now yields efficiency of $\widehat\theta$.
+Closure properties of [Donsker classes](chapter-19.qmd#donsker-classes) control [(25.11i)](#equation-25-11-current-status-kappa), and [Theorem 25.77](#theorem-25-77) now yields efficiency of $\widehat\theta$.
 
 ### 25.11.2 Exponential Frailty {#sec-25-11-exponential-frailty}
 
@@ -6442,11 +6729,13 @@ Closure properties of [Donsker classes](chapter-19.qmd#donsker-classes) control 
 
 Suppose $X=(U,V)$ has density
 
+<span id="equation-25-11-frailty-model"></span>
+
 $$
 p_{\theta,\eta}(u,v)
 =
 \int ze^{-zu}\,\theta ze^{-\theta zv}\,d\eta(z),
-\tag{25.11-frailty-model}
+\tag{25.11j}
 $$
 
 where $\theta>0$ is the target and $\eta$ is an unknown mixing distribution. For fixed $\theta$, the statistic
@@ -6456,6 +6745,8 @@ $$
 $$
 
 is sufficient for $\eta$. The closed nuisance tangent space is the space of mean-zero, square-integrable functions of $U+\theta V$; this uses the mixture completeness argument from [Example 25.35](#example-25-35). Hence the efficient score is the conditional score
+
+<span id="equation-25-11-frailty-efficient-score"></span>
 
 $$
 \begin{aligned}
@@ -6472,10 +6763,12 @@ e^{-z(u+\theta v)}\,d\eta(z)}
 \displaystyle\int \theta z^2
 e^{-z(u+\theta v)}\,d\eta(z)}.
 \end{aligned}
-\tag{25.11-frailty-efficient-score}
+\tag{25.11k}
 $$
 
 Unlike the current-status Cox example, this model possesses an exact least-favorable submodel:
+
+<span id="equation-25-11-frailty-path"></span>
 
 $$
 \eta_t(\theta,\eta)(B)
@@ -6483,19 +6776,21 @@ $$
 \eta\!\left(
 B\left(1-\frac{t}{2\theta}\right)
 \right).
-\tag{25.11-frailty-path}
+\tag{25.11l}
 $$
 
-A change of variables in the mixture integral shows that the likelihood derivative along $(\theta+t,\eta_t)$ is exactly (25.11-frailty-efficient-score). Therefore the MLE satisfies the efficient score equation itself, and [Theorem 25.54](#theorem-25-54) applies.
+A change of variables in the mixture integral shows that the likelihood derivative along $(\theta+t,\eta_t)$ is exactly [(25.11k)](#equation-25-11-frailty-efficient-score). Therefore the MLE satisfies the efficient score equation itself, and [Theorem 25.54](#theorem-25-54) applies.
 
 The model also has exact no bias:
+
+<span id="equation-25-11-frailty-no-bias"></span>
 
 $$
 P_{\theta,\eta_0}
 \widetilde\ell_{\theta,\eta}=0
 \qquad
 \text{for every }\theta,\eta,\eta_0.
-\tag{25.11-frailty-no-bias}
+\tag{25.11m}
 $$
 
 The difficult part is instead uniform empirical-process control. Lemma 25.87 shows, under the moment condition
@@ -6517,13 +6812,15 @@ $$
 
 There is a weak neighborhood $V$ of $\eta_0$ such that the class of functions
 
+<span id="equation-25-87-class"></span>
+
 $$
 (x,y)\longmapsto
 \frac{
 \int(a_1+a_2zx+a_3zy)z^2
 e^{-z(b_1x+b_2y)}\,d\eta(z)}
 {\int z^2e^{-z(b_1x+b_2y)}\,d\eta(z)},
-\tag{25.87-class}
+\tag{25.87a}
 $$
 
 where $(a_1,a_2,a_3)$ ranges over a bounded subset of $\mathbb R^3$, $(b_1,b_2)$ ranges over a compact subset of $(0,\infty)^2$, and $\eta\in V$, is $P_{\theta_0,\eta_0}$-Donsker and has a square-integrable envelope.
@@ -6550,6 +6847,8 @@ $$
 
 uniformly over $\eta\in V$,
 
+<span id="equation-25-87-ratio"></span>
+
 $$
 R_{k,l,\eta}(s)
 \leq
@@ -6557,10 +6856,10 @@ R_{k,l,\eta}(s)
 C^l\{|\log s|/s\}^l,&0<s<1/2,\\
 C^l,&s\geq1/2.
 \end{cases}
-\tag{25.87-ratio}
+\tag{25.87b}
 $$
 
-For $k=2,l=1$, write $h_\eta=R_{2,1,\eta}$. Every function in (25.87-class) is a bounded linear combination of terms of the form
+For $k=2,l=1$, write $h_\eta=R_{2,1,\eta}$. Every function in [(25.87a)](#equation-25-87-class) is a bounded linear combination of terms of the form
 
 $$
 1,\qquad
@@ -6568,16 +6867,20 @@ xh_\eta(b_1x+b_2y),\qquad
 yh_\eta(b_1x+b_2y).
 $$
 
-Equation (25.87-ratio) bounds these by a constant times
+Equation [(25.87b)](#equation-25-87-ratio) bounds these by a constant times
+
+<span id="equation-25-87-envelope"></span>
 
 $$
 1+|\log(b_1x+b_2y)|+x+y.
-\tag{25.87-envelope}
+\tag{25.87c}
 $$
 
-Under $P_{\theta_0,\eta_0}$, the moment assumptions on $\eta_0$ make the square of (25.87-envelope) integrable: the $z^2$ moment controls the large-observation tail, while the $z^{-5}$ moment controls the small-$z$ mixing mass that produces large values of $X$ and $Y$.
+Under $P_{\theta_0,\eta_0}$, the moment assumptions on $\eta_0$ make the square of [(25.87c)](#equation-25-87-envelope) integrable: the $z^2$ moment controls the large-observation tail, while the $z^{-5}$ moment controls the small-$z$ mixing mass that produces large values of $X$ and $Y$.
 
-It remains to prove the Donsker property. Consider the functions $s\mapsto sh_\eta(s)$. For any fixed $1/2<\alpha<1$, (25.87-ratio) and the derivative identity for adjacent Laplace-transform ratios give
+It remains to prove the Donsker property. Consider the functions $s\mapsto sh_\eta(s)$. For any fixed $1/2<\alpha<1$, [(25.87b)](#equation-25-87-ratio) and the derivative identity for adjacent Laplace-transform ratios give
+
+<span id="equation-25-87-small"></span>
 
 $$
 |s_1h_\eta(s_1)-s_2h_\eta(s_2)|
@@ -6586,25 +6889,29 @@ $$
 \frac{|\log s_1|^{1+\alpha}}{s_1^\alpha},
 \qquad
 0<s_1<s_2<1/2,
-\tag{25.87-small}
+\tag{25.87d}
 $$
 
 whereas
+
+<span id="equation-25-87-large"></span>
 
 $$
 |s_1h_\eta(s_1)-s_2h_\eta(s_2)|
 \lesssim |s_1-s_2|s_2,
 \qquad
 1/2<s_1<s_2.
-\tag{25.87-large}
+\tag{25.87e}
 $$
 
-Partition $(0,1/2]$ into dyadic intervals $[2^{-j},2^{-j+1})$ and $[1/2,\infty)$ into $[1/2,1)$ and $[j,j+1)$. The Hölder bracketing bounds applied to (25.87-small)--(25.87-large), with the bracket widths allocated according to the probability of each interval, yield
+Partition $(0,1/2]$ into dyadic intervals $[2^{-j},2^{-j+1})$ and $[1/2,\infty)$ into $[1/2,1)$ and $[j,j+1)$. The Hölder bracketing bounds applied to [(25.87d)](#equation-25-87-small)–[(25.87e)](#equation-25-87-large), with the bracket widths allocated according to the probability of each interval, yield
+
+<span id="equation-25-87-entropy"></span>
 
 $$
 \log N_{[]}\{\varepsilon,\mathcal H,L_2(Q)\}
 \lesssim\varepsilon^{-W}
-\tag{25.87-entropy}
+\tag{25.87f}
 $$
 
 for every $W\geq1/\alpha$, where $\mathcal H=\{s\mapsto sh_\eta(s):\eta\in V\}$ and $Q$ is the law of $b_1X+b_2Y$. The density of this index, conditional on $Z=z$, is bounded by a constant times
@@ -6615,7 +6922,7 @@ $$
 
 uniformly for $(b_1,b_2)$ in its compact set. Together with $\int(z^2+z^{-5})\,d\eta_0<\infty$, this makes the interval sums in the bracketing calculation finite uniformly in $(b_1,b_2)$.
 
-Choose $\alpha>1/2$ and then $W<2$ with $W\geq1/\alpha$. The square root of (25.87-entropy) is integrable at zero. Finally, varying $(a_1,a_2,a_3,b_1,b_2)$ over bounded finite-dimensional sets adds only polynomial covering factors, whose logarithms do not affect the entropy integral. The bracketing Donsker theorem therefore proves the assertion, and (25.87-envelope) supplies the square-integrable envelope.
+Choose $\alpha>1/2$ and then $W<2$ with $W\geq1/\alpha$. The square root of [(25.87f)](#equation-25-87-entropy) is integrable at zero. Finally, varying $(a_1,a_2,a_3,b_1,b_2)$ over bounded finite-dimensional sets adds only polynomial covering factors, whose logarithms do not affect the entropy integral. The bracketing Donsker theorem therefore proves the assertion, and [(25.87c)](#equation-25-87-envelope) supplies the square-integrable envelope.
 
 </details>
 
@@ -6634,9 +6941,11 @@ The theorem is modular: different models can make different verification steps d
 
 Consider
 
+<span id="equation-25-11-partially-linear-model"></span>
+
 $$
 Y=\theta V+\eta(W)+e,
-\tag{25.11-partially-linear-model}
+\tag{25.11n}
 $$
 
 where $e$ is independent of $(V,W)$, $V,W\in[0,1]$, and the nuisance function is twice differentiable with roughness
@@ -6647,21 +6956,25 @@ $$
 
 With Gaussian error, unrestricted likelihood maximization is useless: $\eta$ can interpolate the observations. The estimator instead minimizes the penalized least-squares criterion
 
+<span id="equation-25-11-penalized-least-squares"></span>
+
 $$
 (\theta,\eta)
 \longmapsto
 \mathbb P_n\{Y-\theta V-\eta(W)\}^2
 +\widehat\lambda_n^2J^2(\eta).
-\tag{25.11-penalized-least-squares}
+\tag{25.11o}
 $$
 
 The fitted $\widehat\eta$ is a natural cubic spline with knots at the observed $W_i$. For efficient estimation of $\theta$, the smoothing parameter may be data dependent but must satisfy
+
+<span id="equation-25-11-smoothing-rate"></span>
 
 $$
 \widehat\lambda_n^2=o_P(n^{-1/2}),
 \qquad
 \widehat\lambda_n^{-1}=O_P(n^{2/5}).
-\tag{25.11-smoothing-rate}
+\tag{25.11p}
 $$
 
 The first condition makes the penalty negligible on the root-$n$ scale. The second prevents insufficient regularization of the nuisance function.
@@ -6718,11 +7031,13 @@ $$
 
 The penalized estimator minimizes $\mathbb P_nm_{g,\widehat\lambda_n}$, and
 
+<span id="equation-25-88-criterion"></span>
+
 $$
 m_{g,\lambda}-m_{g_0,\lambda}
 =2e(g_0-g)+(g_0-g)^2
 +\lambda^2J^2(\eta)-\lambda^2J^2(\eta_0).
-\tag{25.88-criterion}
+\tag{25.88a}
 $$
 
 Write $\|\cdot\|_W=\|\cdot\|_{L_2(P_W)}$. Conditional-expectation orthogonality and Cauchy–Schwarz give
@@ -6738,15 +7053,19 @@ $$
 
 The strict inequality is the nonconfounding assumption. [Lemma 25.86](#lemma-25-86) therefore yields
 
+<span id="equation-25-88-identification"></span>
+
 $$
 P_0(g-g_0)^2
 \gtrsim
 |\theta-\theta_0|^2
 +\|\eta-\eta_0\|_W^2.
-\tag{25.88-identification}
+\tag{25.88b}
 $$
 
-Because $P_0e=0$ and $e$ is independent of $(V,W)$, (25.88-criterion) and (25.88-identification) imply
+Because $P_0e=0$ and $e$ is independent of $(V,W)$, [(25.88a)](#equation-25-88-criterion) and [(25.88b)](#equation-25-88-identification) imply
+
+<span id="equation-25-88-drift"></span>
 
 $$
 P_0(m_{g,\lambda}-m_{g_0,\lambda})
@@ -6754,20 +7073,24 @@ P_0(m_{g,\lambda}-m_{g_0,\lambda})
 |\theta-\theta_0|^2
 +\|\eta-\eta_0\|_W^2
 +\lambda^2J^2(\eta)-C\lambda^2.
-\tag{25.88-drift}
+\tag{25.88c}
 $$
 
 Set $\lambda_n=n^{-2/5}$. The condition $\widehat\lambda_n^{-1}=O_P(n^{2/5})$ permits deterministic localization to $\widehat\lambda_n\gtrsim\lambda_n$ with probability tending to one. Use [Theorem 25.81](#theorem-25-81) with
+
+<span id="equation-25-88-distance"></span>
 
 $$
 d_\lambda^2\{(\theta,\eta),(\theta_0,\eta_0)\}
 =|\theta-\theta_0|^2
 +\|\eta-\eta_0\|_W^2
 +\lambda^2J^2(\eta).
-\tag{25.88-distance}
+\tag{25.88d}
 $$
 
 First work on a fixed set on which $|\theta|$ and $\|\eta\|_\infty$ are bounded. If $\|\eta\|_\infty\leq1$, then
+
+<span id="equation-25-88-bernstein"></span>
 
 $$
 \begin{aligned}
@@ -6776,7 +7099,7 @@ P_0\{e^{|e\eta(W)|}-1-|e\eta(W)|\}
 &\leq
 P_0\eta^2(W)\,Ee^{|e|}.
 \end{aligned}
-\tag{25.88-Bernstein}
+\tag{25.88e}
 $$
 
 Thus the $L_2(P_W)$ norm controls the Bernstein norm of $e\eta(W)$. A bracket $[\eta_1,\eta_2]$ induces the bracket
@@ -6787,6 +7110,8 @@ $$
 
 for $e\eta$. The smooth-function entropy calculation and Bernstein-bracketing refinement in [Chapter 19](chapter-19.qmd) then give
 
+<span id="equation-25-88-modulus"></span>
+
 $$
 E^*
 \sup_{d_{\lambda_n}<\delta}
@@ -6795,10 +7120,12 @@ E^*
 \phi_n(\delta)
 =J_n(\delta)
 \left\{1+\frac{J_n(\delta)}{\delta^2\sqrt n}\right\},
-\tag{25.88-modulus}
+\tag{25.88f}
 $$
 
 where
+
+<span id="equation-25-88-entropy-integral"></span>
 
 $$
 \begin{aligned}
@@ -6813,10 +7140,10 @@ J_n(\delta)
 \delta^{3/4}
 +\frac{\delta}{\lambda_n^{1/4}}.
 \end{aligned}
-\tag{25.88-entropy-integral}
+\tag{25.88g}
 $$
 
-The finite-dimensional term $(\theta-\theta_0)V$ does not change this order, so (25.88-modulus) remains valid with $\eta-\eta_0$ replaced by $g-g_0$. The same bound applies to $\mathbb G_n(g-g_0)^2$, using
+The finite-dimensional term $(\theta-\theta_0)V$ does not change this order, so [(25.88f)](#equation-25-88-modulus) remains valid with $\eta-\eta_0$ replaced by $g-g_0$. The same bound applies to $\mathbb G_n(g-g_0)^2$, using
 
 $$
 P_0(g-g_0)^4\leq4P_0(g-g_0)^2
@@ -6829,26 +7156,30 @@ J_n(\delta_n)\lesssim n^{-3/10}
 \asymp\sqrt n\,\delta_n^2.
 $$
 
-Theorem 25.81 applied to (25.88-drift)--(25.88-modulus) now gives
+Theorem 25.81 applied to [(25.88c)](#equation-25-88-drift)–[(25.88f)](#equation-25-88-modulus) now gives
+
+<span id="equation-25-88-local-rate"></span>
 
 $$
 |\widehat\theta-\theta_0|
 +\|\widehat\eta-\eta_0\|_W
 =O_P(n^{-2/5}+\widehat\lambda_n)
 =O_P(\widehat\lambda_n),
-\tag{25.88-local-rate}
+\tag{25.88h}
 $$
 
 provided the temporary boundedness restriction holds.
 
 It remains to prove that restriction. Twice integrating $\eta''$ gives, for every $w\in[0,1]$,
 
+<span id="equation-25-88-sobolev"></span>
+
 $$
 |\eta(w)-\eta(0)-\eta'(0)w|
 \leq
 \int_0^w\int_0^u|\eta''(s)|\,ds\,du
 \leq J(\eta).
-\tag{25.88-Sobolev}
+\tag{25.88i}
 $$
 
 Hence
@@ -6860,10 +7191,12 @@ $$
 
 and
 
+<span id="equation-25-88-linear-part"></span>
+
 $$
 |\theta v+\eta(0)+\eta'(0)w|
 \leq|g(v,w)|+J(\eta).
-\tag{25.88-linear-part}
+\tag{25.88j}
 $$
 
 Let $a=(\theta,\eta(0),\eta'(0))^T$ and
@@ -6872,14 +7205,16 @@ $$
 A_n=\mathbb P_n(V,1,W)^T(V,1,W).
 $$
 
-The empirical mean of the square of the left side of (25.88-linear-part) is $a^TA_na$. The assumptions on $(V,W)$ make the population second-moment matrix positive definite, so its smallest eigenvalue, and hence that of $A_n$, is bounded away from zero with probability tending to one. It therefore suffices to bound $\mathbb P_ng^2$ and $J(\eta)$ at the estimator.
+The empirical mean of the square of the left side of [(25.88j)](#equation-25-88-linear-part) is $a^TA_na$. The assumptions on $(V,W)$ make the population second-moment matrix positive definite, so its smallest eigenvalue, and hence that of $A_n$, is bounded away from zero with probability tending to one. It therefore suffices to bound $\mathbb P_ng^2$ and $J(\eta)$ at the estimator.
 
-Condition on the entire design sequence $(V_i,W_i)$. The errors are then the only random part of (25.88-criterion). Apply the same rate argument conditionally, now with squared distance
+Condition on the entire design sequence $(V_i,W_i)$. The errors are then the only random part of [(25.88a)](#equation-25-88-criterion). Apply the same rate argument conditionally, now with squared distance
+
+<span id="equation-25-88-conditional-distance"></span>
 
 $$
 d_\lambda^2
 =\mathbb P_n(g-g_0)^2+\lambda^2J^2(\eta).
-\tag{25.88-conditional-distance}
+\tag{25.88k}
 $$
 
 The process $\mathbb G_neg$ is sub-Gaussian relative to the empirical $L_2(\mathbb P_n)$ metric. Moreover, $d_\lambda<\delta$ implies
@@ -6890,22 +7225,24 @@ $$
 J(\eta)\leq\delta/\lambda,
 $$
 
-and (25.88-Sobolev), together with the smallest eigenvalue of $A_n$, controls $|\theta|+\|\eta\|_\infty$ by $\mathbb P_n(g-g_0)^2+J^2(\eta)$. The conditional maximal inequality therefore has the same order as (25.88-modulus). Theorem 25.81 conditionally gives
+and [(25.88i)](#equation-25-88-sobolev), together with the smallest eigenvalue of $A_n$, controls $|\theta|+\|\eta\|_\infty$ by $\mathbb P_n(g-g_0)^2+J^2(\eta)$. The conditional maximal inequality therefore has the same order as [(25.88f)](#equation-25-88-modulus). Theorem 25.81 conditionally gives
+
+<span id="equation-25-88-boundedness"></span>
 
 $$
 \mathbb P_n(\widehat g-g_0)^2
 +\widehat\lambda_n^2J^2(\widehat\eta)
 =O_P(\widehat\lambda_n^2).
-\tag{25.88-boundedness}
+\tag{25.88l}
 $$
 
-Thus $J(\widehat\eta)=O_P(1)$ and $\mathbb P_n\widehat g^2=O_P(1)$. Equations (25.88-linear-part)--(25.88-boundedness) imply
+Thus $J(\widehat\eta)=O_P(1)$ and $\mathbb P_n\widehat g^2=O_P(1)$. Equations [(25.88j)](#equation-25-88-linear-part)–[(25.88l)](#equation-25-88-boundedness) imply
 
 $$
 |\widehat\theta|+\|\widehat\eta\|_\infty=O_P(1).
 $$
 
-The temporary restriction is now justified, so (25.88-local-rate) proves consistency of $\widehat\theta$ and the stated $L_2(P_W)$ rate, while (25.88-boundedness) supplies the two boundedness conclusions.
+The temporary restriction is now justified, so [(25.88h)](#equation-25-88-local-rate) proves consistency of $\widehat\theta$ and the stated $L_2(P_W)$ rate, while [(25.88l)](#equation-25-88-boundedness) supplies the two boundedness conclusions.
 
 </details>
 
@@ -6925,12 +7262,14 @@ $$
 
 Projection onto the nuisance-score space replaces $V$ by its conditional expectation given $W$; this is the conditional-expectation instance of Theorem 11.1. Therefore
 
+<span id="equation-25-11-partially-linear-efficient-score"></span>
+
 $$
 \widetilde\ell_{\theta,\eta}(x)
 =
 \{y-\theta v-\eta(w)\}
 \{v-h_0(w)\},
-\tag{25.11-partially-linear-efficient-score}
+\tag{25.11q}
 $$
 
 Figure @twentyfivefig-ch25-partially-linear visualizes the residualization encoded by this efficient score.
@@ -6953,6 +7292,8 @@ $$
 
 The estimator maximizes a penalized rather than ordinary likelihood, so the path derivative includes the penalty:
 
+<span id="equation-25-11-penalized-score"></span>
+
 $$
 \mathbb P_n
 \widetilde\ell_{\widehat\theta,\widehat\eta}
@@ -6960,7 +7301,7 @@ $$
 \int_0^1
 \widehat\eta''(w)h_0''(w)\,dw
 =0.
-\tag{25.11-penalized-score}
+\tag{25.11r}
 $$
 
 By Cauchy--Schwarz, the absolute value of the second term is at most
@@ -6986,10 +7327,12 @@ $$
 
 Read this within the standing setup of §25.8: the plug-in score also satisfies the $L_2(P_0)$ consistency requirement in (25.53). In the present model, given $\widehat\theta_n\to\theta_0$, it is enough that
 
+<span id="equation-25-89-score-consistency"></span>
+
 $$
 \|\widehat\eta_n-\eta_0\|_{L_2(P_W)}
 \overset P\longrightarrow0.
-\tag{25.89-score-consistency}
+\tag{25.89a}
 $$
 
 Any consistent sequence $\widehat\theta_n$ satisfying
@@ -7049,7 +7392,7 @@ $$
 (y-\theta v-\eta(w))\{v-h_0(w)\}
 $$
 
-range over the product of a fixed finite-dimensional class and a bounded second-order Sobolev ball. The smooth-function entropy calculation in Chapter 19, together with the [bracketing Donsker theorem](chapter-19.qmd#theorem-19-5), makes this a $P_0$-Donsker class with a square-integrable envelope. Condition (25.89-score-consistency), together with $\widehat\theta_n\to\theta_0$, gives the required $L_2(P_0)$ convergence of the estimated score, and the efficient information is positive by nonconfounding. The assumed approximate score equation is exactly the remaining hypothesis of [Theorem 25.54](#theorem-25-54). That theorem yields
+range over the product of a fixed finite-dimensional class and a bounded second-order Sobolev ball. The smooth-function entropy calculation in Chapter 19, together with the [bracketing Donsker theorem](chapter-19.qmd#theorem-19-5), makes this a $P_0$-Donsker class with a square-integrable envelope. Condition [(25.89a)](#equation-25-89-score-consistency), together with $\widehat\theta_n\to\theta_0$, gives the required $L_2(P_0)$ convergence of the estimated score, and the efficient information is positive by nonconfounding. The assumed approximate score equation is exactly the remaining hypothesis of [Theorem 25.54](#theorem-25-54). That theorem yields
 
 $$
 \sqrt n(\widehat\theta_n-\theta_0)
@@ -7069,15 +7412,19 @@ The same exact conditional-centering identity is the classical statistical found
 
 In practice $h_0(w)=E(V\mid W=w)$ is also unknown. Introduce working nuisance functions $\bar\eta$ and $\bar h$ and consider
 
+<span id="equation-25-11-plr-dml-score"></span>
+
 $$
 \psi(X;\theta,\bar\eta,\bar h)
 =
 \{Y-\theta V-\bar\eta(W)\}
 \{V-\bar h(W)\}.
-\tag{25.11-PLR-DML-score}
+\tag{25.11s}
 $$
 
 At $\theta=\theta_0$ its population bias is the product
+
+<span id="equation-25-11-plr-product-bias"></span>
 
 $$
 P\psi(X;\theta_0,\bar\eta,\bar h)
@@ -7086,7 +7433,7 @@ E\left[
 \{\eta_0(W)-\bar\eta(W)\}
 \{h_0(W)-\bar h(W)\}
 \right].
-\tag{25.11-PLR-product-bias}
+\tag{25.11t}
 $$
 
 There is no first-order term in either nuisance error alone. Equivalently, the Gâteaux derivative of the moment with respect to either nuisance vanishes at $(\eta_0,h_0)$: this is [Neyman orthogonality](#sec-neyman-orthogonality). Consequently, a sufficient rate condition is
@@ -7100,7 +7447,7 @@ $$
 
 the product-rate condition highlighted in [§25.8](#sec-25-8-two-requirements). Double/debiased machine learning estimates the two regressions on training folds and evaluates the orthogonal score on held-out folds. Cross-fitting uses conditional independence between nuisance training and score evaluation in place of a same-sample Donsker argument; $L_2$ convergence, the displayed product rate, and the usual moment conditions remain necessary [@chernozhukovEtAl2018].
 
-In the language of Fisher and Kennedy's Figure 2, the abstract post-correction curvature has become explicit algebra: motion in either nuisance coordinate alone has zero first derivative, and the remaining mixed movement is the cross-product in (25.11-PLR-product-bias). The figure motivates looking for a second-order remainder; this model-specific calculation identifies its actual form. Compare @fisherKennedy2021 and §4.3 of @kennedy2022.
+In the language of Fisher and Kennedy's Figure 2, the abstract post-correction curvature has become explicit algebra: motion in either nuisance coordinate alone has zero first derivative, and the remaining mixed movement is the cross-product in [(25.11t)](#equation-25-11-plr-product-bias). The figure motivates looking for a second-order remainder; this model-specific calculation identifies its actual form. Compare @fisherKennedy2021 and §4.3 of @kennedy2022.
 
 This final paragraph of §25.11 is one of the book's clearest direct precursors to DML. In modern terms it describes **rate double robustness**. Write
 
@@ -7120,7 +7467,7 @@ Thus, if $r_{\eta,n}=O_P(n^{-a})$ and $r_{h,n}=O_P(n^{-b})$, a sufficient expone
 
 This has two related meanings:
 
-- **Model double robustness:** the population moment in (25.11-PLR-product-bias) is exactly unbiased if either $\bar\eta=\eta_0$ or $\bar h=h_0$, even when the other working nuisance is misspecified.
+- **Model double robustness:** the population moment in [(25.11t)](#equation-25-11-plr-product-bias) is exactly unbiased if either $\bar\eta=\eta_0$ or $\bar h=h_0$, even when the other working nuisance is misspecified.
 - **Rate double robustness:** when both nuisances are estimated consistently, their **product**, rather than each rate separately, controls the root-$n$ bias.
 
 Cross-fitting addresses a different part of the proof: it helps control the empirical-process term created by evaluating estimated nuisances on the data. It does not create the product-bias identity or remove the product-rate requirement.
@@ -7180,12 +7527,16 @@ $$
 
 Varying the target parameter in an ordinary Euclidean direction gives
 
+<span id="equation-25-12-target-equation"></span>
+
 $$
 \mathbb P_n\dot\ell_{\widehat\theta,\widehat\eta}=0.
-\tag{25.12-target-equation}
+\tag{25.12a}
 $$
 
 For the nuisance parameter, let $h$ range over an index set $\mathcal H$. Suppose that, for every $(\theta,\eta)$ and $h\in\mathcal H$, there is a feasible path $t\mapsto\eta_t(\theta,\eta)$ through $\eta$ whose score is
+
+<span id="equation-25-12-nuisance-score"></span>
 
 $$
 \left.
@@ -7196,10 +7547,12 @@ $$
 =
 B_{\theta,\eta}h(x)
 -P_{\theta,\eta}B_{\theta,\eta}h.
-\tag{25.12-nuisance-score}
+\tag{25.12b}
 $$
 
 The centering term is written explicitly because a valid score must have mean zero. Stationarity along every such path gives the infinite family of equations
+
+<span id="equation-25-12-nuisance-equations"></span>
 
 $$
 \mathbb P_nB_{\widehat\theta,\widehat\eta}h
@@ -7207,7 +7560,7 @@ $$
 P_{\widehat\theta,\widehat\eta}
 B_{\widehat\theta,\widehat\eta}h,
 \qquad h\in\mathcal H.
-\tag{25.12-nuisance-equations}
+\tag{25.12c}
 $$
 
 **Notation caution.** In §25.5, $B_{\theta,\eta}h$ denoted a nuisance score and hence was already mean zero. Following van der Vaart's notation in §25.12, $B_{\theta,\eta}h$ here may denote an uncentered directional derivative, and the actual nuisance score is
@@ -7229,6 +7582,8 @@ $$
 
 by
 
+<span id="equation-25-12-psi-n"></span>
+
 $$
 \begin{aligned}
 \Psi_{n1}(\theta,\eta)
@@ -7237,10 +7592,12 @@ $$
 &=\mathbb P_nB_{\theta,\eta}h
 -P_{\theta,\eta}B_{\theta,\eta}h.
 \end{aligned}
-\tag{25.12-Psi-n}
+\tag{25.12d}
 $$
 
 Its expectation under the true law $P_0=P_{\theta_0,\eta_0}$ is
+
+<span id="equation-25-12-psi"></span>
 
 $$
 \begin{aligned}
@@ -7250,7 +7607,7 @@ $$
 &=P_0B_{\theta,\eta}h
 -P_{\theta,\eta}B_{\theta,\eta}h.
 \end{aligned}
-\tag{25.12-Psi}
+\tag{25.12e}
 $$
 
 Both the estimator and the truth are zeros of the corresponding maps:
@@ -7271,16 +7628,20 @@ Assume:
 1. As $(\theta,\eta)$ ranges over a neighborhood of $(\theta_0,\eta_0)$ and $h$ ranges over $\mathcal H$, the functions $\dot\ell_{\theta,\eta}$ and $B_{\theta,\eta}h$ lie in a fixed $P_0$-Donsker class.
 2. Along the estimator sequence, the scores are uniformly $L_2(P_0)$ consistent:
 
+    <span id="equation-25-90-target-l2"></span>
+
     $$
     P_0\left\|
     \dot\ell_{\widehat\theta,\widehat\eta}
     -\dot\ell_{\theta_0,\eta_0}
     \right\|^2
     \overset P\longrightarrow0,
-    \tag{25.90-target-L2}
+    \tag{25.90a}
     $$
 
     and
+
+    <span id="equation-25-90-nuisance-l2"></span>
 
     $$
     \sup_{h\in\mathcal H}
@@ -7289,7 +7650,7 @@ Assume:
     -B_{\theta_0,\eta_0}h
     \right|^2
     \overset P\longrightarrow0.
-    \tag{25.90-nuisance-L2}
+    \tag{25.90b}
     $$
 
 3. The map
@@ -7334,6 +7695,8 @@ $$
 
 Equivalently, on the range of $\dot\Psi_0$,
 
+<span id="equation-25-90-inverse"></span>
+
 $$
 \sqrt n
 \begin{pmatrix}
@@ -7344,7 +7707,7 @@ $$
 -\dot\Psi_0^{-1}
 \sqrt n\,\Psi_n(\theta_0,\eta_0)
 +o_P(1).
-\tag{25.90-inverse}
+\tag{25.90c}
 $$
 
 :::
@@ -7364,10 +7727,12 @@ $$
 
 The two Donsker assumptions and the two uniform $L_2(P_0)$ consistency conditions imply stochastic equicontinuity at the random index:
 
+<span id="equation-25-90-equicontinuity"></span>
+
 $$
 \|Z_n(\widehat\xi)-Z_n(\xi_0)\|
 =o_P(1).
-\tag{25.90-equicontinuity}
+\tag{25.90d}
 $$
 
 For the Euclidean score coordinate this is [Lemma 19.24](chapter-19.qmd#lemma-19.24) applied componentwise; for the nuisance coordinate the supremum over
@@ -7377,6 +7742,8 @@ $\ell^\infty(\mathcal H)$, so the uniform $L_2$ condition gives the same conclus
 The approximate likelihood equations and
 $\Psi(\xi_0)=0$ now give
 
+<span id="equation-25-90-root"></span>
+
 $$
 \begin{aligned}
 0
@@ -7384,10 +7751,12 @@ $$
 &=Z_n(\widehat\xi)+\sqrt n\,\Psi(\widehat\xi)+o_P(1)\\
 &=Z_n(\xi_0)+\sqrt n\,\Psi(\widehat\xi)+o_P(1).
 \end{aligned}
-\tag{25.90-root}
+\tag{25.90e}
 $$
 
 Fréchet differentiability means
+
+<span id="equation-25-90-frechet"></span>
 
 $$
 \Psi(\widehat\xi)
@@ -7395,36 +7764,40 @@ $$
 \qquad
 \|r_n\|
 =o_P(\|\widehat\xi-\xi_0\|).
-\tag{25.90-Frechet}
+\tag{25.90f}
 $$
 
-Substitution into (25.90-root) yields
+Substitution into [(25.90e)](#equation-25-90-root) yields
+
+<span id="equation-25-90-preliminary"></span>
 
 $$
 \dot\Psi_0\sqrt n(\widehat\xi-\xi_0)
 =-Z_n(\xi_0)+o_P(1)
 +o_P\{\sqrt n\|\widehat\xi-\xi_0\|\}.
-\tag{25.90-preliminary}
+\tag{25.90g}
 $$
 
 Continuity of $\dot\Psi_0^{-1}$ on its range is equivalent to the existence of
 $C<\infty$ such that
 
+<span id="equation-25-90-inverse-bound"></span>
+
 $$
 \|v\|\leq C\|\dot\Psi_0v\|
 \qquad
 (v\in\mathbb R^k\times\operatorname{lin}H).
-\tag{25.90-inverse-bound}
+\tag{25.90h}
 $$
 
 The Donsker condition gives $Z_n(\xi_0)=O_P(1)$. Apply
-(25.90-inverse-bound) to (25.90-preliminary) and absorb the last term into the left side. This proves
+[(25.90h)](#equation-25-90-inverse-bound) to [(25.90g)](#equation-25-90-preliminary) and absorb the last term into the left side. This proves
 
 $$
 \sqrt n\|\widehat\xi-\xi_0\|=O_P(1).
 $$
 
-Returning to (25.90-Frechet), its scaled remainder is now $o_P(1)$. Equation (25.90-root) therefore reduces to
+Returning to [(25.90f)](#equation-25-90-frechet), its scaled remainder is now $o_P(1)$. Equation [(25.90e)](#equation-25-90-root) therefore reduces to
 
 $$
 \dot\Psi_0\sqrt n(\widehat\xi-\xi_0)
@@ -7432,7 +7805,7 @@ $$
 $$
 
 because $\Psi(\xi_0)=0$ makes
-$Z_n(\xi_0)=\sqrt n\,\Psi_n(\xi_0)$. This is (25.90). Applying the continuous inverse on the range gives (25.90-inverse).
+$Z_n(\xi_0)=\sqrt n\,\Psi_n(\xi_0)$. This is (25.90). Applying the continuous inverse on the range gives [(25.90c)](#equation-25-90-inverse).
 
 </details>
 
@@ -7453,11 +7826,13 @@ The choice of $\mathcal H$ affects both sides of this tradeoff:
 
 Recall from [§25.5.1](#sec-semiparametric-score-operators) that the joint score operator is
 
+<span id="equation-25-12-joint-score-operator"></span>
+
 $$
 A_{\theta,\eta}(a,b)
 =a^T\dot\ell_{\theta,\eta}
 +B_{\theta,\eta}b.
-\tag{25.12-joint-score-operator}
+\tag{25.12f}
 $$
 
 When $\eta$ is a probability measure, bounded directions $h$ correspond to paths
@@ -7513,6 +7888,8 @@ The formulas in (25.91) are immediate along directions of the form $d(\eta-\eta_
 
 Assume $\dot\Psi_{11}$ is invertible and define the [Schur complement](https://en.wikipedia.org/wiki/Schur_complement)
 
+<span id="equation-25-12-schur"></span>
+
 $$
 \dot V
 =
@@ -7520,10 +7897,12 @@ $$
 -\dot\Psi_{21}
 \dot\Psi_{11}^{-1}
 \dot\Psi_{12}.
-\tag{25.12-Schur}
+\tag{25.12g}
 $$
 
 If $\dot V$ is continuously invertible, then
+
+<span id="equation-25-12-block-inverse"></span>
 
 $$
 \dot\Psi_0^{-1}
@@ -7538,28 +7917,32 @@ $$
 &
 \dot V^{-1}
 \end{pmatrix}.
-\tag{25.12-block-inverse}
+\tag{25.12h}
 $$
 
 The negative target block $-\dot\Psi_{11}=I_0$ is the Fisher information for $\theta$ when $\eta$ is known. With the same derivative convention, $-\dot V$ is the adjusted nuisance-information operator after accounting for target--nuisance interaction; $\dot V$ itself is its negative.
 
 For a measure-valued nuisance parameter,
 
+<span id="equation-25-12-v"></span>
+
 $$
 \dot V(\eta-\eta_0)h
 =
 -\int (B_0^*B_0+K)h\,d(\eta-\eta_0),
-\tag{25.12-V}
+\tag{25.12i}
 $$
 
 where
+
+<span id="equation-25-12-k"></span>
 
 $$
 Kh
 =-
 P_0\{(B_0h)\dot\ell_0^T\}
 I_0^{-1}B_0^*\dot\ell_0.
-\tag{25.12-K}
+\tag{25.12j}
 $$
 
 The operator $B_0^*B_0$ is the nuisance information when $\theta$ is known. The correction $K$ has finite-dimensional range because it passes through the $k$-dimensional target parameter. It is therefore a [compact operator](https://en.wikipedia.org/wiki/Compact_operator).
@@ -7599,9 +7982,11 @@ Suppress the subscript $(\theta_0,\eta_0)$. Because $K$ factors through the fini
 
 Suppose
 
+<span id="equation-25-92-kernel"></span>
+
 $$
 (B_0^*B_0+K)h=0.
-\tag{25.92-kernel}
+\tag{25.92a}
 $$
 
 Let
@@ -7620,13 +8005,15 @@ $$
 
 has score $a_0^T\dot\ell_0+\overline B_0h$ and information
 
+<span id="equation-25-92-joint-information"></span>
+
 $$
 \begin{aligned}
 P_0(a_0^T\dot\ell_0+\overline B_0h)^2
 &=a_0^TI_0a_0+P_0(\overline B_0h)^2+2a_0^Tr\\
 &=P_0(\overline B_0h)^2-a_0^TI_0a_0.
 \end{aligned}
-\tag{25.92-joint-information}
+\tag{25.92b}
 $$
 
 The efficient score is the component of $\dot\ell_0$ orthogonal to all nuisance scores. Therefore adding a nuisance score to $a_0^T\dot\ell_0$ cannot reduce its squared norm below
@@ -7635,9 +8022,11 @@ $$
 a_0^T\widetilde I_0a_0.
 $$
 
-Because $\widetilde I_0$ is nonsingular, (25.92-joint-information) is strictly positive whenever $a_0\neq0$.
+Because $\widetilde I_0$ is nonsingular, [(25.92b)](#equation-25-92-joint-information) is strictly positive whenever $a_0\neq0$.
 
-Now pair (25.92-kernel) with $h$ under $\eta_0$. The adjoint identity and the definition of $K$ in (25.12-K) give
+Now pair [(25.92a)](#equation-25-92-kernel) with $h$ under $\eta_0$. The adjoint identity and the definition of $K$ in [(25.12j)](#equation-25-12-k) give
+
+<span id="equation-25-92-pairing"></span>
 
 $$
 \begin{aligned}
@@ -7647,10 +8036,10 @@ $$
 &=P_0(B_0h)^2-a_0^TI_0a_0\\
 &\geq P_0(\overline B_0h)^2-a_0^TI_0a_0.
 \end{aligned}
-\tag{25.92-pairing}
+\tag{25.92c}
 $$
 
-The last line is the information in (25.92-joint-information). If $a_0\neq0$, it is strictly positive, contradicting (25.92-pairing). Hence $a_0=0$, and therefore $r=0$ and $Kh=0$. Reinserting this in (25.92-kernel) yields $B_0^*B_0h=0$. Since $B_0^*B_0$ is invertible, $h=0$. Thus $B_0^*B_0+K$ is one-to-one, and Lemma 25.93 completes the proof.
+The last line is the information in [(25.92b)](#equation-25-92-joint-information). If $a_0\neq0$, it is strictly positive, contradicting [(25.92c)](#equation-25-92-pairing). Hence $a_0=0$, and therefore $r=0$ and $Kh=0$. Reinserting this in [(25.92a)](#equation-25-92-kernel) yields $B_0^*B_0h=0$. Since $B_0^*B_0$ is invertible, $h=0$. Thus $B_0^*B_0+K$ is one-to-one, and Lemma 25.93 completes the proof.
 
 </details>
 
@@ -7689,10 +8078,12 @@ and $A$ is an isomorphism, it is enough to consider $S=I+T$ with $T=A^{-1}K$ com
 
 **2. The range is closed.** First note that there is a constant $C<\infty$ such that
 
+<span id="equation-25-93-coercive"></span>
+
 $$
 \operatorname{dist}\{x,N(S)\}
 \leq C\|Sx\|.
-\tag{25.93-coercive}
+\tag{25.93a}
 $$
 
 Otherwise, after subtracting an element of $N(S)$ and rescaling, there would be a sequence $x_j$ with
@@ -7707,7 +8098,7 @@ $$
 
 Compactness supplies a subsequence along which $Tx_j$ converges. Since $x_j=Sx_j-Tx_j$, that subsequence of $x_j$ converges to some $x\in N(S)$, contradicting its unit distance from $N(S)$.
 
-Now suppose $Sx_j\to y$. Inequality (25.93-coercive) makes the cosets $x_j+N(S)$ Cauchy in the Banach quotient $\mathbb B/N(S)$. Hence there are $x\in\mathbb B$ and $z_j\in N(S)$ such that $x_j-z_j\to x$. Because $S(x_j-z_j)=Sx_j$, continuity gives $Sx=y$. Thus $R(S)$ is closed.
+Now suppose $Sx_j\to y$. Inequality [(25.93a)](#equation-25-93-coercive) makes the cosets $x_j+N(S)$ Cauchy in the Banach quotient $\mathbb B/N(S)$. Hence there are $x\in\mathbb B$ and $z_j\in N(S)$ such that $x_j-z_j\to x$. Because $S(x_j-z_j)=Sx_j$, continuity gives $Sx=y$. Thus $R(S)$ is closed.
 
 **3. The range has finite codimension.** The operator $T$ leaves $R(S)$ invariant because $TS=ST$. It therefore induces a compact operator $\overline T$ on the quotient $\mathbb B/R(S)$. Since $Sx=x+Tx$ belongs to $R(S)$,
 
@@ -7770,13 +8161,15 @@ $$
 
 belongs to the allowed direction space, insert $h=h_{\mathrm{proj}}$ in the nuisance equation and subtract the resulting equation from the target equation. Using the efficient-score formula (25.33) gives
 
+<span id="equation-25-12-efficient-expansion"></span>
+
 $$
 \widetilde I_0
 \sqrt n(\widehat\theta-\theta_0)
 =
 \mathbb G_n\widetilde\ell_0
 +o_P(1).
-\tag{25.12-efficient-expansion}
+\tag{25.12k}
 $$
 
 Therefore
@@ -7835,6 +8228,8 @@ $$
 
 where $T$ and $C$ are conditionally independent given $Z$ and $T$ follows a Cox model. Dropping factors involving the censoring and covariate distributions gives the point-mass likelihood
 
+<span id="equation-25-12-cox-likelihood"></span>
+
 $$
 \operatorname{lik}(\theta,\Lambda)(x)
 =
@@ -7845,7 +8240,7 @@ e^{-e^{\theta^Tz}\Lambda(y)}
 \left[
 e^{-e^{\theta^Tz}\Lambda(y)}
 \right]^{1-\delta}.
-\tag{25.12-Cox-likelihood}
+\tag{25.12l}
 $$
 
 This is the censored version of the construction in [Example 25.69](#example-25-69). Profiling out the jumps of $\Lambda$ again yields the Cox partial likelihood for $\theta$, and $\widehat\Lambda$ has an explicit jump formula once $\widehat\theta$ is known. Establishing consistency is the hardest preliminary step because the empirical factors $\Lambda\{Y_i\}$ prevent a direct application of ordinary smooth M-estimation arguments.
@@ -7856,11 +8251,13 @@ Only the restriction of $\Lambda$ to $[0,\tau]$ is identified and used below.
 
 The target score is
 
+<span id="equation-25-12-cox-target-score"></span>
+
 $$
 \dot\ell_{\theta,\Lambda}(x)
 =
 \delta z-ze^{\theta^Tz}\Lambda(y).
-\tag{25.12-Cox-target-score}
+\tag{25.12m}
 $$
 
 For bounded measurable $h:[0,\tau]\to\mathbb R$, use the multiplicative hazard path
@@ -7871,16 +8268,20 @@ $$
 
 Its nuisance score is
 
+<span id="equation-25-12-cox-nuisance-score"></span>
+
 $$
 B_{\theta,\Lambda}h(x)
 =
 \delta h(y)
 -e^{\theta^Tz}
 \int_{[0,y]}h\,d\Lambda.
-\tag{25.12-Cox-nuisance-score}
+\tag{25.12n}
 $$
 
 For continuous $\Lambda$, the nuisance information operator has the unusually simple multiplication form
+
+<span id="equation-25-12-cox-information-operator"></span>
 
 $$
 B_{\theta,\Lambda}^*
@@ -7889,17 +8290,19 @@ B_{\theta,\Lambda}h(y)
 h(y)
 E_{\theta,\Lambda}
 \{\mathbf 1\{Y\geq y\}e^{\theta^TZ}\}.
-\tag{25.12-Cox-information-operator}
+\tag{25.12o}
 $$
 
 At the truth, define
+
+<span id="equation-25-12-cox-m"></span>
 
 $$
 M_j(y)
 =
 E_0\{\mathbf 1\{Y\geq y\}Z^j e^{\theta_0^TZ}\},
 \qquad j=0,1,
-\tag{25.12-Cox-M}
+\tag{25.12p}
 $$
 
 with the vector-valued interpretation for $M_1$ when necessary. Then
@@ -7913,6 +8316,8 @@ $$
 
 The efficient score is therefore
 
+<span id="equation-25-12-cox-efficient-score"></span>
+
 $$
 \widetilde\ell_0(x)
 =
@@ -7925,10 +8330,12 @@ z-\frac{M_1}{M_0}(y)
 z-\frac{M_1}{M_0}(t)
 \right\}
 d\Lambda_0(t).
-\tag{25.12-Cox-efficient-score}
+\tag{25.12q}
 $$
 
 If $\overline G_0(y\mid Z)=P_0(Y\geq y\mid Z)$, the efficient information is
+
+<span id="equation-25-12-cox-efficient-information"></span>
 
 $$
 \widetilde I_0
@@ -7942,7 +8349,7 @@ Z-\frac{M_1}{M_0}(y)
 \overline G_0(y\mid Z)
 d\Lambda_0(y)
 \right].
-\tag{25.12-Cox-efficient-information}
+\tag{25.12r}
 $$
 
 It is positive definite when the covariate is not locally determined by observed time.
@@ -7957,7 +8364,7 @@ Take $\mathcal H$ to be the unit ball of $BV[0,\tau]$, the bounded functions of 
 - [Lemma 25.92](#lemma-25-92) then supplies continuous invertibility of the joint derivative.
 - Bounded-variation balls are Donsker, and $h\mapsto\int_{[0,y]}h\,d\Lambda$ again produces bounded-variation functions. Closure under sums and products gives the required score class; see the [Chapter 19 Donsker discussion](chapter-19.qmd#donsker-classes).
 
-Thus Theorem 25.90 yields the joint Gaussian limit, while (25.12-efficient-expansion) shows directly that $\widehat\theta$ attains the semiparametric information bound.
+Thus Theorem 25.90 yields the joint Gaussian limit, while [(25.12k)](#equation-25-12-efficient-expansion) shows directly that $\widehat\theta$ attains the semiparametric information bound.
 
 ::: {.callout-tip title="Why this Cox proof is especially clean"}
 
@@ -7996,12 +8403,14 @@ Let $\eta$ be a completely unknown distribution on $\mathcal Z$, and let $p_\the
 
 The joint law can be written
 
+<span id="equation-25-12-partially-missing-model"></span>
+
 $$
 (x,y,z)
 \longmapsto
 p_\theta(x\mid\eta)
 p_\theta(y\mid z)\,d\eta(z).
-\tag{25.12-partially-missing-model}
+\tag{25.12s}
 $$
 
 The indirect observation alone may contain little stable information about the full mixing distribution. The direct $Z$ observation anchors $\eta$, while the indirect observation can still reduce the asymptotic variance.
@@ -8032,13 +8441,15 @@ Here inference on the unknown distribution $\eta$ may be at least as important a
 
 Use the hybrid likelihood
 
+<span id="equation-25-12-partially-missing-likelihood"></span>
+
 $$
 \operatorname{lik}(\theta,\eta)(x,y,z)
 =
 p_\theta(x\mid\eta)
 p_\theta(y\mid z)
 \eta\{z\}.
-\tag{25.12-partially-missing-likelihood}
+\tag{25.12t}
 $$
 
 The final factor is the point-mass likelihood from [Example 25.68](#example-25-68). The NPMLE charges every observed $Z_i$ and may add further support points favored by the mixture term $p_\theta(x\mid\eta)$.
@@ -8053,6 +8464,8 @@ $$
 
 The target score is
 
+<span id="equation-25-12-partially-missing-target-score"></span>
+
 $$
 \begin{aligned}
 \dot\ell_{\theta,\eta}(x,y,z)
@@ -8063,10 +8476,12 @@ $$
 {p_\theta(x\mid\eta)}
 +k_\theta(y\mid z).
 \end{aligned}
-\tag{25.12-partially-missing-target-score}
+\tag{25.12u}
 $$
 
 For a mean-zero direction $h$ satisfying $\eta h=0$, the path $d\eta_t=(1+th)d\eta$ has nuisance score
+
+<span id="equation-25-12-partially-missing-nuisance-score"></span>
 
 $$
 \begin{aligned}
@@ -8078,24 +8493,28 @@ B_{\theta,\eta}h(x,z)
 {p_\theta(x\mid\eta)}
 +h(z).
 \end{aligned}
-\tag{25.12-partially-missing-nuisance-score}
+\tag{25.12v}
 $$
 
 The mixture score operator $C_{\theta,\eta}$ has adjoint
+
+<span id="equation-25-12-c-adjoint"></span>
 
 $$
 C_{\theta,\eta}^*g(z)
 =
 \int g(x)p_\theta(x\mid z)\,d\mu(x).
-\tag{25.12-C-adjoint}
+\tag{25.12w}
 $$
 
 On the mean-zero subspace of $L_2(\eta)$,
 
+<span id="equation-25-12-direct-information"></span>
+
 $$
 B_{\theta,\eta}^*B_{\theta,\eta}
 =C_{\theta,\eta}^*C_{\theta,\eta}+I.
-\tag{25.12-direct-information}
+\tag{25.12x}
 $$
 
 ::: {.callout-important title="Why the direct observations matter"}
@@ -8117,6 +8536,8 @@ so the nuisance information is strictly positive and stably invertible in $L_2(\
 
 Theorem 25.90 needs invertibility in the Banach norm used for the likelihood equations, not merely in $L_2(\eta)$. Let $\mathcal Z$ be a bounded convex subset of $\mathbb R^d$, and write $p_0=p_{\theta_0}$. Assume $z\mapsto p_0(x\mid z)$ is continuously differentiable and, for constants $K<\infty$ and $\alpha>0$,
 
+<span id="equation-25-96-holder"></span>
+
 $$
 \int
 \left|
@@ -8124,10 +8545,12 @@ $$
 -\frac{\partial}{\partial z_i}p_0(x\mid z')
 \right|d\mu(x)
 \leq K\|z-z'\|^\alpha,
-\tag{25.96-holder}
+\tag{25.96a}
 $$
 
 and
+
+<span id="equation-25-96-bound"></span>
 
 $$
 \int
@@ -8135,7 +8558,7 @@ $$
 \frac{\partial}{\partial z_i}p_0(x\mid z)
 \right|d\mu(x)
 \leq K.
-\tag{25.96-bound}
+\tag{25.96b}
 $$
 
 Then, for every $\beta<\alpha$, with $C^\beta(\mathcal Z)$ denoting the corresponding Hölder space,
@@ -8156,7 +8579,7 @@ is continuously invertible.
 <details>
 <summary>Complete proof</summary>
 
-Equation (25.12-direct-information) gives
+Equation [(25.12x)](#equation-25-12-direct-information) gives
 
 $$
 B_0^*B_0=I+C_0^*C_0.
@@ -8217,6 +8640,8 @@ Thus a convenient sufficient condition is $\alpha>d/2$. In dimensions $d=1,2,3$,
 
 The Donsker condition for the mixture component $C_{\theta,\eta}h(x)$ can also be verified from smoothness in $x$. Differentiation gives
 
+<span id="equation-25-12-mixture-derivative"></span>
+
 $$
 \frac{\partial}{\partial x_i}
 C_{\theta,\eta}h(x)
@@ -8226,7 +8651,7 @@ h(Z),
 \frac{\partial}{\partial x_i}
 \log p_\theta(x\mid Z)
 \right\},
-\tag{25.12-mixture-derivative}
+\tag{25.12y}
 $$
 
 where the covariance is under the posterior distribution of $Z$ given $X=x$. Bounds on derivatives of the kernel therefore translate into entropy control for the mixture-score class.

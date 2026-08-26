@@ -181,9 +181,11 @@ The theorem passes a known limit through a statistic. Its discontinuity caveat i
 
 A sequence of random vectors is **uniformly tight** if, for every $\varepsilon>0$, there is an $M<\infty$ such that
 
+<span id="equation-2-4-tightness"></span>
+
 $$
 \sup_nP(\|X_n\|>M)<\varepsilon.
-\tag{2.4-tightness}
+\tag{2.4a}
 $$
 
 Thus all laws place arbitrarily high probability in one common compact ball. In Euclidean spaces this is equivalent to boundedness in probability. The source spells the next result *Prohorov's theorem*; *Prokhorov* is another common transliteration.
@@ -266,9 +268,11 @@ $$
 
 Each $F_n$ is coordinatewise nondecreasing, so $G(q)\leq G(q')$ whenever $q\leq q'$ coordinatewise. Define
 
+<span id="equation-2-5-extension"></span>
+
 $$
 F(x)=\inf_{\substack{q\in\mathbb Q^k\\q>x}}G(q),
-\tag{2.5-extension}
+\tag{2.5a}
 $$
 
 where $q>x$ means strict inequality in every coordinate. This definition makes $F$ coordinatewise nondecreasing. It is right-continuous: given $\varepsilon>0$, choose rational $q>x$ with $G(q)<F(x)+\varepsilon$. Whenever $x\leq y<q$ coordinatewise,
@@ -302,7 +306,7 @@ For $k=1$, monotonicity and right-continuity are all the finite-point requiremen
 
 </details>
 
-Example 2.6 gives a quick sufficient condition for (2.4-tightness): if $\sup_nE\|X_n\|^p<\infty$ for some $p>0$, then Markov's inequality yields
+Example 2.6 gives a quick sufficient condition for [(2.4a)](#equation-2-4-tightness): if $\sup_nE\|X_n\|^p<\infty$ for some $p>0$, then Markov's inequality yields
 
 $$
 \sup_nP(\|X_n\|>M)

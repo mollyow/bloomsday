@@ -654,7 +654,12 @@ If $f_n$ is close to $f_0$ in $L_2(P)$, the two functions are close in the natur
 Thus:
 
 $$
-\boxed{L_2(P)\text{ closeness of functions}+\text{Donsker equicontinuity}\Rightarrow\text{empirical-process closeness}.}
+\boxed{
+\begin{gathered}
+L_2(P)\text{ closeness}+\text{Donsker equicontinuity}\\
+\Rightarrow\text{empirical-process closeness}
+\end{gathered}
+}
 $$
 
 **Proof roadmap.** Jointly converge the empirical process and its random index, use $L_2(P)$ continuity of the limiting Brownian bridge, and apply the continuous mapping theorem to evaluation at that index.

@@ -141,7 +141,11 @@ Because Hodges’ example defeats pointwise lower bounds, consider local alterna
 <span id="eq-local-regularity"></span>
 
 $$
-(8.2)\qquad  \sqrt{n}\left(T_n-\psi\left(\theta+\frac{h}{\sqrt{n}}\right)\right)\overset{\theta+h/\sqrt{n}}{\rightsquigarrow}L_{\theta,h}.
+\begin{aligned}
+\sqrt n\left[T_n-\psi\left(\theta+\frac{h}{\sqrt n}\right)\right]
+&\overset{\theta+h/\sqrt n}{\rightsquigarrow}L_{\theta,h}.
+\end{aligned}
+\tag{8.2}
 $$
 
 The estimator is locally good at $\theta$ if the family $\{L_{\theta,h}:h\in\mathbb R^k\}$ is concentrated near zero, and it is **locally optimal** if these limits are maximally concentrated for every $h$.
@@ -532,7 +536,10 @@ Therefore $\delta(Y,U)=Y$ for Lebesgue-almost every $(y,u)$. Every normal locati
 An estimator sequence $T_n$ is **regular** at $\theta$ for estimating $\psi(\theta)$ if, for every $h$,
 
 $$
-\sqrt n\left(T_n-\psi\left(\theta+\frac{h}{\sqrt n}\right)\right)\overset{\theta+h/\sqrt n}{\rightsquigarrow}L_\theta,
+\begin{aligned}
+\sqrt n\left[T_n-\psi\left(\theta+\frac{h}{\sqrt n}\right)\right]
+&\overset{\theta+h/\sqrt n}{\rightsquigarrow}L_\theta,
+\end{aligned}
 $$
 
 where the same distribution $L_\theta$ appears for every $h$. Thus local perturbations do not change the limiting error law. By [Theorem 8.3](#theorem-limit-experiment-reduction), the matching estimator in the Gaussian limit experiment is equivariant in law for $\dot\psi_\theta h$. A **best regular estimator** has no additional convolution noise and hence has limiting distribution $N\bigl(0,\dot\psi_\theta I_\theta^{-1}\dot\psi_\theta^T\bigr)$.
@@ -652,7 +659,10 @@ Assume:
 Then, for every sequence $\gamma_n\to0$, there exists a subsequence $\{n_j\}$ such that, for Lebesgue-almost every pair $(\theta,h)$,
 
 $$
-r_{n_j}\left(T_{n_j}-\psi\left(\theta+\gamma_{n_j}h\right)\right)\overset{\theta+\gamma_{n_j}h}{\rightsquigarrow}L_\theta.
+\begin{aligned}
+r_{n_j}\left[T_{n_j}-\psi\left(\theta+\gamma_{n_j}h\right)\right]
+&\overset{\theta+\gamma_{n_j}h}{\rightsquigarrow}L_\theta.
+\end{aligned}
 $$
 
 Thus an estimator with pointwise limits at almost every parameter is, along a subsequence, automatically regular under vanishing perturbations $\theta+\gamma_nh$ for almost every $(\theta,h)$. Its local limiting distribution remains $L_\theta$.
@@ -728,7 +738,13 @@ The convolution theorem applies only to regular estimators, while the almost-eve
 Suppose the model is differentiable in quadratic mean at $\theta$, with nonsingular Fisher information $I_\theta$, and $\psi$ is differentiable at $\theta$. For every estimator sequence $T_n$ and every bowl-shaped loss $\ell$,
 
 $$
-\sup_I\liminf_{n\to\infty}\sup_{h\in I}E_{\theta+h/\sqrt{n}}\ell\left(\sqrt{n}\left[T_n-\psi\left(\theta+\frac{h}{\sqrt{n}}\right)\right]\right)\geq\int\ell\,dN\bigl(0,\dot\psi_\theta I_\theta^{-1}\dot\psi_\theta^T\bigr),
+\begin{aligned}
+&\sup_I\liminf_{n\to\infty}\sup_{h\in I}
+E_{\theta+h/\sqrt n}
+\ell\left(\sqrt n\left[T_n-\psi\left(\theta+\frac{h}{\sqrt n}\right)\right]\right)\\
+&\qquad\geq
+\int\ell\,dN\bigl(0,\dot\psi_\theta I_\theta^{-1}\dot\psi_\theta^T\bigr),
+\end{aligned}
 $$
 
 where the first supremum ranges over finite subsets $I\subset\mathbb{R}^k$.

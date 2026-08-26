@@ -65,6 +65,7 @@ book:
 format:
   html:
     theme: cosmo
+    css: styles.css
     toc: true
     # Preserve the source book's selected chapter numbers (2, 6, 7, 8, 18,
     # 19, and 25) rather than renumbering them sequentially.

@@ -1,0 +1,14 @@
+/* Keep wide display math within the article column. MathJax can otherwise
+   place an equation or its tag beneath the right-hand table of contents. */
+.math.display {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 0.15rem 0 0.35rem;
+}
+
+.math.display mjx-container[display="true"] {
+  min-width: max-content;
+}
