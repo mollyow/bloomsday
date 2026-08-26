@@ -5,20 +5,22 @@ This chapter shows how a smooth model, viewed on an $n^{-1/2}$ neighborhood of a
 ::: {.callout-tip title="Why this chapter is here"}
 - **Prerequisites:** [stochastic order and Slutsky](chapter-2.qmd#sec-stochastic-order), together with [contiguity and change of measure](chapter-6.qmd#sec-contiguity).
 - **Purpose:** use [DQM](glossary.qmd#glossary-dqm) and [LAN](glossary.qmd#glossary-lan) to replace a smooth statistical model, in a shrinking neighborhood of the truth, by a Gaussian location experiment.
-- **Chapter 25 payoff:** [Lemma 25.14](chapter-25.qmd#lemma-25.14-local-asymptotic-normality-along-a-path) applies the same LAN expansion one path at a time. Along the way, LAN supplies the Gaussian reductions in [Theorem 8.3](chapter-8.qmd#theorem-limit-experiment-reduction) and [Chapter 15](chapter-15.qmd#sec-chapter-15-lan-power).
+- **Chapter 25 payoff:** [Lemma 25.14](chapter-25.qmd#lemma-25.14-local-asymptotic-normality-along-a-path) applies the same LAN expansion one path at a time. Along the way, LAN supplies the Gaussian reductions in [Theorem 8.3](chapter-8.qmd#theorem-limit-experiment-reduction) and Chapter 15.
 :::
 
-::: {.callout-note title="Background and another treatment"}
-For complementary treatments of differentiability in quadratic mean, LAN, and convergence of experiments, see [@bailie2021, §6.2 and §§12.1–12.3] and [@tsybakov2009, §2.4].
+::: {.callout-note title="Companion readings"}
+For complementary treatments of differentiability in quadratic mean, LAN, and convergence of experiments, see §6.2 and §§12.1–12.3 of @bailie2021 and §2.4 of @tsybakov2009.
 :::
 
-## Reading guide
+::: {.callout-note title="Reading guide"}
 
-- **Sections 7.2--7.3 are essential:** Theorem 7.2 turns DQM into LAN, and Theorem 7.10 transfers limiting procedures to the Gaussian experiment.
-- **Section 7.5 is essential:** contiguity and Le Cam's third lemma determine behavior under local alternatives.
-- **Section 7.4 is useful but not required for Chapter 25:** it explains likelihood maximization and parameter-space boundaries in the Gaussian limit.
-- **Section 7.6 is a useful abstraction:** Definition 7.14 separates LAN from the i.i.d. setting. The dependent-model Examples 7.16--7.18 and the chapter exercises are omitted from this route.
-- **Examples 7.7--7.9 are compressed:** they illustrate how DQM is verified and why moving support can make it fail.
+- **Core — §§7.2–7.3:** Theorem 7.2 turns DQM into LAN, and Theorem 7.10 transfers limiting procedures to the Gaussian experiment.
+- **Core — §7.5:** contiguity and Le Cam's third lemma determine behavior under local alternatives.
+- **Supporting — §§7.4 and 7.6:** likelihood maximization, parameter-space boundaries, and the abstraction of LAN beyond the i.i.d. setting.
+- **Compressed — Examples 7.7–7.9:** representative DQM verifications and the failure caused by moving support.
+- **Omitted/deferred — Examples 7.16–7.18 and the exercises:** dependent and other non-i.i.d. models not needed for the pathwise Chapter 25 argument.
+
+:::
 
 ## 7.1 Introduction
 
@@ -144,7 +146,7 @@ DQM treats square-root densities as a curve on the unit sphere of $L_2(\mu)$; th
 Chapter 25 extends this one-curve picture to all regular paths through $P$; compare @sevenfig-ch7-dqm-geometry with [the tangent-space construction in §25.3](chapter-25.qmd#tangent-spaces-and-information).
 
 ::: {.callout-note title="Theorem"}
-### Theorem 7.2 {#theorem-lan-iid}
+### Theorem 7.2: DQM implies LAN for i.i.d. experiments {#theorem-lan-iid}
 
 Suppose $\Theta$ is open and the model is differentiable in quadratic mean at $\theta$. Then
 
@@ -269,7 +271,7 @@ which is the claimed expansion because $g=h^T\dot\ell_\theta$ and $P_\theta g^2=
 
 </details>
 
-The two appearances of $-\tfrac14P_\theta g^2$ are worth remembering: one comes from the mean of the square-root likelihood ratio and one from the logarithm. Together they produce the LAN penalty $-\tfrac12h^TI_\theta h$. [Lemma 25.14](chapter-25.qmd#lemma-25.14-local-asymptotic-normality-along-a-path) uses this same mechanism along a single path.
+The two appearances of $-\tfrac14P_\theta g^2$ are worth remembering: one comes from the mean of the square-root likelihood ratio and one from the logarithm. Together they produce the LAN penalty $-\tfrac12h^TI_\theta h$. Figure @sevenfig-ch7-lan-quadratic shows the resulting approximation in a Poisson model. [Lemma 25.14](chapter-25.qmd#lemma-25.14-local-asymptotic-normality-along-a-path) uses this same mechanism along a single path.
 
 ::: {#sevenfig-ch7-lan-quadratic}
 
@@ -284,7 +286,7 @@ Theorem 7.2 is the finite-dimensional prototype for [Lemma 25.14](chapter-25.qmd
 :::
 
 ::: {.callout-important title="Lemma"}
-### Lemma 7.6
+### Lemma 7.6: a sufficient condition for DQM {#lemma-7.6}
 
 Suppose $\theta\mapsto s_\theta(x)=\sqrt{p_\theta(x)}$ is continuously differentiable for every $x$, and the elements of
 
@@ -297,7 +299,7 @@ are well defined and continuous in $\theta$. Then the model is differentiable in
 :::
 
 ::: {.callout-tip title="Example"}
-### Example 7.7: Exponential families
+### Example 7.7: exponential families {#example-7-7}
 
 Most exponential families are differentiable in quadratic mean when parameterized smoothly away from the boundary of the natural parameter space. For the model
 
@@ -309,7 +311,7 @@ the score is $\dot\ell_\theta(x)=Q'_\theta\{t(x)-E_\theta t(X)\}$ and the Fisher
 :::
 
 ::: {.callout-tip title="Example"}
-### Example 7.8: Location models
+### Example 7.8: location models {#example-7-8}
 
 Consider the location model $\{f(x-\theta):\theta\in\mathbb R\}$. If $f$ is positive and continuously differentiable and has finite Fisher information for location, then the model is differentiable in quadratic mean. Its score is $\dot\ell_\theta(x)=-\{f'/f\}(x-\theta)$, and its Fisher information is
 
@@ -324,7 +326,7 @@ The Laplace location model is also differentiable in quadratic mean, even though
 :::
 
 ::: {.callout-warning title="Counterexample"}
-### Counterexample 7.9: Uniform distribution
+### Counterexample 7.9: uniform distribution
 
 The family of uniform distributions on $[0,\theta]$ is nowhere differentiable in quadratic mean. Here $P_{\theta+h}(p_\theta=0)=h/(\theta+h)$ is only $O(h)$, whereas differentiability in quadratic mean would require the mass outside the support of $P_\theta$ to be $o(h^2)$.
 :::
@@ -337,10 +339,10 @@ $$
 \log \dfrac{ dN(h,I_\theta^{-1})}{dN(0,I_\theta^{-1})}(X)=h^TI_\theta X-\frac12h^TI_\theta h.
 $$
 
-This is the same quadratic form as the LAN expansion $h^T\Delta_{n,\theta}-\frac12h^TI_\theta h$ in Section 7.2. If a statistic $T_n$ has a limiting distribution under every local parameter $h$, convergence of experiments means that the entire family of limits can be reproduced by a statistic in the Gaussian experiment. A **randomized statistic** has the form $T=T(X,U)$, where $U\sim\operatorname{Unif}[0,1]$ is independent of $X$; the auxiliary randomization represents arbitrary limiting conditional distributions.
+This is the same quadratic form as the LAN expansion $h^T\Delta_{n,\theta}-\frac12h^TI_\theta h$ in §7.2. If a statistic $T_n$ has a limiting distribution under every local parameter $h$, convergence of experiments means that the entire family of limits can be reproduced by a statistic in the Gaussian experiment. A **randomized statistic** has the form $T=T(X,U)$, where $U\sim\operatorname{Unif}[0,1]$ is independent of $X$; the auxiliary randomization represents arbitrary limiting conditional distributions.
 
 ::: {.callout-note title="Theorem"}
-### Theorem 7.10: Representation in the limit experiment {#theorem-normal-limit-experiment}
+### Theorem 7.10: representation in the limit experiment {#theorem-normal-limit-experiment}
 
 Assume the model is differentiable in quadratic mean at $\theta$ and $I_\theta$ is nonsingular. Let $T_n$ be statistics in the local experiments $\{P_{\theta+h/\sqrt n}^n:h\in\mathbb R^k\}$, and suppose $T_n$ converges in distribution under every $h$. Then there exists a randomized statistic $T$ in the Gaussian experiment $\{N(h,I_\theta^{-1}):h\in\mathbb R^k\}$ having the same limiting distribution under every $h$.
 :::
@@ -382,7 +384,7 @@ The limiting likelihood ratio is positive and has mean one. The local laws are t
 
 $$
 L_h(B)
-=E\left[\mathbf1_B(S)
+=E\left[\mathbf 1_B(S)
 \exp\left\{h^T\Delta-\frac12h^TJh\right\}\right]
 $$
 
@@ -399,7 +401,7 @@ Now let $X\sim N(h,J^{-1})$. Under $h=0$, $JX\sim N(0,J)$ and hence has the same
 $$
 \begin{aligned}
 P_h\{T(JX,U)\in B\}
-&=E_0\left[\mathbf1_B\{T(JX,U)\}
+&=E_0\left[\mathbf 1_B\{T(JX,U)\}
 e^{h^TJX-h^TJh/2}\right]\\
 &=L_h(B).
 \end{aligned}
@@ -410,7 +412,7 @@ Thus $T(JX,U)$ reproduces the full family of limiting distributions of $T_n$ in 
 </details>
 
 ::: {.callout-note title="Lemma"}
-### Lemma 7.11
+### Lemma 7.11: randomized representation from conditional laws {#lemma-7.11}
 
 Given a joint distribution $(S,\Delta)$, one can construct a measurable randomized function $T(\Delta,U)$ such that $(T(\Delta,U),\Delta)$ has the same distribution as $(S,\Delta)$.
 
@@ -452,7 +454,7 @@ $$
 Van der Vaart writes the corresponding squared form $(x-y)^TI_{\theta_0}(x-y)$ when describing the projection. Minimizing the squared form gives the same closest point, while the square root is the metric itself. If $H=\mathbb R^k$, the projection is simply $X$.
 
 ::: {.callout-note title="Theorem"}
-### Theorem 7.12 {#theorem-7-12}
+### Theorem 7.12: constrained-MLE limits {#theorem-7-12}
 
 - Suppose the model is differentiable in quadratic mean at $\theta_0$,
 - $I_{\theta_0}$ is nonsingular,
@@ -528,7 +530,7 @@ $$
 At an interior point, typically $H=\mathbb R^k$ and $\Pi Z=Z$; at a boundary, the restricted set $H$ can produce a nonnormal projected-Gaussian limit.
 
 ::: {.callout-important title="Lemma"}
-### Lemma 7.13
+### Lemma 7.13: distances to moving parameter sets {#lemma-7.13}
 
 If $H_n\to H$ and $X_n\rightsquigarrow X$, then distances from $X_n$ to $H_n$ converge to the corresponding distance from $X$ to $H$. More explicitly,
 
@@ -611,7 +613,7 @@ $$
 
 The covariance is unchanged, while the mean shifts by the covariance with the limiting log likelihood ratio.
 
-This method is used to study the local asymptotic behavior and efficiency of estimators and tests. [Chapter 15](chapter-15.qmd#sec-chapter-15-lan-power) turns the shifted Gaussian limit into local-power bounds. [Lemma 25.23](chapter-25.qmd#lemma-25-23) and [§25.6](chapter-25.qmd#sec-testing) repeat the same change-of-measure argument along each semiparametric tangent direction.
+This method is used to study the local asymptotic behavior and efficiency of estimators and tests. Chapter 15 turns the shifted Gaussian limit into local-power bounds. [Lemma 25.23](chapter-25.qmd#lemma-25-23) and [§25.6](chapter-25.qmd#sec-testing) repeat the same change-of-measure argument along each semiparametric tangent direction.
 
 ---
 
@@ -622,7 +624,7 @@ The preceding results begin with i.i.d. observations, but LAN can be defined for
 Let $\{P_{n,\theta}:\theta\in\Theta\}$ be a sequence of models.
 
 ::: {.callout-note title="Definition"}
-### Definition 7.14
+### Definition 7.14 {#definition-7-14}
 
 The sequence $\{P_{n,\theta}:\theta\in\Theta\}$ is locally asymptotically normal at $\theta$ if there exist norming matrices $r_n$, a matrix $I_\theta$, and random vectors $\Delta_{n,\theta}$ such that $\Delta_{n,\theta}\rightsquigarrow N(0,I_\theta)$ under $P_{n,\theta}$, and for every sequence $h_n\to h$,
 
@@ -636,7 +638,7 @@ Here $r_n$ determines the local rate at which parameters approach $\theta$.
 :::
 
 ::: {.callout-tip title="Example"}
-### Example 7.15: The i.i.d. case
+### Example 7.15: the i.i.d. case {#example-7-15}
 
 If $\{P_\theta:\theta\in\Theta\}$ is differentiable in quadratic mean, then $\{P_\theta^n:\theta\in\Theta\}$ is LAN with $r_n=\sqrt n I$.
 
@@ -644,8 +646,8 @@ The local experiments $\{P_{n,\theta+r_n^{-1}h}:h\in\mathbb R^k\}$ converge to $
 
 :::
 
-::: {.callout-note title="Coverage note"}
-Examples 7.16--7.18 develop LAN for dependent observations and other non-i.i.d. experiments. They are useful when the sampling structure itself is the main subject, but are not needed for the i.i.d. pathwise argument used in Chapter 25 and are omitted here.
-:::
+::: {.callout-tip title="Chapter takeaway"}
 
----
+Differentiability in quadratic mean turns an i.i.d. model into a local Gaussian shift experiment. LAN, representation, and change of measure then transport procedures and limit laws under local alternatives; Chapter 25 repeats this argument one tangent path at a time.
+
+:::

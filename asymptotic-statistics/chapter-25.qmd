@@ -1,7 +1,5 @@
 # Chapter 25: Semiparametric Models
 
-[Worked problems for Chapter 25](problems.qmd#problems-chapter-25)
-
 ## 25.1 Introduction
 
 Chapter 25 is where the book's [local-experiment and empirical-process routes](index.qmd#route-to-chapter-25) meet. It reduces an infinite-dimensional estimation problem to many local one-dimensional parametric problems, then applies the Chapter 7–8 machinery along those paths while using Chapters 18–19 to control the resulting random functions.
@@ -18,9 +16,12 @@ The first block identifies the target. The second constructs target-focused esti
 
 :::
 
-::: {.callout-note title="Coverage and intentional compression" collapse="true"}
+::: {.callout-note title="Reading guide" collapse="true"}
 
-These notes cover §§25.1–25.12 and the numbered results and examples used on the route through the chapter. The three rows in **How the chapter fits together** are the destination guide: geometry and lower bounds, estimating equations, and likelihood constructions. Long technical verifications, historical source notes, and end-of-chapter exercises are deferred or compressed where explicitly labeled; complete conceptual proofs and the assumptions needed for the main route are retained.
+- **Core — §§25.1–25.12:** geometry and lower bounds, estimating equations, and likelihood constructions, including the numbered results and examples used on the main route.
+- **Supporting — model-specific examples:** empirical distributions, regression, Cox models, missingness, testing, and mixtures show how the general geometry becomes an estimator or likelihood calculation.
+- **Compressed — long technical and historical material:** technical verifications and source notes are shortened where the main assumptions, proof mechanism, and conclusion can be retained without reproducing every detail.
+- **Omitted/deferred — end-of-chapter exercises:** exercises are not part of this companion's main route.
 
 :::
 
@@ -108,9 +109,9 @@ $$
 
 ::: {.callout-note title="Notation used in this chapter" collapse="true"}
 
-The notation continues to follow van der Vaart, including a few deliberate reuses. The functional $\psi(P)$ is the statistical target. In the modern DML asides, $\psi(W;\theta,\eta)$ instead denotes a moment or score, following that literature; its displayed arguments distinguish it from the target functional. Likewise, $A_\eta$ and $A_{\theta,\eta}$ denote score operators in §§25.5 and 25.12. Section 25.9 therefore uses $J_{\theta,\tau}$ for the derivative normalization of an estimating equation, a notation local to these notes that avoids confusing that matrix with the book's score operator.
+The notation continues to follow van der Vaart, including a few deliberate reuses. The functional $\psi(P)$ is the statistical target. In the modern DML asides, $\psi(W;\theta,\eta)$ instead denotes a moment or score, following that literature; its displayed arguments distinguish it from the target functional. Likewise, $A_\eta$ and $A_{\theta,\eta}$ denote score operators in §§25.5 and 25.12. §25.9 therefore uses $J_{\theta,\tau}$ for the derivative normalization of an estimating equation, a notation local to these notes that avoids confusing that matrix with the book's score operator.
 
-On a fixed path, the source writes $P_t$; these notes write $P_{t,g}$ when the score index must be explicit. In §25.6, $g$ is the tangent direction and $h$ is the scalar local displacement. Section 25.12 reuses $h$ as an index for a nuisance likelihood equation.
+On a fixed path, the source writes $P_t$; these notes write $P_{t,g}$ when the score index must be explicit. In §25.6, $g$ is the tangent direction and $h$ is the scalar local displacement. §25.12 reuses $h$ as an index for a nuisance likelihood equation.
 
 Vector-valued targets are treated as column vectors. Thus, when $\psi:\mathcal P\to\mathbb R^k$, an influence function has $k$ coordinates and $P\widetilde\psi_P\widetilde\psi_P^T$ is a $k\times k$ covariance matrix.
 
@@ -175,7 +176,7 @@ DML is therefore an estimator-construction layer built on the geometry and lower
 ### Examples
 
 ::: {.callout-tip title="Example"}
-#### Example 25.1: Regression {#example-25-1}
+#### Example 25.1: regression {#example-25-1}
 
 The model is $Y=\mu_\theta(Z)+\sigma_\theta(Z)e$, where $e$ is independent of $Z$.
 
@@ -189,7 +190,7 @@ It becomes semiparametric if the distribution of $e$ is unknown but restricted, 
 :::
 
 ::: {.callout-tip title="Example"}
-#### Example 25.2: Projection pursuit regression
+#### Example 25.2: projection pursuit regression {#example-25-2}
 
 The model is $Y=\eta(\theta^TZ)+e$.
 
@@ -198,7 +199,7 @@ The unknown regression function $\eta$ is infinite-dimensional. The direction of
 :::
 
 ::: {.callout-tip title="Example"}
-#### Example 25.3: Semiparametric logistic regression
+#### Example 25.3: semiparametric logistic regression {#example-25-3}
 
 Here $P(Y=1\mid Z)=\frac{1}{1+e^{-r(Z)}}$, where $r(Z_1,Z_2)=\eta(Z_1)+\theta^TZ_2$.
 
@@ -207,7 +208,7 @@ The response is linear in one part of the covariates and nonparametric in anothe
 :::
 
 ::: {.callout-tip title="Example"}
-#### Example 25.4: Paired exponential model {#example-25-4}
+#### Example 25.4: paired exponential model {#example-25-4}
 
 Conditional on an unobservable variable $Z$, the variables $X_1$ and $X_2$ are independent exponentials with parameters $Z$ and $Z\theta$.
 
@@ -218,7 +219,7 @@ The target $\theta$ is a hazard ratio, while the distribution of $Z$ is unrestri
 :::
 
 ::: {.callout-tip title="Example"}
-#### Example 25.5: Errors-in-variables {#example-25-5}
+#### Example 25.5: errors-in-variables {#example-25-5}
 
 $$
 X_1=Z+e,
@@ -233,7 +234,7 @@ where $(e,f)$ is normal with unknown covariance matrix and the distribution of t
 :::
 
 ::: {.callout-tip title="Example"}
-#### Example 25.6: Transformation regression {#example-25-6}
+#### Example 25.6: transformation regression {#example-25-6}
 
 The model is $\eta(Y)=\theta^TZ+e$.
 
@@ -253,14 +254,14 @@ The [Cox proportional-hazards model](https://en.wikipedia.org/wiki/Proportional_
 :::
 
 ::: {.callout-tip title="Example"}
-#### Example 25.8: Copula model
+#### Example 25.8: copula model {#example-25-8}
 
 The joint distribution of $X=(X_1,X_2)$ is $C_\theta\bigl(G_1(X_1),G_2(X_2)\bigr)$, where $C_\theta$ is a parametric copula and the marginal distributions $G_1,G_2$ may be unknown.
 
 :::
 
 ::: {.callout-tip title="Example"}
-#### Example 25.9: Frailty model {#example-25-9}
+#### Example 25.9: frailty model {#example-25-9}
 
 Conditional on an unobserved frailty $W$ and observed covariate $Z$, survival times have hazard $We^{\theta^TZ}\lambda(t)$.
 
@@ -271,7 +272,7 @@ The frailty introduces unobserved heterogeneity.
 :::
 
 ::: {.callout-tip title="Example"}
-#### Example 25.10: Random censoring {#example-25-10}
+#### Example 25.10: random censoring {#example-25-10}
 
 The observed data are $(T\wedge C,\mathbf 1\{T\leq C\})$, where the event time $T$ and censoring time $C$ are independent and both distributions may be unknown.
 
@@ -280,7 +281,7 @@ The observed data are $(T\wedge C,\mathbf 1\{T\leq C\})$, where the event time $
 :::
 
 ::: {.callout-tip title="Example"}
-#### Example 25.11: Interval or current-status censoring {#example-25-11}
+#### Example 25.11: interval or current-status censoring {#example-25-11}
 
 The observed data are $(C,\mathbf 1\{T\leq C\})$, which reveal only whether the event occurred before a check-up time.
 
@@ -289,7 +290,7 @@ The observed data are $(C,\mathbf 1\{T\leq C\})$, which reveal only whether the 
 :::
 
 ::: {.callout-tip title="Example"}
-#### Example 25.12: Truncation
+#### Example 25.12: truncation {#example-25-12}
 
 The pair $(Y,C)$ is observed only when $Y>C$.
 
@@ -301,7 +302,7 @@ The common feature of these examples is a finite-dimensional target combined wit
 
 ## 25.2 Banach and Hilbert Spaces {#banach-and-hilbert-spaces}
 
-Section 25.2 supplies the functional-analytic language used throughout the chapter. Banach-space norms make infinite-dimensional differentiation and convergence precise, while Hilbert-space geometry supplies the projections, adjoints, and orthogonal decompositions used to identify efficient scores and influence functions.
+§25.2 supplies the functional-analytic language used throughout the chapter. Banach-space norms make infinite-dimensional differentiation and convergence precise, while Hilbert-space geometry supplies the projections, adjoints, and orthogonal decompositions used to identify efficient scores and influence functions.
 
 ::: {.callout-note title="Definition"}
 ### $L_2(P)$
@@ -457,15 +458,13 @@ $$
 
 is the orthogonal projection onto $R(A)$.
 
-::: {.callout-tip title="Handoff to §§25.3–25.5"}
+### Section takeaway {#sec-25-2-takeaway}
 
-Keep three operations in view: **project** onto a closed space, **move** an operator across an inner product with its adjoint, and **invert** the resulting information operator when that inversion is stable. Sections 25.3–25.5 use the first two to identify efficient influence functions; [§25.12](#sec-likelihood-equations) returns to the third when it linearizes joint likelihood equations in a Banach space.
-
-:::
+Keep three operations in view: **project** onto a closed space, **move** an operator across an inner product with its adjoint, and **invert** the resulting information operator when that inversion is stable. §§25.3–25.5 use projection and adjoints to identify efficient influence functions; [§25.12](#sec-likelihood-equations) returns to stable inversion when it linearizes joint likelihood equations in a Banach space.
 
 ## 25.3 Tangent Spaces and Information
 
-Section 25.3 turns regular paths into tangent directions, differentiates the target along those directions, and identifies the efficient influence function as the object that determines the sharp asymptotic covariance bound.
+§25.3 turns regular paths into tangent directions, differentiates the target along those directions, and identifies the efficient influence function as the object that determines the sharp asymptotic covariance bound.
 
 Suppose the true distribution is $P\in\mathcal P$ and the target is $\psi(P)$.
 
@@ -616,7 +615,7 @@ $$
 P_\varepsilon=(1-\varepsilon)P+\varepsilon\widetilde P,
 $$
 
-and plot the ordinary scalar curve $\varepsilon\mapsto T(P_\varepsilon)$. In their Figure 1, one panel shows the distribution changing from the truth $P$ toward an initial estimate $\widetilde P$, while the other records the target value along exactly the same path. Once a path has been chosen, a pathwise derivative is therefore an ordinary slope; the picture does not pretend to draw the whole infinite-dimensional model [@fisherKennedy2021, §3 and fig. 1].
+and plot the ordinary scalar curve $\varepsilon\mapsto T(P_\varepsilon)$. In their Figure 1, one panel shows the distribution changing from the truth $P$ toward an initial estimate $\widetilde P$, while the other records the target value along exactly the same path. Once a path has been chosen, a pathwise derivative is therefore an ordinary slope; the picture does not pretend to draw the whole infinite-dimensional model. See §3 and fig. 1 of @fisherKennedy2021.
 
 Their endpoints serve a different visual purpose from the definition above. Fisher and Kennedy put $P$ at $\varepsilon=0$, put $\widetilde P$ at $\varepsilon=1$, and later differentiate at the estimated endpoint to explain a bias correction. Van der Vaart defines $\dot\psi_P$ at the true endpoint $P_0=P$ and gathers the scores of all admissible paths into a tangent space.
 
@@ -712,7 +711,7 @@ Kennedy's §3.4 gives two useful ways to generate a candidate before the general
     =f'(\psi)\operatorname{IF}(\psi).
     $$
 
-    [Section 25.7](#sec-efficiency-delta-method) gives the formal chain-rule argument and shows when a smooth transform preserves efficiency.
+    [§25.7](#sec-efficiency-delta-method) gives the formal chain-rule argument and shows when a smooth transform preserves efficiency.
 
 The contamination calculation is a shortcut, not the final proof: in a continuous or restricted model, the point-mass path may fail to be dominated, DQM, or even admissible. Likewise, Kennedy's $\operatorname{IF}$ here is a heuristic differentiation operator, not the score operator $A_\eta$ introduced in [§25.5](#score-and-information-operators). The safe pattern is
 
@@ -754,7 +753,7 @@ $$
 :::
 
 ::: {.callout-tip title="Example"}
-### Example 25.15: parametric models
+### Example 25.15: parametric models {#example-25-15}
 
 Suppose $P_\theta$ is differentiable in quadratic mean with vector score $\dot\ell_\theta$:
 
@@ -902,7 +901,7 @@ $$
 Taking the supremum over all available tangent directions gives the semiparametric lower bound.
 
 ::: {.callout-important title="Lemma"}
-### Lemma 25.19
+### Lemma 25.19: the tangent-space information bound {#lemma-25.19}
 
 $$
 \sup_{\substack{g\in\overline{\operatorname{lin}}\dot{\mathcal P}_P\\g\neq0}}\frac{\langle\widetilde\psi_P,g\rangle_P^2}{\langle g,g\rangle_P}=P\widetilde\psi_P^2.
@@ -1087,7 +1086,7 @@ For a convex tangent cone, the finite local parameter sets are convex cones rath
 
 </details>
 
-**Builds on.** The finite-dimensional reduction uses the Gaussian limit experiment from [Theorem 7.10](chapter-7.qmd#theorem-normal-limit-experiment), the [reduction in Theorem 8.3](chapter-8.qmd#theorem-limit-experiment-reduction), and the [local asymptotic minimax framework in Section 8.7](chapter-8.qmd#sec-local-asymptotic-minimax).
+**Builds on.** The finite-dimensional reduction uses the Gaussian limit experiment from [Theorem 7.10](chapter-7.qmd#theorem-normal-limit-experiment), the [reduction in Theorem 8.3](chapter-8.qmd#theorem-limit-experiment-reduction), and the [local asymptotic minimax framework in §8.7](chapter-8.qmd#sec-local-asymptotic-minimax).
 
 ::: {.callout-note title="Definition"}
 ### Asymptotic efficiency
@@ -1101,7 +1100,7 @@ $$
 :::
 
 ::: {.callout-important title="Lemma"}
-### Lemma 25.23 {#lemma-25-23}
+### Lemma 25.23: efficiency and asymptotic linearity {#lemma-25-23}
 
 An estimator is regular and efficient if and only if
 
@@ -1230,15 +1229,13 @@ Taking $f_t(x)=\mathbf 1\{x\leq t\}$ gives $\mathbb P_nf_t=\mathbb F_n(t)$ and $
 
 :::
 
-::: {.callout-tip title="Handoff from tangent geometry"}
+### Section takeaway {#sec-25-3-takeaway}
 
-Section 25.3 has now supplied both the **benchmark** and the **recognition rule**. [Theorem 25.20](#theorem-25-20) and [Theorem 25.21](#theorem-25-21) give the lower bounds, while [Lemma 25.23](#lemma-25-23) says an estimator reaches them exactly when its first-order summand is the efficient influence function. Sections [25.4](#efficient-score-functions) and [25.5](#score-and-information-operators) show how to calculate that function; Sections [25.6](#sec-testing)–[25.12](#sec-likelihood-equations) show what to do with it.
-
-:::
+A regular path turns one direction through the full model into a LAN experiment. The scores of all selected paths generate the tangent space; the efficient influence function is the tangent-space representative of the target derivative. [Theorem 25.20](#theorem-25-20) and [Theorem 25.21](#theorem-25-21) give the resulting lower bounds, and [Lemma 25.23](#lemma-25-23) says that an estimator attains them exactly when its first-order summand is the efficient influence function. [§25.4](#efficient-score-functions)–[§25.5](#score-and-information-operators) show how to calculate that function.
 
 ## 25.4 Efficient Score Functions {#efficient-score-functions}
 
-Section 25.4 specializes the tangent-space construction to a model with a finite-dimensional target and an infinite-dimensional nuisance parameter. Projecting the ordinary target score away from the nuisance-score space produces the efficient score; normalizing that residual by efficient information produces the efficient influence function.
+§25.4 specializes the tangent-space construction to a model with a finite-dimensional target and an infinite-dimensional nuisance parameter. Projecting the ordinary target score away from the nuisance-score space produces the efficient score; normalizing that residual by efficient information produces the efficient influence function.
 
 Consider the semiparametric model $\{P_{\theta,\eta}:\theta\in\Theta,\eta\in H\},$ where $\theta\in\mathbb R^k$ is the target and $\eta$ is the nuisance parameter.
 
@@ -1324,7 +1321,7 @@ Figures 1–2 of @fisherKennedy2021 explain differentiation and bias correction 
 :::
 
 ::: {.callout-important title="Lemma"}
-### Lemma 25.25 {#lemma-25-25}
+### Lemma 25.25: efficient influence function from the efficient score {#lemma-25-25}
 
 The efficient influence function is the efficient score normalized by the inverse efficient information.
 
@@ -1494,15 +1491,13 @@ Thus efficient estimation weights the regression residual by the inverse conditi
 
 :::
 
-::: {.callout-tip title="Handoff from projection to construction"}
+### Section takeaway {#sec-25-4-takeaway}
 
-[Section 25.8](#sec-efficient-score-equations) estimates and solves the efficient score, while [§25.9](#sec-general-estimating-equations) allows other valid residual weights and measures their efficiency loss.
-
-:::
+The efficient score is the residual left after projecting the ordinary target score off the nuisance tangent space. Its covariance is the efficient information, and normalizing it by the inverse efficient information produces the efficient influence function. Equality between ordinary and efficient information is the adaptivity case in which the nuisance costs no first-order information. [§25.8](#sec-efficient-score-equations) estimates and solves this score, while [§25.9](#sec-general-estimating-equations) studies valid but potentially less efficient alternatives.
 
 ## 25.5 Score and Information Operators {#score-and-information-operators}
 
-Sections 25.3–25.4 describe efficiency through tangent spaces and projections. Section 25.5 expresses the same geometry through score operators, a formulation that remains useful when:
+§§25.3–25.4 describe efficiency through tangent spaces and projections. §25.5 expresses the same geometry through score operators, a formulation that remains useful when:
 
 - the target is a functional of an infinite-dimensional parameter;
 - the observed data are a transformation of latent data;
@@ -1557,7 +1552,7 @@ For a vector target, the equation is read coordinatewise. Its solvability determ
 :::
 
 ::: {.callout-note title="Theorem"}
-### Theorem 25.31 {#theorem-25-31}
+### Theorem 25.31: pathwise differentiability via the adjoint equation {#theorem-25-31}
 
 The target $\psi(P_\eta)=\chi(\eta)$ is pathwise differentiable relative to the tangent set $A_\eta\dot H_\eta$ if and only if every coordinate of $\widetilde\chi_\eta$ belongs to
 
@@ -1675,7 +1670,7 @@ If $A_\eta$ is not one-to-one, distinct parameter directions can produce the sam
 The range $R(A_\eta^*)$ may be dense but not closed. The target gradient can then be approximated arbitrarily well by elements of the range without belonging to it, and solving the inverse problem may require an unbounded operator.
 
 ::: {.callout-note title="Theorem"}
-### Theorem 25.32 {#theorem-25-32}
+### Theorem 25.32: failure of the adjoint equation {#theorem-25-32}
 
 If $\widetilde\chi_\eta\notin R(A_\eta^*),$ then there is no estimator sequence for $\chi(\eta)$ that is regular at $P_\eta$.
 
@@ -1766,7 +1761,7 @@ This places $\widetilde\chi_\eta$ in $R(A^*)$, contradicting the hypothesis. Hen
 
 ### 25.5.1 Semiparametric Models {#sec-semiparametric-score-operators}
 
-Section 25.5.1 is the operator version of the projection argument in [§25.4](#efficient-score-functions). For the model $\{P_{\theta,\eta}:\theta\in\Theta,\eta\in H\}$, let $\mathbb H_\eta=\overline{\operatorname{lin}}\dot H_\eta$ denote the closed linear span of the nuisance directions. A joint direction $(a,b)$ perturbs the target by $a\in\mathbb R^k$ and the nuisance parameter by $b\in\mathbb H_\eta$. The nuisance score operator
+§25.5.1 is the operator version of the projection argument in [§25.4](#efficient-score-functions). For the model $\{P_{\theta,\eta}:\theta\in\Theta,\eta\in H\}$, let $\mathbb H_\eta=\overline{\operatorname{lin}}\dot H_\eta$ denote the closed linear span of the nuisance directions. A joint direction $(a,b)$ perturbs the target by $a\in\mathbb R^k$ and the nuisance parameter by $b\in\mathbb H_\eta$. The nuisance score operator
 
 $$
 B_{\theta,\eta}:\mathbb H_\eta\longrightarrow L_2(P_{\theta,\eta})
@@ -1862,7 +1857,7 @@ The first term is the influence function that would apply if $\theta$ were known
 
 ### 25.5.2 Information Loss Models {#sec-information-loss-models}
 
-Section 25.5.2 applies score operators when the observed data retain only part of the full-data information. The central fact is that the score operator becomes conditional expectation.
+§25.5.2 applies score operators when the observed data retain only part of the full-data information. The central fact is that the score operator becomes conditional expectation.
 
 Suppose the full data are $Y$, but the observed data retain only
 
@@ -1883,7 +1878,7 @@ $$
 The full-data score $b(Y)$ records a local change before coarsening; conditioning on $X$ retains exactly the component visible in the observed data. Information loss is therefore represented by an ordinary Hilbert-space projection.
 
 ::: {.callout-important title="Lemma"}
-#### Lemma 25.34 {#lemma-25-34}
+#### Lemma 25.34: DQM under measurable transformations {#lemma-25-34}
 
 Differentiability in quadratic mean is preserved by measurable transformations.
 
@@ -2086,7 +2081,7 @@ $$
 
 ### 25.5.3* Missing and Coarsening at Random {#sec-missing-coarsening-random}
 
-Section 25.5.3 specializes the information-loss framework to missing and coarsened data. The score spaces for the full-data law and the coarsening mechanism determine which observed-data influence functions are valid and which one is efficient.
+§25.5.3 specializes the information-loss framework to missing and coarsened data. The score spaces for the full-data law and the coarsening mechanism determine which observed-data influence functions are valid and which one is efficient.
 
 #### Example 25.39: missing and coarsening at random {#example-25-39}
 
@@ -2105,7 +2100,7 @@ $$
 If $r(\delta\mid y)$ is the conditional density of $\Delta$ given $Y=y$, the model is **coarsening at random** (CAR) when $r(\delta\mid y)$ depends on $y$ only through the observed value $x=(\phi(y,\delta),\delta)$. Thus two full-data values that produce the same observed data under a given pattern must have the same probability of that pattern.
 
 ::: {.callout-note title="Theorem"}
-#### Theorem 25.40 {#theorem-25-40}
+#### Theorem 25.40: the observed-data tangent space under CAR {#theorem-25-40}
 
 Suppose:
 
@@ -2266,6 +2261,46 @@ Conditioning on $Y$ shows $E\{b(X)\mid Y\}=u(Y)-u(Y)=0$, giving the required and
 
 </details>
 
+<span id="sec-25-41-double-robustness"></span>
+
+::: {.callout-note title="Modern connection: augmentation and double robustness"}
+
+Lemma 25.41 supplies the geometric starting point for augmented inverse-probability weighting. Under the binary MAR specialization in [Example 25.43](#example-25-43), its affine family becomes
+
+$$
+c(V)+\frac{\Delta}{\pi(V)}\{\dot\chi_Q(Y)-c(V)\},
+\tag{25.41-AIPW}
+$$
+
+where $V=\phi(Y,0)$ is observed for everyone. The inverse-probability term transports the full-data influence function to the observed-data model; the augmentation $c(V)$ uses the information available even when the full data are missing. Choosing
+
+$$
+c_0(V)=E\{\dot\chi_Q(Y)\mid V\}
+$$
+
+gives the minimum-variance augmentation for a fixed full-data influence function.
+
+Lemma 25.41 by itself is therefore not yet a double-robustness theorem: it holds $R$ fixed and characterizes influence functions. There are two further steps to **double robustness**. First specialize to MAR, which gives the observable representation (25.41-AIPW). Then replace $(\pi,c_0)$ by working functions $(\bar\pi,\bar c)$. At the true target,
+
+$$
+P\left[
+\bar c(V)+\frac{\Delta}{\bar\pi(V)}
+\{\dot\chi_Q(Y)-\bar c(V)\}
+\right]
+=
+E\left[
+\left\{1-\frac{\pi_0(V)}{\bar\pi(V)}\right\}
+\{\bar c(V)-c_0(V)\}
+\right].
+\tag{25.41-DR-bias}
+$$
+
+The mean is therefore zero if either the observation-probability model is correct, $\bar\pi=\pi_0$, or the augmentation model is correct, $\bar c=c_0$. This union-model guarantee is stronger than local orthogonality, though the same product identity also produces orthogonality and rate tradeoffs near the truth.
+
+Robins, Rotnitzky, and Zhao developed this semiparametric missing-data framework, including inverse-probability estimating equations, the influence-function class, and efficiency under MAR [@robinsEtAl1994]. Lemma 25.41 explains the underlying tangent-space geometry; [Example 25.67](#example-25-67) turns it into an estimating equation and derives the double-robust bias identity in its general notation. The historical paper predates much of the now-standard DML vocabulary, so the connection here is conceptual rather than a claim that it used the modern terminology.
+
+:::
+
 #### Unknown coarsening mechanism
 
 When $R$ is unknown, an influence function must additionally be orthogonal to all score functions for $R$.
@@ -2325,33 +2360,27 @@ To obtain the globally efficient influence function, one then also optimizes ove
 
 :::
 
-::: {.callout-tip title="Handoff from operators to procedures"}
+### Section takeaway {#sec-25-5-takeaway}
 
-Sections 25.2–25.5 answer the chapter's identification question: form the tangent space, remove nuisance directions, and solve the resulting projection or adjoint equation. The examples have also introduced the three main application mechanisms—hazard-score projection, conditional-expectation operators, and MAR augmentation. The rest of the chapter holds the resulting efficient influence function fixed and asks how to use it for [testing](#sec-testing), [estimating equations](#sec-efficient-score-equations), and [likelihood inference](#sec-maximum-likelihood-estimators).
-
-:::
+The score operator maps underlying parameter directions into observed-data scores, and its adjoint turns the influence-function identity into an operator equation. Solving that equation identifies the efficient influence function; failure of the required range condition rules out regular root-$n$ estimation. Conditional expectation is the central operator in information-loss and missing-data models, producing inverse-probability and augmentation terms. The rest of the chapter holds the resulting efficient influence function fixed and asks how to use it for [testing](#sec-testing), [estimating equations](#sec-efficient-score-equations), and [likelihood inference](#sec-maximum-likelihood-estimators).
 
 ## 25.6 Testing {#sec-testing}
 
-Section 25.6 derives the largest attainable local power for detecting root-$n$ departures from a semiparametric null and shows that a test built from an efficient estimator attains that bound.
+§25.6 derives the largest attainable local power for detecting root-$n$ departures from a semiparametric null and shows that a test built from an efficient estimator attains that bound.
 
 The chapter considers the one-sided hypotheses $H_0:\psi(P)\leq0$ versus $H_1:\psi(P)>0,$ for a real-valued functional $\psi$.
 
-::: {.callout-tip title="Reading priorities for Sections 25.6--25.7"}
+::: {.callout-note title="Reading guide"}
 
-| Material | Priority | Main takeaway |
-|---|---:|---|
-| Opening and local alternatives | High | Testing is organized along $P_{h/\sqrt n,g}$ |
-| Theorem 25.44 | High | No valid test can exceed the semiparametric local-power bound |
-| Lemma 25.45 | **Very high** | An efficient estimator yields a test that attains the bound |
-| Example 25.46 | High | The rank-sum test makes the abstract result concrete |
-| Basic argument in Section 25.7 | Medium-high | Smooth transformations preserve efficiency |
-| Theorems 25.47–25.48 and Lemma 25.49 | Low | Recognize the Banach-space extension; proofs are not essential here |
-| Long proof of Theorem 25.44 | Low | It transfers [Chapter 15's Gaussian argument](chapter-15.qmd#sec-chapter-15-lan-power) to finite-dimensional submodels |
+- **Core — §25.6:** local alternatives, Theorem 25.44's local-power bound, Lemma 25.45's attainment result, and Example 25.46's rank-sum illustration.
+- **Core — §25.7 opening:** the finite-dimensional argument that smooth transformations preserve efficiency.
+- **Supporting — Theorems 25.47–25.48 and Lemma 25.49:** the Banach-space extension; recognize the statements and the role of tightness and norming families.
+- **Compressed — proof of Theorem 25.44:** the transfer of Chapter 15's Gaussian argument to finite-dimensional tangent submodels.
+- **Omitted/deferred:** none within §§25.6–25.7 beyond the proof compression just noted.
 
 :::
 
-**Chapter 15 prerequisite:** The testing argument below is the semiparametric extension of the [LAN power template in Section 15.3](chapter-15.qmd#sec-chapter-15-lan-power). In particular, it uses [Theorem 15.1](chapter-15.qmd#theorem-15-1) to represent limiting power and [Proposition 15.2](chapter-15.qmd#proposition-15-2) to bound power in the Gaussian limit experiment.
+**Chapter 15 prerequisite:** The testing argument below is the semiparametric extension of the LAN power template in §15.3. In particular, it uses Theorem 15.1 to represent limiting power and Proposition 15.2 to bound power in the Gaussian limit experiment.
 
 ### Local alternatives
 
@@ -2415,17 +2444,17 @@ $$
 P\widetilde\psi_Pg\leq(P\widetilde\psi_P^2)^{1/2},
 $$
 
-with the most favorable direction aligned with the efficient influence function whenever that direction is available in the tangent space.
+with the most favorable direction aligned with the efficient influence function whenever that direction is available in the tangent space. Figure @twentyfivefig-ch25-local-power shows how alignment changes the Gaussian power envelope.
 
 ::: {#twentyfivefig-ch25-local-power}
 
-![](images/generated/chapter-15-local-power.svg){fig-alt="At a fixed norm for the tangent displacement, three increasing local-power curves show that a direction aligned with the efficient influence function yields the largest power, while partially aligned directions yield less power."}
+![](images/generated/chapter-25-local-power.svg){fig-alt="At a fixed norm for the tangent displacement, three increasing local-power curves show that a direction aligned with the efficient influence function yields the largest power, while partially aligned directions yield less power."}
 
 For normalized tangent directions, the Chapter 15 Gaussian power envelope applies after replacing parametric alignment by the inner product between $g$ and the normalized efficient influence function.
 
 :::
 
-This is the same Gaussian calculation as @fifteenfig-ch15-local-power. Theorem 25.44 changes the object that supplies the alignment coefficient, not the shape of the power curve.
+This is the same Gaussian calculation as the local-power figure associated with Chapter 15. Theorem 25.44 changes the object that supplies the alignment coefficient, not the shape of the power curve.
 
 **Proof roadmap.** Embed the selected tangent direction in an arbitrary finite-dimensional tangent subspace. LAN turns that submodel into a Gaussian shift experiment; the level condition passes to the Gaussian limit, where Proposition 15.2 gives the one-sided power bound. Enlarging the subspace makes the projected efficient influence function converge to the full efficient influence function.
 
@@ -2453,7 +2482,7 @@ v=P\widetilde\psi_Pg_P
 P\widetilde\psi_Pg_m\bigr)^T.
 $$
 
-Take any subsequence along which the limsup in the theorem is attained at $(h_1,g_1)$. The compactness argument in [Theorem 15.1](chapter-15.qmd#theorem-15-1) and contiguity give a further subsequence whose power functions converge to the power function $\pi(h,a)$ of a test in this Gaussian experiment.
+Take any subsequence along which the limsup in the theorem is attained at $(h_1,g_1)$. The compactness argument in Theorem 15.1 and contiguity give a further subsequence whose power functions converge to the power function $\pi(h,a)$ of a test in this Gaussian experiment.
 
 That limiting test has level $\alpha$ for the Gaussian null $ha^Tv\leq0$. Indeed, if $a^Tv<0$ and $h>0$, differentiability gives
 
@@ -2464,7 +2493,7 @@ $$
 
 for all sufficiently large $n$. These distributions therefore belong to the original null, and their rejection probabilities are at most $\alpha$. Passing to the limit gives $\pi(h,a)\leq\alpha$ whenever $a^Tv<0$; continuity of Gaussian-shift power extends the inequality to $a^Tv=0$.
 
-[Proposition 15.2](chapter-15.qmd#proposition-15-2) now gives, for $a^Tv>0$,
+Proposition 15.2 now gives, for $a^Tv>0$,
 
 $$
 \pi(h,a)
@@ -2671,21 +2700,25 @@ Lemma 25.45 now gives its local power and Theorem 25.44 shows that no other asym
 
 This is an instance of the broader principle that empirical-type statistics are often efficient for the functionals they naturally estimate when the underlying distributions are otherwise unrestricted.
 
-**Builds on [Section 15.5](chapter-15.qmd#sec-chapter-15-two-sample).** Chapter 15 derives the local asymptotic behavior of the Wilcoxon rank-sum test in a two-sample location problem and identifies distributions for which it is optimal. Example 25.46 makes a different, more general claim: in the unrestricted product model, the rank-sum statistic efficiently estimates the functional $\int F\,dG$, so its standardized test is locally optimal for hypotheses about that functional.
+**Builds on §15.5.** Chapter 15 derives the local asymptotic behavior of the Wilcoxon rank-sum test in a two-sample location problem and identifies distributions for which it is optimal. Example 25.46 makes a different, more general claim: in the unrestricted product model, the rank-sum statistic efficiently estimates the functional $\int F\,dG$, so its standardized test is locally optimal for hypotheses about that functional.
 
 :::
+
+### Section takeaway {#sec-25-6-takeaway}
+
+Semiparametric testing is organized along root-$n$ local alternatives $P_{h/\sqrt n,g}$. The local-power envelope depends on how strongly the tangent direction $g$ changes the target relative to the efficient standard deviation. Theorem 25.44 transfers the Gaussian testing bound from Chapter 15 to these tangent submodels, while Lemma 25.45 shows that standardizing an efficient estimator attains the bound.
 
 ## 25.7* Efficiency and the Delta Method {#sec-efficiency-delta-method}
 
 Many estimators have the form $\phi(T_n)$, where $T_n$ efficiently estimates a parameter $\psi(P)$ and $\phi$ is a smooth transformation. The ordinary delta method transfers asymptotic normality; this section establishes when it also transfers efficiency. In finite dimensions the answer follows from a short chain-rule calculation. For function-valued estimators the same idea requires Banach-space differentiation and tight weak limits.
 
-::: {.callout-important title="Section 25.7 in one sentence"}
+::: {.callout-important title="§25.7 in one sentence"}
 
 The derivative of $\phi$ pushes forward both the limit distribution and the efficient influence function, so a sufficiently smooth transformation of an efficient estimator remains efficient.
 
 :::
 
-**Earlier / new here.** The ordinary [delta method in Theorem 3.1](chapter-3.qmd#theorem-3-1) explains the finite-dimensional transformation step, while the [functional delta method in Theorem 20.8](chapter-20.qmd#theorem-20-8) and its [chain rule](chapter-20.qmd#theorem-20-9) supply the Hadamard-differentiable version for random elements. [Lemma 25.23](#lemma-25-23) adds the genuinely new conclusion: the transformed influence function is not merely valid, but efficient. Chapter 18 supplies [random elements](chapter-18.qmd#sec-random-elements), [tightness and Prokhorov's theorem](chapter-18.qmd#sec-tightness), and the process-level convergence needed to combine those ideas here.
+**Earlier / new here.** The ordinary delta method in Theorem 3.1 explains the finite-dimensional transformation step, while the functional delta method in Theorem 20.8 and its chain rule supply the Hadamard-differentiable version for random elements. [Lemma 25.23](#lemma-25-23) adds the genuinely new conclusion: the transformed influence function is not merely valid, but efficient. Chapter 18 supplies [random elements](chapter-18.qmd#sec-random-elements), [tightness and Prokhorov's theorem](chapter-18.qmd#sec-tightness), and the process-level convergence needed to combine those ideas here.
 
 ### Finite-dimensional efficiency under smooth transformations {#sec-efficiency-delta-finite}
 
@@ -2800,9 +2833,8 @@ For each $d^*$, the scalar derivative is $d^*\dot\psi_P$, with efficient influen
 
 Van der Vaart permits nonmeasurable $T_n$ in this section and interprets convergence through the associated outer-probability conventions. This is the same issue motivating the stars on outer expectation and probability in [Chapter 18](chapter-18.qmd#sec-random-elements); see also the [glossary entry on measurability](glossary.qmd#glossary-measurability).
 
-### Theorem 25.47: functional delta method for efficiency {#theorem-25-47}
-
 ::: {.callout-note title="Theorem"}
+### Theorem 25.47: functional delta method for efficiency {#theorem-25-47}
 
 Suppose that $\psi:\mathcal P\to\mathbb D$ is differentiable at $P$ and takes its values in a subset $\mathbb D_\phi\subset\mathbb D$. Let
 
@@ -2832,7 +2864,7 @@ $$
 <details>
 <summary>Complete proof</summary>
 
-For a path $t\mapsto P_t$ with score $g$, differentiability of $\psi$ and the Hadamard chain rule in [Theorem 20.9](chapter-20.qmd#theorem-20-9) give
+For a path $t\mapsto P_t$ with score $g$, differentiability of $\psi$ and the Hadamard chain rule in Theorem 20.9 give
 
 $$
 \frac{\phi\{\psi(P_t)\}-\phi\{\psi(P)\}}{t}
@@ -2861,7 +2893,7 @@ $$
 
 If $d^*\dot\psi_P=0$, the scalar parameter $d^*\psi$ has zero derivative and hence zero efficient influence function. Efficiency of $d^*T_n$ therefore gives $d^*Z_n\to0$ in probability. The continuous mapping theorem gives $d^*Z=0$ almost surely. Applying this to the countable separating subcollection proves (25.47-support).
 
-The functional delta method, [Theorem 20.8](chapter-20.qmd#theorem-20-8), is now applicable tangentially to $\mathbb D_0$:
+The functional delta method, Theorem 20.8, is now applicable tangentially to $\mathbb D_0$:
 
 $$
 \sqrt n[\phi(T_n)-\phi\{\psi(P)\}]
@@ -2915,9 +2947,8 @@ At $p=1/2$, the sample median is therefore efficient with asymptotic variance $1
 
 :::
 
-### Theorem 25.48: efficiency in $\ell^\infty(S)$ {#theorem-25-48}
-
 ::: {.callout-note title="Theorem"}
+### Theorem 25.48: efficiency in $\ell^\infty(S)$ {#theorem-25-48}
 
 Suppose that $\psi:\mathcal P\to\ell^\infty(S)$ is differentiable at $P$. If $T_n(s)$ is asymptotically efficient for $\psi(P)(s)$ for every $s\in S$ and
 
@@ -2955,9 +2986,8 @@ $$
 
 Thus the sup norm can detect no direction invisible to all the coordinates. This is the process-level connection to [Theorem 18.14](chapter-18.qmd#theorem-weak-convergence-processes).
 
-### Lemma 25.49: a norming family is enough {#lemma-25-49}
-
 ::: {.callout-important title="Lemma"}
+### Lemma 25.49: a norming family is enough {#lemma-25-49}
 
 Let $\mathbb D'\subset\mathbb D^*$ be a collection of continuous linear functionals such that, for some finite constant $C$,
 
@@ -3077,9 +3107,8 @@ Finally, this identification must also hold under local alternatives. Along any 
 
 </details>
 
-### Theorem 25.50: efficiency in product spaces {#theorem-25-50}
-
 ::: {.callout-note title="Theorem"}
+### Theorem 25.50: efficiency in product spaces {#theorem-25-50}
 
 For $i=1,2$, let $\psi_i:\mathcal P\to\mathbb D_i$ be differentiable at $P$, and let $T_{n,i}$ be efficient for $\psi_i(P)$. If each sequence
 
@@ -3135,9 +3164,8 @@ $$
 
 single-component dual functionals control the norm through the [Hahn--Banach norm identity](#hahn-banach-consequences), so Lemma 25.49 applies.
 
-### Example 25.51: random censoring {#example-25-51}
-
 ::: {.callout-tip title="Example"}
+### Example 25.51: random censoring {#example-25-51}
 
 In the source's notation, one observes
 
@@ -3169,7 +3197,7 @@ $$
 \text{efficient Kaplan--Meier estimator}.
 $$
 
-[Section 25.10.1](#sec-25-10-random-censoring) returns to the same estimator and derives it from the nonparametric likelihood, giving a complementary construction.
+[§25.10.1](#sec-25-10-random-censoring) returns to the same estimator and derives it from the nonparametric likelihood, giving a complementary construction.
 
 :::
 
@@ -3196,7 +3224,7 @@ $$
 
 ## 25.8 Efficient Score Equations {#sec-efficient-score-equations}
 
-Sections [25.3](#sec-pathwise-differentiability), [25.4](#efficient-score-functions), and [25.5](#sec-semiparametric-score-operators) identify the efficiency bound. Section 25.8 turns that bound into an estimator. Its main proposal is the semiparametric analogue of the likelihood score equation:
+[§25.3](#sec-pathwise-differentiability), [§25.4](#efficient-score-functions), and [§25.5](#sec-semiparametric-score-operators) identify the efficiency bound. §25.8 turns that bound into an estimator. Its main proposal is the semiparametric analogue of the likelihood score equation:
 
 $$
 \sum_{i=1}^n
@@ -3213,7 +3241,7 @@ $$
 
 which is exactly the efficient influence function from [Lemma 25.25](#lemma-25-25).
 
-::: {.callout-important title="Section 25.8 in one sentence"}
+::: {.callout-important title="§25.8 in one sentence"}
 
 Efficient estimation reduces to estimating the efficient score with both **small $L_2$ error** and **negligible mean error**, then either solving its estimating equation under Donsker conditions or taking a sample-split one-step update.
 
@@ -3229,7 +3257,7 @@ $$
 \sum_{i=1}^n\dot\ell_\theta(X_i)=0.
 $$
 
-In a semiparametric model $\{P_{\theta,\eta}:\theta\in\Theta,\eta\in H\}$, the ordinary target score contains components that can also be produced by changing $\eta$. Section [25.4](#efficient-score-functions) removes those components by projection. It is therefore natural to replace the ordinary score by $\widetilde\ell_{\theta,\eta}$ and estimate $\eta$.
+In a semiparametric model $\{P_{\theta,\eta}:\theta\in\Theta,\eta\in H\}$, the ordinary target score contains components that can also be produced by changing $\eta$. [§25.4](#efficient-score-functions) removes those components by projection. It is therefore natural to replace the ordinary score by $\widetilde\ell_{\theta,\eta}$ and estimate $\eta$.
 
 A profile version first computes a nuisance estimate $\widehat\eta_n(\theta)$ for every candidate $\theta$ and solves
 
@@ -3240,7 +3268,7 @@ $$
 
 The dependence of $\widehat\eta_n(\theta)$ on $\theta$ can matter for consistency, but should be first-order irrelevant for the limiting distribution. The reason is the defining orthogonality of the efficient score: at the truth, its population mean is locally insensitive to nuisance directions.
 
-The main complication is that an infinite-dimensional $\widehat\eta_n$ need not converge at the parametric $n^{-1/2}$ rate. A joint finite-dimensional Taylor expansion in $(\theta,\eta)$ is therefore usually unavailable. Section 25.8 instead uses the empirical-process tools developed in [Chapter 19](chapter-19.qmd), especially [Lemma 19.24](chapter-19.qmd#lemma-19.24).
+The main complication is that an infinite-dimensional $\widehat\eta_n$ need not converge at the parametric $n^{-1/2}$ rate. A joint finite-dimensional Taylor expansion in $(\theta,\eta)$ is therefore usually unavailable. §25.8 instead uses the empirical-process tools developed in [Chapter 19](chapter-19.qmd), especially [Lemma 19.24](chapter-19.qmd#lemma-19.24).
 
 ### The two score-estimation requirements {#sec-25-8-two-requirements}
 
@@ -3286,9 +3314,8 @@ These requirements control different errors:
 
 $L_2$ consistency alone is not enough. A score estimate may be close to the true score in mean square while retaining a mean error of order $n^{-1/2}$; that error survives in the limiting distribution.
 
-### Theorem 25.54: solving the efficient score equation {#theorem-25-54}
-
 ::: {.callout-note title="Theorem"}
+### Theorem 25.54: solving the efficient score equation {#theorem-25-54}
 
 Suppose:
 
@@ -3490,7 +3517,7 @@ $P f\dot\ell_{\theta,\eta}^T=Pff^T$. Consequently, the result remains valid for 
 
 ### A one-step route with sample splitting {#sec-25-8-one-step}
 
-The Donsker condition in [Theorem 25.54](#theorem-25-54) controls the dependence between the estimated score and the empirical process computed from the same observations. Section 25.8 gives a second route that removes this dependence by sample splitting.
+The Donsker condition in [Theorem 25.54](#theorem-25-54) controls the dependence between the estimated score and the empirical process computed from the same observations. §25.8 gives a second route that removes this dependence by sample splitting.
 
 Start with an initial estimator $\widetilde\theta_n$ satisfying
 
@@ -3549,7 +3576,7 @@ $$
 | $T_1$ | An estimated-function empirical-process term, handled by [Chapter 19](chapter-19.qmd) and a Donsker condition, or by sample splitting together with $L_2$ and moment control |
 | $T_2$ | The [von Mises remainder](#sec-von-mises-expansion), controlled by the no-bias, orthogonality, and product-rate arguments below |
 
-Fisher and Kennedy's Figure 1B draws (25.8-functional-one-step) as a tangent-line correction. The plug-in value $T(\widetilde P)$ is at one endpoint of the path, the tangent line is extrapolated toward the truth, and the remaining vertical gap is $R_2$. Equation (25.8-one-step) above starts instead from a finite-dimensional $\widetilde\theta_n$ and takes one Newton step on the efficient-score equation. Because $\widetilde I^{-1}\widetilde\ell$ is the efficient influence function, the two formulas have the same first-order architecture [@fisherKennedy2021, §3 and fig. 1; @kennedy2022, §§4.1–4.3].
+Fisher and Kennedy's Figure 1B draws (25.8-functional-one-step) as a tangent-line correction. The plug-in value $T(\widetilde P)$ is at one endpoint of the path, the tangent line is extrapolated toward the truth, and the remaining vertical gap is $R_2$. Equation (25.8-one-step) above starts instead from a finite-dimensional $\widetilde\theta_n$ and takes one Newton step on the efficient-score equation. Because $\widetilde I^{-1}\widetilde\ell$ is the efficient influence function, the two formulas have the same first-order architecture; see §3 and fig. 1 of @fisherKennedy2021 and §§4.1–4.3 of @kennedy2022.
 
 Conditional on a training sample, sample splitting makes the fixed-endpoint picture operational: the nuisance fit is held fixed while the other observations average its estimated correction. Machine learning supplies that nuisance fit; the derivative and projection calculations in §§25.3–25.5 determine the correction; and sample splitting supplies the conditional independence used to control $T_1$. The conclusion $T_1=o_P(n^{-1/2})$ still needs $L_2$ convergence, integrability, and the relevant regularity conditions. Orthogonality similarly removes first-order nuisance drift from $T_2$ only when the target-specific remainder calculation verifies it.
 
@@ -3586,7 +3613,7 @@ $$
 
 ::: {.callout-note title="Theorem"}
 
-### Theorem 25.57 {#theorem-25-57}
+### Theorem 25.57: efficiency of the sample-split one-step estimator {#theorem-25-57}
 
 If the model is differentiable in quadratic mean in $\theta$, $\widetilde I_{\theta,\eta}$ is nonsingular, and (25.55)--(25.56) hold, then the sample-split one-step estimator (25.8-one-step) is asymptotically efficient.
 
@@ -3669,7 +3696,7 @@ $$
 \tag{25.57-local-expansion}
 $$
 
-The preliminary estimator is root-$n$ consistent and lies on a grid of mesh $n^{-1/2}$. On every bounded root-$n$ neighborhood, that grid contains only finitely many possible offsets, with a number bounded independently of $n$. If (25.57-local-expansion) failed after replacing $\theta_n$ by $\widetilde\theta_n$, one of those grid values would define a deterministic local sequence along which it failed, contradicting the display. This is precisely the finite-grid argument proved in [Theorem 5.48](chapter-5.qmd#theorem-5-48). Hence
+The preliminary estimator is root-$n$ consistent and lies on a grid of mesh $n^{-1/2}$. On every bounded root-$n$ neighborhood, that grid contains only finitely many possible offsets, with a number bounded independently of $n$. If (25.57-local-expansion) failed after replacing $\theta_n$ by $\widetilde\theta_n$, one of those grid values would define a deterministic local sequence along which it failed, contradicting the display. This is precisely the finite-grid argument proved in Theorem 5.48. Hence
 
 $$
 \sqrt n\,\mathbb P_n
@@ -3884,7 +3911,7 @@ because $\sqrt n\|\widehat\eta_n-\eta\|^2=o_P(1)$. This familiar quarter-rate co
 
 ::: {.callout-tip title="Visual companion: distance, curvature, and the remainder" collapse="true"}
 
-Fisher and Kennedy's Figure 2 overlays paths beginning at several initial distribution estimates $\widetilde P^{(k)}$. Each target curve has its own tangent-line correction. They then place the paths on a common horizontal axis measuring distance from the truth: the correction is more accurate when the initial estimate is closer to $P$ or when the target curve has less curvature. Under their smoothness condition, plug-in bias is first order in that distance, while the residual after the one-step correction is second order. This is the visual intuition behind the $n^{-1/4}$ calculation above [@fisherKennedy2021, §4 and fig. 2]. Kennedy's §4.3 supplies the corresponding algebra [@kennedy2022].
+Fisher and Kennedy's Figure 2 overlays paths beginning at several initial distribution estimates $\widetilde P^{(k)}$. Each target curve has its own tangent-line correction. They then place the paths on a common horizontal axis measuring distance from the truth: the correction is more accurate when the initial estimate is closer to $P$ or when the target curve has less curvature. Under their smoothness condition, plug-in bias is first order in that distance, while the residual after the one-step correction is second order. This is the visual intuition behind the $n^{-1/4}$ calculation above; see §4 and fig. 2 of @fisherKennedy2021. §4.3 of @kennedy2022 supplies the corresponding algebra.
 
 The horizontal axis in their picture is an $L_2$ distance between densities. It is not automatically the nuisance norm $\|\widehat\eta-\eta_0\|_{L_2(P)}$ used in regression, and a squared distribution-level remainder does not by itself establish a two-nuisance product bound. The relevant norm and remainder must be derived for each target and model.
 
@@ -4048,7 +4075,7 @@ $$
 
 ::: {.callout-important title="Lemma"}
 
-### Lemma 25.64 {#lemma-25-64}
+### Lemma 25.64: consistency of the truncated kernel score {#lemma-25-64}
 
 Let $T_1,\ldots,T_n$ be a random sample from a density $g$ that is supported and absolutely continuous on $[0,\infty)$ and has finite Fisher information for location,
 
@@ -4274,8 +4301,6 @@ The book presents this construction mainly as an existence proof, not as a recom
 
 For the theorem's sample-split version, construct $\widehat k_n$ separately on each training half and evaluate its odd extension only on observations in the opposite half.
 
-**Related exercise:** [Chapter 25, Problem 2](problems.qmd#problem-2-symmetric-location-model) derives the efficient score from the odd/even tangent-space decomposition.
-
 ### 25.8.2 Errors-in-Variables {#sec-25-8-errors-in-variables}
 
 Return to the model introduced in [Example 25.5](#example-25-5):
@@ -4336,7 +4361,7 @@ $$
 \int |z|^9\,d\eta(z)<\infty,
 $$
 
-the remaining Donsker and envelope conditions in [Theorem 25.54](#theorem-25-54) can be verified. Lemma 25.65 supplies the required bracketing-entropy bound for the relevant conditional-expectation class; it is a technical empirical-process result whose role is to connect this example to the [Donsker criterion in Chapter 19](chapter-19.qmd#theorem-19.5-donsker-via-bracketing-entropy).
+the remaining Donsker and envelope conditions in [Theorem 25.54](#theorem-25-54) can be verified. Lemma 25.65 supplies the required bracketing-entropy bound for the relevant conditional-expectation class; it is a technical empirical-process result whose role is to connect this example to the [Donsker criterion in Chapter 19](chapter-19.qmd#theorem-19-5).
 
 ::: {.callout-important title="Lemma"}
 ### Lemma 25.65: mixture-score entropy {#lemma-25-65}
@@ -4368,7 +4393,7 @@ where $C$ depends only on $\alpha,\eta_0,U,V$, the compact coefficient sets, and
 
 :::
 
-**How the lemma is used.** The conditional-score coordinates are a quadratic polynomial in $(x,y)$ plus a linear polynomial times a conditional moment of $Z$, and that conditional moment has the ratio form (25.65-class). Choose $\alpha$ just above $1/2$ and $V<2$ close enough to $2$ while retaining $V\geq1/\alpha$. Then the entropy integral is finite and the envelope exponent can be taken below $9$ by choosing $\delta$ small. The assumed ninth moment and [Theorem 19.5](chapter-19.qmd#theorem-19.5-donsker-via-bracketing-entropy) therefore make the local conditional-score class Donsker.
+**How the lemma is used.** The conditional-score coordinates are a quadratic polynomial in $(x,y)$ plus a linear polynomial times a conditional moment of $Z$, and that conditional moment has the ratio form (25.65-class). Choose $\alpha$ just above $1/2$ and $V<2$ close enough to $2$ while retaining $V\geq1/\alpha$. Then the entropy integral is finite and the envelope exponent can be taken below $9$ by choosing $\delta$ small. The assumed ninth moment and [Theorem 19.5](chapter-19.qmd#theorem-19-5) therefore make the local conditional-score class Donsker.
 
 **Proof roadmap.** First bracket a one-dimensional family of exponentially tilted conditional means on consecutive unit intervals. Transfer those brackets to $(x,y)$ through the affine index $b_0+b_1x+b_2y$ and weight $a_0+a_1x+a_2y$. Finally discretize the finite-dimensional coefficients; this adds only polynomially many grid points and does not change the leading entropy exponent.
 
@@ -4496,7 +4521,7 @@ The deepest practical lesson is that the nuisance parameter does **not** need to
 
 ## 25.9 General Estimating Equations {#sec-general-estimating-equations}
 
-[Section 25.8](#sec-efficient-score-equations) starts from the efficient score because its goal is full semiparametric efficiency. Section 25.9 deliberately broadens the objective. A different estimating equation may sacrifice some asymptotic efficiency in exchange for:
+[§25.8](#sec-efficient-score-equations) starts from the efficient score because its goal is full semiparametric efficiency. §25.9 deliberately broadens the objective. A different estimating equation may sacrifice some asymptotic efficiency in exchange for:
 
 - robustness to parts of the model;
 - better finite-sample behavior;
@@ -4506,7 +4531,7 @@ The deepest practical lesson is that the nuisance parameter does **not** need to
 
 The semiparametric information bound still matters in this broader setting: it measures exactly how much asymptotic variance is lost by the chosen estimating equation.
 
-::: {.callout-important title="Section 25.9 in one sentence"}
+::: {.callout-important title="§25.9 in one sentence"}
 
 The efficient influence function is the minimum-variance member of a larger family of valid influence functions. General estimating equations construct regular estimators from other members of that family and use the efficiency bound as a benchmark rather than an absolute design requirement.
 
@@ -4628,7 +4653,7 @@ $$
 
 If $\varphi_{\theta,\tau}$ has already been normalized as an influence function, then $J_{\theta,\tau}=I$ and (25.9-EE) can be read directly. Multiplying an estimating equation by a fixed nonsingular matrix does not change its root, which is why the book sometimes identifies influence functions only “up to a constant.” The symbol $J$ is a clarification local to these notes; it does not change van der Vaart's estimating functions.
 
-**Builds on.** This is the finite-dimensional version of the empirical-process linearization in [Theorem 19.26](chapter-19.qmd#theorem-19.26-infinite-dimensional-z-estimation).
+**Builds on.** This is the finite-dimensional version of the empirical-process linearization in [Theorem 19.26](chapter-19.qmd#theorem-19-26-infinite-dimensional-z-estimation).
 
 ### Choosing or estimating $\tau$ {#sec-25-9-choosing-tau}
 
@@ -4646,7 +4671,7 @@ Replacing $\tau$ by $\widehat\tau_n$ requires the same two checks as estimating 
 1. $\varphi_{\theta,\widehat\tau_n}$ must approach its limiting estimating function in the relevant $L_2$ norm.
 2. Its population mean must remain $o_P(n^{-1/2})$.
 
-These are the [consistency and no-bias requirements from Section 25.8](#sec-25-8-two-requirements). If the estimating equation is exactly unbiased for every $\tau$, the second requirement is automatic, and only consistency plus empirical-process control remains.
+These are the [consistency and no-bias requirements from §25.8](#sec-25-8-two-requirements). If the estimating equation is exactly unbiased for every $\tau$, the second requirement is automatic, and only consistency plus empirical-process control remains.
 
 ::: {.callout-tip title="Efficiency on an ideal submodel"}
 
@@ -4666,7 +4691,7 @@ A robust procedure may use an estimating equation that is valid throughout a lar
 
 Return to [Example 25.28](#example-25-28):
 
-**Earlier / new here.** Section 25.4 found the uniquely efficient residual weight. Here the weight is allowed to vary, producing a family of valid estimators whose distance from that optimal weight measures the efficiency loss.
+**Earlier / new here.** §25.4 found the uniquely efficient residual weight. Here the weight is allowed to vary, producing a family of valid estimators whose distance from that optimal weight measures the efficiency loss.
 
 $$
 Y=g_\theta(X)+e,
@@ -4767,7 +4792,7 @@ The example makes the trade-off concrete:
 - weights closer to $\dot g_\theta(x)/v(x)$ improve efficiency;
 - full efficiency requires estimating the conditional variance nonparametrically.
 
-Because equation (25.66) is unbiased for every $h$, estimating $h_{\mathrm{eff}}$ has the same favorable no-bias structure emphasized in [Section 25.8](#sec-25-8-no-bias). Under appropriate stochastic-equicontinuity or sample-splitting conditions, consistency of the estimated weight in the norm induced by $E\{v(X)h(X)^2\}$ is enough.
+Because equation (25.66) is unbiased for every $h$, estimating $h_{\mathrm{eff}}$ has the same favorable no-bias structure emphasized in [§25.8](#sec-25-8-no-bias). Under appropriate stochastic-equicontinuity or sample-splitting conditions, consistency of the estimated weight in the norm induced by $E\{v(X)h(X)^2\}$ is enough.
 
 ::: {.callout-tip title="Regression interpretation"}
 
@@ -4902,7 +4927,7 @@ The efficient influence function in the original full-data model need not automa
 
 ::: {.callout-note title="Modern connection: double robustness and the ATE"}
 
-Van der Vaart states Example 25.67 with $\pi$ known or correctly specified and uses $c$ primarily to optimize variance. If instead both entries are treated as working nuisance functions, the same equation contains the algebra of [double robustness](glossary.qmd#glossary-double-robustness).
+Van der Vaart states Example 25.67 with $\pi$ known or correctly specified and uses $c$ primarily to optimize variance. If instead both entries are treated as working nuisance functions, the same equation contains the algebra of [double robustness](glossary.qmd#glossary-double-robustness). This is the estimating-equation version of the influence-function family in [Lemma 25.41](#lemma-25-41) and belongs to the missing-data line developed by Robins, Rotnitzky, and Zhao [@robinsEtAl1994].
 
 Let
 
@@ -4992,7 +5017,7 @@ $$
 \tag{25.67-ATE-DML}
 $$
 
-DML estimates $(\mu_0,\mu_1,e)$ on training folds and evaluates this score on held-out folds. In the [one-step decomposition](#sec-25-8-one-step), cross-fitting supplies the conditional independence used to control the estimated-function empirical-process term, together with $L_2$ convergence and moment bounds; the product identity (25.67-double-robust) supplies target-specific remainder control [@kennedy2022, §§4.2–4.3; @chernozhukovEtAl2018]. Causal interpretation additionally requires identification assumptions—most importantly consistency, conditional exchangeability, and overlap—which are not supplied by the missing-data geometry alone.
+DML estimates $(\mu_0,\mu_1,e)$ on training folds and evaluates this score on held-out folds. In the [one-step decomposition](#sec-25-8-one-step), cross-fitting supplies the conditional independence used to control the estimated-function empirical-process term, together with $L_2$ convergence and moment bounds; the product identity (25.67-double-robust) supplies target-specific remainder control, as discussed in §§4.2–4.3 of @kennedy2022 and @chernozhukovEtAl2018. Causal interpretation additionally requires identification assumptions—most importantly consistency, conditional exchangeability, and overlap—which are not supplied by the missing-data geometry alone.
 
 :::
 
@@ -5020,9 +5045,9 @@ In regression, the free choice is the residual weight $h$. Under missing at rand
 
 ## 25.10 Maximum Likelihood Estimators {#sec-maximum-likelihood-estimators}
 
-Maximum likelihood remains a central route to efficient semiparametric estimation, but there is an immediate complication: an infinite-dimensional model may have no useful ordinary density likelihood, or its density likelihood may have infinite supremum. Section 25.10 therefore does not give one universal definition of a semiparametric likelihood. It develops several **likelihoods that work** for particular model structures.
+Maximum likelihood remains a central route to efficient semiparametric estimation, but there is an immediate complication: an infinite-dimensional model may have no useful ordinary density likelihood, or its density likelihood may have infinite supremum. §25.10 therefore does not give one universal definition of a semiparametric likelihood. It develops several **likelihoods that work** for particular model structures.
 
-::: {.callout-important title="Section 25.10 in one sentence"}
+::: {.callout-important title="§25.10 in one sentence"}
 
 In a semiparametric model, writing down a formal density is not enough. One must choose a likelihood representation for which
 
@@ -5031,7 +5056,7 @@ In a semiparametric model, writing down a formal density is not enough. One must
 3. the target component satisfies an efficient, or approximately efficient, score equation;
 4. consistency and empirical-process conditions can be verified.
 
-Maximization constructs the estimator. The efficient-score theory of [Section 25.8](#sec-efficient-score-equations) is still what explains its first-order efficiency.
+Maximization constructs the estimator. The efficient-score theory of [§25.8](#sec-efficient-score-equations) is still what explains its first-order efficiency.
 
 :::
 
@@ -5145,7 +5170,7 @@ $$
 \right\}^{-1}
 $$
 
-is used as an estimate of the covariance matrix of $\widehat\theta$. This is the likelihood version of the efficient-information calculation in [Section 25.4](#efficient-score-functions).
+is used as an estimate of the covariance matrix of $\widehat\theta$. This is the likelihood version of the efficient-information calculation in [§25.4](#efficient-score-functions).
 
 ### Example 25.69: the Cox model {#example-25-69}
 
@@ -5272,7 +5297,7 @@ $$
 
 If $\phi$ is symmetric about zero, then every mixture density is symmetric about $\theta$. There are therefore two routes to efficient estimation:
 
-1. ignore the mixture representation and use the adaptive symmetric-location construction from [Section 25.8.1](#sec-25-8-symmetric-location);
+1. ignore the mixture representation and use the adaptive symmetric-location construction from [§25.8.1](#sec-25-8-symmetric-location);
 2. exploit the mixture representation and maximize (25.70).
 
 For this model the ordinary target score is already the efficient score. Consequently, an interior maximum likelihood estimator satisfies
@@ -5363,7 +5388,7 @@ The first condition is an **undersmoothing condition for the target**: the penal
 
 ::: {.callout-note title="Modern connection: penalization and orthogonality"}
 
-Penalization and orthogonality solve different problems. The penalty regularizes the nuisance estimate, but regularization can itself bias the target score. Section 25.8 controls that bias through efficient-score orthogonality and a no-bias condition. DML makes the separation explicit: regularize the nuisance functions, evaluate a Neyman-orthogonal score, and cross-fit to control overfitting [@chernozhukovEtAl2018].
+Penalization and orthogonality solve different problems. The penalty regularizes the nuisance estimate, but regularization can itself bias the target score. §25.8 controls that bias through efficient-score orthogonality and a no-bias condition. DML makes the separation explicit: regularize the nuisance functions, evaluate a Neyman-orthogonal score, and cross-fit to control overfitting [@chernozhukovEtAl2018].
 
 :::
 
@@ -5416,7 +5441,7 @@ The maximizer $\widehat\eta$ is a step function supported on observed uncensored
 
 This example also illustrates boundary behavior. If the largest observed time is an uncensored failure, the final jump of $\widehat\eta$ is infinite; if the largest observation is censored, all jumps are finite. Thus a semiparametric MLE commonly lives on the boundary of an enlarged parameter space even when the true nuisance function is smooth.
 
-Under suitable conditions, the target and nuisance maximum likelihood estimators are asymptotically efficient. Sections 25.11--25.12 develop tools for proving this when the efficient score equation is not directly available at such a boundary maximizer.
+Under suitable conditions, the target and nuisance maximum likelihood estimators are asymptotically efficient. §§25.11--25.12 develop tools for proving this when the efficient score equation is not directly available at such a boundary maximizer.
 
 ### 25.10.1 Random Censoring {#sec-25-10-random-censoring}
 
@@ -5470,7 +5495,7 @@ F\longmapsto
 F\{X_i\}^{\Delta_i}.
 $$
 
-Its maximizer is the product-limit, or Kaplan--Meier, estimator. [Lemma 20.14](chapter-20.qmd#lemma-20-14) develops the cumulative-hazard/product-integral map, and [Example 20.15](chapter-20.qmd#example-20-15) applies that map to Nelson--Aalen and Kaplan--Meier. If $t_1<\cdots<t_m$ are the distinct observed failure times, $d_j$ is the number of failures at $t_j$, and $r_j$ is the number at risk immediately before $t_j$, then
+Its maximizer is the product-limit, or Kaplan--Meier, estimator. Lemma 20.14 develops the cumulative-hazard/product-integral map, and Example 20.15 applies that map to Nelson--Aalen and Kaplan--Meier. If $t_1<\cdots<t_m$ are the distinct observed failure times, $d_j$ is the number of failures at $t_j$, and $r_j$ is the number at risk immediately before $t_j$, then
 
 $$
 1-\widehat F(t)
@@ -5480,7 +5505,7 @@ $$
 \tag{25.10-KM}
 $$
 
-This is the same estimator whose efficiency follows from the functional delta method in [Example 25.51](#example-25-51). Section 25.10 supplies a complementary likelihood characterization.
+This is the same estimator whose efficiency follows from the functional delta method in [Example 25.51](#example-25-51). §25.10 supplies a complementary likelihood characterization.
 
 #### Why the empirical-distribution argument applies
 
@@ -5501,7 +5526,7 @@ Step 2 requires every pair of observed subdistributions $(H_0,H_1)$ to be repres
 
 ::: {.callout-important title="Lemma"}
 
-### Lemma 25.74 {#lemma-25-74}
+### Lemma 25.74: recovering latent distributions from observed subdistributions {#lemma-25-74}
 
 Let $(H_0,H_1)$ be subdistribution functions on $[0,\infty)$ satisfying
 
@@ -5677,10 +5702,10 @@ Existence and computation are only the first half of the argument. To conclude e
 
 1. prove consistency of $(\widehat\theta,\widehat\eta)$;
 2. obtain an efficient or approximately efficient score equation;
-3. verify the $L_2$ and no-bias conditions from [Section 25.8](#sec-25-8-two-requirements);
+3. verify the $L_2$ and no-bias conditions from [§25.8](#sec-25-8-two-requirements);
 4. control the estimated score by [Chapter 19 empirical-process methods](chapter-19.qmd).
 
-This last step is the motivation for the approximately least-favorable submodels of Section 25.11.
+This last step is the motivation for the approximately least-favorable submodels of §25.11.
 
 ## 25.11 Approximately Least-Favorable Submodels {#sec-approximately-least-favorable-submodels}
 
@@ -5689,11 +5714,11 @@ The efficient score is defined geometrically: subtract from the ordinary target 
 1. [Theorem 25.54](#theorem-25-54) proves efficiency for an estimator that approximately solves the efficient score equation;
 2. a maximum likelihood estimator is known to satisfy stationary equations only along paths that remain inside the parameter space.
 
-The gap matters most for infinite-dimensional nuisance estimators. As the examples in [Section 25.10](#sec-maximum-likelihood-estimators) show, a semiparametric MLE is often a step function or another boundary point. A formally correct efficient direction may destroy monotonicity, positivity, or smoothness when moved in both signs, so it cannot be used to differentiate the likelihood at the MLE.
+The gap matters most for infinite-dimensional nuisance estimators. As the examples in [§25.10](#sec-maximum-likelihood-estimators) show, a semiparametric MLE is often a step function or another boundary point. A formally correct efficient direction may destroy monotonicity, positivity, or smoothness when moved in both signs, so it cannot be used to differentiate the likelihood at the MLE.
 
 Throughout §§25.11–25.12, a subscript $0$ denotes evaluation at the truth: $P_0=P_{\theta_0,\eta_0}$, $\dot\ell_0=\dot\ell_{\theta_0,\eta_0}$, and similarly for scores, information matrices, and operators. In model-specific subsections, $\eta$ may be replaced by the relevant nuisance object, such as $\Lambda$.
 
-::: {.callout-important title="Section 25.11 in one sentence"}
+::: {.callout-important title="§25.11 in one sentence"}
 
 Replace an unavailable exact least-favorable path by a feasible path whose score agrees with the efficient score **at the truth**. Likelihood stationarity then supplies a proper score equation, while the $L_2$, no-bias, and empirical-process conditions show that this equation is first-order equivalent to the efficient score equation.
 
@@ -5760,9 +5785,8 @@ $$
 
 or an asymptotically negligible approximation to this equation. The problem has therefore been converted from *construct an exact efficient-score path at every possible estimate* to *construct a feasible likelihood path that has the right derivative at the truth*.
 
-### Theorem 25.77: efficiency from an approximate path {#theorem-25-77}
-
 ::: {.callout-note title="Theorem"}
+### Theorem 25.77: efficiency from an approximate path {#theorem-25-77}
 
 Suppose the model is differentiable in quadratic mean with respect to $\theta$ at $(\theta_0,\eta_0)$ and the efficient information $\widetilde I_{\theta_0,\eta_0}$ is nonsingular. Let $\widetilde\kappa_{\theta,\eta}$ be the scores of approximately least-favorable submodels. Assume:
 
@@ -5912,11 +5936,11 @@ p_{\theta_0,\eta_0}
 \tag{25.78}
 $$
 
-The first term is a product of a distribution error and a score error. The second is the nonlinear remainder after subtracting the first-order nuisance-score contribution. Orthogonality kills the first-order nuisance effect; the remaining terms are often quadratic in $\widehat\eta-\eta_0$. This is the same mechanism behind the [quarter-rate and product-rate discussion in Section 25.8](#sec-25-8-two-requirements).
+The first term is a product of a distribution error and a score error. The second is the nonlinear remainder after subtracting the first-order nuisance-score contribution. Orthogonality kills the first-order nuisance effect; the remaining terms are often quadratic in $\widehat\eta-\eta_0$. This is the same mechanism behind the [quarter-rate and product-rate discussion in §25.8](#sec-25-8-two-requirements).
 
 ### Theorem 25.81: a general nuisance-rate device {#theorem-25-81}
 
-Theorem 25.77 may require an explicit rate for $\widehat\eta$. Section 25.11 therefore restates [Theorem 5.55](chapter-5.qmd#theorem-5-55), the general rate theorem for criterion estimators with an estimated nuisance parameter.
+Theorem 25.77 may require an explicit rate for $\widehat\eta$. §25.11 therefore restates Theorem 5.55, the general rate theorem for criterion estimators with an estimated nuisance parameter.
 
 Let $\widehat\tau$ maximize, or at least improve on $\tau_0$ for, a criterion $\mathbb P_n m_{\tau,\widehat\lambda}$. Suppose uniformly over relevant $(\tau,\lambda)$,
 
@@ -6134,7 +6158,7 @@ $$
 \tag{25.83-improvement}
 $$
 
-First establish consistency by the [Wald argument in Chapter 5](chapter-5.qmd#sec-5-2). The target parameter space is compact and the monotone cumulative hazards bounded by $M$ are compact in the weak topology. The distance from $(\widehat\theta,\widehat\Lambda)$ to the Kullback--Leibler maximizers therefore tends to zero. The observed model identifies $\theta_0$ and identifies $\Lambda_0(t)$ for every $\sigma<t<\tau$, so
+First establish consistency by the Wald argument in Chapter 5. The target parameter space is compact and the monotone cumulative hazards bounded by $M$ are compact in the weak topology. The distance from $(\widehat\theta,\widehat\Lambda)$ to the Kullback--Leibler maximizers therefore tends to zero. The observed model identifies $\theta_0$ and identifies $\Lambda_0(t)$ for every $\sigma<t<\tau$, so
 
 $$
 \widehat\theta\to\theta_0,
@@ -6651,7 +6675,7 @@ $$
 has finite roughness $J(h_0)$.
 
 ::: {.callout-important title="Lemma"}
-### Lemma 25.88 {#lemma-25-88}
+### Lemma 25.88: nuisance rates in partially linear regression {#lemma-25-88}
 
 Under these conditions,
 
@@ -6899,7 +6923,7 @@ B_{\theta,\eta}h(x)
 =\{y-\theta v-\eta(w)\}h(w).
 $$
 
-Projection onto the nuisance-score space replaces $V$ by its conditional expectation given $W$; this is the conditional-expectation instance of [Theorem 11.1](chapter-11.qmd#theorem-11-1). Therefore
+Projection onto the nuisance-score space replaces $V$ by its conditional expectation given $W$; this is the conditional-expectation instance of Theorem 11.1. Therefore
 
 $$
 \widetilde\ell_{\theta,\eta}(x)
@@ -6908,6 +6932,8 @@ $$
 \{v-h_0(w)\},
 \tag{25.11-partially-linear-efficient-score}
 $$
+
+Figure @twentyfivefig-ch25-partially-linear visualizes the residualization encoded by this efficient score.
 
 ::: {#twentyfivefig-ch25-partially-linear}
 
@@ -6948,7 +6974,7 @@ $$
 Thus the penalized estimator solves the efficient score equation to the accuracy required by [Theorem 25.54](#theorem-25-54).
 
 ::: {.callout-note title="Theorem"}
-### Theorem 25.89 {#theorem-25-89}
+### Theorem 25.89: efficient partially linear score roots {#theorem-25-89}
 
 Let $\widehat\eta_n$ be any estimators such that
 
@@ -6958,7 +6984,7 @@ $$
 J(\widehat\eta_n)=O_P(1).
 $$
 
-Read this within the standing setup of Section 25.8: the plug-in score also satisfies the $L_2(P_0)$ consistency requirement in (25.53). In the present model, given $\widehat\theta_n\to\theta_0$, it is enough that
+Read this within the standing setup of §25.8: the plug-in score also satisfies the $L_2(P_0)$ consistency requirement in (25.53). In the present model, given $\widehat\theta_n\to\theta_0$, it is enough that
 
 $$
 \|\widehat\eta_n-\eta_0\|_{L_2(P_W)}
@@ -7023,7 +7049,7 @@ $$
 (y-\theta v-\eta(w))\{v-h_0(w)\}
 $$
 
-range over the product of a fixed finite-dimensional class and a bounded second-order Sobolev ball. The smooth-function entropy calculation in Chapter 19, together with the [bracketing Donsker theorem](chapter-19.qmd#theorem-19.5-donsker-via-bracketing-entropy), makes this a $P_0$-Donsker class with a square-integrable envelope. Condition (25.89-score-consistency), together with $\widehat\theta_n\to\theta_0$, gives the required $L_2(P_0)$ convergence of the estimated score, and the efficient information is positive by nonconfounding. The assumed approximate score equation is exactly the remaining hypothesis of [Theorem 25.54](#theorem-25-54). That theorem yields
+range over the product of a fixed finite-dimensional class and a bounded second-order Sobolev ball. The smooth-function entropy calculation in Chapter 19, together with the [bracketing Donsker theorem](chapter-19.qmd#theorem-19-5), makes this a $P_0$-Donsker class with a square-integrable envelope. Condition (25.89-score-consistency), together with $\widehat\theta_n\to\theta_0$, gives the required $L_2(P_0)$ convergence of the estimated score, and the efficient information is positive by nonconfounding. The assumed approximate score equation is exactly the remaining hypothesis of [Theorem 25.54](#theorem-25-54). That theorem yields
 
 $$
 \sqrt n(\widehat\theta_n-\theta_0)
@@ -7072,11 +7098,32 @@ $$
 =o_P(1),
 $$
 
-the product-rate condition highlighted in [Section 25.8](#sec-25-8-two-requirements). Double/debiased machine learning estimates the two regressions on training folds and evaluates the orthogonal score on held-out folds. Cross-fitting uses conditional independence between nuisance training and score evaluation in place of a same-sample Donsker argument; $L_2$ convergence, the displayed product rate, and the usual moment conditions remain necessary [@chernozhukovEtAl2018].
+the product-rate condition highlighted in [§25.8](#sec-25-8-two-requirements). Double/debiased machine learning estimates the two regressions on training folds and evaluates the orthogonal score on held-out folds. Cross-fitting uses conditional independence between nuisance training and score evaluation in place of a same-sample Donsker argument; $L_2$ convergence, the displayed product rate, and the usual moment conditions remain necessary [@chernozhukovEtAl2018].
 
-In the language of Fisher and Kennedy's Figure 2, the abstract post-correction curvature has become explicit algebra: motion in either nuisance coordinate alone has zero first derivative, and the remaining mixed movement is the cross-product in (25.11-PLR-product-bias). The figure motivates looking for a second-order remainder; this model-specific calculation identifies its actual form [@fisherKennedy2021; @kennedy2022, §4.3].
+In the language of Fisher and Kennedy's Figure 2, the abstract post-correction curvature has become explicit algebra: motion in either nuisance coordinate alone has zero first derivative, and the remaining mixed movement is the cross-product in (25.11-PLR-product-bias). The figure motivates looking for a second-order remainder; this model-specific calculation identifies its actual form. Compare @fisherKennedy2021 and §4.3 of @kennedy2022.
 
-This final paragraph of Section 25.11 is one of the book's clearest direct precursors to DML: it explicitly notes that smoothness of $\eta_0$ can be traded against smoothness of $h_0$, because the bias is the **cross-product** of their estimation errors.
+This final paragraph of §25.11 is one of the book's clearest direct precursors to DML. In modern terms it describes **rate double robustness**. Write
+
+$$
+r_{\eta,n}=\|\widehat\eta-\eta_0\|_2,
+\qquad
+r_{h,n}=\|\widehat h-h_0\|_2.
+$$
+
+The displayed remainder only requires
+
+$$
+r_{\eta,n}r_{h,n}=o_P(n^{-1/2}).
+$$
+
+Thus, if $r_{\eta,n}=O_P(n^{-a})$ and $r_{h,n}=O_P(n^{-b})$, a sufficient exponent condition is $a+b>1/2$. The familiar symmetric benchmark asks both nuisances to be slightly faster than $n^{-1/4}$, but symmetry is unnecessary: a faster estimate of one nuisance can compensate for a slower estimate of the other. For example, the $n^{-2/5}$ nuisance rate supplied by Lemma 25.88 can be paired with $r_{h,n}=o_P(n^{-1/10})$. Van der Vaart phrases this as a trade between the smoothness of $\eta_0$ and the smoothness of $h_0(w)=E(V\mid W=w)$ because smoothness determines their available nonparametric rates. The source calls the latter function $g$ in its closing paragraph; these notes retain $h_0$ to match the score immediately above.
+
+This has two related meanings:
+
+- **Model double robustness:** the population moment in (25.11-PLR-product-bias) is exactly unbiased if either $\bar\eta=\eta_0$ or $\bar h=h_0$, even when the other working nuisance is misspecified.
+- **Rate double robustness:** when both nuisances are estimated consistently, their **product**, rather than each rate separately, controls the root-$n$ bias.
+
+Cross-fitting addresses a different part of the proof: it helps control the empirical-process term created by evaluating estimated nuisances on the data. It does not create the product-bias identity or remove the product-rate requirement.
 
 :::
 
@@ -7110,15 +7157,15 @@ The durable lesson is that nuisance estimation need not be root-$n$. What matter
 
 ## 25.12 Likelihood Equations {#sec-likelihood-equations}
 
-[Section 25.8](#sec-efficient-score-equations) isolates the finite-dimensional target and solves one efficient score equation after estimating the nuisance parameter. [Section 25.11](#sec-approximately-least-favorable-submodels) shows how a likelihood maximizer can satisfy an equation that is first-order equivalent to that efficient score equation. Section 25.12 takes a different route: write the likelihood equations for the target and nuisance parameters **jointly**, treat them as one infinite-dimensional Z-estimation problem, and linearize the whole system.
+[§25.8](#sec-efficient-score-equations) isolates the finite-dimensional target and solves one efficient score equation after estimating the nuisance parameter. [§25.11](#sec-approximately-least-favorable-submodels) shows how a likelihood maximizer can satisfy an equation that is first-order equivalent to that efficient score equation. §25.12 takes a different route: write the likelihood equations for the target and nuisance parameters **jointly**, treat them as one infinite-dimensional Z-estimation problem, and linearize the whole system.
 
-::: {.callout-important title="Section 25.12 in one sentence"}
+::: {.callout-important title="§25.12 in one sentence"}
 
 A semiparametric MLE behaves like the solution of a block system of score equations; if the empirical scores are uniformly well behaved and the derivative of the population system has a continuous inverse, then the inverse derivative maps the limiting empirical process into the joint Gaussian limit of $(\widehat\theta,\widehat\eta)$.
 
 :::
 
-This route is closer to the ordinary multivariate proof for maximum likelihood, but it has a strong limitation: both $\widehat\theta-\theta_0$ and $\widehat\eta-\eta_0$ must be root-$n$ in the Banach-space norm used to formulate the equations. That fails in many natural parametrizations. For example, the current-status cumulative-hazard estimator in [Section 25.11.1](#sec-25-11-current-status-cox) converges at $n^{-1/3}$, which is why the target-specific approximately least-favorable argument is needed there.
+This route is closer to the ordinary multivariate proof for maximum likelihood, but it has a strong limitation: both $\widehat\theta-\theta_0$ and $\widehat\eta-\eta_0$ must be root-$n$ in the Banach-space norm used to formulate the equations. That fails in many natural parametrizations. For example, the current-status cumulative-hazard estimator in [§25.11.1](#sec-25-11-current-status-cox) converges at $n^{-1/3}$, which is why the target-specific approximately least-favorable argument is needed there.
 
 ### Constructing the joint likelihood equations
 
@@ -7214,11 +7261,10 @@ $$
 \Psi(\theta_0,\eta_0)=0.
 $$
 
-The task is now recognizable as the infinite-dimensional Z-estimation problem of [Theorem 19.26](chapter-19.qmd#theorem-19.26-infinite-dimensional-z-estimation).
-
-### Theorem 25.90: linearizing the full system {#theorem-25-90}
+The task is now recognizable as the infinite-dimensional Z-estimation problem of [Theorem 19.26](chapter-19.qmd#theorem-19-26-infinite-dimensional-z-estimation).
 
 ::: {.callout-note title="Theorem"}
+### Theorem 25.90: linearizing the full system {#theorem-25-90}
 
 Assume:
 
@@ -7405,7 +7451,7 @@ The choice of $\mathcal H$ affects both sides of this tradeoff:
 
 ### The derivative is a block information operator
 
-Recall from [Section 25.5.1](#sec-semiparametric-score-operators) that the joint score operator is
+Recall from [§25.5.1](#sec-semiparametric-score-operators) that the joint score operator is
 
 $$
 A_{\theta,\eta}(a,b)
@@ -7450,7 +7496,7 @@ $$
 \tag{25.91}
 $$
 
-These four blocks are the four pieces of the information operator $A_0^*A_0$ from [Section 25.5](#sec-semiparametric-score-operators), with a minus sign. This is the operator version of the parametric information identity
+These four blocks are the four pieces of the information operator $A_0^*A_0$ from [§25.5](#sec-semiparametric-score-operators), with a minus sign. This is the operator version of the parametric information identity
 
 $$
 E(\text{Hessian of log likelihood})
@@ -7519,7 +7565,7 @@ $$
 The operator $B_0^*B_0$ is the nuisance information when $\theta$ is known. The correction $K$ has finite-dimensional range because it passes through the $k$-dimensional target parameter. It is therefore a [compact operator](https://en.wikipedia.org/wiki/Compact_operator).
 
 ::: {.callout-note title="Lemma"}
-### Lemma 25.92 {#lemma-25-92}
+### Lemma 25.92: stability of nuisance information under target coupling {#lemma-25-92}
 
 Let $\mathbb B\subset\ell^\infty(\mathcal Z)$ be a Banach space. Suppose
 
@@ -8214,4 +8260,4 @@ The two examples show complementary ways the operator problem can simplify:
 | Censored Cox model | Multiplication by the weighted at-risk function $M_0(y)$ | $M_0$ is bounded away from zero |
 | Partially missing data | $C^*C+I$ | Direct observations contribute the identity; $C^*C$ is a compact smoothing perturbation |
 
-Section 25.12 closes the chapter by unifying likelihood, empirical-process, and information-operator arguments. Its method is powerful when the full nuisance parameter is itself regular at root-$n$ in a suitable norm. When that is too demanding, the target-specific orthogonal methods of [Sections 25.8](#sec-efficient-score-equations) and [25.11](#sec-approximately-least-favorable-submodels) are usually the more flexible route.
+§25.12 closes the chapter by unifying likelihood, empirical-process, and information-operator arguments. Its method is powerful when the full nuisance parameter is itself regular at root-$n$ in a suitable norm. When that is too demanding, the target-specific orthogonal methods of [§25.8](#sec-efficient-score-equations) and [§25.11](#sec-approximately-least-favorable-submodels) are usually the more flexible route.

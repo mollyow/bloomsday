@@ -1,2 +1,9 @@
 /.quarto/
 **/*.quarto_ipynb
+
+# Supplemental chapters retained locally but excluded from the public companion
+/chapter-3.qmd
+/chapter-5.qmd
+/chapter-11.qmd
+/chapter-15.qmd
+/chapter-20.qmd

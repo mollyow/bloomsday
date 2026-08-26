@@ -1,6 +1,6 @@
-# Asymptotic Statistics Quarto Book
+# Reading Companion for Asymptotic Statistics
 
-This directory contains a Quarto book of study notes for selected chapters of A. W. van der Vaart's *Asymptotic Statistics*.
+This directory contains an unofficial Quarto reading companion for selected chapters of A. W. van der Vaart's *Asymptotic Statistics*. It is designed for use alongside the original book, which readers will need in order to follow the assigned readings and consult the complete source material.
 
 ## Requirements
 
@@ -36,7 +36,6 @@ The rendered site is written to `_book/`, beginning at `_book/index.html`. The o
 - `index.qmd` contains the reading plan.
 - `chapter-*.qmd` contains the chapter notes.
 - `glossary.qmd` collects shared notation.
-- `problems.qmd` contains worked problems.
 - `images/` contains book assets referenced by the notes.
 
 The source book's chapter and result numbers are written explicitly because this project includes a nonconsecutive selection of chapters. Major cross-references use stable anchors so that links survive nearby heading edits.

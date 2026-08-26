@@ -17,11 +17,6 @@ crossref:
       caption-prefix: Figure G.
       space-before-numbering: false
     - kind: float
-      key: twofig
-      reference-prefix: Figure 2.
-      caption-prefix: Figure 2.
-      space-before-numbering: false
-    - kind: float
       key: sixfig
       reference-prefix: Figure 6.
       caption-prefix: Figure 6.
@@ -35,11 +30,6 @@ crossref:
       key: eightfig
       reference-prefix: Figure 8.
       caption-prefix: Figure 8.
-      space-before-numbering: false
-    - kind: float
-      key: fifteenfig
-      reference-prefix: Figure 15.
-      caption-prefix: Figure 15.
       space-before-numbering: false
     - kind: float
       key: eighteenfig
@@ -58,31 +48,25 @@ crossref:
       space-before-numbering: false
 
 book:
-  title: "Asymptotic Statistics"
+  title: "Reading Companion for Asymptotic Statistics"
   search: true
   chapters:
     - index.qmd
     - glossary.qmd
     - chapter-2.qmd
-    - chapter-3.qmd
-    - chapter-5.qmd
     - chapter-6.qmd
     - chapter-7.qmd
     - chapter-8.qmd
-    - chapter-11.qmd
-    - chapter-15.qmd
     - chapter-18.qmd
     - chapter-19.qmd
-    - chapter-20.qmd
     - chapter-25.qmd
-    - problems.qmd
     - references.qmd
 
 format:
   html:
     theme: cosmo
     toc: true
-    # Preserve the source book's selected chapter numbers (2, 3, 5, 6, 7, 8,
-    # 11, 15, 18, 19, 20, and 25) rather than renumbering them sequentially.
+    # Preserve the source book's selected chapter numbers (2, 6, 7, 8, 18,
+    # 19, and 25) rather than renumbering them sequentially.
     number-sections: false
     link-external-newwindow: true

@@ -10,18 +10,16 @@ Stochastic convergence is the language for separating a stable first-order limit
 
 ::: {.callout-note title="Companion readings"}
 
-For a systematic review of convergence and stochastic order, see [@jiang2022, §§2.1–2.7 and §3.4]. For a compact treatment centered on weak convergence, see [@dasgupta2008, §1.1].
+For a systematic review of convergence and stochastic order, see §§2.1–2.7 and §3.4 of @jiang2022. For a compact treatment centered on weak convergence, see §1.1 of @dasgupta2008.
 
 :::
 
 ::: {.callout-note title="Reading guide"}
 
-The route through van der Vaart's chapter is deliberately selective.
-
-- **Core:** §2.1 through Lemma 2.8 supplies Portmanteau, continuous mapping, the Euclidean Prohorov–Helly compactness step, relations among convergence modes, and Slutsky's lemma.
-- **Core:** §2.2 supplies the stochastic $o_P/O_P$ calculus and Lemma 2.12, which converts deterministic remainder bounds into stochastic ones.
-- **Illustration:** Example 2.9 shows how weak convergence and a random normalizer combine in a $t$ statistic.
-- **Deferred:** Example 2.10 and Lemma 2.11, characteristic functions, almost-sure representations, moment convergence, convergence-determining classes, the law of the iterated logarithm, Lindeberg--Feller theory, and total variation are not needed for the direct route to Chapter 25. [Chapter 18](chapter-18.qmd#sec-tightness) generalizes Prohorov's theorem and tightness to metric spaces.
+- **Core — §2.1 through Lemma 2.8:** Portmanteau, continuous mapping, the Euclidean Prohorov–Helly compactness step, relations among convergence modes, and Slutsky's lemma.
+- **Core — §2.2 and Lemma 2.12:** stochastic $o_P/O_P$ calculus and the conversion of deterministic remainder bounds into stochastic ones.
+- **Compressed — Example 2.9:** an illustration of weak convergence combined with a random normalizer in a $t$ statistic.
+- **Omitted/deferred — remaining Chapter 2 material:** Example 2.10, Lemma 2.11, characteristic functions, almost-sure representations, moment convergence, convergence-determining classes, the law of the iterated logarithm, Lindeberg–Feller theory, and total variation. [Chapter 18](chapter-18.qmd#sec-tightness) supplies the metric-space generalization of tightness and Prohorov's theorem needed later.
 
 :::
 
@@ -45,15 +43,7 @@ For random vectors in $\mathbb R^k$:
   for every $\epsilon>0$.
 - **Almost-sure convergence** is written $X_n\overset{\mathrm{a.s.}}\longrightarrow X$. It means $d(X_n,X)\to0$ with probability one.
 
-Convergence in probability and almost-sure convergence require $X_n$ and $X$ to live on the same probability space. Weak convergence depends only on their laws.
-
-::: {#twofig-ch2-convergence-map}
-
-![](images/generated/chapter-2-convergence-map.svg){fig-alt="A diagram shows almost-sure convergence implying convergence in probability, which implies convergence in distribution. L1 convergence also implies convergence in probability. A separate note states that every subsequence has a further subsequence converging almost surely to X, and uniform integrability provides a route from convergence in probability to L1."}
-
-The main implications among modes of stochastic convergence. The extra moment conditions shown in the diagram are not part of the route developed in this chapter.
-
-:::
+Convergence in probability and almost-sure convergence require $X_n$ and $X$ to live on the same probability space. Weak convergence depends only on their laws. For a careful measure-theoretic treatment of these convergence modes and the role of uniform integrability, see @pollard2002.
 
 ::: {.callout-important title="Lemma"}
 ### Lemma 2.2: Portmanteau {#lemma-portmanteau}
@@ -94,7 +84,7 @@ $$
 f_m(x)=m\,d(x,G^c)\wedge1.
 $$
 
-Then $f_m$ is bounded and Lipschitz, $0\leq f_m\leq\mathbf1_G$, and $f_m\uparrow\mathbf1_G$. Hence, for every fixed $m$,
+Then $f_m$ is bounded and Lipschitz, $0\leq f_m\leq\mathbf 1_G$, and $f_m\uparrow\mathbf 1_G$. Hence, for every fixed $m$,
 
 $$
 \liminf_nP(X_n\in G)
@@ -134,7 +124,7 @@ The source leaves this last equivalence as an exercise; the truncation argument 
 Portmanteau allows a proof to switch to whichever characterization best matches the problem. The open-set form is central in weak-convergence arguments; the test-function form drives the change-of-measure result in [Theorem 6.6](chapter-6.qmd#theorem-change-of-measure).
 
 ::: {.callout-note title="Theorem"}
-### Theorem 2.3: Continuous mapping {#theorem-continuous-mapping}
+### Theorem 2.3: continuous mapping {#theorem-continuous-mapping}
 
 Let $g:\mathbb R^k\to\mathbb R^m$ be continuous at every point of a set $C$ such that $P(X\in C)=1$. Then:
 
@@ -185,7 +175,7 @@ Finally, on the probability-one event where $X_n\to X$ and $X\in C$, ordinary co
 
 </details>
 
-The theorem passes a known limit through a statistic. Its discontinuity caveat is substantive: if $X_n=1/n$, $X=0$, and $g(x)=\mathbf1\{x>0\}$, then $X_n\to0$ but $g(X_n)=1\not\to g(0)=0$.
+The theorem passes a known limit through a statistic. Its discontinuity caveat is substantive: if $X_n=1/n$, $X=0$, and $g(x)=\mathbf 1\{x>0\}$, then $X_n\to0$ but $g(X_n)=1\not\to g(0)=0$.
 
 ### Tightness and subsequences
 
@@ -323,7 +313,7 @@ $$
 The compactness step reappears in [Chapter 18](chapter-18.qmd#sec-tightness), where closed balls need not be compact and tightness must be formulated with general compact sets.
 
 ::: {.callout-note title="Theorem"}
-### Theorem 2.7: Relations among modes of convergence {#theorem-2-7}
+### Theorem 2.7: relations among modes of convergence {#theorem-2-7}
 
 Let $X_n$, $X$, and $Y_n$ be random vectors. Then:
 
@@ -415,10 +405,10 @@ $$
 T_n=A_n+R_n,\qquad A_n\rightsquigarrow A,\qquad R_n=o_P(1).
 $$
 
-Slutsky removes $R_n$. The LAN remainder in [Theorem 7.2](chapter-7.qmd#theorem-lan-iid), the empirical-process remainder in [Theorem 19.26](chapter-19.qmd#theorem-19.26-infinite-dimensional-z-estimation), and the efficient-estimator expansion in [Lemma 25.23](chapter-25.qmd#lemma-25-23) all have this structure.
+Slutsky removes $R_n$. The LAN remainder in [Theorem 7.2](chapter-7.qmd#theorem-lan-iid), the empirical-process remainder in [Theorem 19.26](chapter-19.qmd#theorem-19-26-infinite-dimensional-z-estimation), and the efficient-estimator expansion in [Lemma 25.23](chapter-25.qmd#lemma-25-23) all have this structure.
 
 ::: {.callout-tip title="Example"}
-### Example 2.9: The $t$ statistic {#example-2-9}
+### Example 2.9: the $t$ statistic {#example-2-9}
 
 Let $Y_1,Y_2,\ldots$ be i.i.d. with $EY_1=0$ and $EY_1^2<\infty$, and let
 
@@ -475,7 +465,7 @@ These displays are implications read from left to right, not algebraic identitie
 The product rule is especially important in semiparametric problems. Two nuisance errors may each be larger than $n^{-1/2}$ while their product is $o_P(n^{-1/2})$, so the product disappears from the target estimator's first-order expansion; see the [no-bias condition in §25.8](chapter-25.qmd#sec-25-8-no-bias).
 
 ::: {.callout-important title="Lemma"}
-### Lemma 2.12: Deterministic remainders at random arguments {#lemma-2-12}
+### Lemma 2.12: deterministic remainders at random arguments {#lemma-2-12}
 
 Let $R$ be defined on a subset of $\mathbb R^k$, with $R(0)=0$, and let $X_n$ take values in that domain with $X_n\overset P\to0$. For every $p>0$:
 
@@ -522,7 +512,7 @@ $$
 
 </details>
 
-Lemma 2.12 is the bridge from ordinary differentiability to stochastic expansions. It supplies the remainder step in the [delta method](chapter-3.qmd#theorem-3-1), and the same mechanism reappears in likelihood and estimating-equation expansions throughout Chapters 7, 19, and 25.
+Lemma 2.12 is the bridge from ordinary differentiability to stochastic expansions. It supplies the remainder step in the delta method in Chapter 3, and the same mechanism reappears in likelihood and estimating-equation expansions throughout Chapters 7, 19, and 25.
 
 <span id="sec-uniform-integrability"></span>
 
@@ -542,5 +532,11 @@ $$
 $$
 
 for some $\delta>0$. This extra tail control is what turns a distributional efficiency statement into convergence of mean loss when the loss is unbounded. It is optional for the first-order Chapter 25 route, whose principal conclusions are weak limits and local risk lower bounds stated with their own regularity conditions.
+
+:::
+
+::: {.callout-tip title="Chapter takeaway"}
+
+Weak convergence, continuous mapping, Slutsky's lemma, and stochastic-order calculus separate stable first-order limits from negligible remainders. These tools underwrite the local expansions used throughout Chapters 6--8, 18--19, and 25.
 
 :::

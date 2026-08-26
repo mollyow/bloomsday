@@ -295,7 +295,7 @@ p_power <- ggplot(power_data, aes(delta, power, colour = alignment, linetype = a
        subtitle = "Equal-norm local displacements; one-sided test at alpha = 0.05",
        x = "Local-displacement norm delta", y = "Power") + book_theme()
 
-save_svg(p_power, "chapter-15-local-power.svg", width = 9.5, height = 5.2)
+save_svg(p_power, "chapter-25-local-power.svg", width = 9.5, height = 5.2)
 
 # Chapter 18: pointwise versus uniform control --------------------------------
 x01 <- seq(0, 1, length.out = 1200)
@@ -322,6 +322,206 @@ p_uniform <- ggplot(function_data, aes(x, value, colour = n, linetype = n)) +
   book_theme()
 
 save_svg(p_uniform, "chapter-18-pointwise-uniform.svg", width = 11, height = 4.8)
+
+# Chapter 19: Donsker convergence, entropy, and shattering --------------------
+set.seed(19031)
+n_bridge <- 90
+uniform_sample <- runif(n_bridge)
+bridge_grid <- seq(0, 1, length.out = 501)
+empirical_bridge <- sqrt(n_bridge) *
+  (ecdf(uniform_sample)(bridge_grid) - bridge_grid)
+
+brownian_increments <- c(
+  0,
+  sqrt(diff(bridge_grid)) * rnorm(length(bridge_grid) - 1)
+)
+brownian_motion <- cumsum(brownian_increments)
+gaussian_bridge <- brownian_motion -
+  bridge_grid * brownian_motion[length(brownian_motion)]
+
+stopifnot(
+  abs(empirical_bridge[1]) < 1e-12,
+  abs(empirical_bridge[length(empirical_bridge)]) < 1e-12,
+  abs(gaussian_bridge[1]) < 1e-12,
+  abs(gaussian_bridge[length(gaussian_bridge)]) < 1e-12
+)
+
+bridge_plot_data <- rbind(
+  data.frame(
+    t = bridge_grid,
+    value = empirical_bridge,
+    process = "Finite-sample empirical bridge"
+  ),
+  data.frame(
+    t = bridge_grid,
+    value = gaussian_bridge,
+    process = "One Brownian-bridge draw"
+  )
+)
+
+p_donsker_bridge <- ggplot(
+  bridge_plot_data,
+  aes(t, value, colour = process, linetype = process)
+) +
+  geom_hline(yintercept = 0, colour = palette$light_gray, linewidth = 0.5) +
+  geom_line(linewidth = 0.9) +
+  scale_colour_manual(
+    values = c(
+      "Finite-sample empirical bridge" = palette$blue,
+      "One Brownian-bridge draw" = palette$green
+    )
+  ) +
+  scale_linetype_manual(
+    values = c(
+      "Finite-sample empirical bridge" = 1,
+      "One Brownian-bridge draw" = 2
+    )
+  ) +
+  labs(
+    title = "Donsker convergence is a uniform CLT",
+    subtitle = "Thresholds f_t(x) = 1{x <= t}: the whole empirical path has a Gaussian limit",
+    x = "Threshold t",
+    y = expression(sqrt(n) * (F[n](t) - t))
+  ) +
+  book_theme(base_size = 11.5)
+
+entropy_scales <- data.frame(
+  epsilon = c(0.50, 0.25),
+  row = c(2, 1)
+)
+entropy_scales$n_brackets <- ceiling(1 / entropy_scales$epsilon^2)
+stopifnot(identical(entropy_scales$n_brackets, c(4, 16)))
+
+entropy_cells <- do.call(rbind, lapply(seq_len(nrow(entropy_scales)), function(i) {
+  n_cells <- entropy_scales$n_brackets[i]
+  data.frame(
+    xmin = (0:(n_cells - 1)) / n_cells,
+    xmax = (1:n_cells) / n_cells,
+    ymin = entropy_scales$row[i] - 0.26,
+    ymax = entropy_scales$row[i] + 0.26,
+    shade = factor((0:(n_cells - 1)) %% 2),
+    row = entropy_scales$row[i]
+  )
+}))
+
+p_entropy_scales <- ggplot(entropy_cells) +
+  geom_rect(
+    aes(xmin = xmin, xmax = xmax, ymin = ymin, ymax = ymax, fill = shade),
+    colour = "white",
+    linewidth = 0.4
+  ) +
+  annotate(
+    "text",
+    x = 1.03,
+    y = entropy_scales$row,
+    label = paste0(entropy_scales$n_brackets, " brackets"),
+    hjust = 0,
+    size = 3.2,
+    colour = palette$ink
+  ) +
+  scale_fill_manual(values = c("0" = "#9FC4E8", "1" = "#D6E6F5"), guide = "none") +
+  scale_x_continuous(limits = c(0, 1.28), breaks = c(0, 0.5, 1)) +
+  scale_y_continuous(
+    breaks = c(1, 2),
+    labels = c("epsilon = 0.25", "epsilon = 0.50")
+  ) +
+  labs(
+    title = "Finer accuracy needs more brackets",
+    subtitle = "For Uniform thresholds, L2 distance is sqrt(|s - t|)",
+    x = "Threshold index t",
+    y = NULL
+  ) +
+  book_theme(base_size = 11.5) +
+  theme(legend.position = "none")
+
+two_point_patterns <- c("00", "10", "01", "11")
+two_point_rows <- c(5, 4, 3, 2)
+shatter_points <- do.call(rbind, lapply(seq_along(two_point_patterns), function(i) {
+  bits <- as.integer(strsplit(two_point_patterns[i], "")[[1]])
+  data.frame(
+    x = 1:2,
+    y = two_point_rows[i],
+    selected = factor(bits)
+  )
+}))
+shatter_points <- rbind(
+  shatter_points,
+  data.frame(
+    x = 1:3,
+    y = 0,
+    selected = factor(c(1, 0, 1), levels = c(0, 1))
+  )
+)
+
+possible_intervals <- data.frame(
+  xmin = c(NA, 0.72, 1.72, 0.72),
+  xmax = c(NA, 1.28, 2.28, 2.28),
+  y = two_point_rows
+)
+
+p_shattering <- ggplot() +
+  geom_segment(
+    data = possible_intervals[!is.na(possible_intervals$xmin), ],
+    aes(x = xmin, xend = xmax, y = y, yend = y),
+    colour = palette$green,
+    linewidth = 2.2,
+    alpha = 0.55
+  ) +
+  geom_segment(
+    aes(x = 0.72, xend = 3.28, y = 0, yend = 0),
+    colour = "#C43C39",
+    linewidth = 2.2,
+    alpha = 0.55
+  ) +
+  geom_point(
+    data = shatter_points,
+    aes(x, y, fill = selected),
+    shape = 21,
+    size = 3.2,
+    stroke = 0.7,
+    colour = palette$ink
+  ) +
+  annotate(
+    "text",
+    x = 2,
+    y = 0.62,
+    label = "101 is impossible for one interval",
+    colour = "#A42F2C",
+    size = 3.1
+  ) +
+  scale_fill_manual(values = c("0" = "white", "1" = palette$green), guide = "none") +
+  scale_x_continuous(
+    limits = c(0.55, 3.45),
+    breaks = 1:3,
+    labels = c("x1", "x2", "x3")
+  ) +
+  scale_y_continuous(
+    limits = c(-0.4, 5.65),
+    breaks = c(5, 4, 3, 2, 0),
+    labels = c("00", "10", "01", "11", "101")
+  ) +
+  labs(
+    title = "Shattering means realizing every labeling",
+    subtitle = "Intervals realize all 4 patterns on 2 points, but not all 8 on 3",
+    x = "Ordered points",
+    y = "Requested labels"
+  ) +
+  book_theme(base_size = 11.5) +
+  theme(legend.position = "none")
+
+save_svg(
+  p_donsker_bridge + p_entropy_scales + plot_layout(widths = c(1.35, 1)),
+  "chapter-19-donsker-entropy.svg",
+  width = 11.5,
+  height = 5.2
+)
+
+save_svg(
+  p_shattering,
+  "chapter-19-shattering.svg",
+  width = 8.8,
+  height = 5.2
+)
 
 # Chapter 19: empirical process and Z-estimation ------------------------------
 population <- faithful$eruptions

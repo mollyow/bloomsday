@@ -2,30 +2,29 @@
 
 This chapter asks how well an estimator can perform asymptotically and develops several forms of the lower bound obtained from the [Gaussian shift experiment](glossary.qmd#glossary-limit-experiment).
 
-[Worked problems for Chapter 8](problems.qmd#problems-chapter-8)
-
 ::: {.callout-tip title="Why this chapter is here"}
 
 - **Prerequisites:** [LAN in Chapter 7](chapter-7.qmd#theorem-lan-iid) and the [Gaussian limit experiment](chapter-7.qmd#theorem-normal-limit-experiment).
 - **Purpose:** replace pointwise comparisons by comparisons that remain valid over $n^{-1/2}$-local alternatives.
-- **Chapter 25 payoff:** Chapter 25 replaces the parametric score space by a tangent space. The [semiparametric convolution theorem](chapter-25.qmd#theorem-25-20) and [local asymptotic minimax theorem](chapter-25.qmd#theorem-25-21) are the direct analogues of Sections 8.5 and 8.7.
+- **Chapter 25 payoff:** Chapter 25 replaces the parametric score space by a tangent space. The [semiparametric convolution theorem](chapter-25.qmd#theorem-25-20) and [local asymptotic minimax theorem](chapter-25.qmd#theorem-25-21) are the direct analogues of §§8.5 and 8.7.
 
 :::
 
 ::: {.callout-note title="Companion readings"}
 
-For alternative treatments of convolution, minimax bounds, and superefficiency, see [@bailie2021, §§13.2--14.2], [@dasgupta2008, §§16.7--16.8], and [@tsybakov2009, §3.4.3]. For the broader limit-experiment perspective behind the chapter, see @leCamYang2000.
+For alternative treatments of convolution, minimax bounds, and superefficiency, see §§13.2–14.2 of @bailie2021, §§16.7–16.8 of @dasgupta2008, and §3.4.3 of @tsybakov2009. For the broader limit-experiment perspective behind the chapter, see @leCamYang2000.
 
 :::
 
-## Reading guide
+::: {.callout-note title="Reading guide"}
 
-- **Sections 8.3--8.5 and 8.7 are essential:** representation in the Gaussian experiment leads to the convolution and local asymptotic minimax bounds.
-- **Section 8.9 is essential for construction:** Lemma 8.14 identifies the asymptotic linear expansion that attains the bound. It is the parametric prototype for [Lemma 25.23](chapter-25.qmd#lemma-25-23).
-- **Section 8.1 is essential motivation:** Hodges' estimator explains why efficiency cannot be a pointwise comparison.
-- **Sections 8.2 and 8.6 are useful but not needed for the Chapter 25 proofs:** they cover relative efficiency and an almost-everywhere alternative to regularity.
-- **Section 8.8 is retained as a caveat:** Stein shrinkage can improve quadratic risk without contradicting the regular convolution bound.
-- **Section 8.10 is omitted:** its large-deviation comparison concerns a different asymptotic scale.
+- **Core — §§8.1, 8.3–8.5, and 8.7:** Hodges' estimator motivates local comparison; Gaussian representation then yields the convolution and local asymptotic minimax bounds.
+- **Core — §8.9:** Lemma 8.14 identifies the asymptotic linear expansion attaining the bound and supplies the parametric prototype for [Lemma 25.23](chapter-25.qmd#lemma-25-23).
+- **Supporting — §§8.2 and 8.6:** relative efficiency and an almost-everywhere alternative to regularity.
+- **Compressed — §8.8 and Lemma 8.13:** Stein shrinkage and the converse link from local minimaxity to best regularity are retained as caveats rather than part of the main proof route.
+- **Omitted/deferred — §8.10:** large-deviation comparisons on a different asymptotic scale.
+
+:::
 
 ::: {.callout-note title="Chapter roadmap"}
 
@@ -77,7 +76,7 @@ Examples include:
 A distribution is more concentrated near zero when these risks are smaller.
 
 ::: {.callout-tip title="Example"}
-### Example 8.1: Hodges’ estimator
+### Example 8.1: Hodges’ estimator {#example-8-1}
 
 Suppose that $T_n$ is a sequence of estimators for a real parameter $\theta$ with standard root-$n$ behavior,
 
@@ -97,7 +96,7 @@ Define $S_n=\begin{cases}T_n&\text{if }|T_n|\geq n^{-1/4},\\ 0&\text{if }|T_n|<n
     - their widths shrink, but their heights diverge.
 - Thus, the estimator’s improvement exactly at $\theta=0$ is purchased through very poor behavior at parameter values that approach zero with $n$.
 
-**Pointwise asymptotic comparisons at fixed parameter values are too weak. Efficiency must account for neighboring parameter values simultaneously.**
+**Pointwise asymptotic comparisons at fixed parameter values are too weak. Efficiency must account for neighboring parameter values simultaneously.** Figure @eightfig-ch8-hodges-risk makes the moving risk peaks visible.
 
 ::: {#eightfig-ch8-hodges-risk}
 
@@ -132,7 +131,7 @@ $$
 =\frac{\sigma_2^2(\theta)}{\sigma_1^2(\theta)}.
 $$
 
-If this ratio exceeds one, the second estimator needs proportionally more observations to attain the same asymptotic precision. The [worked problems](problems.qmd#problems-chapter-8) retain this chapter's ordering convention and also give the reciprocal convention commonly called asymptotic relative efficiency.
+If this ratio exceeds one, the second estimator needs proportionally more observations to attain the same asymptotic precision. The reciprocal convention is also commonly called asymptotic relative efficiency.
 :::
 
 ## 8.3 Lower Bound for Experiments {#sec-lower-bound-experiments}
@@ -154,7 +153,7 @@ For the rest of the chapter, assume:
 - The model is differentiable in quadratic mean at $\theta$, so the local experiments converge to $\{N(h,I_\theta^{-1}):h\in\mathbb R^k\}$ by [Theorem 7.10](chapter-7.qmd#theorem-normal-limit-experiment).
 
 ::: {.callout-note title="Theorem"}
-### Theorem 8.3: Reduction to the limit experiment {#theorem-limit-experiment-reduction}
+### Theorem 8.3: reduction to the limit experiment {#theorem-limit-experiment-reduction}
 
 Assume the experiment $\{P_\theta:\theta\in\Theta\}$ is differentiable in quadratic mean at $\theta$, with nonsingular Fisher information $I_\theta$, and let $\psi$ be differentiable at $\theta$. If $T_n$ satisfies (8.2) for every $h$, then there is a randomized estimator $T$ based on $X\sim N(h,I_\theta^{-1})$ such that
 
@@ -231,7 +230,7 @@ $$
 
 </details>
 
-The theorem does not itself impose regularity. The family $L_{\theta,h}$ may depend on $h$. Regularity in [Section 8.5](#sec-convolution-theorem) is the additional requirement that this error law be the same for every local direction.
+The theorem does not itself impose regularity. The family $L_{\theta,h}$ may depend on $h$. Regularity in [§8.5](#sec-convolution-theorem) is the additional requirement that this error law be the same for every local direction.
 
 ## 8.4 Estimating Normal Means
 
@@ -257,7 +256,7 @@ An estimator $T$ is **equivariant in law** if the distribution of $T-Ah$ under $
 :::
 
 ::: {.callout-note title="Proposition"}
-### Proposition 8.4 {#proposition-8-4}
+### Proposition 8.4: convolution form of equivariant estimators {#proposition-8-4}
 
 The invariant distribution of any randomized equivariant-in-law estimator can be decomposed as $L=N(0,A\Sigma A^T)*M$ for some probability measure $M$.
 
@@ -327,7 +326,7 @@ A regular limit distribution consists of the efficient Gaussian component plus a
 
 - A loss function $\ell$ is **bowl-shaped** if every sublevel set $\{x:\ell(x)\leq c\}$ is convex and symmetric around zero.
 - It is **subconvex** if these sublevel sets are also closed.
-- Typical examples include squared-error loss, norm loss, and indicators of complements of symmetric convex sets.
+- Typical examples include squared-error loss, norm loss, and indicators of complements of symmetric convex sets. Figure @eightfig-ch8-bowl-shaped-loss shows two elementary cases.
 
 ::: {#eightfig-ch8-bowl-shaped-loss}
 
@@ -364,7 +363,7 @@ For bowl-shaped loss, every randomized estimator satisfies $\sup_h E_h\ell(T-Ah)
 :::
 
 ::: {.callout-note title="Proposition"}
-### Proposition 8.6 {#proposition-8-6}
+### Proposition 8.6: Gaussian minimax bound {#proposition-8-6}
 
 For any bowl-shaped loss function $\ell$, the maximum risk of any randomized estimator $T$ of $Ah$ is bounded below by $E_0\ell(AX)$. Consequently, $AX$ is a minimax estimator for $Ah$. If $Ah$ is real and $E_0\{(AX)^2\ell(AX)\}<\infty$, then $AX$ is the only minimax estimator for $Ah$ up to changes on sets of probability zero.
 
@@ -539,7 +538,7 @@ $$
 where the same distribution $L_\theta$ appears for every $h$. Thus local perturbations do not change the limiting error law. By [Theorem 8.3](#theorem-limit-experiment-reduction), the matching estimator in the Gaussian limit experiment is equivariant in law for $\dot\psi_\theta h$. A **best regular estimator** has no additional convolution noise and hence has limiting distribution $N\bigl(0,\dot\psi_\theta I_\theta^{-1}\dot\psi_\theta^T\bigr)$.
 
 ::: {.callout-note title="Theorem"}
-### Theorem 8.8: Convolution {#theorem-8-8}
+### Theorem 8.8: convolution {#theorem-8-8}
 
 Suppose $\{P_\theta:\theta\in\Theta\}$ is differentiable in quadratic mean at $\theta$, with nonsingular Fisher information $I_\theta$, and $\psi$ is differentiable at $\theta$. For every regular estimator sequence with limiting distribution $L_\theta$,
 
@@ -610,9 +609,7 @@ The convolution remainder is the parametric version of the orthogonal noise that
 Regularity is a substantive restriction, and Hodges’ estimator is not regular at the point where it is superefficient. The almost-everywhere theorem removes that assumption.
 
 ::: {.callout-note title="Theorem"}
-<span id="theorem-8.9-almost-everywhere-convolution"></span>
-
-### Theorem 8.9: Almost-everywhere convolution {#theorem-8-9-almost-everywhere-convolution}
+### Theorem 8.9: almost-everywhere convolution {#theorem-8-9-almost-everywhere-convolution}
 
 Suppose the model is differentiable in quadratic mean at every $\theta$, with nonsingular information matrix $I_\theta$, and $\psi$ is differentiable at every $\theta$. If $\sqrt n\{T_n-\psi(\theta)\}\rightsquigarrow L_\theta$ under every $\theta$, then, for Lebesgue-almost every $\theta$,
 
@@ -642,7 +639,7 @@ The supporting lemma shows that any estimator sequence possessing pointwise limi
 **Supporting-result dependency.** Van der Vaart obtains Theorem 8.9 by combining the convolution theorem with Lemma 8.10. This almost-everywhere route explains superefficiency but is not needed for the Chapter 25 proof chain, so the notes retain the exact result and its supporting lemma without adding a second full convolution argument.
 
 ::: {.callout-important title="Lemma"}
-### Lemma 8.10: Almost-everywhere local regularity {#lemma-8-10}
+### Lemma 8.10: almost-everywhere local regularity {#lemma-8-10}
 
 Let $T_n$ be estimators in experiments $\left(P_{n,\theta}:\theta\in\Theta\right),$ where $\Theta$ is a measurable subset of $\mathbb{R}^k$.
 
@@ -726,7 +723,7 @@ for Lebesgue-almost every $(\theta,h)$, which is the required almost-everywhere 
 The convolution theorem applies only to regular estimators, while the almost-everywhere theorem leaves open a null set of parameter values. The local asymptotic minimax theorem instead evaluates the worst risk over shrinking neighborhoods.
 
 ::: {.callout-note title="Theorem"}
-### Theorem 8.11: Local asymptotic minimax bound {#theorem-8-11}
+### Theorem 8.11: local asymptotic minimax bound {#theorem-8-11}
 
 Suppose the model is differentiable in quadratic mean at $\theta$, with nonsingular Fisher information $I_\theta$, and $\psi$ is differentiable at $\theta$. For every estimator sequence $T_n$ and every bowl-shaped loss $\ell$,
 
@@ -742,7 +739,7 @@ No estimator can have uniformly smaller asymptotic risk over all local direction
 
 **Proof roadmap.** First approximate the loss from below by bounded continuous bowl-shaped losses. For one such loss, compactify the estimator through all loss profiles at rational local directions; this forces tightness without restricting the estimator. LAN then produces a randomized compact-action rule in the Gaussian experiment. Finite-prior Bayes risks show that boundary actions cannot improve the problem, and diffuse Gaussian priors recover the normal lower bound. Finally remove the loss approximation.
 
-**Derivation in these notes.** Van der Vaart proves the result under auxiliary tightness and lower-semicontinuity conditions and points to [@vanDerVaartWellner1996, §3.11] for the general compactification argument. The reconstruction below exposes that argument for the present finite-dimensional setting.
+**Derivation in these notes.** Van der Vaart proves the result under auxiliary tightness and lower-semicontinuity conditions and points to §3.11 of @vanDerVaartWellner1996 for the general compactification argument. The reconstruction below exposes that argument for the present finite-dimensional setting.
 
 <details>
 <summary>Complete proof of Theorem 8.11</summary>
@@ -980,16 +977,12 @@ $$
 
 for every $h$. The gain is loss-specific and is accompanied by nonregular local behavior.
 
-::: {.callout-note title="Coverage note"}
-Lemma 8.13, which shows for a real-valued target that local asymptotic minimaxity under a suitable bowl-shaped loss forces best regularity, is omitted from the main route. It refines the caveat but is not used by Chapter 25.
-:::
-
 ## 8.9* Achieving the Bound {#sec-achieving-efficiency-bound}
 
 The lower bound becomes operational once an estimator's first-order expansion is identified.
 
 ::: {.callout-important title="Lemma"}
-### Lemma 8.14: Characterization of best regular estimators {#lemma-8-14}
+### Lemma 8.14: characterization of best regular estimators {#lemma-8-14}
 
 Suppose the model is differentiable in quadratic mean at $\theta$, $I_\theta$ is nonsingular, and $\psi$ is differentiable at $\theta$. If
 
@@ -1083,12 +1076,9 @@ $$
 =\dot\psi_\theta I_\theta^{-1}\dot\ell_\theta(X)
 $$
 
-is the parametric efficient influence function introduced in [Section 8.3](#theorem-limit-experiment-reduction). Chapter 25 keeps this characterization but replaces the finite-dimensional normalized score by the efficient influence function in the tangent space; see [Lemma 25.23](chapter-25.qmd#lemma-25-23).
-
----
+is the parametric efficient influence function introduced in [§8.3](#theorem-limit-experiment-reduction). Chapter 25 keeps this characterization but replaces the finite-dimensional normalized score by the efficient influence function in the tangent space; see [Lemma 25.23](chapter-25.qmd#lemma-25-23).
 
 ::: {.callout-tip title="Chapter takeaway"}
-### Main points
 
 - Pointwise asymptotics are not enough because of superefficient estimators such as Hodges’ estimator.
 - Efficiency is fundamentally local: parameters of the form $\theta+h/\sqrt{n}$ must be considered together.

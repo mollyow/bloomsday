@@ -2,7 +2,13 @@
 
 This chapter makes the ordinary law of large numbers and central limit theorem uniform over classes of functions. Its central objects are the [empirical measure](glossary.qmd#glossary-empirical-measure) $\mathbb P_n$ and [empirical process](glossary.qmd#glossary-empirical-process) $\mathbb G_n$.
 
-[Worked problems for Chapter 19](problems.qmd#problems-chapter-19)
+::: {.callout-tip title="Why this chapter is here"}
+
+- **Prerequisites:** [Chapter 18](chapter-18.qmd#theorem-weak-convergence-processes), which explains finite-dimensional convergence, tightness, and asymptotic equicontinuity for random functions.
+- **Purpose:** turn those abstract tools into uniform laws for sample averages indexed by function classes.
+- **Chapter 25 payoff:** Donsker theory controls estimated scores in [§25.8](chapter-25.qmd#sec-efficient-score-equations), supplies nuisance-rate bounds in [§25.11](chapter-25.qmd#sec-approximately-least-favorable-submodels), and gives the Gaussian process used to linearize [likelihood equations in §25.12](chapter-25.qmd#sec-likelihood-equations).
+
+:::
 
 The chapter develops two levels of uniformity:
 
@@ -11,31 +17,21 @@ The chapter develops two levels of uniformity:
 
 Donsker conditions also control empirical processes evaluated at estimated random functions, including functions that depend on nuisance estimates.
 
-::: {.callout-tip title="Why this chapter is here"}
-
-- **Prerequisites:** [Chapter 18](chapter-18.qmd#theorem-weak-convergence-processes), which explains finite-dimensional convergence, tightness, and asymptotic equicontinuity for random functions.
-- **Purpose:** turn those abstract tools into uniform laws for sample averages indexed by function classes.
-- **Chapter 25 payoff:** Donsker theory controls estimated scores in [Section 25.8](chapter-25.qmd#sec-efficient-score-equations), supplies nuisance-rate bounds in [Section 25.11](chapter-25.qmd#sec-approximately-least-favorable-submodels), and gives the Gaussian process used to linearize [likelihood equations in Section 25.12](chapter-25.qmd#sec-likelihood-equations).
-
-:::
-
 ::: {.callout-note title="Companion readings"}
 
-For complementary introductions, see [@sen2022, §§1.3--4 and ch. 11], [@kosorok2008, chs. 8--10 and §13.2], and [@jiang2022, ch. 7]. The standard comprehensive reference is @vanDerVaartWellner1996.
+For complementary introductions, see §§1.3–4 and ch. 11 of @sen2022, chs. 8–10 and §13.2 of @kosorok2008, and ch. 7 of @jiang2022. The standard comprehensive reference is @vanDerVaartWellner1996.
 
 :::
 
-### Route-only coverage
+::: {.callout-note title="Reading guide"}
 
-| Source material | Treatment here | Destination |
-|---|---|---|
-| §§19.1–19.2 | Core definitions, the complete bracketing route to Theorem 19.5, and selected entropy examples | Uniform laws and Donsker verification throughout Chapter 25 |
-| §19.3 | Omitted except for its location in the source | Goodness-of-fit limits are not needed for the Chapter 25 route |
-| §19.4 | Lemma 19.24, Example 19.25, and Theorem 19.26 with complete proofs | Estimated scores and infinite-dimensional estimating equations |
-| §19.5 | Orientation only | Recognizing when a rescaled local class changes with $n$ |
-| §19.6 | Bernstein's inequality, finite maxima, Lemma 19.34, and the bounded-class Lemma 19.36 | Bracketing proof of Theorem 19.5 and nuisance-rate calculations |
+- **Core — §§19.1–19.2:** empirical measures, Glivenko–Cantelli and Donsker classes, the complete bracketing route to Theorem 19.5, and selected entropy examples used throughout Chapter 25.
+- **Core — §19.4:** Lemma 19.24, Example 19.25, and Theorem 19.26 for estimated random functions and infinite-dimensional estimating equations.
+- **Supporting — §§19.5–19.6:** orientation to changing classes, Bernstein's inequality, finite maxima, the bracketing maximal inequality, and the bounded-class Lemma 19.36 used in nuisance-rate calculations.
+- **Compressed — smoothness and VC material:** selected entropy conditions, the meaning of shattering, and practical verification rules without the source's longer combinatorial development.
+- **Omitted/deferred — §19.3 and additional specialized results:** goodness-of-fit limits and other results not needed for the score and likelihood equations in Chapter 25.
 
-The source contains additional smoothness, VC, changing-class, and goodness-of-fit results. They remain useful as a reference, but the material retained here is the shortest route from empirical-process foundations to the score and likelihood equations in Chapter 25.
+:::
 
 ::: {.callout-note title="Chapter 19 destinations in Chapter 25"}
 
@@ -43,7 +39,7 @@ The source contains additional smoothness, VC, changing-class, and goodness-of-f
 |---|---|
 | [Donsker classes](#donsker-classes) | Control estimated score functions in [§25.8](chapter-25.qmd#sec-efficient-score-equations) and the score systems in [§25.12](chapter-25.qmd#sec-likelihood-equations). |
 | [Lemma 19.24](#lemma-19.24) | Replaces an estimated efficient score by its population limit in [Theorem 25.54](chapter-25.qmd#theorem-25-54). |
-| [Theorem 19.26](#theorem-19.26-infinite-dimensional-z-estimation) | Supplies the empirical-process/population linearization used for efficient score equations and [Theorem 25.90](chapter-25.qmd#theorem-25-90). |
+| [Theorem 19.26](#theorem-19-26-infinite-dimensional-z-estimation) | Supplies the empirical-process/population linearization used for efficient score equations and [Theorem 25.90](chapter-25.qmd#theorem-25-90). |
 | [Bounded-variation classes](#example-19.11-bounded-variation) | Verify the joint score class for the [Cox likelihood equations](chapter-25.qmd#sec-25-12-cox-model). |
 | [Lemma 19.36](#lemma-19.36) | Converts local entropy control into the nuisance rate in the [current-status Cox model](chapter-25.qmd#sec-25-11-current-status-cox). |
 
@@ -79,7 +75,7 @@ $$
 :::
 
 ::: {.callout-note title="Theorem"}
-### Theorem 19.1: Glivenko–Cantelli
+### Theorem 19.1: Glivenko–Cantelli {#theorem-19-1}
 
 If $X_1,X_2,\ldots$ are i.i.d. with distribution function $F$, then the
 empirical CDF based on the first $n$ observations satisfies
@@ -140,7 +136,7 @@ may remain inside an interval but are already included in its bound of
 $1/m$.
 
 For every fixed finite cut point $t_i$, the strong law applied to
-$1\{X_j\leq t_i\}$ and $1\{X_j<t_i\}$ gives
+$\mathbf 1\{X_j\leq t_i\}$ and $\mathbf 1\{X_j<t_i\}$ gives
 
 $$
 \mathbb F_n(t_i)\longrightarrow F(t_i),
@@ -199,7 +195,7 @@ of the finite-approximation principle used in
 finite set of coordinates and then control what happens between them.
 
 ::: {.callout-note title="Theorem"}
-### Theorem 19.3: Donsker
+### Theorem 19.3: Donsker {#theorem-19-3}
 
 The process $\sqrt n(\mathbb F_n-F)$ converges as a random function to an $F$-Brownian bridge $\mathbb G_F$. The limit is a zero-mean Gaussian process with covariance
 
@@ -208,7 +204,7 @@ E\{\mathbb G_F(s)\mathbb G_F(t)\}
 =F(s\wedge t)-F(s)F(t).
 $$
 
-This is the functional, uniform analogue of the central limit theorem. Section 19.2 develops conditions under which the same conclusion holds for more general function classes.
+This is the functional, uniform analogue of the central limit theorem. §19.2 develops conditions under which the same conclusion holds for more general function classes.
 :::
 
 The rest of the chapter generalizes these two results from the indicator class $\{\mathbf 1_{(-\infty,t]}:t\in\mathbb R\}$ to arbitrary classes of functions.
@@ -298,6 +294,12 @@ $$
 \text{finite-dimensional CLT}+\text{asymptotic equicontinuity}\Rightarrow\text{Donsker convergence}
 $$
 
+::: {.callout-warning title="Definition versus verification"}
+
+The exact Donsker property is the weak-convergence statement above. Saying that $\mathcal F$ is “not too rich” is useful intuition, but it is not a definition. Bracketing entropy, covering entropy, smoothness, and VC dimension are different **sufficient routes** for proving the tightness and equicontinuity that the definition requires. A class may be Donsker even when one particular sufficient entropy integral is unavailable.
+
+:::
+
 ::: {.callout-note title="Definition"}
 ### Envelope function
 
@@ -323,7 +325,7 @@ The **bracketing number** $N_{[]}(\varepsilon,\mathcal F,L_r(P))$ is the minimum
 Bracketing replaces the possibly infinite class $\mathcal F$ by finitely many approximations. Uniform control becomes possible when sufficiently few brackets are needed at increasingly fine scales.
 
 ::: {.callout-note title="Theorem"}
-### Theorem 19.4: Glivenko–Cantelli via bracketing
+### Theorem 19.4: Glivenko–Cantelli via bracketing {#theorem-19-4}
 
 If $N_{[]}(\varepsilon,\mathcal F,L_1(P))<\infty$ for every $\varepsilon>0$, then $\mathcal F$ is $P$-Glivenko–Cantelli. At every desired accuracy, finitely many brackets reduce the uniform claim to finitely many ordinary laws of large numbers.
 :::
@@ -363,9 +365,7 @@ There are only finitely many bracket endpoints. The ordinary strong law makes th
 </details>
 
 ::: {.callout-note title="Theorem"}
-<span id="theorem-19-5"></span>
-
-### Theorem 19.5: Donsker via bracketing entropy
+### Theorem 19.5: Donsker via bracketing entropy {#theorem-19-5}
 
 Define the bracketing entropy integral
 
@@ -422,7 +422,7 @@ $$
 E^*\max_{1\leq i\leq m}
 \sup_{f,g\in\mathcal F_i}|\mathbb G_n(f-g)|
 \lesssim{}&J_{[]}(\delta,\mathcal F,L_2(P))\\
-&+\sqrt n\,P^*F\,1\{F>a(\delta)\sqrt n\}.
+&+\sqrt n\,P^*F\,\mathbf 1\{F>a(\delta)\sqrt n\}.
 \end{aligned}
 \tag{19.5b}
 $$
@@ -434,7 +434,7 @@ For fixed $\delta$,
 $$
 \sqrt n\,P^*F1\{F>a(\delta)\sqrt n\}
 \leq
-\frac1{a(\delta)}P^*F^2 1\{F>a(\delta)\sqrt n\}
+\frac1{a(\delta)}P^*F^2 \mathbf 1\{F>a(\delta)\sqrt n\}
 \longrightarrow0.
 $$
 
@@ -456,15 +456,31 @@ $$
 \text{equicontinuity}\Rightarrow\text{Donsker}.}
 $$
 
+Figure @nineteenfig-ch19-donsker-entropy connects this chain to the threshold class and its Brownian-bridge limit.
+
+::: {#nineteenfig-ch19-donsker-entropy}
+
+![](images/generated/chapter-19-donsker-entropy.svg){fig-alt="Two-panel diagram for threshold indicators under a uniform distribution. The first panel compares a finite-sample empirical bridge with a Brownian-bridge draw, illustrating process-level convergence. The second partitions the threshold index into four cells at L2 accuracy one half and sixteen cells at accuracy one quarter, illustrating how finer approximation requires more brackets."}
+
+For the threshold class $f_t(x)=\mathbf 1\{x\leq t\}$ under $P=\operatorname{Unif}(0,1)$, the empirical process is the entire path $\sqrt n\{\mathbb F_n(t)-t\}$ and its limit is a Brownian bridge. Moreover,
+
+$$
+\|f_s-f_t\|_{P,2}=\sqrt{|s-t|},
+$$
+
+so a grid with spacing $\varepsilon^2$ gives an $L_2(P)$ bracketing cover of order $\varepsilon^{-2}$. The picture makes “manageable at finer scales” concrete, but the entropy integral in Theorem 19.5 remains a sufficient verification route rather than the definition of Donsker.
+
+:::
+
 ::: {.callout-tip title="Example"}
-### Example 19.6: Distribution functions
+### Example 19.6: distribution functions {#example-19-6}
 
 Let
 
 $$
 \mathcal F=\{f_t:t\in\mathbb R\},
 \qquad
-f_t=1_{(-\infty,t]}.
+f_t=\mathbf 1_{(-\infty,t]}.
 $$
 
 Choose points $-\infty=t_0<t_1<\cdots<t_k=\infty$ so that
@@ -477,7 +493,7 @@ $$
 with $k<2/\varepsilon$. The factor $2$ accommodates jumps of $F$. The brackets
 
 $$
-\left[1_{(-\infty,t_{i-1}]},1_{(-\infty,t_i)}\right]
+\left[\mathbf 1_{(-\infty,t_{i-1}]},\mathbf 1_{(-\infty,t_i)}\right]
 $$
 
 cover the indicators with endpoints between $t_{i-1}$ and $t_i$; an indicator at $t_i$ is the lower endpoint of the next bracket. Their $L_1(F)$ size is less than $\varepsilon$. Because the difference of two bracket endpoints is itself an indicator,
@@ -514,7 +530,7 @@ Thus Theorems 19.4 and 19.5 recover the classical Glivenko–Cantelli and Donske
 :::
 
 ::: {.callout-tip title="Example"}
-### Example 19.7: Parametric classes
+### Example 19.7: parametric classes {#example-19-7}
 
 Suppose $\mathcal F=\{f_\theta:\theta\in\Theta\subset\mathbb R^d\}$ and
 
@@ -527,27 +543,76 @@ If $Pm^2<\infty$ and $\Theta$ is bounded, the class has polynomially growing bra
 :::
 
 ::: {.callout-tip title="Examples"}
-### Examples 19.9–19.10: Smooth function classes
+### Examples 19.9–19.10: smooth function classes {#examples-19-9-19-10}
 
 Sufficiently smooth infinite-dimensional classes also have controlled entropy. Greater smoothness reduces effective complexity, and sufficiently smooth classes are Donsker.
 :::
 
 ::: {.callout-tip title="Example"}
-### Example 19.11: Bounded variation
+### Example 19.11: bounded variation {#example-19.11-bounded-variation}
 
 Uniformly bounded classes of monotone functions, and classes whose total variation and value at one fixed point are uniformly bounded, are Donsker under the usual measurability and envelope conditions. The [Cox likelihood equations in §25.12](chapter-25.qmd#sec-25-12-cox-model) use such variation control to verify a joint score class.
 :::
 
-### VC classes
+### VC classes {#sec-vc-classes}
 
-VC classes provide another way to control complexity. A class has finite VC dimension if it cannot represent arbitrarily complicated patterns on finite sets. Finite VC dimension implies polynomial covering-number growth and, with suitable envelope moment conditions, Glivenko–Cantelli and Donsker properties.
+VC classes provide a combinatorial way to control complexity.
+
+#### What it means to shatter a finite set {#sec-shattering}
+
+Let $\mathcal A$ be a class of subsets of $\mathcal X$, and fix
 
 $$
-\boxed{\text{VC class}\Rightarrow\text{polynomial entropy}\Rightarrow\text{GC/Donsker}}
+S=\{x_1,\ldots,x_m\}.
 $$
+
+The class $\mathcal A$ **shatters** $S$ when its intersections with $S$ realize every subset of $S$:
+
+$$
+\{A\cap S:A\in\mathcal A\}=2^S.
+$$
+
+Equivalently, for every binary labeling $(b_1,\ldots,b_m)\in\{0,1\}^m$, there is some $A\in\mathcal A$ such that
+
+$$
+\mathbf 1\{x_i\in A\}=b_i,
+\qquad i=1,\ldots,m.
+$$
+
+Thus shattering $m$ points means realizing all $2^m$ possible include/exclude patterns—not merely separating the points in one particular way. The **VC dimension** is the largest $m$ for which some $m$-point set is shattered; it is infinite if sets of every finite size can be shattered.
+
+Two one-dimensional examples make the definition concrete:
+
+- The half-lines $\{(-\infty,t]:t\in\mathbb R\}$ have VC dimension $1$. They can include or exclude one point, but for $x_1<x_2$ they cannot realize the labeling $(0,1)$: any lower half-line containing $x_2$ also contains $x_1$.
+- The intervals $\{[a,b]:a\leq b\}$ have VC dimension $2$. They realize all four labelings of two ordered points. They cannot shatter three ordered points because the labeling $(1,0,1)$ would require one interval to contain the two outer points but exclude the point between them.
+
+This is a property of the class itself, independent of the probability law $P$. For a real-valued function class, the analogous notion is applied to its subgraphs and is called the **VC-subgraph** property.
+
+Finite VC dimension yields polynomial covering-number bounds. For indicator classes the envelope is automatically bounded by one; more generally, suitable measurability and envelope moment conditions are still required before concluding Glivenko–Cantelli or Donsker behavior:
+
+$$
+\boxed{
+\text{finite VC dimension}
++\text{measurability and envelope control}
+\Longrightarrow
+\text{polynomial entropy}
+\Longrightarrow
+\text{GC/Donsker}
+}.
+$$
+
+Figure @nineteenfig-ch19-shattering shows the distinction between shattering two ordered points and failing to shatter three.
+
+::: {#nineteenfig-ch19-shattering}
+
+![](images/generated/chapter-19-shattering.svg){fig-alt="Diagram showing intervals realizing all four binary inclusion patterns on two ordered points. A final row requests the pattern one-zero-one on three ordered points; a red interval spanning the two selected outer points necessarily passes through the excluded middle point, showing that the pattern is impossible."}
+
+Intervals shatter two ordered points because all four rows are achievable. For three ordered points, the red row exposes the obstruction: an interval containing $x_1$ and $x_3$ must also contain $x_2$, so the labeling $(1,0,1)$ is impossible. See @vanDerVaartWellner1996, §§2.5–2.6, for the general entropy and VC theory.
+
+:::
 
 ::: {.callout-tip title="Example"}
-### Example 19.20: Stability under Lipschitz transformations
+### Example 19.20: stability under Lipschitz transformations {#example-19-20}
 
 Donsker classes remain Donsker under many simple transformations. If $\mathcal F$ and $\mathcal G$ are Donsker with suitable envelopes, then classes formed by sums, minima, maxima, and—under boundedness conditions—products can also be Donsker. Complicated estimating functions can therefore be assembled from simpler known classes.
 :::
@@ -561,7 +626,7 @@ Van der Vaart's §19.3 develops goodness-of-fit statistics from empirical-proces
 Donsker theory initially controls $\mathbb G_nf$ uniformly over deterministic $f\in\mathcal F$. Statistical applications instead evaluate the process at an estimated function such as $\widehat f_n=f_{\widehat\theta_n}$. Because $\widehat f_n$ may depend on the same observations that define $\mathbb G_n$, an ordinary conditional central limit theorem does not apply directly. Stochastic equicontinuity supplies the replacement argument.
 
 ::: {.callout-important title="Lemma"}
-### Lemma 19.24 {#lemma-19.24}
+### Lemma 19.24: substituting an estimated index {#lemma-19.24}
 
 Suppose:
 
@@ -632,7 +697,8 @@ Convergence in distribution to a constant is equivalent to convergence in probab
 
 </details>
 
-::: {.callout-tip title="Example 19.25: mean absolute deviation"}
+::: {.callout-tip title="Example"}
+### Example 19.25: mean absolute deviation {#example-19-25}
 
 Let $F$ be the distribution of the observations and retain the source convention $Ff=\int f\,dF$. Assume $Fx=0$ and $Fx^2<\infty$, and define
 
@@ -679,7 +745,7 @@ $$
 Once the estimated score has been replaced by its population counterpart, an ordinary central limit theorem can often complete the argument. [Theorem 25.54](chapter-25.qmd#theorem-25-54) uses precisely this step.
 
 ::: {.callout-note title="Theorem"}
-### Theorem 19.26: Infinite-dimensional Z-estimation {#theorem-19.26-infinite-dimensional-z-estimation}
+### Theorem 19.26: infinite-dimensional Z-estimation {#theorem-19-26-infinite-dimensional-z-estimation}
 
 For each $\theta$ in a subset $\Theta$ of a normed space and every $h$ in an arbitrary set $H$, let $x\mapsto\psi_{\theta,h}(x)$ be measurable. Write
 
@@ -733,7 +799,7 @@ $$
 
 :::
 
-The theorem is the infinite-dimensional version of [Theorem 5.21](chapter-5.qmd#theorem-5-21). The index $h$ labels an entire system of equations; the parameter $\theta$ itself may also be infinite-dimensional.
+The theorem is the infinite-dimensional version of Theorem 5.21. The index $h$ labels an entire system of equations; the parameter $\theta$ itself may also be infinite-dimensional.
 
 **Proof roadmap.** Donsker equicontinuity removes the random change in the estimating function, the approximate-root condition turns the empirical equation into a population drift plus one empirical-process term, and Fréchet differentiability with a continuous inverse converts that drift into the stated linear expansion.
 
@@ -839,14 +905,14 @@ The empirical-distribution example and a Z-estimator share the same structure: a
 
 :::
 
-This one picture links the empirical-CDF thread to Chapter 25: [Example 25.24](chapter-25.qmd#example-25-24) uses empirical averages as efficient estimators, while [Theorem 25.90](chapter-25.qmd#theorem-25-90) applies the same two-part Z-linearization to a full semiparametric likelihood system.
+Figure @nineteenfig-ch19-empirical-z links the empirical-CDF thread to Chapter 25: [Example 25.24](chapter-25.qmd#example-25-24) uses empirical averages as efficient estimators, while [Theorem 25.90](chapter-25.qmd#theorem-25-90) applies the same two-part Z-linearization to a full semiparametric likelihood system.
 
 ## 19.5 Changing Classes
 
 The preceding results use a fixed class $\mathcal F$. After local rescaling around an estimated parameter, however, the relevant class may change with $n$ and must be treated as a sequence $\mathcal F_n$.
 
 ::: {.callout-note title="Theorem"}
-### Theorem 19.28
+### Theorem 19.28: Donsker convergence for changing classes {#theorem-19.28}
 
 The theorem extends Donsker-type weak convergence to changing classes $\mathcal F_n$. Its ingredients remain finite-dimensional Gaussian convergence, entropy control for the changing classes, and asymptotic equicontinuity.
 :::
@@ -1097,10 +1163,10 @@ For $q>q_0$, let $A_{q-1}f$ indicate that every width through level $q-1$ is at 
 $$
 \begin{aligned}
 A_{q-1}f
-&=1\{\Delta_{q_0}f\leq\sqrt n\,a_{q_0},\ldots,
+&=\mathbf 1\{\Delta_{q_0}f\leq\sqrt n\,a_{q_0},\ldots,
 \Delta_{q-1}f\leq\sqrt n\,a_{q-1}\},\\
 B_qf
-&=1\{\Delta_{q_0}f\leq\sqrt n\,a_{q_0},\ldots,
+&=\mathbf 1\{\Delta_{q_0}f\leq\sqrt n\,a_{q_0},\ldots,
 \Delta_{q-1}f\leq\sqrt n\,a_{q-1},
 \Delta_qf>\sqrt n\,a_q\}.
 \end{aligned}
@@ -1294,11 +1360,12 @@ E^*\|\mathbb G_n\|_{\mathcal F_\delta}
 \tag{19.36f}
 $$
 
-This is the quantity balanced against deterministic criterion curvature in [Theorem 5.55](chapter-5.qmd#theorem-5-55) and [Theorem 25.81](chapter-25.qmd#theorem-25-81). The [current-status Cox calculation](chapter-25.qmd#sec-25-11-current-status-cox) is a concrete instance.
+This is the quantity balanced against deterministic criterion curvature in Theorem 5.55 and [Theorem 25.81](chapter-25.qmd#theorem-25-81). The [current-status Cox calculation](chapter-25.qmd#sec-25-11-current-status-cox) is a concrete instance.
 
 :::
 
-::: {.callout-note title="Lemma 19.37: stronger tail control"}
+::: {.callout-note title="Lemma"}
+### Lemma 19.37: stronger tail control {#lemma-19-37}
 
 The source next replaces the $L_2(P)$ bracket size by the Bernstein gauge
 
@@ -1310,7 +1377,7 @@ This removes the uniform boundedness restriction at the cost of measuring bracke
 
 :::
 
-## Chapter takeaway {.unnumbered}
+::: {.callout-tip title="Chapter takeaway"}
 
 The empirical process $\mathbb G_n=\sqrt n(\mathbb P_n-P)$ turns a collection of centered sample averages into one random function. The chapter's main chain is
 
@@ -1331,3 +1398,5 @@ $$
 $$
 
 under the conditions of Lemma 19.24. This first-order replacement of an estimated nuisance-dependent function by its population counterpart is the empirical-process step used throughout [Chapter 25's estimator constructions](chapter-25.qmd#sec-efficient-score-equations).
+
+:::

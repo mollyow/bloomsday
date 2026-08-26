@@ -2,8 +2,6 @@
 
 This chapter extends stochastic convergence from Euclidean random vectors to random functions and other objects in metric spaces. Its central lesson is that convergence of every fixed coordinate is not enough: a process limit also requires uniform control between coordinates.
 
-[Worked problems for Chapter 18](problems.qmd#problems-chapter-18)
-
 ::: {.callout-tip title="Why this chapter is here"}
 
 - **Prerequisites:** the scalar and vector convergence tools in [Chapter 2](chapter-2.qmd#sec-convergence).
@@ -14,20 +12,17 @@ This chapter extends stochastic convergence from Euclidean random vectors to ran
 
 ::: {.callout-note title="Companion readings"}
 
-For a gentler process-level development, see [@sen2022, §§9.2--10.1]. For systematic treatments of weak convergence in metric spaces, see [@kosorok2008, chs. 6--7] and @vanDerVaartWellner1996. The measurable-map and image-measure viewpoint is developed in [@pollard2002, §§2.2 and 2.9].
+For a gentler process-level development, see §§9.2–10.1 of @sen2022. For systematic treatments of weak convergence in metric spaces, see chs. 6–7 of @kosorok2008 and @vanDerVaartWellner1996. The measurable-map and image-measure viewpoint is developed in §§2.2 and 2.9 of @pollard2002.
 
 :::
 
-::: {.callout-note title="Coverage, omissions, and destinations"}
+::: {.callout-note title="Reading guide"}
 
-| Source material | Treatment here | Main destination |
-|---|---|---|
-| §18.1, Definition 18.1, Lemma 18.2, Examples 18.5, 18.7, and 18.8 | Core definitions and selected spaces | Random functions in [Chapter 19](chapter-19.qmd#donsker-classes) and Banach-valued maps in [§25.7](chapter-25.qmd#sec-efficiency-delta-banach) |
-| §18.2, Lemma 18.9, and Theorem 18.10 | Exact statements; proofs linked to their genuinely identical Chapter 2 arguments | The process-level continuous mapping theorem and outer-probability conventions |
-| Theorem 18.11 | Core; complete varying-map argument | The [functional delta method](chapter-20.qmd#theorem-20-8) and changing statistical maps |
-| Theorem 18.12 | Exact statement, proof deferred as in the source | Tight subsequences used in Chapter 25 |
-| §18.3, Theorem 18.14, and Lemma 18.15 | Core; complete layered proofs | Donsker classes, stochastic equicontinuity, and [Z-estimation](chapter-19.qmd#theorem-19.26-infinite-dimensional-z-estimation) |
-| Examples 18.3, 18.4, and 18.6; Lemma 18.13 | Safely omitted or summarized by examples already used here | No additional prerequisite for the route to Chapter 25 |
+- **Core — §18.1, Definition 18.1, Lemma 18.2, and Examples 18.5, 18.7, and 18.8:** metric-space definitions and selected function spaces used in [Chapter 19](chapter-19.qmd#donsker-classes) and [§25.7](chapter-25.qmd#sec-efficiency-delta-banach).
+- **Core — §18.2, Lemma 18.9, and Theorems 18.10–18.11:** outer-probability conventions, modes of convergence, and the process-level continuous mapping theorem; identical Chapter 2 arguments are linked rather than repeated.
+- **Core — §18.3, Theorem 18.14, and Lemma 18.15:** finite-dimensional convergence, asymptotic equicontinuity, and the Gaussian semimetric used by Donsker theory and [Z-estimation](chapter-19.qmd#theorem-19-26-infinite-dimensional-z-estimation).
+- **Compressed — Theorem 18.12:** the exact tightness statement is retained, while its proof remains deferred as in the source.
+- **Omitted/deferred — Examples 18.3, 18.4, and 18.6 and Lemma 18.13:** material that adds no further prerequisite for the route to Chapter 25.
 
 :::
 
@@ -58,7 +53,7 @@ is a **random element** with values in $\mathbb D$. Random variables, random vec
 The [measurability diagram in the glossary](glossary.qmd#glossary-measurability) shows the same pullback construction: target Borel sets must have measurable inverse images in the probability space.
 
 ::: {.callout-important title="Lemma"}
-### Lemma 18.2: Continuous maps are Borel measurable {#lemma-18.2}
+### Lemma 18.2: continuous maps are Borel measurable {#lemma-18.2}
 
 Every continuous map between metric spaces is Borel measurable.
 :::
@@ -67,7 +62,8 @@ Every continuous map between metric spaces is Borel measurable.
 
 Continuity makes the inverse image of each open set open. Since open sets generate the target Borel $\sigma$-field, their inverse images generate only sets in the source Borel $\sigma$-field.
 
-<details><summary>Complete proof</summary>
+<details>
+<summary>Complete proof</summary>
 
 Let $g:\mathbb D\to\mathbb E$ be continuous. For every open $G\subset\mathbb E$, the inverse image $g^{-1}(G)$ is open in $\mathbb D$, hence Borel. The collection
 
@@ -82,7 +78,7 @@ is a $\sigma$-field containing all open subsets of $\mathbb E$. It therefore con
 This lemma makes continuous functionals of random elements ordinary random variables whenever the input map is Borel measurable. The outer conventions in §18.2 cover the cases in which the input map itself is not measurable.
 
 ::: {.callout-tip title="Example"}
-### Example 18.5: Uniform norm {#example-18-5}
+### Example 18.5: uniform norm {#example-18-5}
 
 For an arbitrary index set $T$,
 
@@ -110,7 +106,7 @@ Pointwise convergence can miss a moving spike, whereas uniform convergence contr
 The moving spike is the warning that motivates Theorem 18.14: limits at each fixed $t$ do not control behavior at an index $t_n$ that changes with $n$.
 
 ::: {.callout-tip title="Example"}
-### Example 18.7: Uniformly continuous functions {#example-18-7}
+### Example 18.7: uniformly continuous functions {#example-18-7}
 
 Let $(T,\rho)$ be totally bounded. The space $UC(T,\rho)$ consists of functions $z:T\to\mathbb R$ that are uniformly $\rho$-continuous. Such functions are bounded, so
 
@@ -122,7 +118,7 @@ Equipped with the uniform norm, $UC(T,\rho)$ is complete and separable. Its Bore
 :::
 
 ::: {.callout-tip title="Example"}
-### Example 18.8: Product-space measurability {#example-18-8-product-spaces}
+### Example 18.8: product-space measurability {#example-18-8-product-spaces}
 
 For metric spaces $(\mathbb D,d)$ and $(\mathbb E,e)$, equip $\mathbb D\times\mathbb E$ with
 
@@ -161,7 +157,7 @@ The inner expectation is $E_*Z=-E^*(-Z)$. For an arbitrary subset $A\subset\Omeg
 
 $$
 P^*(A)
-=E^*\mathbf1_A
+=E^*\mathbf 1_A
 =\inf\{P(B):A\subset B,\ B\in\mathcal A\}.
 $$
 
@@ -214,7 +210,7 @@ $$
 handles open sets, and the remaining complement and boundary arguments are identical. Outer expectations and probabilities replace ordinary ones wherever an approximating map may be nonmeasurable; no new analytic step is required.
 
 ::: {.callout-note title="Theorem"}
-### Theorem 18.10: Relations among modes of stochastic convergence {#theorem-18-10}
+### Theorem 18.10: relations among modes of stochastic convergence {#theorem-18-10}
 
 For arbitrary maps $X_n,Y_n:\Omega_n\to\mathbb D$ and every random element $X$ in $\mathbb D$:
 
@@ -229,10 +225,9 @@ For arbitrary maps $X_n,Y_n:\Omega_n\to\mathbb D$ and every random element $X$ i
 These are exactly the relations proved in [Theorem 2.7](chapter-2.qmd#theorem-2-7), with outer probabilities inserted when necessary. The bounded-Lipschitz comparison in the proof of part 4 and the product-metric bound in part 6 already work in arbitrary metric spaces, so duplicating those arguments would add no new step.
 
 <span id="theorem-18-11-continuous-mapping-theorem"></span>
-<span id="theorem-18.11-continuous-mapping-theorem"></span>
 
 ::: {.callout-note title="Theorem"}
-### Theorem 18.11: Continuous mapping {#theorem-18-11}
+### Theorem 18.11: continuous mapping {#theorem-18-11}
 
 Let $\mathbb D_n\subset\mathbb D$ be arbitrary subsets and let
 
@@ -258,7 +253,8 @@ Let $X_n:\Omega_n\to\mathbb D_n$ be arbitrary maps and let $X$ be a random eleme
 
 For weak convergence, collect all late inverse images of a closed set and close their union. The sequential hypothesis identifies every point that remains in all such closures. Portmanteau then supplies the closed-set inequality. For probability and outer almost-sure convergence, use the subsequence characterization of convergence in probability and apply the same deterministic sequential hypothesis along almost-surely convergent sample paths.
 
-<details><summary>Complete proof</summary>
+<details>
+<summary>Complete proof</summary>
 
 **Weak convergence.** Let $F\subset\mathbb E$ be closed and define the closed subsets of $\mathbb D$
 
@@ -323,7 +319,7 @@ Van der Vaart prints the weak-convergence argument above and notes that the othe
 
 </details>
 
-When $\mathbb D_n=\mathbb D$ and $g_n=g_0$, the sequential condition is ordinary continuity on the support of $X$, so this result reduces to [Theorem 2.3](chapter-2.qmd#theorem-continuous-mapping). Allowing both the domain and the map to vary is the form used in the [functional delta method](chapter-20.qmd#theorem-20-8).
+When $\mathbb D_n=\mathbb D$ and $g_n=g_0$, the sequential condition is ordinary continuity on the support of $X$, so this result reduces to [Theorem 2.3](chapter-2.qmd#theorem-continuous-mapping). Allowing both the domain and the map to vary is the form used in the functional delta method in Chapter 20.
 
 ### Tightness {#sec-tightness}
 
@@ -371,7 +367,7 @@ $$
 For i.i.d. observations $Z_1,\ldots,Z_n$ with distribution function $F$, the empirical CDF is the bounded random function
 
 $$
-F_n(t)=\frac1n\sum_{i=1}^n\mathbf1\{Z_i\leq t\},
+F_n(t)=\frac1n\sum_{i=1}^n\mathbf 1\{Z_i\leq t\},
 \qquad t\in\mathbb R.
 $$
 
@@ -402,7 +398,7 @@ $$
 :::
 
 ::: {.callout-note title="Theorem"}
-### Theorem 18.14: Weak convergence of stochastic processes {#theorem-weak-convergence-processes}
+### Theorem 18.14: weak convergence of stochastic processes {#theorem-weak-convergence-processes}
 
 A sequence of arbitrary maps $X_n:\Omega_n\to\ell^\infty(T)$ converges weakly to a tight random element if and only if both conditions hold:
 
@@ -430,7 +426,8 @@ A sequence of arbitrary maps $X_n:\Omega_n\to\ell^\infty(T)$ converges weakly to
 
 Necessity follows because coordinate projections are continuous and compact subsets of $\ell^\infty(T)$ admit finite uniform approximations. For sufficiency, nested finite partitions generate a totally bounded semimetric $\rho$ on $T$. Finite-dimensional limits first construct a process on a countable $\rho$-dense set; the oscillation condition and Borel--Cantelli make its paths uniformly continuous. Finite projections then approximate both $X_n$ and the constructed limit.
 
-<details><summary>Complete proof</summary>
+<details>
+<summary>Complete proof</summary>
 
 **Necessity.** Suppose $X_n\rightsquigarrow X$ for a tight random element $X$ in $\ell^\infty(T)$. For fixed $t_1,\ldots,t_k$, the coordinate map
 
@@ -585,7 +582,7 @@ $$
 Condition 2 is also called asymptotic tightness or asymptotic equicontinuity. It prevents the moving-spike behavior in @eighteenfig-ch18-pointwise-uniform.
 
 ::: {.callout-important title="Lemma"}
-### Lemma 18.15: The natural semimetric of the limit {#lemma-18.15-the-natural-semimetric-of-the-limit}
+### Lemma 18.15: the natural semimetric of the limit {#lemma-18.15-the-natural-semimetric-of-the-limit}
 
 Under conditions 1 and 2 of [Theorem 18.14](#theorem-weak-convergence-processes), there is a semimetric $\rho$ on $T$ such that $(T,\rho)$ is totally bounded and the weak limit can be constructed with almost every sample path in $UC(T,\rho)$. If the weak limit $X$ is zero-mean Gaussian, one may take
 
@@ -598,7 +595,8 @@ $$
 
 Theorem 18.14 already constructs one totally bounded semimetric supporting uniformly continuous paths. For a Gaussian process, compare that semimetric with the intrinsic standard-deviation semimetric. Compactness transfers by subsequences, and path continuity can fail only if two points at intrinsic distance zero have unequal process values. Separability reduces those possible pairs to a countable null union.
 
-<details><summary>Complete proof</summary>
+<details>
+<summary>Complete proof</summary>
 
 The proof of Theorem 18.14 constructs a semimetric $\rho$ for which $T$ is totally bounded and almost every path of $X$ belongs to $UC(T,\rho)$. This proves the first assertion.
 
@@ -661,7 +659,7 @@ so $X_s=X_t$ almost surely. A countable union of these null events is null. Henc
 
 The intrinsic semimetric turns covariance into geometry: two indices are close when the Gaussian process cannot distinguish them in mean square. In the empirical-CDF example, this is exactly the Brownian-bridge semimetric $\rho_F$.
 
-::: {.callout-tip title="From random functions to Chapter 25"}
+::: {.callout-tip title="Chapter takeaway"}
 
 For an empirical process, the index $t$ becomes a function $f\in\mathcal F$, and the limit is a Gaussian process indexed by $\mathcal F$. Lemma 18.15 gives uniformly continuous sample paths under the natural variance semimetric. [Chapter 19](chapter-19.qmd#donsker-classes) uses that geometry to control empirical processes evaluated at estimated functions; [§25.8](chapter-25.qmd#sec-efficient-score-equations) then uses the resulting stochastic equicontinuity in efficient score equations.
 

@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' class='svglite' width='633.60pt' height='374.40pt' viewBox='0 0 633.60 374.40'>
+<defs>
+  <style type='text/css'><![CDATA[
+    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {
+      fill: none;
+      stroke: #000000;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-miterlimit: 10.00;
+    }
+    .svglite text {
+      white-space: pre;
+    }
+  ]]></style>
+</defs>
+<rect width='100%' height='100%' style='stroke: none; fill: #FFFFFF;'/>
+<defs>
+  <clipPath id='cpMC4wMHw2MzMuNjB8MC4wMHwzNzQuNDA='>
+    <rect x='0.00' y='0.00' width='633.60' height='374.40' />
+  </clipPath>
+</defs>
+<g clip-path='url(#cpMC4wMHw2MzMuNjB8MC4wMHwzNzQuNDA=)'>
+<rect x='0.000000000000064' y='0.00' width='633.60' height='374.40' style='stroke-width: 1.12; stroke: none; fill: #FFFFFF;' />
+</g>
+<defs>
+  <clipPath id='cpMzkuODh8NjI3Ljg3fDQwLjk2fDM0MS4yNA=='>
+    <rect x='39.88' y='40.96' width='587.99' height='300.28' />
+  </clipPath>
+</defs>
+<g clip-path='url(#cpMzkuODh8NjI3Ljg3fDQwLjk2fDM0MS4yNA==)'>
+<polyline points='39.88,83.94 627.87,83.94 ' style='stroke-width: 0.75; stroke: #E8ECF1; stroke-linecap: butt;' />
+<polyline points='39.88,129.06 627.87,129.06 ' style='stroke-width: 0.75; stroke: #E8ECF1; stroke-linecap: butt;' />
+<polyline points='39.88,174.18 627.87,174.18 ' style='stroke-width: 0.75; stroke: #E8ECF1; stroke-linecap: butt;' />
+<polyline points='39.88,219.30 627.87,219.30 ' style='stroke-width: 0.75; stroke: #E8ECF1; stroke-linecap: butt;' />
+<polyline points='39.88,309.54 627.87,309.54 ' style='stroke-width: 0.75; stroke: #E8ECF1; stroke-linecap: butt;' />
+<polyline points='149.55,341.24 149.55,40.96 ' style='stroke-width: 0.75; stroke: #E8ECF1; stroke-linecap: butt;' />
+<polyline points='333.87,341.24 333.87,40.96 ' style='stroke-width: 0.75; stroke: #E8ECF1; stroke-linecap: butt;' />
+<polyline points='518.20,341.24 518.20,40.96 ' style='stroke-width: 0.75; stroke: #E8ECF1; stroke-linecap: butt;' />
+<line x1='97.94' y1='129.06' x2='201.16' y2='129.06' style='stroke-width: 4.69; stroke: #278A64; stroke-opacity: 0.55; stroke-linecap: butt;' />
+<line x1='282.26' y1='174.18' x2='385.49' y2='174.18' style='stroke-width: 4.69; stroke: #278A64; stroke-opacity: 0.55; stroke-linecap: butt;' />
+<line x1='97.94' y1='219.30' x2='385.49' y2='219.30' style='stroke-width: 4.69; stroke: #278A64; stroke-opacity: 0.55; stroke-linecap: butt;' />
+<line x1='97.94' y1='309.54' x2='569.81' y2='309.54' style='stroke-width: 4.69; stroke: #C43C39; stroke-opacity: 0.55; stroke-linecap: butt;' />
+<circle cx='149.55' cy='83.94' r='3.91' style='stroke-width: 0.99; stroke: #18212B; fill: #FFFFFF;' />
+<circle cx='333.87' cy='83.94' r='3.91' style='stroke-width: 0.99; stroke: #18212B; fill: #FFFFFF;' />
+<circle cx='149.55' cy='129.06' r='3.91' style='stroke-width: 0.99; stroke: #18212B; fill: #278A64;' />
+<circle cx='333.87' cy='129.06' r='3.91' style='stroke-width: 0.99; stroke: #18212B; fill: #FFFFFF;' />
+<circle cx='149.55' cy='174.18' r='3.91' style='stroke-width: 0.99; stroke: #18212B; fill: #FFFFFF;' />
+<circle cx='333.87' cy='174.18' r='3.91' style='stroke-width: 0.99; stroke: #18212B; fill: #278A64;' />
+<circle cx='149.55' cy='219.30' r='3.91' style='stroke-width: 0.99; stroke: #18212B; fill: #278A64;' />
+<circle cx='333.87' cy='219.30' r='3.91' style='stroke-width: 0.99; stroke: #18212B; fill: #278A64;' />
+<circle cx='149.55' cy='309.54' r='3.91' style='stroke-width: 0.99; stroke: #18212B; fill: #278A64;' />
+<circle cx='333.87' cy='309.54' r='3.91' style='stroke-width: 0.99; stroke: #18212B; fill: #FFFFFF;' />
+<circle cx='518.20' cy='309.54' r='3.91' style='stroke-width: 0.99; stroke: #18212B; fill: #278A64;' />
+<text x='333.87' y='284.73' text-anchor='middle' style='font-size: 8.82px;fill: #A42F2C; font-family: "Arial";' textLength='128.38px' lengthAdjust='spacingAndGlyphs'>101 is impossible for one interval</text>
+</g>
+<g clip-path='url(#cpMC4wMHw2MzMuNjB8MC4wMHwzNzQuNDA=)'>
+<text x='34.72' y='87.23' text-anchor='end' style='font-size: 9.20px;fill: #18212B; font-family: "Arial";' textLength='10.22px' lengthAdjust='spacingAndGlyphs'>00</text>
+<text x='34.72' y='132.35' text-anchor='end' style='font-size: 9.20px;fill: #18212B; font-family: "Arial";' textLength='10.22px' lengthAdjust='spacingAndGlyphs'>10</text>
+<text x='34.72' y='177.47' text-anchor='end' style='font-size: 9.20px;fill: #18212B; font-family: "Arial";' textLength='10.22px' lengthAdjust='spacingAndGlyphs'>01</text>
+<text x='34.72' y='222.59' text-anchor='end' style='font-size: 9.20px;fill: #18212B; font-family: "Arial";' textLength='10.22px' lengthAdjust='spacingAndGlyphs'>11</text>
+<text x='34.72' y='312.84' text-anchor='end' style='font-size: 9.20px;fill: #18212B; font-family: "Arial";' textLength='15.34px' lengthAdjust='spacingAndGlyphs'>101</text>
+<text x='149.55' y='352.98' text-anchor='middle' style='font-size: 9.20px;fill: #18212B; font-family: "Arial";' textLength='9.71px' lengthAdjust='spacingAndGlyphs'>x1</text>
+<text x='333.87' y='352.98' text-anchor='middle' style='font-size: 9.20px;fill: #18212B; font-family: "Arial";' textLength='9.71px' lengthAdjust='spacingAndGlyphs'>x2</text>
+<text x='518.20' y='352.98' text-anchor='middle' style='font-size: 9.20px;fill: #18212B; font-family: "Arial";' textLength='9.71px' lengthAdjust='spacingAndGlyphs'>x3</text>
+<text x='333.87' y='366.13' text-anchor='middle' style='font-size: 11.50px;fill: #18212B; font-family: "Arial";' textLength='76.06px' lengthAdjust='spacingAndGlyphs'>Ordered points</text>
+<text transform='translate(13.98,191.10) rotate(-90)' text-anchor='middle' style='font-size: 11.50px;fill: #18212B; font-family: "Arial";' textLength='88.86px' lengthAdjust='spacingAndGlyphs'>Requested labels</text>
+<text x='39.88' y='32.69' style='font-size: 11.50px;fill: #68717C; font-family: "Arial";' textLength='300.46px' lengthAdjust='spacingAndGlyphs'>Intervals realize all 4 patterns on 2 points, but not all 8 on 3</text>
+<text x='39.88' y='15.66' style='font-size: 13.80px; font-weight: bold;fill: #18212B; font-family: "Arial";' textLength='271.40px' lengthAdjust='spacingAndGlyphs'>Shattering means realizing every labeling</text>
+</g>
+</svg>

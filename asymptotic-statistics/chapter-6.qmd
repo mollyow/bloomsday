@@ -20,20 +20,19 @@ $$
 $$
 :::
 
-::: {.callout-note title="Companion reading"}
+::: {.callout-note title="Companion readings"}
 
-For a parallel development of likelihood ratios, contiguity, and Le Cam's lemmas, see [@bailie2021, §§10.2.1–10.2.3 and §§11.1–11.2].
+For a parallel development of likelihood ratios, contiguity, and Le Cam's lemmas, see §§10.2.1–10.2.3 and §§11.1–11.2 of @bailie2021.
 
 :::
 
 ::: {.callout-note title="Reading guide"}
 
-Both source sections are on the direct route.
-
-- **Core:** §6.1 and Lemma 6.2 establish exactly what a likelihood ratio represents when the two measures are not absolutely continuous.
-- **Core:** §6.2, Lemma 6.4, and Theorem 6.6 characterize contiguity and give the abstract change-of-measure theorem.
-- **Core mechanism:** Example 6.7 is the Gaussian form usually called Le Cam's third lemma. The normal-location calculation below makes its local-alternative shift explicit.
-- **No substantive source section is omitted:** Example 6.5 is retained as a compact diagnostic for the lognormal likelihood-ratio limit.
+- **Core — §6.1 and Lemma 6.2:** likelihood ratios and the decomposition needed when the two measures are not absolutely continuous.
+- **Core — §6.2, Lemma 6.4, and Theorem 6.6:** contiguity and the abstract change-of-measure theorem.
+- **Core — Example 6.7:** Le Cam's third lemma and the covariance-driven shift under local alternatives.
+- **Compressed — Example 6.5:** the lognormal likelihood-ratio limit as a diagnostic for contiguity.
+- **Omitted/deferred:** none; both source sections are on the direct route.
 
 :::
 
@@ -149,7 +148,7 @@ $$
 Contiguity is the sequence-level condition that prevents probability mass from disappearing in the limit.
 
 ::: {.callout-note title="Definition"}
-### Definition 6.3: Contiguity {#definition-6-3}
+### Definition 6.3: contiguity {#definition-6-3}
 
 The sequence $Q_n$ is **contiguous with respect to** $P_n$, written $Q_n\triangleleft P_n$, if
 
@@ -194,7 +193,7 @@ Statements 1 and 4 are the same eventwise condition written for indicator statis
 <details>
 <summary>Complete proof</summary>
 
-**(1) $\Leftrightarrow$ (4).** If $T_n\overset{P_n}\to0$, apply contiguity to $A_n=\{\|T_n\|>\epsilon\}$ for each $\epsilon>0$. Conversely, given events $A_n$ with $P_n(A_n)\to0$, use $T_n=\mathbf1_{A_n}$.
+**(1) $\Leftrightarrow$ (4).** If $T_n\overset{P_n}\to0$, apply contiguity to $A_n=\{\|T_n\|>\epsilon\}$ for each $\epsilon>0$. Conversely, given events $A_n$ with $P_n(A_n)\to0$, use $T_n=\mathbf 1_{A_n}$.
 
 **(1) $\Rightarrow$ (2).** Work along a subsequence on which
 
@@ -221,7 +220,7 @@ Contiguity makes $Q_n(L_n\leq\epsilon_n)\to0$. Hence $P(U=0)=0$.
 **(3) $\Rightarrow$ (1).** Suppose $P_n(A_n)\to0$. Along any subsequence, pass to a further subsequence on which
 
 $$
-\left(\frac{dQ_n}{dP_n},\mathbf1_{A_n^c}\right)
+\left(\frac{dQ_n}{dP_n},\mathbf 1_{A_n^c}\right)
 \overset{P_n}{\rightsquigarrow}(V,1).
 $$
 
@@ -230,7 +229,7 @@ The likelihood ratios are tight under $P_n$ because their expectations are at mo
 $$
 \liminf_n Q_n(A_n^c)
 \geq
-\liminf_nE_{P_n}\left\{\mathbf1_{A_n^c}\frac{dQ_n}{dP_n}\right\}
+\liminf_nE_{P_n}\left\{\mathbf 1_{A_n^c}\frac{dQ_n}{dP_n}\right\}
 \geq EV=1.
 $$
 
@@ -262,7 +261,7 @@ and
 
 $$
 EV
-=E\{(2-W)\mathbf1_{\{W>0\}}\}
+=E\{(2-W)\mathbf 1_{\{W>0\}}\}
 =1-2P(W=0).
 $$
 
@@ -273,7 +272,7 @@ Therefore $P(U=0)+EV=1$. Statement 2 makes the first term zero, so $EV=1$, provi
 In applications, condition 3 usually establishes contiguity from a likelihood-ratio limit, and condition 4 then transfers $o_{P_n}(1)$ remainders to $o_{Q_n}(1)$ remainders.
 
 ::: {.callout-tip title="Example"}
-### Example 6.5: Asymptotic lognormality {#example-asymptotic-log-normality}
+### Example 6.5: asymptotic lognormality {#example-asymptotic-log-normality}
 
 Suppose that, under $Q_n$,
 
@@ -292,7 +291,7 @@ or $\mu=-\sigma^2/2$. This mean-equals-minus-one-half-variance form recurs in LA
 :::
 
 ::: {.callout-note title="Theorem"}
-### Theorem 6.6: Abstract change of measure {#theorem-change-of-measure}
+### Theorem 6.6: abstract change of measure {#theorem-change-of-measure}
 
 Suppose $Q_n\triangleleft P_n$ and, under $P_n$,
 
@@ -304,7 +303,7 @@ $$
 Then
 
 $$
-L(B)=E\{\mathbf1_B(X)V\}
+L(B)=E\{\mathbf 1_B(X)V\}
 $$
 
 defines a probability measure, and $X_n\overset{Q_n}{\rightsquigarrow}L$.
@@ -317,7 +316,7 @@ Le Cam's first lemma supplies $EV=1$, so weighting by $V$ defines a probability 
 <details>
 <summary>Complete proof</summary>
 
-Because every likelihood ratio is nonnegative, its weak limit satisfies $V\geq0$. Contiguity and [Lemma 6.4](#lemma-le-cam-first) give $EV=1$. Hence $B\mapsto E\{\mathbf1_B(X)V\}$ is a probability measure.
+Because every likelihood ratio is nonnegative, its weak limit satisfies $V\geq0$. Contiguity and [Lemma 6.4](#lemma-le-cam-first) give $EV=1$. Hence $B\mapsto E\{\mathbf 1_B(X)V\}$ is a probability measure.
 
 For every nonnegative continuous $f$, the likelihood-ratio inequality from §6.1 gives
 
@@ -402,7 +401,7 @@ This is the characteristic function of $N_k(\mu+\tau,\Sigma)$.
 
 </details>
 
-The cross-covariance $\tau=\operatorname{Cov}(X,W)$ determines the mean shift under the alternative. Exponential tilting changes the center but not the covariance.
+The cross-covariance $\tau=\operatorname{Cov}(X,W)$ determines the mean shift under the alternative. Exponential tilting changes the center but not the covariance, as Figure @sixfig-ch6-exponential-tilt illustrates.
 
 ::: {#sixfig-ch6-exponential-tilt}
 
@@ -454,7 +453,7 @@ $$
 
 The conclusion is also exact here: under $Q_n$, $\sqrt n\,\overline X_n$ has mean $h$ and variance one for every $n$. The calculation isolates the general mechanism used after [LAN in §7.5](chapter-7.qmd#sec-limit-distributions-alternatives): a local parameter shift becomes a covariance-driven shift in a Gaussian limit experiment.
 
-::: {.callout-tip title="From contiguity to Chapter 25"}
+::: {.callout-tip title="Chapter takeaway"}
 
 [Theorem 7.2](chapter-7.qmd#theorem-lan-iid) supplies the likelihood-ratio expansion, [Example 6.5](#example-asymptotic-log-normality) establishes contiguity, and [Example 6.7](#lemma-le-cam-third) supplies the shifted limit under $P_{\theta+h/\sqrt n}^n$. Chapter 25 repeats this argument along a tangent direction $g$: see [Lemma 25.23](chapter-25.qmd#lemma-25-23) for estimation and [§25.6](chapter-25.qmd#sec-testing) for testing.
 

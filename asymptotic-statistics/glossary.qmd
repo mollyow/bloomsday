@@ -65,7 +65,7 @@ $$
 E^*Z=\inf\{EY:Y\text{ is measurable and }Y\geq Z\},
 $$
 
-with the usual integrability qualification; outer probability is $P^*(A)=E^*\mathbf1_A$. These envelopes let empirical-process statements remain meaningful when a supremum over an uncountable class is not known to be measurable. See [the formal definitions in §18.2](chapter-18.qmd#sec-outer-expectation) and their rate-theorem use in [Theorem 25.81](chapter-25.qmd#theorem-25-81).
+with the usual integrability qualification; outer probability is $P^*(A)=E^*\mathbf 1_A$. These envelopes let empirical-process statements remain meaningful when a supremum over an uncountable class is not known to be measurable. See [the formal definitions in §18.2](chapter-18.qmd#sec-outer-expectation) and their rate-theorem use in [Theorem 25.81](chapter-25.qmd#theorem-25-81).
 
 ### Uniform integrability {#glossary-uniform-integrability}
 
@@ -97,6 +97,10 @@ $$
 
 For i.i.d. DQM models, $r_n=\sqrt nI$, where the un-subscripted $I$ in this expression is the identity matrix, not the information $I_\theta$. LAN makes a regular model locally resemble a Gaussian shift experiment. See [§7.6](chapter-7.qmd#sec-local-asymptotic-normality).
 
+### Local alternative and local power {#glossary-local-alternative}
+
+A local alternative approaches the null at the resolution of the experiment, typically $\theta+h/\sqrt n$ in a parametric model or $P_{h/\sqrt n,g}$ along a semiparametric path with score $g$. Such sequences remain statistically distinguishable without becoming perfectly separated. The **local power** of a test is its limiting rejection probability along one of these sequences. See [§7.5](chapter-7.qmd#sec-limit-distributions-alternatives), the Chapter 15 Gaussian power calculation, and [semiparametric testing in §25.6](chapter-25.qmd#sec-testing).
+
 ### Central sequence {#glossary-central-sequence}
 
 $\Delta_{n,\theta}$ is the random linear term in the source's LAN expansion. In an i.i.d. DQM model it is a normalized sum of scores. Under a local alternative, contiguity and Le Cam's third lemma shift its limiting mean. See [Theorem 7.2](chapter-7.qmd#theorem-lan-iid) and [Le Cam's third lemma](chapter-6.qmd#lemma-le-cam-third).
@@ -108,6 +112,10 @@ A limit experiment is the asymptotic statistical experiment obtained after local
 ### Regular estimator {#glossary-regular-estimator}
 
 A root-$n$ estimator is regular when its centered limiting distribution is stable along every admissible $n^{-1/2}$ local alternative. This rules out pointwise gains such as Hodges' estimator that break nearby. See [the Chapter 8 convolution framework](chapter-8.qmd#sec-convolution-theorem) and [regular estimators in §25.3](chapter-25.qmd#sec-regular-estimator).
+
+### Convolution and local asymptotic minimax bounds {#glossary-efficiency-bounds}
+
+The convolution bound says that the limit law of a regular estimator contains the efficient Gaussian component plus an independent noise component. The local asymptotic minimax bound expresses the same information restriction as a lower bound on the largest local risk under bowl-shaped loss. In Chapter 25 the covariance of the efficient Gaussian component is $P\widetilde\psi_P\widetilde\psi_P^T$. See the [Chapter 8 convolution theorem](chapter-8.qmd#sec-convolution-theorem), the [local asymptotic minimax theorem](chapter-8.qmd#sec-local-asymptotic-minimax), [Theorem 25.20](chapter-25.qmd#theorem-25-20), and [Theorem 25.21](chapter-25.qmd#theorem-25-21).
 
 ## Empirical-process machinery
 
@@ -127,17 +135,21 @@ $\mathcal F$ is $P$-Glivenko–Cantelli when $\sup_{f\in\mathcal F}|\mathbb P_nf
 
 $\mathcal F$ is $P$-Donsker when $\mathbb G_n$, viewed in $\ell^\infty(\mathcal F)$, converges weakly to a tight Gaussian process. Donsker control supports plug-in empirical-process arguments in §§25.8 and 25.12. See [Donsker classes](chapter-19.qmd#donsker-classes).
 
+### VC dimension and shattering {#glossary-vc-shattering}
+
+A class of sets shatters $\{x_1,\ldots,x_m\}$ when it realizes every one of the $2^m$ binary inclusion patterns on those points. Its VC dimension is the largest size of a finite set it can shatter. Finite VC dimension gives polynomial entropy bounds and, with appropriate measurability and envelope conditions, a route to Glivenko–Cantelli and Donsker conclusions. See the [definition and interval example in Chapter 19](chapter-19.qmd#sec-shattering).
+
 ### Asymptotic equicontinuity {#glossary-asymptotic-equicontinuity}
 
 Asymptotic equicontinuity says that the oscillation of a stochastic process over increasingly close index points becomes negligible. Together with finite-dimensional convergence, it supplies process convergence; in Chapter 25 it controls scores evaluated at estimated nuisance parameters. See [Theorem 18.14](chapter-18.qmd#theorem-weak-convergence-processes) and [Lemma 19.24](chapter-19.qmd#lemma-19.24).
 
 ### M-estimator and near maximizer {#glossary-m-estimator}
 
-An M-estimator maximizes, or nearly maximizes, a sample criterion $M_n(\theta)$. A near maximizer satisfies $M_n(\widehat\theta_n)\geq\sup_\theta M_n(\theta)-o_P(1)$, with a sharper remainder when the rate theorem requires one. Uniform convergence and a well-separated population maximizer yield consistency; a local quadratic expansion yields the limiting distribution. See [M- and Z-estimators in Chapter 5](chapter-5.qmd#sec-m-z-estimators).
+An M-estimator maximizes, or nearly maximizes, a sample criterion $M_n(\theta)$. A near maximizer satisfies $M_n(\widehat\theta_n)\geq\sup_\theta M_n(\theta)-o_P(1)$, with a sharper remainder when the rate theorem requires one. Uniform convergence and a well-separated population maximizer yield consistency; a local quadratic expansion yields the limiting distribution. See the discussion of M- and Z-estimators in Chapter 5 of the original text.
 
 ### Z-estimator and approximate root {#glossary-z-estimator}
 
-A Z-estimator solves, or approximately solves, an empirical equation $\Psi_n(\widehat\theta)=0$. An approximate root only requires the residual $\|\Psi_n(\widehat\theta_n)\|$ to be negligible at the scale of the expansion. Differentiating the population map and controlling the empirical-process remainder yields an asymptotic-linear representation. See [Theorem 5.21](chapter-5.qmd#theorem-5-21), [Theorem 19.26](chapter-19.qmd#theorem-19.26-infinite-dimensional-z-estimation), and the [Banach-valued likelihood-equation use in §25.12](chapter-25.qmd#theorem-25-90).
+A Z-estimator solves, or approximately solves, an empirical equation $\Psi_n(\widehat\theta)=0$. An approximate root only requires the residual $\|\Psi_n(\widehat\theta_n)\|$ to be negligible at the scale of the expansion. Differentiating the population map and controlling the empirical-process remainder yields an asymptotic-linear representation. See Theorem 5.21, [Theorem 19.26](chapter-19.qmd#theorem-19-26-infinite-dimensional-z-estimation), and the [Banach-valued likelihood-equation use in §25.12](chapter-25.qmd#theorem-25-90).
 
 ### Sensitivity and sandwich covariance {#glossary-sandwich}
 
@@ -149,19 +161,19 @@ V_{\theta_0}^{-1}
 (V_{\theta_0}^{-1})^T.
 $$
 
-See [the Z-estimator expansion in Chapter 5](chapter-5.qmd#theorem-5-21). Section 25.9 uses the local symbol $J_{\theta,\tau}$ for the analogous derivative normalization to avoid collision with Chapter 25's score-operator notation.
+See the Z-estimator expansion in Chapter 5 of the original text. §25.9 uses the local symbol $J_{\theta,\tau}$ for the analogous derivative normalization to avoid collision with Chapter 25's score-operator notation.
 
 ### $L_2$ projection {#glossary-l2-projection}
 
-The orthogonal projection of $X\in L_2(P)$ onto a closed linear subspace $S$ is the unique element $\Pi_SX\in S$ such that $X-\Pi_SX$ is orthogonal to every element of $S$. The Pythagorean identity makes it the minimum-mean-square approximation. See [Theorem 11.1](chapter-11.qmd#theorem-11-1) and its score-space use in [§25.4](chapter-25.qmd#efficient-score-functions).
+The orthogonal projection of $X\in L_2(P)$ onto a closed linear subspace $S$ is the unique element $\Pi_SX\in S$ such that $X-\Pi_SX$ is orthogonal to every element of $S$. The Pythagorean identity makes it the minimum-mean-square approximation. See Theorem 11.1 and its score-space use in [§25.4](chapter-25.qmd#efficient-score-functions).
 
 ### Conditional expectation as projection {#glossary-conditional-expectation}
 
-$E(X\mid Y)$ is the orthogonal projection of $X\in L_2(P)$ onto the closed subspace of square-integrable functions of $Y$. Consequently, $X-E(X\mid Y)$ is orthogonal to every such function. This identity drives residualization, information-loss score operators, and many missing-data calculations. See [§11.2](chapter-11.qmd#sec-conditional-expectation).
+$E(X\mid Y)$ is the orthogonal projection of $X\in L_2(P)$ onto the closed subspace of square-integrable functions of $Y$. Consequently, $X-E(X\mid Y)$ is orthogonal to every such function. This identity drives residualization, information-loss score operators, and many missing-data calculations. See §11.2 of the original text.
 
 ### Hájek projection {#glossary-hajek-projection}
 
-The Hájek projection replaces a statistic based on independent observations by its orthogonal projection onto sums of one-observation functions. When the remainder is negligible, the projected summands give its asymptotic influence representation. See [Lemma 11.10](chapter-11.qmd#lemma-11-10) and the Wilcoxon return in [Example 25.46](chapter-25.qmd#example-25-46).
+The Hájek projection replaces a statistic based on independent observations by its orthogonal projection onto sums of one-observation functions. When the remainder is negligible, the projected summands give its asymptotic influence representation. See Lemma 11.10 and the Wilcoxon return in [Example 25.46](chapter-25.qmd#example-25-46).
 
 ## Semiparametric geometry
 
@@ -187,7 +199,7 @@ $\dot\psi_P$ is one continuous linear map that gives the derivative of $\psi(P_t
 
 ### Influence function {#glossary-influence-function}
 
-An influence function $\psi_P^\dagger\in L_2(P)$ represents the pathwise derivative through $\dot\psi_Pg=P\psi_P^\dagger g$ for every score $g$ under consideration. It need not be unique outside the tangent space. @kennedy2022 calls this target-derivative representative an *influence curve*. Keep it conceptually separate from both an estimator's asymptotic influence function—its first-order summand—and the Hampel contamination sensitivity used in robust statistics. [Lemma 25.23](chapter-25.qmd#lemma-25-23) characterizes regular efficient estimators by the appearance of the efficient target influence function as their asymptotic summand; bounded contamination sensitivity is a separate robustness property [@fisherKennedy2021, §5.3]. See [influence functions and their construction](chapter-25.qmd#sec-if-construction).
+An influence function $\psi_P^\dagger\in L_2(P)$ represents the pathwise derivative through $\dot\psi_Pg=P\psi_P^\dagger g$ for every score $g$ under consideration. It need not be unique outside the tangent space. @kennedy2022 calls this target-derivative representative an *influence curve*. Keep it conceptually separate from both an estimator's asymptotic influence function—its first-order summand—and the Hampel contamination sensitivity used in robust statistics. [Lemma 25.23](chapter-25.qmd#lemma-25-23) characterizes regular efficient estimators by the appearance of the efficient target influence function as their asymptotic summand; bounded contamination sensitivity is a separate robustness property discussed in §5.3 of @fisherKennedy2021. See [influence functions and their construction](chapter-25.qmd#sec-if-construction).
 
 ### Efficient influence function {#glossary-efficient-influence-function}
 
@@ -224,7 +236,7 @@ An estimator is asymptotically linear when its root-$n$ error equals an average 
 
 ### Hadamard and Fréchet differentiation {#glossary-functional-derivatives}
 
-Hadamard differentiability is the uniform directional differentiability used by the functional delta method. Fréchet differentiability is a norm-uniform linear approximation and is stronger. See [§20.2 and Theorem 20.8](chapter-20.qmd#sec-hadamard-differentiability), the [Banach-space delta-method guide in §25.7](chapter-25.qmd#sec-efficiency-delta-banach), and [the likelihood-equation linearization in §25.12](chapter-25.qmd#theorem-25-90).
+Hadamard differentiability is the uniform directional differentiability used by the functional delta method. Fréchet differentiability is a norm-uniform linear approximation and is stronger. See §20.2 and Theorem 20.8, the [Banach-space delta-method guide in §25.7](chapter-25.qmd#sec-efficiency-delta-banach), and [the likelihood-equation linearization in §25.12](chapter-25.qmd#theorem-25-90).
 
 ### Von Mises expansion {#glossary-von-mises}
 
@@ -238,7 +250,7 @@ the centered influence function evaluated at $Q$ supplies the linear term and $R
 
 ### Gâteaux derivative and point-mass contamination {#glossary-gateaux-contamination}
 
-A Gâteaux derivative differentiates $\psi(P_t)$ along a chosen direction. The contamination path $P_t=(1-t)P+t\delta_z$ is a useful shortcut for generating an influence-function candidate, especially in discrete or unrestricted nonparametric calculations. It may, however, fail to be dominated, DQM, or admissible in the stated model. The candidate must therefore be centered and verified against every allowed score through $\dot\psi_Pg=P\psi_P^\dagger g$. See [von Mises calculus in §20.1](chapter-20.qmd#sec-von-mises-calculus) and [the influence-function construction recipe](chapter-25.qmd#sec-if-construction).
+A Gâteaux derivative differentiates $\psi(P_t)$ along a chosen direction. The contamination path $P_t=(1-t)P+t\delta_z$ is a useful shortcut for generating an influence-function candidate, especially in discrete or unrestricted nonparametric calculations. It may, however, fail to be dominated, DQM, or admissible in the stated model. The candidate must therefore be centered and verified against every allowed score through $\dot\psi_Pg=P\psi_P^\dagger g$. See the von Mises calculus in §20.1 and [the influence-function construction recipe](chapter-25.qmd#sec-if-construction).
 
 ### One-step estimator {#glossary-one-step}
 
@@ -249,7 +261,7 @@ $$
 =\psi(\widehat P)+\mathbb P_n\psi_{\widehat P}^\dagger.
 $$
 
-Here the representative is chosen so that $\widehat P\psi_{\widehat P}^\dagger=0$. The plug-in or machine-learning fit supplies $\widehat P$; semiparametric theory supplies the correction, the efficiency benchmark, and the remainder conditions under which the result is asymptotically linear. With sample splitting or cross-fitting, the nuisance fit used in a summand is learned away from that observation, providing conditional independence; $L_2$ convergence, integrability, and target-specific remainder control are still required. See the [finite-dimensional Newton prototype in Theorem 5.45](chapter-5.qmd#theorem-5-45) and [the influence-function route in §25.8](chapter-25.qmd#sec-25-8-one-step).
+Here the representative is chosen so that $\widehat P\psi_{\widehat P}^\dagger=0$. The plug-in or machine-learning fit supplies $\widehat P$; semiparametric theory supplies the correction, the efficiency benchmark, and the remainder conditions under which the result is asymptotically linear. With sample splitting or cross-fitting, the nuisance fit used in a summand is learned away from that observation, providing conditional independence; $L_2$ convergence, integrability, and target-specific remainder control are still required. See the finite-dimensional Newton prototype in Theorem 5.45 and [the influence-function route in §25.8](chapter-25.qmd#sec-25-8-one-step).
 
 ### Neyman orthogonality {#glossary-neyman-orthogonality}
 
@@ -265,7 +277,7 @@ Sample splitting estimates nuisance functions on one sample and evaluates the ta
 
 ### Double robustness {#glossary-double-robustness}
 
-An estimating equation is doubly robust when its population mean remains zero if either of two nuisance components is correctly specified. This is distinct from Neyman orthogonality: double robustness concerns consistency under two model branches, while orthogonality concerns local insensitivity and rates near the intersection. See [Example 25.67](chapter-25.qmd#example-25-67).
+An estimating equation is **model doubly robust** when its population mean remains zero if either of two nuisance components is correctly specified. **Rate double robustness** means that, near the intersection model, the leading bias is bounded by the product of the two nuisance-estimation errors; root-$n$ inference can then allow a slower rate for one nuisance when the other is estimated faster. These properties are distinct from Neyman orthogonality: model double robustness concerns consistency on two model branches, whereas orthogonality is a local derivative condition. See the [missing-data construction after Lemma 25.41](chapter-25.qmd#sec-25-41-double-robustness), [Example 25.67](chapter-25.qmd#example-25-67), and the [partially linear product-rate calculation](chapter-25.qmd#sec-25-11-partially-linear-regression).
 
 ### Profile likelihood {#glossary-profile-likelihood}
 
@@ -275,4 +287,4 @@ For each fixed target value, profile likelihood maximizes over the nuisance para
 
 A least-favorable submodel has a target score equal to the efficient score and therefore reproduces the semiparametric information bound inside a parametric path. An approximately least-favorable path matches this behavior to the order needed for estimation. See [§25.11](chapter-25.qmd#sec-approximately-least-favorable-submodels).
 
-[Return to the route through the book](index.qmd#route-to-chapter-25) or continue to the [worked problems](problems.qmd).
+[Return to the route through the book](index.qmd#route-to-chapter-25).
