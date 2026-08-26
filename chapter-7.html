@@ -125,6 +125,7 @@ window.Quarto = {
 };
 </script>
 
+<link rel="stylesheet" href="styles.css">
 </head>
 
 <body class="nav-sidebar floating quarto-light">
@@ -163,8 +164,7 @@ window.Quarto = {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Reading Companion for <em>Asymptotic Statistics</em></span></a>
+  <a href="./index.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Path to Chapter 25</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -465,7 +465,15 @@ I_\theta=P_\theta\dot\ell_\theta\dot\ell_\theta^T=-P_\theta\ddot\ell_\theta.
 <div class="callout-body-container callout-body">
 <p><span id="eq-differentiability-quadratic-mean"></span></p>
 <p><span class="math display">\[
-(7.1) \qquad \int\left[\sqrt{p_{\theta+h}}-\sqrt{p_\theta}-\frac12h^T\dot\ell_\theta\sqrt{p_\theta}\right]^2\,d\mu=o(\|h\|^2), \qquad h\to0.
+\begin{aligned}
+\int\biggl[
+&amp;\sqrt{p_{\theta+h}}-\sqrt{p_\theta}\\
+&amp;\quad-\frac12h^T\dot\ell_\theta\sqrt{p_\theta}
+\biggr]^2\,d\mu
+&amp;=o(\|h\|^2),
+\qquad h\to0.
+\end{aligned}
+\tag{7.1}
 \]</span></p>
 </div>
 </div>
@@ -904,11 +912,19 @@ I_{\theta_0}^{1/2}\sqrt n(\widehat\theta_n-\theta_0)\rightsquigarrow\Pi Z.
 <h2 class="anchored" data-anchor-id="sec-limit-distributions-alternatives">7.5 Limit Distributions Under Alternatives</h2>
 <p>From <a href="#theorem-lan-iid">Theorem 7.2</a>, LAN gives the expansion</p>
 <p><span class="math display">\[
-\log\frac{dP_{\theta+h/\sqrt n}^n}{dP_\theta^n}=h^T\Delta_{n,\theta}-\frac12h^TI_\theta h+o_{P_\theta}(1).
+\begin{aligned}
+\log\frac{dP_{\theta+h/\sqrt n}^n}{dP_\theta^n}
+&amp;=h^T\Delta_{n,\theta}-\frac12h^TI_\theta h
++o_{P_\theta}(1).
+\end{aligned}
 \]</span></p>
 <p>Under <span class="math inline">\(P_\theta^n\)</span>, <span class="math inline">\(\Delta_{n,\theta}\rightsquigarrow N(0,I_\theta)\)</span>, so <span class="math inline">\(h^T\Delta_{n,\theta}\rightsquigarrow N(0,h^TI_\theta h)\)</span>. Therefore,</p>
 <p><span class="math display">\[
-\log\frac{dP_{\theta+h/\sqrt n}^n}{dP_\theta^n}\rightsquigarrow N\left(-\frac12h^TI_\theta h,\,h^TI_\theta h\right).
+\begin{aligned}
+\log\frac{dP_{\theta+h/\sqrt n}^n}{dP_\theta^n}
+&amp;\rightsquigarrow
+N\left(-\frac12h^TI_\theta h,\,h^TI_\theta h\right).
+\end{aligned}
 \]</span></p>
 <p>Let <span class="math inline">\(v=h^TI_\theta h\)</span>. If <span class="math inline">\(Z\sim N(-v/2,v)\)</span>, then <span class="math inline">\(e^Z&gt;0\)</span> almost surely and <span class="math inline">\(E(e^Z)=1\)</span>. The limiting likelihood ratio is therefore positive with expectation one. By <a href="./chapter-6.html#lemma-le-cam-first">Le Cam’s first lemma</a>,</p>
 <p><span class="math display">\[

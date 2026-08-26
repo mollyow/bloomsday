@@ -125,6 +125,7 @@ window.Quarto = {
 };
 </script>
 
+<link rel="stylesheet" href="styles.css">
 </head>
 
 <body class="nav-sidebar floating quarto-light">
@@ -163,8 +164,7 @@ window.Quarto = {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Reading Companion for <em>Asymptotic Statistics</em></span></a>
+  <a href="./index.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Path to Chapter 25</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -439,7 +439,11 @@ Figure 8.2: The scaled quadratic risk of Hodges’ estimator develops higher, na
 <p>Because Hodges’ example defeats pointwise lower bounds, consider local alternatives <span class="math inline">\(\theta+h/\sqrt n\)</span>, where <span class="math inline">\(h\in\mathbb R^k\)</span> remains fixed. Suppose that, for some limit distributions <span class="math inline">\(L_{\theta,h}\)</span> and every <span class="math inline">\(h\)</span>,</p>
 <p><span id="eq-local-regularity"></span></p>
 <p><span class="math display">\[
-(8.2)\qquad  \sqrt{n}\left(T_n-\psi\left(\theta+\frac{h}{\sqrt{n}}\right)\right)\overset{\theta+h/\sqrt{n}}{\rightsquigarrow}L_{\theta,h}.
+\begin{aligned}
+\sqrt n\left[T_n-\psi\left(\theta+\frac{h}{\sqrt n}\right)\right]
+&amp;\overset{\theta+h/\sqrt n}{\rightsquigarrow}L_{\theta,h}.
+\end{aligned}
+\tag{8.2}
 \]</span></p>
 <p>The estimator is locally good at <span class="math inline">\(\theta\)</span> if the family <span class="math inline">\(\{L_{\theta,h}:h\in\mathbb R^k\}\)</span> is concentrated near zero, and it is <strong>locally optimal</strong> if these limits are maximally concentrated for every <span class="math inline">\(h\)</span>.</p>
 <p>For the rest of the chapter, assume:</p>
@@ -824,7 +828,10 @@ S=\{(y,u):|y|\leq K,\ \varepsilon\leq|\delta(y,u)-y|\leq M\}
 <h2 class="anchored" data-anchor-id="sec-convolution-theorem">8.5 Convolution Theorem</h2>
 <p>An estimator sequence <span class="math inline">\(T_n\)</span> is <strong>regular</strong> at <span class="math inline">\(\theta\)</span> for estimating <span class="math inline">\(\psi(\theta)\)</span> if, for every <span class="math inline">\(h\)</span>,</p>
 <p><span class="math display">\[
-\sqrt n\left(T_n-\psi\left(\theta+\frac{h}{\sqrt n}\right)\right)\overset{\theta+h/\sqrt n}{\rightsquigarrow}L_\theta,
+\begin{aligned}
+\sqrt n\left[T_n-\psi\left(\theta+\frac{h}{\sqrt n}\right)\right]
+&amp;\overset{\theta+h/\sqrt n}{\rightsquigarrow}L_\theta,
+\end{aligned}
 \]</span></p>
 <p>where the same distribution <span class="math inline">\(L_\theta\)</span> appears for every <span class="math inline">\(h\)</span>. Thus local perturbations do not change the limiting error law. By <a href="#theorem-limit-experiment-reduction">Theorem 8.3</a>, the matching estimator in the Gaussian limit experiment is equivariant in law for <span class="math inline">\(\dot\psi_\theta h\)</span>. A <strong>best regular estimator</strong> has no additional convolution noise and hence has limiting distribution <span class="math inline">\(N\bigl(0,\dot\psi_\theta I_\theta^{-1}\dot\psi_\theta^T\bigr)\)</span>.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="Theorem">
@@ -938,7 +945,10 @@ L_\theta=N\bigl(0,\dot\psi_\theta I_\theta^{-1}\dot\psi_\theta^T\bigr)*M_\theta.
 </ul>
 <p>Then, for every sequence <span class="math inline">\(\gamma_n\to0\)</span>, there exists a subsequence <span class="math inline">\(\{n_j\}\)</span> such that, for Lebesgue-almost every pair <span class="math inline">\((\theta,h)\)</span>,</p>
 <p><span class="math display">\[
-r_{n_j}\left(T_{n_j}-\psi\left(\theta+\gamma_{n_j}h\right)\right)\overset{\theta+\gamma_{n_j}h}{\rightsquigarrow}L_\theta.
+\begin{aligned}
+r_{n_j}\left[T_{n_j}-\psi\left(\theta+\gamma_{n_j}h\right)\right]
+&amp;\overset{\theta+\gamma_{n_j}h}{\rightsquigarrow}L_\theta.
+\end{aligned}
 \]</span></p>
 <p>Thus an estimator with pointwise limits at almost every parameter is, along a subsequence, automatically regular under vanishing perturbations <span class="math inline">\(\theta+\gamma_nh\)</span> for almost every <span class="math inline">\((\theta,h)\)</span>. Its local limiting distribution remains <span class="math inline">\(L_\theta\)</span>.</p>
 </section>
@@ -1007,7 +1017,13 @@ r_{n_j}\left\{T_{n_j}-\psi(\theta+\gamma_{n_j}h)\right\}
 <h3 class="anchored" data-anchor-id="theorem-8-11">Theorem 8.11: local asymptotic minimax bound</h3>
 <p>Suppose the model is differentiable in quadratic mean at <span class="math inline">\(\theta\)</span>, with nonsingular Fisher information <span class="math inline">\(I_\theta\)</span>, and <span class="math inline">\(\psi\)</span> is differentiable at <span class="math inline">\(\theta\)</span>. For every estimator sequence <span class="math inline">\(T_n\)</span> and every bowl-shaped loss <span class="math inline">\(\ell\)</span>,</p>
 <p><span class="math display">\[
-\sup_I\liminf_{n\to\infty}\sup_{h\in I}E_{\theta+h/\sqrt{n}}\ell\left(\sqrt{n}\left[T_n-\psi\left(\theta+\frac{h}{\sqrt{n}}\right)\right]\right)\geq\int\ell\,dN\bigl(0,\dot\psi_\theta I_\theta^{-1}\dot\psi_\theta^T\bigr),
+\begin{aligned}
+&amp;\sup_I\liminf_{n\to\infty}\sup_{h\in I}
+E_{\theta+h/\sqrt n}
+\ell\left(\sqrt n\left[T_n-\psi\left(\theta+\frac{h}{\sqrt n}\right)\right]\right)\\
+&amp;\qquad\geq
+\int\ell\,dN\bigl(0,\dot\psi_\theta I_\theta^{-1}\dot\psi_\theta^T\bigr),
+\end{aligned}
 \]</span></p>
 <p>where the first supremum ranges over finite subsets <span class="math inline">\(I\subset\mathbb{R}^k\)</span>.</p>
 </section>

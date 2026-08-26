@@ -125,6 +125,7 @@ window.Quarto = {
 };
 </script>
 
+<link rel="stylesheet" href="styles.css">
 </head>
 
 <body class="nav-sidebar floating quarto-light">
@@ -163,8 +164,7 @@ window.Quarto = {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Reading Companion for <em>Asymptotic Statistics</em></span></a>
+  <a href="./index.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Path to Chapter 25</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -976,7 +976,12 @@ Figure 19.2: Intervals shatter two ordered points because all four rows are achi
 <p>If <span class="math inline">\(f_n\)</span> is close to <span class="math inline">\(f_0\)</span> in <span class="math inline">\(L_2(P)\)</span>, the two functions are close in the natural variance semimetric of the limiting Gaussian process. Because <span class="math inline">\(\mathcal F\)</span> is Donsker, the limiting Brownian bridge has uniformly continuous sample paths in this semimetric. The empirical process therefore cannot distinguish <span class="math inline">\(f_n\)</span> from <span class="math inline">\(f_0\)</span> asymptotically.</p>
 <p>Thus:</p>
 <p><span class="math display">\[
-\boxed{L_2(P)\text{ closeness of functions}+\text{Donsker equicontinuity}\Rightarrow\text{empirical-process closeness}.}
+\boxed{
+\begin{gathered}
+L_2(P)\text{ closeness}+\text{Donsker equicontinuity}\\
+\Rightarrow\text{empirical-process closeness}
+\end{gathered}
+}
 \]</span></p>
 <p><strong>Proof roadmap.</strong> Jointly converge the empirical process and its random index, use <span class="math inline">\(L_2(P)\)</span> continuity of the limiting Brownian bridge, and apply the continuous mapping theorem to evaluation at that index.</p>
 <details>

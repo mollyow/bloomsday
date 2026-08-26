@@ -125,6 +125,7 @@ window.Quarto = {
 };
 </script>
 
+<link rel="stylesheet" href="styles.css">
 </head>
 
 <body class="nav-sidebar floating quarto-light">
@@ -163,8 +164,7 @@ window.Quarto = {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Reading Companion for <em>Asymptotic Statistics</em></span></a>
+  <a href="./index.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Path to Chapter 25</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -439,9 +439,10 @@ P\bigl[d\{g(X_n),g(X)\}&gt;\epsilon\bigr]
 <section id="tightness-and-subsequences" class="level3">
 <h3 class="anchored" data-anchor-id="tightness-and-subsequences">Tightness and subsequences</h3>
 <p>A sequence of random vectors is <strong>uniformly tight</strong> if, for every <span class="math inline">\(\varepsilon&gt;0\)</span>, there is an <span class="math inline">\(M&lt;\infty\)</span> such that</p>
+<p><span id="equation-2-4-tightness"></span></p>
 <p><span class="math display">\[
 \sup_nP(\|X_n\|&gt;M)&lt;\varepsilon.
-\tag{2.4-tightness}
+\tag{2.4a}
 \]</span></p>
 <p>Thus all laws place arbitrarily high probability in one common compact ball. In Euclidean spaces this is equivalent to boundedness in probability. The source spells the next result <em>Prohorov’s theorem</em>; <em>Prokhorov</em> is another common transliteration.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="Theorem">
@@ -520,9 +521,10 @@ F_{n_j}(q)\longrightarrow G(q)
 \qquad\text{for every }q\in\mathbb Q^k.
 \]</span></p>
 <p>Each <span class="math inline">\(F_n\)</span> is coordinatewise nondecreasing, so <span class="math inline">\(G(q)\leq G(q')\)</span> whenever <span class="math inline">\(q\leq q'\)</span> coordinatewise. Define</p>
+<p><span id="equation-2-5-extension"></span></p>
 <p><span class="math display">\[
 F(x)=\inf_{\substack{q\in\mathbb Q^k\\q&gt;x}}G(q),
-\tag{2.5-extension}
+\tag{2.5a}
 \]</span></p>
 <p>where <span class="math inline">\(q&gt;x\)</span> means strict inequality in every coordinate. This definition makes <span class="math inline">\(F\)</span> coordinatewise nondecreasing. It is right-continuous: given <span class="math inline">\(\varepsilon&gt;0\)</span>, choose rational <span class="math inline">\(q&gt;x\)</span> with <span class="math inline">\(G(q)&lt;F(x)+\varepsilon\)</span>. Whenever <span class="math inline">\(x\leq y&lt;q\)</span> coordinatewise,</p>
 <p><span class="math display">\[
@@ -544,7 +546,7 @@ G(q)\leq\liminf_jF_{n_j}(x)
 <p>The definition of <span class="math inline">\(F\)</span> and the continuity of <span class="math inline">\(F\)</span> at <span class="math inline">\(x\)</span> place <span class="math inline">\(F(x)\)</span> between the same two bounds. Since their gap is smaller than <span class="math inline">\(\varepsilon\)</span>, and <span class="math inline">\(\varepsilon\)</span> is arbitrary, <span class="math inline">\(F_{n_j}(x)\to F(x)\)</span>.</p>
 <p>For <span class="math inline">\(k=1\)</span>, monotonicity and right-continuity are all the finite-point requirements for a possibly defective distribution function. In higher dimensions one must also verify that every half-open rectangle has nonnegative <span class="math inline">\(F\)</span>-mass. If all <span class="math inline">\(2^k\)</span> corners of a rectangle are continuity points, its alternating corner sum is the limit of the corresponding nonnegative corner sums for <span class="math inline">\(F_{n_j}\)</span> and is therefore nonnegative. For an arbitrary rectangle, move each face downward through continuity points and use right-continuity. Hence <span class="math inline">\(F\)</span> is <span class="math inline">\(k\)</span>-increasing and so is a possibly defective distribution function.</p>
 </details>
-<p>Example 2.6 gives a quick sufficient condition for (2.4-tightness): if <span class="math inline">\(\sup_nE\|X_n\|^p&lt;\infty\)</span> for some <span class="math inline">\(p&gt;0\)</span>, then Markov’s inequality yields</p>
+<p>Example 2.6 gives a quick sufficient condition for <a href="#equation-2-4-tightness">(2.4a)</a>: if <span class="math inline">\(\sup_nE\|X_n\|^p&lt;\infty\)</span> for some <span class="math inline">\(p&gt;0\)</span>, then Markov’s inequality yields</p>
 <p><span class="math display">\[
 \sup_nP(\|X_n\|&gt;M)
 \leq M^{-p}\sup_nE\|X_n\|^p
