@@ -1,0 +1,1141 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Glossary – Reading Companion for Asymptotic Statistics</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./chapter-2.html" rel="next">
+<link href="./index.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-d3f7f8e73c8d287b30bcf59c2b563615.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./glossary.html">Glossary</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Reading Companion for Asymptotic Statistics</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Reading Companion for <em>Asymptotic Statistics</em></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./glossary.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Glossary</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-2.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Chapter 2: Stochastic Convergence</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-6.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Chapter 6: Contiguity</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-7.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Chapter 7: Local Asymptotic Normality</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-8.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Chapter 8: Efficiency of Estimators</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-18.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Chapter 18: Stochastic Convergence in Metric Spaces</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-19.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Chapter 19: Empirical Processes</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-25.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Chapter 25: Semiparametric Models</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#global-notation" id="toc-global-notation" class="nav-link active" data-scroll-target="#global-notation">Global notation</a>
+  <ul class="collapse">
+  <li><a href="#glossary-measurability" id="toc-glossary-measurability" class="nav-link" data-scroll-target="#glossary-measurability">Measurability and induced laws</a></li>
+  </ul></li>
+  <li><a href="#convergence-and-local-experiments" id="toc-convergence-and-local-experiments" class="nav-link" data-scroll-target="#convergence-and-local-experiments">Convergence and local experiments</a>
+  <ul class="collapse">
+  <li><a href="#glossary-convergence-modes" id="toc-glossary-convergence-modes" class="nav-link" data-scroll-target="#glossary-convergence-modes">Modes of stochastic convergence</a></li>
+  <li><a href="#glossary-stochastic-order" id="toc-glossary-stochastic-order" class="nav-link" data-scroll-target="#glossary-stochastic-order">Stochastic order: <span class="math inline">\(O_P\)</span> and <span class="math inline">\(o_P\)</span></a></li>
+  <li><a href="#glossary-tightness" id="toc-glossary-tightness" class="nav-link" data-scroll-target="#glossary-tightness">Tightness</a></li>
+  <li><a href="#glossary-outer-expectation" id="toc-glossary-outer-expectation" class="nav-link" data-scroll-target="#glossary-outer-expectation">Outer expectation and outer probability</a></li>
+  <li><a href="#glossary-uniform-integrability" id="toc-glossary-uniform-integrability" class="nav-link" data-scroll-target="#glossary-uniform-integrability">Uniform integrability</a></li>
+  <li><a href="#glossary-contiguity" id="toc-glossary-contiguity" class="nav-link" data-scroll-target="#glossary-contiguity">Contiguity</a></li>
+  <li><a href="#glossary-dqm" id="toc-glossary-dqm" class="nav-link" data-scroll-target="#glossary-dqm">Differentiability in quadratic mean (DQM)</a></li>
+  <li><a href="#glossary-lan" id="toc-glossary-lan" class="nav-link" data-scroll-target="#glossary-lan">Local asymptotic normality (LAN)</a></li>
+  <li><a href="#glossary-local-alternative" id="toc-glossary-local-alternative" class="nav-link" data-scroll-target="#glossary-local-alternative">Local alternative and local power</a></li>
+  <li><a href="#glossary-central-sequence" id="toc-glossary-central-sequence" class="nav-link" data-scroll-target="#glossary-central-sequence">Central sequence</a></li>
+  <li><a href="#glossary-limit-experiment" id="toc-glossary-limit-experiment" class="nav-link" data-scroll-target="#glossary-limit-experiment">Limit experiment and Gaussian shift</a></li>
+  <li><a href="#glossary-regular-estimator" id="toc-glossary-regular-estimator" class="nav-link" data-scroll-target="#glossary-regular-estimator">Regular estimator</a></li>
+  <li><a href="#glossary-efficiency-bounds" id="toc-glossary-efficiency-bounds" class="nav-link" data-scroll-target="#glossary-efficiency-bounds">Convolution and local asymptotic minimax bounds</a></li>
+  </ul></li>
+  <li><a href="#empirical-process-machinery" id="toc-empirical-process-machinery" class="nav-link" data-scroll-target="#empirical-process-machinery">Empirical-process machinery</a>
+  <ul class="collapse">
+  <li><a href="#glossary-empirical-measure" id="toc-glossary-empirical-measure" class="nav-link" data-scroll-target="#glossary-empirical-measure">Empirical measure</a></li>
+  <li><a href="#glossary-empirical-process" id="toc-glossary-empirical-process" class="nav-link" data-scroll-target="#glossary-empirical-process">Empirical process</a></li>
+  <li><a href="#glossary-glivenko-cantelli" id="toc-glossary-glivenko-cantelli" class="nav-link" data-scroll-target="#glossary-glivenko-cantelli">Glivenko–Cantelli class</a></li>
+  <li><a href="#glossary-donsker" id="toc-glossary-donsker" class="nav-link" data-scroll-target="#glossary-donsker">Donsker class</a></li>
+  <li><a href="#glossary-vc-shattering" id="toc-glossary-vc-shattering" class="nav-link" data-scroll-target="#glossary-vc-shattering">VC dimension and shattering</a></li>
+  <li><a href="#glossary-asymptotic-equicontinuity" id="toc-glossary-asymptotic-equicontinuity" class="nav-link" data-scroll-target="#glossary-asymptotic-equicontinuity">Asymptotic equicontinuity</a></li>
+  <li><a href="#glossary-m-estimator" id="toc-glossary-m-estimator" class="nav-link" data-scroll-target="#glossary-m-estimator">M-estimator and near maximizer</a></li>
+  <li><a href="#glossary-z-estimator" id="toc-glossary-z-estimator" class="nav-link" data-scroll-target="#glossary-z-estimator">Z-estimator and approximate root</a></li>
+  <li><a href="#glossary-sandwich" id="toc-glossary-sandwich" class="nav-link" data-scroll-target="#glossary-sandwich">Sensitivity and sandwich covariance</a></li>
+  <li><a href="#glossary-l2-projection" id="toc-glossary-l2-projection" class="nav-link" data-scroll-target="#glossary-l2-projection"><span class="math inline">\(L_2\)</span> projection</a></li>
+  <li><a href="#glossary-conditional-expectation" id="toc-glossary-conditional-expectation" class="nav-link" data-scroll-target="#glossary-conditional-expectation">Conditional expectation as projection</a></li>
+  <li><a href="#glossary-hajek-projection" id="toc-glossary-hajek-projection" class="nav-link" data-scroll-target="#glossary-hajek-projection">Hájek projection</a></li>
+  </ul></li>
+  <li><a href="#semiparametric-geometry" id="toc-semiparametric-geometry" class="nav-link" data-scroll-target="#semiparametric-geometry">Semiparametric geometry</a>
+  <ul class="collapse">
+  <li><a href="#glossary-semiparametric-model" id="toc-glossary-semiparametric-model" class="nav-link" data-scroll-target="#glossary-semiparametric-model">Semiparametric model</a></li>
+  <li><a href="#glossary-regular-submodel" id="toc-glossary-regular-submodel" class="nav-link" data-scroll-target="#glossary-regular-submodel">Regular parametric submodel</a></li>
+  <li><a href="#glossary-tangent-space" id="toc-glossary-tangent-space" class="nav-link" data-scroll-target="#glossary-tangent-space">Tangent set and tangent space</a></li>
+  <li><a href="#glossary-nuisance-tangent-space" id="toc-glossary-nuisance-tangent-space" class="nav-link" data-scroll-target="#glossary-nuisance-tangent-space">Nuisance tangent space</a></li>
+  <li><a href="#glossary-pathwise-derivative" id="toc-glossary-pathwise-derivative" class="nav-link" data-scroll-target="#glossary-pathwise-derivative">Pathwise derivative</a></li>
+  <li><a href="#glossary-influence-function" id="toc-glossary-influence-function" class="nav-link" data-scroll-target="#glossary-influence-function">Influence function</a></li>
+  <li><a href="#glossary-efficient-influence-function" id="toc-glossary-efficient-influence-function" class="nav-link" data-scroll-target="#glossary-efficient-influence-function">Efficient influence function</a></li>
+  <li><a href="#glossary-efficient-score" id="toc-glossary-efficient-score" class="nav-link" data-scroll-target="#glossary-efficient-score">Efficient score</a></li>
+  <li><a href="#glossary-efficient-information" id="toc-glossary-efficient-information" class="nav-link" data-scroll-target="#glossary-efficient-information">Efficient information</a></li>
+  <li><a href="#glossary-score-operator" id="toc-glossary-score-operator" class="nav-link" data-scroll-target="#glossary-score-operator">Score operator and adjoint</a></li>
+  <li><a href="#glossary-information-operator" id="toc-glossary-information-operator" class="nav-link" data-scroll-target="#glossary-information-operator">Information operator</a></li>
+  </ul></li>
+  <li><a href="#estimator-construction-and-modern-connections" id="toc-estimator-construction-and-modern-connections" class="nav-link" data-scroll-target="#estimator-construction-and-modern-connections">Estimator construction and modern connections</a>
+  <ul class="collapse">
+  <li><a href="#glossary-asymptotic-linearity" id="toc-glossary-asymptotic-linearity" class="nav-link" data-scroll-target="#glossary-asymptotic-linearity">Asymptotic linearity</a></li>
+  <li><a href="#glossary-functional-derivatives" id="toc-glossary-functional-derivatives" class="nav-link" data-scroll-target="#glossary-functional-derivatives">Hadamard and Fréchet differentiation</a></li>
+  <li><a href="#glossary-von-mises" id="toc-glossary-von-mises" class="nav-link" data-scroll-target="#glossary-von-mises">Von Mises expansion</a></li>
+  <li><a href="#glossary-gateaux-contamination" id="toc-glossary-gateaux-contamination" class="nav-link" data-scroll-target="#glossary-gateaux-contamination">Gâteaux derivative and point-mass contamination</a></li>
+  <li><a href="#glossary-one-step" id="toc-glossary-one-step" class="nav-link" data-scroll-target="#glossary-one-step">One-step estimator</a></li>
+  <li><a href="#glossary-neyman-orthogonality" id="toc-glossary-neyman-orthogonality" class="nav-link" data-scroll-target="#glossary-neyman-orthogonality">Neyman orthogonality</a></li>
+  <li><a href="#glossary-no-bias" id="toc-glossary-no-bias" class="nav-link" data-scroll-target="#glossary-no-bias">No-bias condition</a></li>
+  <li><a href="#glossary-cross-fitting" id="toc-glossary-cross-fitting" class="nav-link" data-scroll-target="#glossary-cross-fitting">Sample splitting and cross-fitting</a></li>
+  <li><a href="#glossary-double-robustness" id="toc-glossary-double-robustness" class="nav-link" data-scroll-target="#glossary-double-robustness">Double robustness</a></li>
+  <li><a href="#glossary-profile-likelihood" id="toc-glossary-profile-likelihood" class="nav-link" data-scroll-target="#glossary-profile-likelihood">Profile likelihood</a></li>
+  <li><a href="#glossary-least-favorable-submodel" id="toc-glossary-least-favorable-submodel" class="nav-link" data-scroll-target="#glossary-least-favorable-submodel">Least-favorable submodel</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Glossary</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>This glossary is a map, not a replacement for the formal definitions. Each entry links to the chapter where the idea is developed and, when useful, to the place where it reappears in Chapter 25.</p>
+<div class="callout callout-style-default callout-warning callout-titled" title="The source deliberately reuses notation">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>The source deliberately reuses notation
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>These notes follow van der Vaart’s notation section by section. A symbol can therefore acquire a different local meaning later in the book. In particular, <span class="math inline">\(P_n\)</span> may denote a sequence of probability laws while <span class="math inline">\(\mathbb P_n\)</span> denotes the empirical measure; <span class="math inline">\(F\)</span> may denote a distribution function even though a Portmanteau proof may use <span class="math inline">\(F\)</span> for a closed set; and letters such as <span class="math inline">\(A\)</span>, <span class="math inline">\(B\)</span>, <span class="math inline">\(\Phi\)</span>, <span class="math inline">\(\Psi\)</span>, and <span class="math inline">\(\psi\)</span> are reused for locally defined maps or parameters. Use the definition nearest the display. The notes flag the most consequential collisions rather than replacing the source notation.</p>
+</div>
+</div>
+<section id="global-notation" class="level2">
+<h2 class="anchored" data-anchor-id="global-notation">Global notation</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Notation</th>
+<th>Meaning in these notes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(P,Q\)</span></td>
+<td>Probability laws. For a measurable <span class="math inline">\(f\)</span>, <span class="math inline">\(Pf=\int f\,dP\)</span> and <span class="math inline">\(Pfg=\int fg\,dP\)</span>.</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(P_n,Q_n\)</span></td>
+<td>Usually sequences of probability laws or experiments. These are not automatically empirical measures.</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\mathbb P_n\)</span></td>
+<td>The empirical measure: <span class="math inline">\(\mathbb P_nf=n^{-1}\sum_{i=1}^n f(X_i)\)</span>.</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\mathbb G_n\)</span></td>
+<td>The empirical process: <span class="math inline">\(\mathbb G_nf=\sqrt n(\mathbb P_n-P)f\)</span>.</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(P_0\)</span></td>
+<td>The true law when a model is indexed around a distinguished truth.</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(P_{t,g}\)</span></td>
+<td>In Chapter 25, a path through <span class="math inline">\(P\)</span> with score <span class="math inline">\(g\)</span>, evaluated at path time <span class="math inline">\(t\)</span>. Thus <span class="math inline">\(P_{1/\sqrt n,g}\)</span> and <span class="math inline">\(P_{h/\sqrt n,g}\)</span> are local laws along that path. In Chapter 7, by contrast, <span class="math inline">\(h\)</span> is usually a parameter vector.</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\langle f,g\rangle_P\)</span> and <span class="math inline">\(|f|_P\)</span></td>
+<td>The <span class="math inline">\(L_2(P)\)</span> inner product <span class="math inline">\(Pfg\)</span> and norm <span class="math inline">\((Pf^2)^{1/2}\)</span>. Other texts often write <span class="math inline">\(\|f\|_{P,2}\)</span> for <span class="math inline">\(|f|_P\)</span>.</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(L_2^0(P)\)</span></td>
+<td>The mean-zero subspace <span class="math inline">\(\{g\in L_2(P):Pg=0\}\)</span>. Scores live here.</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(d(x,y)\)</span></td>
+<td>A metric or semimetric, determined by context.</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(x\wedge y\)</span></td>
+<td><span class="math inline">\(\min(x,y)\)</span>.</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(X_n\rightsquigarrow X\)</span></td>
+<td>Weak convergence, convergence in distribution, or convergence in law.</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\dot{\ }\)</span></td>
+<td>A derivative or score. Its meaning is local: for example, <span class="math inline">\(\dot\ell\)</span> is a score and <span class="math inline">\(\dot\psi_P\)</span> is a derivative map.</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\widetilde{\ }\)</span></td>
+<td>An efficient object in Chapter 25: <span class="math inline">\(\widetilde\psi_P\)</span>, <span class="math inline">\(\widetilde\ell_{\theta,\eta}\)</span>, and <span class="math inline">\(\widetilde I_{\theta,\eta}\)</span>.</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\dagger\)</span></td>
+<td>A generic, not necessarily efficient, influence function in parts of Chapter 25.</td>
+</tr>
+</tbody>
+</table>
+<p>In Portmanteau arguments, <span class="math inline">\(G\)</span> conventionally denotes an open set and <span class="math inline">\(F\)</span> or <span class="math inline">\(C\)</span> may denote a closed set. That convention is local: elsewhere <span class="math inline">\(F\)</span> and <span class="math inline">\(G\)</span> often denote distribution functions.</p>
+<section id="glossary-measurability" class="level3">
+<h3 class="anchored" data-anchor-id="glossary-measurability">Measurability and induced laws</h3>
+<p>A map <span class="math inline">\(T:(\mathcal X,\mathcal A)\to(\mathcal Y,\mathcal B)\)</span> is measurable when <span class="math inline">\(T^{-1}(B)\in\mathcal A\)</span> for every <span class="math inline">\(B\in\mathcal B\)</span>. A real-valued <span class="math inline">\(f\)</span> is Borel measurable when the target sigma-field is <span class="math inline">\(\mathcal B(\mathbb R)\)</span>; equivalently, it is enough to check sets such as <span class="math inline">\(\{x:f(x)&gt;t\}\)</span>. The same preimage operation defines the law induced by <span class="math inline">\(T\)</span>; <a href="#glossaryfig-measurability" class="quarto-xref">Figure G.<span>1</span></a> keeps the two directions visually separate.</p>
+<div id="glossaryfig-measurability" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-alt="Two measurable spaces are connected by a function T. A target set B has a highlighted preimage in the source space. One box states the measurability condition and another states that the induced law assigns B the probability of its preimage.">
+<figure class="quarto-float quarto-float-glossaryfig figure">
+<div aria-describedby="glossaryfig-measurability-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/generated/glossary-measurability.svg" class="img-fluid figure-img" alt="Two measurable spaces are connected by a function T. A target set B has a highlighted preimage in the source space. One box states the measurability condition and another states that the induced law assigns B the probability of its preimage.">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-glossaryfig" id="glossaryfig-measurability-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure G.1: Measurability pulls target sets back to the source sigma-field; the pushforward law then assigns a target set the probability of that preimage. Original diagram based on the treatment of measurable functions and image measures in <span class="citation" data-cites="pollard2002">Pollard (<a href="references.html#ref-pollard2002" role="doc-biblioref">2002</a>)</span>, §§2.2 and 2.9.
+</figcaption>
+</figure>
+</div>
+<p>See <a href="./chapter-18.html#sec-random-elements">random elements in §18.1</a> for the infinite-dimensional version.</p>
+</section>
+</section>
+<section id="convergence-and-local-experiments" class="level2">
+<h2 class="anchored" data-anchor-id="convergence-and-local-experiments">Convergence and local experiments</h2>
+<section id="glossary-convergence-modes" class="level3">
+<h3 class="anchored" data-anchor-id="glossary-convergence-modes">Modes of stochastic convergence</h3>
+<p>Almost-sure convergence implies convergence in probability, which implies convergence in distribution. <span class="math inline">\(L_1\)</span> convergence also implies convergence in probability. The reverse implications require additional hypotheses or couplings. See <a href="./chapter-2.html#sec-convergence">§2.1</a>.</p>
+</section>
+<section id="glossary-stochastic-order" class="level3">
+<h3 class="anchored" data-anchor-id="glossary-stochastic-order">Stochastic order: <span class="math inline">\(O_P\)</span> and <span class="math inline">\(o_P\)</span></h3>
+<p><span class="math inline">\(X_n=O_P(a_n)\)</span> means that <span class="math inline">\(X_n/a_n\)</span> is bounded in probability; <span class="math inline">\(X_n=o_P(a_n)\)</span> means that <span class="math inline">\(X_n/a_n\overset P\to0\)</span>. These symbols control the remainders in likelihood expansions, estimator linearizations, and nuisance-product errors. See <a href="./chapter-2.html#sec-stochastic-order">stochastic order in Chapter 2</a>.</p>
+</section>
+<section id="glossary-tightness" class="level3">
+<h3 class="anchored" data-anchor-id="glossary-tightness">Tightness</h3>
+<p>A sequence of laws is tight if, for every <span class="math inline">\(\epsilon&gt;0\)</span>, one compact set contains at least <span class="math inline">\(1-\epsilon\)</span> of every law in the sequence. In function spaces, tightness is what upgrades finite-dimensional convergence to convergence of the whole random function. See <a href="./chapter-18.html#sec-tightness">§18.2</a> and <a href="./chapter-18.html#theorem-weak-convergence-processes">weak convergence of stochastic processes</a>.</p>
+</section>
+<section id="glossary-outer-expectation" class="level3">
+<h3 class="anchored" data-anchor-id="glossary-outer-expectation">Outer expectation and outer probability</h3>
+<p>For a possibly nonmeasurable real map <span class="math inline">\(Z\)</span>, outer expectation is</p>
+<p><span class="math display">\[
+E^*Z=\inf\{EY:Y\text{ is measurable and }Y\geq Z\},
+\]</span></p>
+<p>with the usual integrability qualification; outer probability is <span class="math inline">\(P^*(A)=E^*\mathbf 1_A\)</span>. These envelopes let empirical-process statements remain meaningful when a supremum over an uncountable class is not known to be measurable. See <a href="./chapter-18.html#sec-outer-expectation">the formal definitions in §18.2</a> and their rate-theorem use in <a href="./chapter-25.html#theorem-25-81">Theorem 25.81</a>.</p>
+</section>
+<section id="glossary-uniform-integrability" class="level3">
+<h3 class="anchored" data-anchor-id="glossary-uniform-integrability">Uniform integrability</h3>
+<p>A family <span class="math inline">\((X_n)\)</span> is uniformly integrable when</p>
+<p><span class="math display">\[
+\lim_{M\to\infty}\sup_n
+E\{|X_n|\mathbf 1\{|X_n|&gt;M\}\}=0.
+\]</span></p>
+<p>It is the tail condition that can upgrade convergence in distribution to convergence of first moments. See the <a href="./chapter-2.html#sec-uniform-integrability">optional Chapter 2 bridge</a>.</p>
+</section>
+<section id="glossary-contiguity" class="level3">
+<h3 class="anchored" data-anchor-id="glossary-contiguity">Contiguity</h3>
+<p><span class="math inline">\(Q_n\mathrel{\triangleleft}P_n\)</span> means that every sequence of events with <span class="math inline">\(P_n\)</span>-probability tending to zero also has <span class="math inline">\(Q_n\)</span>-probability tending to zero. It is the sequence-level analogue of absolute continuity and lets <span class="math inline">\(o_{P_n}(1)\)</span> conclusions survive under local alternatives. See <a href="./chapter-6.html#sec-contiguity">§6.2</a>.</p>
+</section>
+<section id="glossary-dqm" class="level3">
+<h3 class="anchored" data-anchor-id="glossary-dqm">Differentiability in quadratic mean (DQM)</h3>
+<p>DQM requires square-root densities to have an <span class="math inline">\(L_2\)</span> linear approximation. Its derivative determines a mean-zero score and yields the local quadratic likelihood expansion. See <a href="./chapter-7.html#sec-differentiability-quadratic-mean">DQM in Chapter 7</a> and its <a href="./chapter-25.html#sec-dqm">pathwise form in §25.3</a>.</p>
+</section>
+<section id="glossary-lan" class="level3">
+<h3 class="anchored" data-anchor-id="glossary-lan">Local asymptotic normality (LAN)</h3>
+<p>In the source’s general formulation, a sequence of experiments is LAN at <span class="math inline">\(\theta\)</span> when there are norming matrices <span class="math inline">\(r_n\)</span>, information <span class="math inline">\(I_\theta\)</span>, and central sequences <span class="math inline">\(\Delta_{n,\theta}\)</span> such that</p>
+<p><span class="math display">\[
+\log\frac{dP_{n,\theta+r_n^{-1}h_n}}{dP_{n,\theta}}
+=h_n^T\Delta_{n,\theta}-\frac12h_n^TI_\theta h_n+o_{P_{n,\theta}}(1).
+\]</span></p>
+<p>For i.i.d. DQM models, <span class="math inline">\(r_n=\sqrt nI\)</span>, where the un-subscripted <span class="math inline">\(I\)</span> in this expression is the identity matrix, not the information <span class="math inline">\(I_\theta\)</span>. LAN makes a regular model locally resemble a Gaussian shift experiment. See <a href="./chapter-7.html#sec-local-asymptotic-normality">§7.6</a>.</p>
+</section>
+<section id="glossary-local-alternative" class="level3">
+<h3 class="anchored" data-anchor-id="glossary-local-alternative">Local alternative and local power</h3>
+<p>A local alternative approaches the null at the resolution of the experiment, typically <span class="math inline">\(\theta+h/\sqrt n\)</span> in a parametric model or <span class="math inline">\(P_{h/\sqrt n,g}\)</span> along a semiparametric path with score <span class="math inline">\(g\)</span>. Such sequences remain statistically distinguishable without becoming perfectly separated. The <strong>local power</strong> of a test is its limiting rejection probability along one of these sequences. See <a href="./chapter-7.html#sec-limit-distributions-alternatives">§7.5</a>, the Chapter 15 Gaussian power calculation, and <a href="./chapter-25.html#sec-testing">semiparametric testing in §25.6</a>.</p>
+</section>
+<section id="glossary-central-sequence" class="level3">
+<h3 class="anchored" data-anchor-id="glossary-central-sequence">Central sequence</h3>
+<p><span class="math inline">\(\Delta_{n,\theta}\)</span> is the random linear term in the source’s LAN expansion. In an i.i.d. DQM model it is a normalized sum of scores. Under a local alternative, contiguity and Le Cam’s third lemma shift its limiting mean. See <a href="./chapter-7.html#theorem-lan-iid">Theorem 7.2</a> and <a href="./chapter-6.html#lemma-le-cam-third">Le Cam’s third lemma</a>.</p>
+</section>
+<section id="glossary-limit-experiment" class="level3">
+<h3 class="anchored" data-anchor-id="glossary-limit-experiment">Limit experiment and Gaussian shift</h3>
+<p>A limit experiment is the asymptotic statistical experiment obtained after localization. For regular finite-dimensional models it is typically a Gaussian observation whose mean is shifted by the local parameter. <a href="./chapter-8.html#theorem-limit-experiment-reduction">Theorem 8.3</a> transfers lower-bound questions to this simpler experiment; <a href="./chapter-25.html#theorem-25-20">Theorem 25.20</a> and <a href="./chapter-25.html#theorem-25-21">Theorem 25.21</a> repeat that reduction along semiparametric tangent directions.</p>
+</section>
+<section id="glossary-regular-estimator" class="level3">
+<h3 class="anchored" data-anchor-id="glossary-regular-estimator">Regular estimator</h3>
+<p>A root-<span class="math inline">\(n\)</span> estimator is regular when its centered limiting distribution is stable along every admissible <span class="math inline">\(n^{-1/2}\)</span> local alternative. This rules out pointwise gains such as Hodges’ estimator that break nearby. See <a href="./chapter-8.html#sec-convolution-theorem">the Chapter 8 convolution framework</a> and <a href="./chapter-25.html#sec-regular-estimator">regular estimators in §25.3</a>.</p>
+</section>
+<section id="glossary-efficiency-bounds" class="level3">
+<h3 class="anchored" data-anchor-id="glossary-efficiency-bounds">Convolution and local asymptotic minimax bounds</h3>
+<p>The convolution bound says that the limit law of a regular estimator contains the efficient Gaussian component plus an independent noise component. The local asymptotic minimax bound expresses the same information restriction as a lower bound on the largest local risk under bowl-shaped loss. In Chapter 25 the covariance of the efficient Gaussian component is <span class="math inline">\(P\widetilde\psi_P\widetilde\psi_P^T\)</span>. See the <a href="./chapter-8.html#sec-convolution-theorem">Chapter 8 convolution theorem</a>, the <a href="./chapter-8.html#sec-local-asymptotic-minimax">local asymptotic minimax theorem</a>, <a href="./chapter-25.html#theorem-25-20">Theorem 25.20</a>, and <a href="./chapter-25.html#theorem-25-21">Theorem 25.21</a>.</p>
+</section>
+</section>
+<section id="empirical-process-machinery" class="level2">
+<h2 class="anchored" data-anchor-id="empirical-process-machinery">Empirical-process machinery</h2>
+<section id="glossary-empirical-measure" class="level3">
+<h3 class="anchored" data-anchor-id="glossary-empirical-measure">Empirical measure</h3>
+<p><span class="math inline">\(\mathbb P_n=n^{-1}\sum_{i=1}^n\delta_{X_i}\)</span> is the empirical distribution, and <span class="math inline">\(\mathbb P_nf\)</span> is the sample average of <span class="math inline">\(f(X)\)</span>. See <a href="./chapter-19.html#empirical-measure-notation">§19.2</a>.</p>
+</section>
+<section id="glossary-empirical-process" class="level3">
+<h3 class="anchored" data-anchor-id="glossary-empirical-process">Empirical process</h3>
+<p><span class="math inline">\(\mathbb G_n=\sqrt n(\mathbb P_n-P)\)</span> is the centered, scaled empirical measure. Indexing <span class="math inline">\(\mathbb G_nf\)</span> by <span class="math inline">\(f\in\mathcal F\)</span> turns one central limit theorem into a random-function problem. See <a href="./chapter-19.html#empirical-process-notation">empirical-process notation</a>.</p>
+</section>
+<section id="glossary-glivenko-cantelli" class="level3">
+<h3 class="anchored" data-anchor-id="glossary-glivenko-cantelli">Glivenko–Cantelli class</h3>
+<p><span class="math inline">\(\mathcal F\)</span> is <span class="math inline">\(P\)</span>-Glivenko–Cantelli when <span class="math inline">\(\sup_{f\in\mathcal F}|\mathbb P_nf-Pf|\to0\)</span> in the stated mode. It is a uniform law of large numbers. See <a href="./chapter-19.html#glivenko-cantelli-classes">Glivenko–Cantelli classes</a>.</p>
+</section>
+<section id="glossary-donsker" class="level3">
+<h3 class="anchored" data-anchor-id="glossary-donsker">Donsker class</h3>
+<p><span class="math inline">\(\mathcal F\)</span> is <span class="math inline">\(P\)</span>-Donsker when <span class="math inline">\(\mathbb G_n\)</span>, viewed in <span class="math inline">\(\ell^\infty(\mathcal F)\)</span>, converges weakly to a tight Gaussian process. Donsker control supports plug-in empirical-process arguments in §§25.8 and 25.12. See <a href="./chapter-19.html#donsker-classes">Donsker classes</a>.</p>
+</section>
+<section id="glossary-vc-shattering" class="level3">
+<h3 class="anchored" data-anchor-id="glossary-vc-shattering">VC dimension and shattering</h3>
+<p>A class of sets shatters <span class="math inline">\(\{x_1,\ldots,x_m\}\)</span> when it realizes every one of the <span class="math inline">\(2^m\)</span> binary inclusion patterns on those points. Its VC dimension is the largest size of a finite set it can shatter. Finite VC dimension gives polynomial entropy bounds and, with appropriate measurability and envelope conditions, a route to Glivenko–Cantelli and Donsker conclusions. See the <a href="./chapter-19.html#sec-shattering">definition and interval example in Chapter 19</a>.</p>
+</section>
+<section id="glossary-asymptotic-equicontinuity" class="level3">
+<h3 class="anchored" data-anchor-id="glossary-asymptotic-equicontinuity">Asymptotic equicontinuity</h3>
+<p>Asymptotic equicontinuity says that the oscillation of a stochastic process over increasingly close index points becomes negligible. Together with finite-dimensional convergence, it supplies process convergence; in Chapter 25 it controls scores evaluated at estimated nuisance parameters. See <a href="./chapter-18.html#theorem-weak-convergence-processes">Theorem 18.14</a> and <a href="./chapter-19.html#lemma-19.24">Lemma 19.24</a>.</p>
+</section>
+<section id="glossary-m-estimator" class="level3">
+<h3 class="anchored" data-anchor-id="glossary-m-estimator">M-estimator and near maximizer</h3>
+<p>An M-estimator maximizes, or nearly maximizes, a sample criterion <span class="math inline">\(M_n(\theta)\)</span>. A near maximizer satisfies <span class="math inline">\(M_n(\widehat\theta_n)\geq\sup_\theta M_n(\theta)-o_P(1)\)</span>, with a sharper remainder when the rate theorem requires one. Uniform convergence and a well-separated population maximizer yield consistency; a local quadratic expansion yields the limiting distribution. See the discussion of M- and Z-estimators in Chapter 5 of the original text.</p>
+</section>
+<section id="glossary-z-estimator" class="level3">
+<h3 class="anchored" data-anchor-id="glossary-z-estimator">Z-estimator and approximate root</h3>
+<p>A Z-estimator solves, or approximately solves, an empirical equation <span class="math inline">\(\Psi_n(\widehat\theta)=0\)</span>. An approximate root only requires the residual <span class="math inline">\(\|\Psi_n(\widehat\theta_n)\|\)</span> to be negligible at the scale of the expansion. Differentiating the population map and controlling the empirical-process remainder yields an asymptotic-linear representation. See Theorem 5.21, <a href="./chapter-19.html#theorem-19-26-infinite-dimensional-z-estimation">Theorem 19.26</a>, and the <a href="./chapter-25.html#theorem-25-90">Banach-valued likelihood-equation use in §25.12</a>.</p>
+</section>
+<section id="glossary-sandwich" class="level3">
+<h3 class="anchored" data-anchor-id="glossary-sandwich">Sensitivity and sandwich covariance</h3>
+<p>For an estimating function <span class="math inline">\(\psi_\theta\)</span>, the sensitivity matrix is the derivative of the population equation, commonly <span class="math inline">\(V_{\theta_0}=\partial_\theta P\psi_\theta|_{\theta_0}\)</span> in Chapter 5. If the empirical fluctuation has covariance <span class="math inline">\(P\psi_{\theta_0}\psi_{\theta_0}^T\)</span>, then the estimator’s asymptotic covariance is the sandwich</p>
+<p><span class="math display">\[
+V_{\theta_0}^{-1}
+\{P\psi_{\theta_0}\psi_{\theta_0}^T\}
+(V_{\theta_0}^{-1})^T.
+\]</span></p>
+<p>See the Z-estimator expansion in Chapter 5 of the original text. §25.9 uses the local symbol <span class="math inline">\(J_{\theta,\tau}\)</span> for the analogous derivative normalization to avoid collision with Chapter 25’s score-operator notation.</p>
+</section>
+<section id="glossary-l2-projection" class="level3">
+<h3 class="anchored" data-anchor-id="glossary-l2-projection"><span class="math inline">\(L_2\)</span> projection</h3>
+<p>The orthogonal projection of <span class="math inline">\(X\in L_2(P)\)</span> onto a closed linear subspace <span class="math inline">\(S\)</span> is the unique element <span class="math inline">\(\Pi_SX\in S\)</span> such that <span class="math inline">\(X-\Pi_SX\)</span> is orthogonal to every element of <span class="math inline">\(S\)</span>. The Pythagorean identity makes it the minimum-mean-square approximation. See Theorem 11.1 and its score-space use in <a href="./chapter-25.html#efficient-score-functions">§25.4</a>.</p>
+</section>
+<section id="glossary-conditional-expectation" class="level3">
+<h3 class="anchored" data-anchor-id="glossary-conditional-expectation">Conditional expectation as projection</h3>
+<p><span class="math inline">\(E(X\mid Y)\)</span> is the orthogonal projection of <span class="math inline">\(X\in L_2(P)\)</span> onto the closed subspace of square-integrable functions of <span class="math inline">\(Y\)</span>. Consequently, <span class="math inline">\(X-E(X\mid Y)\)</span> is orthogonal to every such function. This identity drives residualization, information-loss score operators, and many missing-data calculations. See §11.2 of the original text.</p>
+</section>
+<section id="glossary-hajek-projection" class="level3">
+<h3 class="anchored" data-anchor-id="glossary-hajek-projection">Hájek projection</h3>
+<p>The Hájek projection replaces a statistic based on independent observations by its orthogonal projection onto sums of one-observation functions. When the remainder is negligible, the projected summands give its asymptotic influence representation. See Lemma 11.10 and the Wilcoxon return in <a href="./chapter-25.html#example-25-46">Example 25.46</a>.</p>
+</section>
+</section>
+<section id="semiparametric-geometry" class="level2">
+<h2 class="anchored" data-anchor-id="semiparametric-geometry">Semiparametric geometry</h2>
+<section id="glossary-semiparametric-model" class="level3">
+<h3 class="anchored" data-anchor-id="glossary-semiparametric-model">Semiparametric model</h3>
+<p>A semiparametric model contains a finite-dimensional target together with an infinite-dimensional nuisance component, or more generally asks for a low-dimensional functional of a large model. See <a href="./chapter-25.html#semiparametric-models">§25.1</a>.</p>
+</section>
+<section id="glossary-regular-submodel" class="level3">
+<h3 class="anchored" data-anchor-id="glossary-regular-submodel">Regular parametric submodel</h3>
+<p>A regular parametric submodel is a smooth finite-dimensional path through the true law. Restricting the full model to such a path creates an ordinary parametric problem and hence a lower bound. Chapter 25 compares these bounds across all admissible paths. See <a href="./chapter-25.html#tangent-spaces-and-information">§25.3</a>.</p>
+</section>
+<section id="glossary-tangent-space" class="level3">
+<h3 class="anchored" data-anchor-id="glossary-tangent-space">Tangent set and tangent space</h3>
+<p>The tangent set <span class="math inline">\(\dot{\mathcal P}_P\)</span> collects scores of selected DQM paths through <span class="math inline">\(P\)</span>. Its closed linear span is the space on which semiparametric projection geometry operates. The source sometimes calls the set itself a tangent space when it is already linear. See <a href="./chapter-25.html#sec-tangent-space">the tangent-set construction</a>.</p>
+</section>
+<section id="glossary-nuisance-tangent-space" class="level3">
+<h3 class="anchored" data-anchor-id="glossary-nuisance-tangent-space">Nuisance tangent space</h3>
+<p>The nuisance tangent space contains scores of paths that vary the nuisance parameter while leaving the target fixed to first order. Projecting an ordinary target score onto this space identifies the information absorbed by nuisance variation. See <a href="./chapter-25.html#efficient-score-functions">§25.4</a>.</p>
+</section>
+<section id="glossary-pathwise-derivative" class="level3">
+<h3 class="anchored" data-anchor-id="glossary-pathwise-derivative">Pathwise derivative</h3>
+<p><span class="math inline">\(\dot\psi_P\)</span> is one continuous linear map that gives the derivative of <span class="math inline">\(\psi(P_t)\)</span> along every admissible score direction. Existence of separate directional derivatives is not enough unless they fit this common linear map. See <a href="./chapter-25.html#sec-pathwise-differentiability">pathwise differentiability</a>.</p>
+</section>
+<section id="glossary-influence-function" class="level3">
+<h3 class="anchored" data-anchor-id="glossary-influence-function">Influence function</h3>
+<p>An influence function <span class="math inline">\(\psi_P^\dagger\in L_2(P)\)</span> represents the pathwise derivative through <span class="math inline">\(\dot\psi_Pg=P\psi_P^\dagger g\)</span> for every score <span class="math inline">\(g\)</span> under consideration. It need not be unique outside the tangent space. <span class="citation" data-cites="kennedy2022">Kennedy (<a href="references.html#ref-kennedy2022" role="doc-biblioref">2022</a>)</span> calls this target-derivative representative an <em>influence curve</em>. Keep it conceptually separate from both an estimator’s asymptotic influence function—its first-order summand—and the Hampel contamination sensitivity used in robust statistics. <a href="./chapter-25.html#lemma-25-23">Lemma 25.23</a> characterizes regular efficient estimators by the appearance of the efficient target influence function as their asymptotic summand; bounded contamination sensitivity is a separate robustness property discussed in §5.3 of <span class="citation" data-cites="fisherKennedy2021">Fisher and Kennedy (<a href="references.html#ref-fisherKennedy2021" role="doc-biblioref">2021</a>)</span>. See <a href="./chapter-25.html#sec-if-construction">influence functions and their construction</a>.</p>
+</section>
+<section id="glossary-efficient-influence-function" class="level3">
+<h3 class="anchored" data-anchor-id="glossary-efficient-influence-function">Efficient influence function</h3>
+<p><span class="math inline">\(\widetilde\psi_P\)</span> is the projection of any influence function onto the closed linear span of the tangent set. It is the unique representative with minimum <span class="math inline">\(L_2(P)\)</span> norm and gives the semiparametric covariance lower bound. See <a href="./chapter-25.html#efficient-influence-function">the efficient influence function</a>.</p>
+</section>
+<section id="glossary-efficient-score" class="level3">
+<h3 class="anchored" data-anchor-id="glossary-efficient-score">Efficient score</h3>
+<p><span class="math inline">\(\widetilde\ell_{\theta,\eta}\)</span> is the ordinary score for the target parameter after subtracting its orthogonal projection onto the nuisance tangent space. See <a href="./chapter-25.html#efficient-score-functions">efficient score functions</a>.</p>
+</section>
+<section id="glossary-efficient-information" class="level3">
+<h3 class="anchored" data-anchor-id="glossary-efficient-information">Efficient information</h3>
+<p><span class="math inline">\(\widetilde I_{\theta,\eta}=P_{\theta,\eta}\widetilde\ell_{\theta,\eta}\widetilde\ell_{\theta,\eta}^T\)</span> is the information remaining after nuisance projection. When nonsingular, <span class="math inline">\(\widetilde I_{\theta,\eta}^{-1}\widetilde\ell_{\theta,\eta}\)</span> is the efficient influence function for the finite-dimensional target. See <a href="./chapter-25.html#efficient-score-functions">§25.4</a>.</p>
+</section>
+<section id="glossary-score-operator" class="level3">
+<h3 class="anchored" data-anchor-id="glossary-score-operator">Score operator and adjoint</h3>
+<p>For Hilbert spaces <span class="math inline">\(\mathbb H_1\)</span> and <span class="math inline">\(\mathbb H_2\)</span>, the adjoint of a continuous linear operator <span class="math inline">\(A:\mathbb H_1\to\mathbb H_2\)</span> is the operator <span class="math inline">\(A^*:\mathbb H_2\to\mathbb H_1\)</span> characterized by</p>
+<p><span class="math display">\[
+\langle Ah_1,h_2\rangle_{\mathbb H_2}
+=\langle h_1,A^*h_2\rangle_{\mathbb H_1}.
+\]</span></p>
+<p>Thus the adjoint reverses the direction of the map; in Euclidean spaces it is the matrix transpose. In §25.5, <span class="math inline">\(A_\eta\)</span> maps a parameter-space direction <span class="math inline">\(b\)</span> to its observable score <span class="math inline">\(A_\eta b\)</span>, and the equation <span class="math inline">\(A_\eta^*\widetilde\psi_{P_\eta}=\widetilde\chi_\eta\)</span> identifies observed-data influence functions. See <a href="./chapter-25.html#score-and-information-operators">score and information operators</a>.</p>
+</section>
+<section id="glossary-information-operator" class="level3">
+<h3 class="anchored" data-anchor-id="glossary-information-operator">Information operator</h3>
+<p><span class="math inline">\(A_\eta^*A_\eta\)</span> is the infinite-dimensional analogue of a Fisher information matrix. Failure of stable invertibility signals local nonidentification or ill-posedness. See <a href="./chapter-25.html#information-operator">the information-operator discussion</a>.</p>
+</section>
+</section>
+<section id="estimator-construction-and-modern-connections" class="level2">
+<h2 class="anchored" data-anchor-id="estimator-construction-and-modern-connections">Estimator construction and modern connections</h2>
+<section id="glossary-asymptotic-linearity" class="level3">
+<h3 class="anchored" data-anchor-id="glossary-asymptotic-linearity">Asymptotic linearity</h3>
+<p>An estimator is asymptotically linear when its root-<span class="math inline">\(n\)</span> error equals an average of a mean-zero influence function plus <span class="math inline">\(o_P(1)\)</span>. This representation turns estimation into a central-limit problem and makes asymptotic variance explicit. See <a href="./chapter-25.html#sec-general-estimating-equations">§25.9</a>.</p>
+</section>
+<section id="glossary-functional-derivatives" class="level3">
+<h3 class="anchored" data-anchor-id="glossary-functional-derivatives">Hadamard and Fréchet differentiation</h3>
+<p>Hadamard differentiability is the uniform directional differentiability used by the functional delta method. Fréchet differentiability is a norm-uniform linear approximation and is stronger. See §20.2 and Theorem 20.8, the <a href="./chapter-25.html#sec-efficiency-delta-banach">Banach-space delta-method guide in §25.7</a>, and <a href="./chapter-25.html#theorem-25-90">the likelihood-equation linearization in §25.12</a>.</p>
+</section>
+<section id="glossary-von-mises" class="level3">
+<h3 class="anchored" data-anchor-id="glossary-von-mises">Von Mises expansion</h3>
+<p>A von Mises expansion is a Taylor expansion of a functional of a probability law. Choose the derivative representative at each law to be centered under that law. In the reverse convention used by <span class="citation" data-cites="kennedy2022">Kennedy (<a href="references.html#ref-kennedy2022" role="doc-biblioref">2022</a>)</span> and in Chapter 25’s one-step discussion,</p>
+<p><span class="math display">\[
+\psi(Q)-\psi(P)=(Q-P)\psi_Q^\dagger+R_2(Q,P),
+\]</span></p>
+<p>the centered influence function evaluated at <span class="math inline">\(Q\)</span> supplies the linear term and <span class="math inline">\(R_2\)</span> records the nonlinear remainder. A forward expansion instead evaluates the derivative at <span class="math inline">\(P\)</span> and defines its remainder accordingly. This is the bridge from pathwise derivatives to plug-in bias correction and nuisance-rate conditions. See <a href="./chapter-25.html#sec-von-mises-expansion">the Chapter 25 expansion</a>.</p>
+</section>
+<section id="glossary-gateaux-contamination" class="level3">
+<h3 class="anchored" data-anchor-id="glossary-gateaux-contamination">Gâteaux derivative and point-mass contamination</h3>
+<p>A Gâteaux derivative differentiates <span class="math inline">\(\psi(P_t)\)</span> along a chosen direction. The contamination path <span class="math inline">\(P_t=(1-t)P+t\delta_z\)</span> is a useful shortcut for generating an influence-function candidate, especially in discrete or unrestricted nonparametric calculations. It may, however, fail to be dominated, DQM, or admissible in the stated model. The candidate must therefore be centered and verified against every allowed score through <span class="math inline">\(\dot\psi_Pg=P\psi_P^\dagger g\)</span>. See the von Mises calculus in §20.1 and <a href="./chapter-25.html#sec-if-construction">the influence-function construction recipe</a>.</p>
+</section>
+<section id="glossary-one-step" class="level3">
+<h3 class="anchored" data-anchor-id="glossary-one-step">One-step estimator</h3>
+<p>A one-step estimator adds an estimated, centered influence-function correction to a plug-in estimate,</p>
+<p><span class="math display">\[
+\widehat\psi_{\mathrm{1step}}
+=\psi(\widehat P)+\mathbb P_n\psi_{\widehat P}^\dagger.
+\]</span></p>
+<p>Here the representative is chosen so that <span class="math inline">\(\widehat P\psi_{\widehat P}^\dagger=0\)</span>. The plug-in or machine-learning fit supplies <span class="math inline">\(\widehat P\)</span>; semiparametric theory supplies the correction, the efficiency benchmark, and the remainder conditions under which the result is asymptotically linear. With sample splitting or cross-fitting, the nuisance fit used in a summand is learned away from that observation, providing conditional independence; <span class="math inline">\(L_2\)</span> convergence, integrability, and target-specific remainder control are still required. See the finite-dimensional Newton prototype in Theorem 5.45 and <a href="./chapter-25.html#sec-25-8-one-step">the influence-function route in §25.8</a>.</p>
+</section>
+<section id="glossary-neyman-orthogonality" class="level3">
+<h3 class="anchored" data-anchor-id="glossary-neyman-orthogonality">Neyman orthogonality</h3>
+<p>A moment is Neyman-orthogonal when its population derivative with respect to the nuisance parameter vanishes at the truth. In regular likelihood constructions, coherently extending a projected score often yields such a moment. Under appropriate differentiability and remainder conditions, this removes first-order nuisance error and can leave a second-order or product remainder; orthogonality alone does not determine that remainder. See <a href="./chapter-25.html#sec-25-8-no-bias">the no-bias condition in §25.8</a> and <a href="./chapter-25.html#sec-25-11-partially-linear-regression">the partially linear example</a>.</p>
+</section>
+<section id="glossary-no-bias" class="level3">
+<h3 class="anchored" data-anchor-id="glossary-no-bias">No-bias condition</h3>
+<p>When an efficient score or influence function is estimated, its population mean under the true data-generating law must be negligible on the root-<span class="math inline">\(n\)</span> scale. This requirement is separate from <span class="math inline">\(L_2\)</span> consistency: a small mean drift can survive in the estimator’s limiting distribution. Neyman orthogonality often makes the drift second order, but the target-specific remainder still has to be verified. See <a href="./chapter-25.html#sec-25-8-two-requirements">the two score-estimation requirements in §25.8</a>.</p>
+</section>
+<section id="glossary-cross-fitting" class="level3">
+<h3 class="anchored" data-anchor-id="glossary-cross-fitting">Sample splitting and cross-fitting</h3>
+<p>Sample splitting estimates nuisance functions on one sample and evaluates the target moment on another. Cross-fitting rotates the held-out fold so that every observation contributes to target estimation. It provides conditional independence that can replace same-sample stochastic-equicontinuity arguments, but negligibility still requires <span class="math inline">\(L_2\)</span> convergence, integrability, and the relevant remainder conditions. See <a href="./chapter-25.html#sec-25-8-one-step">the one-step route in §25.8</a>.</p>
+</section>
+<section id="glossary-double-robustness" class="level3">
+<h3 class="anchored" data-anchor-id="glossary-double-robustness">Double robustness</h3>
+<p>An estimating equation is <strong>model doubly robust</strong> when its population mean remains zero if either of two nuisance components is correctly specified. <strong>Rate double robustness</strong> means that, near the intersection model, the leading bias is bounded by the product of the two nuisance-estimation errors; root-<span class="math inline">\(n\)</span> inference can then allow a slower rate for one nuisance when the other is estimated faster. These properties are distinct from Neyman orthogonality: model double robustness concerns consistency on two model branches, whereas orthogonality is a local derivative condition. See the <a href="./chapter-25.html#sec-25-41-double-robustness">missing-data construction after Lemma 25.41</a>, <a href="./chapter-25.html#example-25-67">Example 25.67</a>, and the <a href="./chapter-25.html#sec-25-11-partially-linear-regression">partially linear product-rate calculation</a>.</p>
+</section>
+<section id="glossary-profile-likelihood" class="level3">
+<h3 class="anchored" data-anchor-id="glossary-profile-likelihood">Profile likelihood</h3>
+<p>For each fixed target value, profile likelihood maximizes over the nuisance parameter and then optimizes the resulting target-only criterion. See <a href="./chapter-25.html#sec-25-10-profile-likelihood">§25.10</a>.</p>
+</section>
+<section id="glossary-least-favorable-submodel" class="level3">
+<h3 class="anchored" data-anchor-id="glossary-least-favorable-submodel">Least-favorable submodel</h3>
+<p>A least-favorable submodel has a target score equal to the efficient score and therefore reproduces the semiparametric information bound inside a parametric path. An approximately least-favorable path matches this behavior to the order needed for estimation. See <a href="./chapter-25.html#sec-approximately-least-favorable-submodels">§25.11</a>.</p>
+<p><a href="./index.html#route-to-chapter-25">Return to the route through the book</a>.</p>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
+<div id="ref-bailie2021" class="csl-entry" role="listitem">
+Bailie, James. 2021. <em>Stat213 Lecture Notes</em>. Course lecture notes, Harvard University. <a href="https://jameshbailie.github.io/files/papers/2021-06-16-Asymptotic-statistics.pdf">https://jameshbailie.github.io/files/papers/2021-06-16-Asymptotic-statistics.pdf</a>.
+</div>
+<div id="ref-bickelEtAl1993" class="csl-entry" role="listitem">
+Bickel, Peter J., Chris A. J. Klaassen, Ya’acov Ritov, and Jon A. Wellner. 1993. <em>Efficient and Adaptive Estimation for Semiparametric Models</em>. Johns Hopkins Series in the Mathematical Sciences. Johns Hopkins University Press. <a href="https://link.springer.com/book/9780387984735">https://link.springer.com/book/9780387984735</a>.
+</div>
+<div id="ref-chernozhukovEtAl2018" class="csl-entry" role="listitem">
+Chernozhukov, Victor, Denis Chetverikov, Mert Demirer, et al. 2018. <span>“Double/Debiased Machine Learning for Treatment and Structural Parameters.”</span> <em>The Econometrics Journal</em> 21 (1): C1–68. <a href="https://doi.org/10.1111/ectj.12097">https://doi.org/10.1111/ectj.12097</a>.
+</div>
+<div id="ref-dasgupta2008" class="csl-entry" role="listitem">
+DasGupta, Anirban. 2008. <em>Asymptotic Theory of Statistics and Probability</em>. Springer Texts in Statistics. Springer. <a href="https://doi.org/10.1007/978-0-387-75971-5">https://doi.org/10.1007/978-0-387-75971-5</a>.
+</div>
+<div id="ref-fisherKennedy2021" class="csl-entry" role="listitem">
+Fisher, Aaron, and Edward H. Kennedy. 2021. <span>“Visually Communicating and Teaching Intuition for Influence Functions.”</span> <em>The American Statistician</em> 75 (2): 162–72. <a href="https://doi.org/10.1080/00031305.2020.1717620">https://doi.org/10.1080/00031305.2020.1717620</a>.
+</div>
+<div id="ref-gillJohansen1990" class="csl-entry" role="listitem">
+Gill, Richard D., and Søren Johansen. 1990. <span>“A Survey of Product-Integration with a View Toward Application in Survival Analysis.”</span> <em>The Annals of Statistics</em> 18 (4): 1501–55. <a href="https://doi.org/10.1214/aos/1176347865">https://doi.org/10.1214/aos/1176347865</a>.
+</div>
+<div id="ref-jiang2022" class="csl-entry" role="listitem">
+Jiang, Jiming. 2022. <em>Large Sample Techniques for Statistics</em>. 2nd ed. Springer Texts in Statistics. Springer. <a href="https://doi.org/10.1007/978-3-030-91695-4">https://doi.org/10.1007/978-3-030-91695-4</a>.
+</div>
+<div id="ref-kennedy2016" class="csl-entry" role="listitem">
+Kennedy, Edward H. 2016. <span>“Semiparametric Theory and Empirical Processes in Causal Inference.”</span> In <em>Statistical Causal Inferences and Their Applications in Public Health Research</em>, edited by Hua He, Pan Wu, and Ding-Geng Chen. ICSA Book Series in Statistics. Springer International Publishing. <a href="https://doi.org/10.1007/978-3-319-41259-7_8">https://doi.org/10.1007/978-3-319-41259-7_8</a>.
+</div>
+<div id="ref-kennedy2022" class="csl-entry" role="listitem">
+Kennedy, Edward H. 2022. <em>Semiparametric Doubly Robust Targeted Double Machine Learning: A Review</em>. <a href="https://doi.org/10.48550/arXiv.2203.06469">https://doi.org/10.48550/arXiv.2203.06469</a>.
+</div>
+<div id="ref-kosorok2008" class="csl-entry" role="listitem">
+Kosorok, Michael R. 2008. <em>Introduction to Empirical Processes and Semiparametric Inference</em>. Springer Series in Statistics. Springer. <a href="https://doi.org/10.1007/978-0-387-74978-5">https://doi.org/10.1007/978-0-387-74978-5</a>.
+</div>
+<div id="ref-leCamYang2000" class="csl-entry" role="listitem">
+Le Cam, Lucien, and Grace Lo Yang. 2000. <em>Asymptotics in Statistics: Some Basic Concepts</em>. 2nd ed. Springer Series in Statistics. Springer. <a href="https://doi.org/10.1007/978-1-4612-1166-2">https://doi.org/10.1007/978-1-4612-1166-2</a>.
+</div>
+<div id="ref-murphyVanDerVaart1996" class="csl-entry" role="listitem">
+Murphy, Susan A., and Aad W. van der Vaart. 1996. <span>“Likelihood Inference in the Errors-in-Variables Model.”</span> <em>Journal of Multivariate Analysis</em> 59 (1): 81–108. <a href="https://doi.org/10.1006/jmva.1996.0055">https://doi.org/10.1006/jmva.1996.0055</a>.
+</div>
+<div id="ref-pollard2002" class="csl-entry" role="listitem">
+Pollard, David. 2002. <em>A User’s Guide to Measure Theoretic Probability</em>. Cambridge Series in Statistical and Probabilistic Mathematics 8. Cambridge University Press. <a href="https://doi.org/10.1017/CBO9780511811555">https://doi.org/10.1017/CBO9780511811555</a>.
+</div>
+<div id="ref-robinsEtAl1994" class="csl-entry" role="listitem">
+Robins, James M., Andrea Rotnitzky, and Lue Ping Zhao. 1994. <span>“Estimation of Regression Coefficients When Some Regressors Are Not Always Observed.”</span> <em>Journal of the American Statistical Association</em> 89 (427): 846–66. <a href="https://doi.org/10.1080/01621459.1994.10476818">https://doi.org/10.1080/01621459.1994.10476818</a>.
+</div>
+<div id="ref-sen2022" class="csl-entry" role="listitem">
+Sen, Bodhisattva. 2022. <em>A Gentle Introduction to Empirical Process Theory and Applications</em>. Lecture notes, Department of Statistics, Columbia University. <a href="https://sites.stat.columbia.edu/bodhi/Talks/Emp-Proc-Lecture-Notes.pdf">https://sites.stat.columbia.edu/bodhi/Talks/Emp-Proc-Lecture-Notes.pdf</a>.
+</div>
+<div id="ref-tsiatis2006" class="csl-entry" role="listitem">
+Tsiatis, Anastasios A. 2006. <em>Semiparametric Theory and Missing Data</em>. Springer Series in Statistics. Springer. <a href="https://doi.org/10.1007/0-387-37345-4">https://doi.org/10.1007/0-387-37345-4</a>.
+</div>
+<div id="ref-tsybakov2009" class="csl-entry" role="listitem">
+Tsybakov, Alexandre B. 2009. <em>Introduction to Nonparametric Estimation</em>. Springer Series in Statistics. Springer. <a href="https://doi.org/10.1007/b13794">https://doi.org/10.1007/b13794</a>.
+</div>
+<div id="ref-vanDerVaart1991Differentiable" class="csl-entry" role="listitem">
+Vaart, Aad W. van der. 1991. <span>“On Differentiable Functionals.”</span> <em>The Annals of Statistics</em> 19 (1): 178–204. <a href="https://doi.org/10.1214/aos/1176347976">https://doi.org/10.1214/aos/1176347976</a>.
+</div>
+<div id="ref-vanDerVaart1996Mixture" class="csl-entry" role="listitem">
+Vaart, Aad W. van der. 1996. <span>“Efficient Maximum Likelihood Estimation in Semiparametric Mixture Models.”</span> <em>The Annals of Statistics</em> 24 (2): 862–78. <a href="https://doi.org/10.1214/aos/1032894470">https://doi.org/10.1214/aos/1032894470</a>.
+</div>
+<div id="ref-vanDerVaartWellner1996" class="csl-entry" role="listitem">
+<span class="nocase">van der Vaart, Aad W., and Jon A. Wellner</span>. 1996. <em>Weak Convergence and Empirical Processes: With Applications to Statistics</em>. Springer Series in Statistics. Springer. <a href="https://doi.org/10.1007/978-1-4757-2545-2">https://doi.org/10.1007/978-1-4757-2545-2</a>.
+</div>
+</div>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./index.html" class="pagination-link" aria-label="Reading Companion for *Asymptotic Statistics*">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Reading Companion for <em>Asymptotic Statistics</em></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./chapter-2.html" class="pagination-link" aria-label="Chapter 2: Stochastic Convergence">
+        <span class="nav-page-text"><span class="chapter-title">Chapter 2: Stochastic Convergence</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

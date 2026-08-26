@@ -1,0 +1,1495 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Chapter 7: Local Asymptotic Normality – Reading Companion for Asymptotic Statistics</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./chapter-8.html" rel="next">
+<link href="./chapter-6.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-d3f7f8e73c8d287b30bcf59c2b563615.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./chapter-7.html"><span class="chapter-title">Chapter 7: Local Asymptotic Normality</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Reading Companion for Asymptotic Statistics</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Reading Companion for <em>Asymptotic Statistics</em></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./glossary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Glossary</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-2.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Chapter 2: Stochastic Convergence</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-6.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Chapter 6: Contiguity</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-7.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Chapter 7: Local Asymptotic Normality</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-8.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Chapter 8: Efficiency of Estimators</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-18.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Chapter 18: Stochastic Convergence in Metric Spaces</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-19.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Chapter 19: Empirical Processes</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-25.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Chapter 25: Semiparametric Models</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">7.1 Introduction</a>
+  <ul class="collapse">
+  <li><a href="#parametric-to-semiparametric-dictionary" id="toc-parametric-to-semiparametric-dictionary" class="nav-link" data-scroll-target="#parametric-to-semiparametric-dictionary">Parametric-to-semiparametric dictionary</a></li>
+  </ul></li>
+  <li><a href="#expanding-the-likelihood" id="toc-expanding-the-likelihood" class="nav-link" data-scroll-target="#expanding-the-likelihood">7.2 Expanding the Likelihood</a>
+  <ul class="collapse">
+  <li><a href="#local-reparameterization" id="toc-local-reparameterization" class="nav-link" data-scroll-target="#local-reparameterization">Local reparameterization</a></li>
+  <li><a href="#heuristic-likelihood-expansion" id="toc-heuristic-likelihood-expansion" class="nav-link" data-scroll-target="#heuristic-likelihood-expansion">Heuristic likelihood expansion</a></li>
+  <li><a href="#sec-differentiability-quadratic-mean" id="toc-sec-differentiability-quadratic-mean" class="nav-link" data-scroll-target="#sec-differentiability-quadratic-mean">Differentiability in quadratic mean</a></li>
+  </ul></li>
+  <li><a href="#convergence-to-a-normal-experiment" id="toc-convergence-to-a-normal-experiment" class="nav-link" data-scroll-target="#convergence-to-a-normal-experiment">7.3 Convergence to a Normal Experiment</a></li>
+  <li><a href="#maximum-likelihood" id="toc-maximum-likelihood" class="nav-link" data-scroll-target="#maximum-likelihood">7.4 Maximum Likelihood</a>
+  <ul class="collapse">
+  <li><a href="#constrained-parameter-spaces" id="toc-constrained-parameter-spaces" class="nav-link" data-scroll-target="#constrained-parameter-spaces">Constrained parameter spaces</a></li>
+  </ul></li>
+  <li><a href="#sec-limit-distributions-alternatives" id="toc-sec-limit-distributions-alternatives" class="nav-link" data-scroll-target="#sec-limit-distributions-alternatives">7.5 Limit Distributions Under Alternatives</a>
+  <ul class="collapse">
+  <li><a href="#general-scheme" id="toc-general-scheme" class="nav-link" data-scroll-target="#general-scheme">General scheme</a></li>
+  </ul></li>
+  <li><a href="#sec-local-asymptotic-normality" id="toc-sec-local-asymptotic-normality" class="nav-link" data-scroll-target="#sec-local-asymptotic-normality">7.6 Local Asymptotic Normality</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span id="sec-lan" class="quarto-section-identifier"><span class="chapter-title">Chapter 7: Local Asymptotic Normality</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>This chapter shows how a smooth model, viewed on an <span class="math inline">\(n^{-1/2}\)</span> neighborhood of a fixed parameter, becomes a <a href="./glossary.html#glossary-limit-experiment">Gaussian shift experiment</a>.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Why this chapter is here">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Why this chapter is here
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong>Prerequisites:</strong> <a href="./chapter-2.html#sec-stochastic-order">stochastic order and Slutsky</a>, together with <a href="./chapter-6.html#sec-contiguity">contiguity and change of measure</a>.</li>
+<li><strong>Purpose:</strong> use <a href="./glossary.html#glossary-dqm">DQM</a> and <a href="./glossary.html#glossary-lan">LAN</a> to replace a smooth statistical model, in a shrinking neighborhood of the truth, by a Gaussian location experiment.</li>
+<li><strong>Chapter 25 payoff:</strong> <a href="./chapter-25.html#lemma-25.14-local-asymptotic-normality-along-a-path">Lemma 25.14</a> applies the same LAN expansion one path at a time. Along the way, LAN supplies the Gaussian reductions in <a href="./chapter-8.html#theorem-limit-experiment-reduction">Theorem 8.3</a> and Chapter 15.</li>
+</ul>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Companion readings">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Companion readings
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>For complementary treatments of differentiability in quadratic mean, LAN, and convergence of experiments, see §6.2 and §§12.1–12.3 of <span class="citation" data-cites="bailie2021">Bailie (<a href="references.html#ref-bailie2021" role="doc-biblioref">2021</a>)</span> and §2.4 of <span class="citation" data-cites="tsybakov2009">Tsybakov (<a href="references.html#ref-tsybakov2009" role="doc-biblioref">2009</a>)</span>.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Reading guide">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Reading guide
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong>Core — §§7.2–7.3:</strong> Theorem 7.2 turns DQM into LAN, and Theorem 7.10 transfers limiting procedures to the Gaussian experiment.</li>
+<li><strong>Core — §7.5:</strong> contiguity and Le Cam’s third lemma determine behavior under local alternatives.</li>
+<li><strong>Supporting — §§7.4 and 7.6:</strong> likelihood maximization, parameter-space boundaries, and the abstraction of LAN beyond the i.i.d. setting.</li>
+<li><strong>Compressed — Examples 7.7–7.9:</strong> representative DQM verifications and the failure caused by moving support.</li>
+<li><strong>Omitted/deferred — Examples 7.16–7.18 and the exercises:</strong> dependent and other non-i.i.d. models not needed for the pathwise Chapter 25 argument.</li>
+</ul>
+</div>
+</div>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">7.1 Introduction</h2>
+<div class="callout callout-style-default callout-note callout-titled" title="Chapter roadmap">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Chapter roadmap
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>Reparameterize locally using <span class="math inline">\(\theta+h/\sqrt n\)</span>.</li>
+<li>Assume differentiability in quadratic mean.</li>
+<li>Obtain the quadratic likelihood expansion <span class="math inline">\(h^T\Delta_{n,\theta}-\frac12h^TI_\theta h+o_{P_\theta}(1)\)</span>.</li>
+<li>Recognize this as the likelihood-ratio form of a Gaussian location experiment.</li>
+<li>Match limiting procedures in the original experiments to procedures in the Gaussian experiment.</li>
+<li>Use the Gaussian experiment to understand maximum likelihood, local alternatives, testing, estimation, and asymptotic efficiency.</li>
+<li>Abstract the likelihood expansion into the general definition of LAN for non-i.i.d. and dependent models.</li>
+</ol>
+<p>The central sequence <span class="math inline">\(\Delta_{n,\theta}\)</span> and Fisher information <span class="math inline">\(I_\theta\)</span> summarize the local behavior of a regular model. In the limit, the original experiment behaves like observing <span class="math inline">\(X\sim N(h,I_\theta^{-1})\)</span>.</p>
+</div>
+</div>
+<section id="parametric-to-semiparametric-dictionary" class="level3">
+<h3 class="anchored" data-anchor-id="parametric-to-semiparametric-dictionary">Parametric-to-semiparametric dictionary</h3>
+<p>Chapter 25 keeps the structure developed here but allows infinitely many local directions. The correspondence is conceptual, not a literal change of notation:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Chapter 7: smooth parametric model</th>
+<th>Chapter 25: semiparametric model</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>local vector <span class="math inline">\(h\)</span> selects a direction and magnitude</td>
+<td>score <span class="math inline">\(g\)</span> selects a tangent direction; a scalar <span class="math inline">\(h\)</span> controls its magnitude</td>
+</tr>
+<tr class="even">
+<td>DQM of <span class="math inline">\(\theta\mapsto P_\theta\)</span> along parameter vectors</td>
+<td>DQM of a path <span class="math inline">\(t\mapsto P_{t,g}\)</span> with score <span class="math inline">\(g\)</span></td>
+</tr>
+<tr class="odd">
+<td>local law <span class="math inline">\(P_{\theta+h/\sqrt n}^n\)</span></td>
+<td>local law <span class="math inline">\(P_{h/\sqrt n,g}^n\)</span> along a chosen path</td>
+</tr>
+<tr class="even">
+<td>Fisher information <span class="math inline">\(I_\theta\)</span></td>
+<td>efficient information after projecting away nuisance directions</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(I_\theta^{-1}\dot\ell_\theta\)</span> for <span class="math inline">\(\theta\)</span> itself (and <span class="math inline">\(\dot\psi_\theta I_\theta^{-1}\dot\ell_\theta\)</span> for a smooth scalar target, using the book’s row-gradient convention)</td>
+<td>efficient influence function <span class="math inline">\(\widetilde\psi_P\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>The key move is therefore <span class="math inline">\(h\leftrightarrow g\)</span>: Chapter 7 studies finitely many parameter directions at once, while <a href="./chapter-25.html#tangent-spaces-and-information">§25.3</a> collects the scores of all admissible paths into a tangent space.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Statistical experiments">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Statistical experiments
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Let <span class="math inline">\(X_1,\ldots,X_n\)</span> be an i.i.d. sample from <span class="math inline">\(P_\theta\)</span> on <span class="math inline">\((\mathcal X,\mathcal A)\)</span>, where <span class="math inline">\(\theta\)</span> ranges over an open subset <span class="math inline">\(\Theta\subset\mathbb R^k\)</span>. The full observation has law <span class="math inline">\(P_\theta^n\)</span> on <span class="math inline">\((\mathcal X^n,\mathcal A^n)\)</span>, and the statistical experiment is the family <span class="math inline">\(\{P_\theta^n:\theta\in\Theta\}\)</span>. A single <span class="math inline">\(P_\theta^n\)</span> describes the data law at one parameter value; the experiment retains the full family of possible laws.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Local asymptotic normality, informally">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Local asymptotic normality, informally
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A sequence of statistical experiments is <strong>locally asymptotically normal</strong> when, after an appropriate local reparameterization, its likelihood-ratio process has the same asymptotic quadratic form as the likelihood-ratio process of a Gaussian location experiment.</p>
+</div>
+</div>
+<p>The approximation to be established is</p>
+<p><span class="math display">\[
+\{P_{\theta_0+h/\sqrt n}^n:h\in\mathbb R^k\} \approx \{N(h,I_{\theta_0}^{-1}):h\in\mathbb R^k\}
+\]</span></p>
+<p>when <span class="math inline">\(n\)</span> is large and <span class="math inline">\(\theta\mapsto P_\theta\)</span> is smooth in the parameter.</p>
+<hr>
+</section>
+</section>
+<section id="expanding-the-likelihood" class="level2">
+<h2 class="anchored" data-anchor-id="expanding-the-likelihood">7.2 Expanding the Likelihood</h2>
+<section id="local-reparameterization" class="level3">
+<h3 class="anchored" data-anchor-id="local-reparameterization">Local reparameterization</h3>
+<p>Fix <span class="math inline">\(\theta_0\)</span> and define the <strong>local parameter</strong> <span class="math inline">\(h=\sqrt n(\theta-\theta_0)\)</span>. Equivalently, write nearby parameter values as <span class="math inline">\(\theta=\theta_0+h/\sqrt n\)</span> and the corresponding data law as <span class="math inline">\(P_{\theta_0+h/\sqrt n}^n\)</span>. If <span class="math inline">\(\theta_0\)</span> is an interior point of <span class="math inline">\(\Theta\)</span>, every fixed <span class="math inline">\(h\in\mathbb R^k\)</span> gives a valid parameter for all sufficiently large <span class="math inline">\(n\)</span>.</p>
+<hr>
+</section>
+<section id="heuristic-likelihood-expansion" class="level3">
+<h3 class="anchored" data-anchor-id="heuristic-likelihood-expansion">Heuristic likelihood expansion</h3>
+<p>Let <span class="math inline">\(p_\theta\)</span> be a density of <span class="math inline">\(P_\theta\)</span> with respect to <span class="math inline">\(\mu\)</span>, and write <span class="math inline">\(\ell_\theta(x)=\log p_\theta(x)\)</span>. The score is <span class="math inline">\(\dot\ell_\theta(x)=\partial\ell_\theta(x)/\partial\theta\)</span>, and the second derivative is <span class="math inline">\(\ddot\ell_\theta(x)=\partial\dot\ell_\theta(x)/\partial\theta\)</span>.</p>
+<p><strong>Heuristic Taylor expansion:</strong></p>
+<p>For a one-dimensional parameter, suppose <span class="math inline">\(\ell_\theta(x)\)</span> is twice differentiable in <span class="math inline">\(\theta\)</span>. Expanding <span class="math inline">\(\ell_{\theta+h}(x)-\ell_\theta(x)\)</span> gives</p>
+<p><span class="math display">\[
+\log\dfrac{p_{\theta+h}}{p_\theta}(x)=h\dot\ell_\theta(x)+\frac12h^2\ddot\ell_\theta(x)+o_x(h^2).
+\]</span></p>
+<p>Summing the expansion over the sample and substituting the local shift <span class="math inline">\(h/\sqrt n\)</span> gives, under suitable regularity conditions,</p>
+<p><span class="math display">\[
+\begin{aligned}
+\log\prod_{i=1}^n\frac{p_{\theta+h/\sqrt n}}{p_\theta}(X_i)
+&amp;=\frac{h}{\sqrt n}\sum_{i=1}^n\dot\ell_\theta(X_i)
++\frac{h^2}{2n}\sum_{i=1}^n\ddot\ell_\theta(X_i)
++o_{P_\theta}(1)\\
+&amp;=h\Delta_{n,\theta}-\frac12h^2I_\theta+o_{P_\theta}(1).
+\end{aligned}
+\]</span></p>
+<p>Under standard regularity conditions, the score has mean zero, <span class="math inline">\(P_\theta\dot\ell_\theta=0\)</span>, and the Fisher information is</p>
+<p><span class="math display">\[
+I_\theta=P_\theta\dot\ell_\theta\dot\ell_\theta^T=-P_\theta\ddot\ell_\theta.
+\]</span></p>
+<p>The first term is random and asymptotically normal:</p>
+<p><span class="math display">\[
+\Delta_{n,\theta}=n^{-1/2}\sum_{i=1}^n\dot\ell_\theta(X_i)\rightsquigarrow N(0,I_\theta)
+\]</span></p>
+<p>by the central limit theorem. The second term converges by the law of large numbers to the deterministic quadratic penalty <span class="math inline">\(-\frac12h^2I_\theta\)</span>.</p>
+</section>
+<section id="sec-differentiability-quadratic-mean" class="level3">
+<h3 class="anchored" data-anchor-id="sec-differentiability-quadratic-mean">Differentiability in quadratic mean</h3>
+<p>The model <span class="math inline">\(\{P_\theta:\theta\in\Theta\}\)</span> is differentiable in quadratic mean at <span class="math inline">\(\theta\)</span> if there exists a measurable vector function <span class="math inline">\(\dot\ell_\theta\)</span> such that</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Definition">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Definition
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span id="eq-differentiability-quadratic-mean"></span></p>
+<p><span class="math display">\[
+(7.1) \qquad \int\left[\sqrt{p_{\theta+h}}-\sqrt{p_\theta}-\frac12h^T\dot\ell_\theta\sqrt{p_\theta}\right]^2\,d\mu=o(\|h\|^2), \qquad h\to0.
+\]</span></p>
+</div>
+</div>
+<p>Thus, when the parameter moves from <span class="math inline">\(\theta\)</span> to <span class="math inline">\(\theta+h\)</span>, the <strong>square-root density</strong> changes approximately linearly in <span class="math inline">\(h\)</span>.</p>
+<p>When pointwise differentiation is valid, <span class="math inline">\(\dot\ell_\theta(x)=\frac{2}{\sqrt{p_\theta(x)}}\frac{\partial}{\partial\theta}\sqrt{p_\theta(x)}=\frac{\partial}{\partial\theta}\log p_\theta(x)\)</span>.</p>
+<div id="sevenfig-ch7-dqm-geometry" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-alt="A blue arc lies on a circle representing the unit sphere in L2. At one square-root density, a green tangent arrow is perpendicular to the gray radius from the origin.">
+<figure class="quarto-float quarto-float-sevenfig figure">
+<div aria-describedby="sevenfig-ch7-dqm-geometry-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/generated/chapter-7-dqm-geometry.svg" class="img-fluid figure-img" alt="A blue arc lies on a circle representing the unit sphere in L2. At one square-root density, a green tangent arrow is perpendicular to the gray radius from the origin.">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-sevenfig" id="sevenfig-ch7-dqm-geometry-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure 7.1: DQM treats square-root densities as a curve on the unit sphere of <span class="math inline">\(L_2(\mu)\)</span>; the score determines its tangent, which is orthogonal to the radial direction because scores have mean zero.
+</figcaption>
+</figure>
+</div>
+<p>Chapter 25 extends this one-curve picture to all regular paths through <span class="math inline">\(P\)</span>; compare <a href="#sevenfig-ch7-dqm-geometry" class="quarto-xref">Figure 7.<span>1</span></a> with <a href="./chapter-25.html#tangent-spaces-and-information">the tangent-space construction in §25.3</a>.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Theorem">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Theorem
+</div>
+</div>
+<section id="theorem-lan-iid" class="level3 callout-body-container callout-body">
+<h3 class="anchored" data-anchor-id="theorem-lan-iid">Theorem 7.2: DQM implies LAN for i.i.d. experiments</h3>
+<p>Suppose <span class="math inline">\(\Theta\)</span> is open and the model is differentiable in quadratic mean at <span class="math inline">\(\theta\)</span>. Then</p>
+<ul>
+<li><span class="math inline">\(P_\theta\dot\ell_\theta=0\)</span>,</li>
+<li>the Fisher information matrix <span class="math inline">\(I_\theta=P_\theta\dot\ell_\theta\dot\ell_\theta^T\)</span> exists,</li>
+<li>and, for every sequence <span class="math inline">\(h_n\to h\)</span>,</li>
+</ul>
+<p><span class="math display">\[
+\log\prod_{i=1}^n\frac{p_{\theta+h_n/\sqrt n}(X_i)}{p_\theta(X_i)}
+=\frac{1}{\sqrt n}\sum_{i=1}^nh^T\dot\ell_\theta(X_i)-\frac12h^TI_\theta h+o_{P_\theta}(1).
+\]</span></p>
+<p>Differentiability in quadratic mean at <span class="math inline">\(\theta\)</span> implies the quadratic likelihood expansion above, and hence the i.i.d. sequence of experiments is LAN at <span class="math inline">\(\theta\)</span>.</p>
+</section>
+</div>
+<p><strong>Proof roadmap.</strong> Work with square-root likelihood ratios rather than differentiating the log likelihood directly.</p>
+<ol type="1">
+<li>DQM and normalization of the densities show that the score is centered.</li>
+<li>The sum of the linearized square-root likelihood ratios equals the central sequence plus a deterministic drift.</li>
+<li>A logarithmic expansion supplies a second copy of the quadratic drift.</li>
+<li>DQM also controls the sum of squares and the largest summand, making the Taylor remainder negligible.</li>
+</ol>
+<details>
+<summary>
+Complete proof of Theorem 7.2
+</summary>
+<p>Write <span class="math inline">\(p_n=p_{\theta+h_n/\sqrt n}\)</span>, <span class="math inline">\(p=p_\theta\)</span>, and <span class="math inline">\(g=h^T\dot\ell_\theta\)</span>. DQM and <span class="math inline">\(h_n\to h\)</span> give</p>
+<p><span class="math display">\[
+\sqrt n(\sqrt{p_n}-\sqrt p)\longrightarrow \frac12g\sqrt p
+\quad\text{in }L_2(\mu),
+\qquad
+\sqrt{p_n}\longrightarrow\sqrt p.
+\]</span></p>
+<p>Since both <span class="math inline">\(p_n\)</span> and <span class="math inline">\(p\)</span> integrate to one,</p>
+<p><span class="math display">\[
+P_\theta g
+=\lim_{n\to\infty}\int
+\sqrt n(\sqrt{p_n}-\sqrt p)(\sqrt{p_n}+\sqrt p)\,d\mu
+=0.
+\]</span></p>
+<p>Thus the score is centered. DQM also gives <span class="math inline">\(P_\theta g^2=h^TI_\theta h&lt;\infty\)</span>.</p>
+<p>Define, on the support of <span class="math inline">\(p\)</span>,</p>
+<p><span class="math display">\[
+W_{ni}=2\left\{\sqrt{\frac{p_n}{p}}(X_i)-1\right\}.
+\]</span></p>
+<p>The <span class="math inline">\(L_2\)</span> approximation implies</p>
+<p><span class="math display">\[
+\operatorname{var}_{P_\theta}
+\left(\sum_{i=1}^nW_{ni}-\frac1{\sqrt n}\sum_{i=1}^ng(X_i)\right)
+\leq P_\theta\{\sqrt nW_{n1}-g\}^2\longrightarrow0.
+\]</span></p>
+<p>Normalization gives its mean exactly:</p>
+<p><span class="math display">\[
+\begin{aligned}
+E_{P_\theta}\sum_{i=1}^nW_{ni}
+&amp;=2n\left(\int\sqrt{p_np}\,d\mu-1\right)\\
+&amp;=-n\int(\sqrt{p_n}-\sqrt p)^2\,d\mu
+\longrightarrow-\frac14P_\theta g^2.
+\end{aligned}
+\]</span></p>
+<p>Consequently,</p>
+<p><span class="math display">\[
+\sum_{i=1}^nW_{ni}
+=\frac1{\sqrt n}\sum_{i=1}^ng(X_i)-\frac14P_\theta g^2+o_{P_\theta}(1).
+\tag{7.4}
+\]</span></p>
+<p>Use <span class="math inline">\(\log(1+x)=x-x^2/2+x^2R(2x)\)</span>, where <span class="math inline">\(R(u)\to0\)</span> as <span class="math inline">\(u\to0\)</span>. Then</p>
+<p><span class="math display">\[
+\log\prod_{i=1}^n\frac{p_n}{p}(X_i)
+=\sum_{i=1}^nW_{ni}-\frac14\sum_{i=1}^nW_{ni}^2
++\frac12\sum_{i=1}^nW_{ni}^2R(W_{ni}).
+\tag{7.5}
+\]</span></p>
+<p>DQM permits the decomposition <span class="math inline">\(nW_{n1}^2=g^2(X_1)+A_{n1}\)</span> with <span class="math inline">\(P_\theta|A_{n1}|\to0\)</span>. The law of large numbers therefore yields</p>
+<p><span class="math display">\[
+\sum_{i=1}^nW_{ni}^2\overset{P_\theta}\longrightarrow P_\theta g^2.
+\]</span></p>
+<p>It remains to control the Taylor remainder. For every <span class="math inline">\(\varepsilon&gt;0\)</span>, the same decomposition and truncation give</p>
+<p><span class="math display">\[
+nP_\theta(|W_{n1}|&gt;\varepsilon)
+\leq 2\varepsilon^{-2}P_\theta\!\left[g^2
+\mathbf 1\{g^2&gt;n\varepsilon^2/2\}\right]
++2\varepsilon^{-2}P_\theta|A_{n1}|\longrightarrow0.
+\]</span></p>
+<p>Hence <span class="math inline">\(\max_{i\leq n}|W_{ni}|\to0\)</span> in probability. It follows that</p>
+<p><span class="math display">\[
+\left|\sum_{i=1}^nW_{ni}^2R(W_{ni})\right|
+\leq \sum_{i=1}^nW_{ni}^2
+\max_{i\leq n}|R(W_{ni})|
+=o_{P_\theta}(1).
+\]</span></p>
+<p>Combining (7.4) and (7.5) gives</p>
+<p><span class="math display">\[
+\log\prod_{i=1}^n\frac{p_n}{p}(X_i)
+=\frac1{\sqrt n}\sum_{i=1}^ng(X_i)
+-\frac12P_\theta g^2+o_{P_\theta}(1),
+\]</span></p>
+<p>which is the claimed expansion because <span class="math inline">\(g=h^T\dot\ell_\theta\)</span> and <span class="math inline">\(P_\theta g^2=h^TI_\theta h\)</span>.</p>
+</details>
+<p>The two appearances of <span class="math inline">\(-\tfrac14P_\theta g^2\)</span> are worth remembering: one comes from the mean of the square-root likelihood ratio and one from the logarithm. Together they produce the LAN penalty <span class="math inline">\(-\tfrac12h^TI_\theta h\)</span>. Figure <a href="#sevenfig-ch7-lan-quadratic" class="quarto-xref">Figure 7.<span>2</span></a> shows the resulting approximation in a Poisson model. <a href="./chapter-25.html#lemma-25.14-local-asymptotic-normality-along-a-path">Lemma 25.14</a> uses this same mechanism along a single path.</p>
+<div id="sevenfig-ch7-lan-quadratic" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-alt="Three panels for increasing sample sizes compare a solid exact Poisson local log-likelihood curve with a dashed quadratic LAN approximation; the curves become nearly indistinguishable.">
+<figure class="quarto-float quarto-float-sevenfig figure">
+<div aria-describedby="sevenfig-ch7-lan-quadratic-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/generated/chapter-7-lan-quadratic.svg" class="img-fluid figure-img" alt="Three panels for increasing sample sizes compare a solid exact Poisson local log-likelihood curve with a dashed quadratic LAN approximation; the curves become nearly indistinguishable.">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-sevenfig" id="sevenfig-ch7-lan-quadratic-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure 7.2: For a Poisson model under <span class="math inline">\(\lambda=\lambda_0+h/\sqrt n\)</span>, the exact local log likelihood is increasingly well represented by the LAN quadratic on a fixed local-<span class="math inline">\(h\)</span> scale.
+</figcaption>
+</figure>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Forward connection: Lemma 25.14">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Forward connection: Lemma 25.14
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Theorem 7.2 is the finite-dimensional prototype for <a href="./chapter-25.html#lemma-25.14-local-asymptotic-normality-along-a-path">Lemma 25.14</a>. Fixing a semiparametric score direction <span class="math inline">\(g\)</span> and following one path <span class="math inline">\(P_{t,g}\)</span> produces the same quadratic expansion, with <span class="math inline">\(g\)</span> replacing <span class="math inline">\(h^T\dot\ell_\theta\)</span> and <span class="math inline">\(Pg^2\)</span> replacing <span class="math inline">\(h^TI_\theta h\)</span>.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-important callout-titled" title="Lemma">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Lemma
+</div>
+</div>
+<section id="lemma-7.6" class="level3 callout-body-container callout-body">
+<h3 class="anchored" data-anchor-id="lemma-7.6">Lemma 7.6: a sufficient condition for DQM</h3>
+<p>Suppose <span class="math inline">\(\theta\mapsto s_\theta(x)=\sqrt{p_\theta(x)}\)</span> is continuously differentiable for every <span class="math inline">\(x\)</span>, and the elements of</p>
+<p><span class="math display">\[
+I_\theta=\int(\dot p_\theta/p_\theta)(\dot p_\theta/p_\theta)^Tp_\theta\,d\mu
+\]</span></p>
+<p>are well defined and continuous in <span class="math inline">\(\theta\)</span>. Then the model is differentiable in quadratic mean as in (7.1), with score <span class="math inline">\(\dot\ell_\theta=\dot p_\theta/p_\theta\)</span>.</p>
+</section>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Example">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Example
+</div>
+</div>
+<section id="example-7-7" class="level3 callout-body-container callout-body">
+<h3 class="anchored" data-anchor-id="example-7-7">Example 7.7: exponential families</h3>
+<p>Most exponential families are differentiable in quadratic mean when parameterized smoothly away from the boundary of the natural parameter space. For the model</p>
+<p><span class="math display">\[
+p_\theta(x)=d(\theta)h(x)e^{Q(\theta)^Tt(x)}.
+\]</span></p>
+<p>the score is <span class="math inline">\(\dot\ell_\theta(x)=Q'_\theta\{t(x)-E_\theta t(X)\}\)</span> and the Fisher information is <span class="math inline">\(I_\theta=Q'_\theta\operatorname{cov}_\theta\{t(X)\}(Q'_\theta)^T\)</span>.</p>
+</section>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Example">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Example
+</div>
+</div>
+<section id="example-7-8" class="level3 callout-body-container callout-body">
+<h3 class="anchored" data-anchor-id="example-7-8">Example 7.8: location models</h3>
+<p>Consider the location model <span class="math inline">\(\{f(x-\theta):\theta\in\mathbb R\}\)</span>. If <span class="math inline">\(f\)</span> is positive and continuously differentiable and has finite Fisher information for location, then the model is differentiable in quadratic mean. Its score is <span class="math inline">\(\dot\ell_\theta(x)=-\{f'/f\}(x-\theta)\)</span>, and its Fisher information is</p>
+<p><span class="math display">\[
+I_f=\int \left(\frac{f'}{f}\right)^2(x)f(x)\,dx,
+\]</span></p>
+<p>which does not depend on <span class="math inline">\(\theta\)</span>.</p>
+<p>The Laplace location model is also differentiable in quadratic mean, even though the log density is not differentiable at <span class="math inline">\(x=\theta\)</span>.</p>
+</section>
+</div>
+<div class="callout callout-style-default callout-warning callout-titled" title="Counterexample">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Counterexample
+</div>
+</div>
+<section id="counterexample-7.9-uniform-distribution" class="level3 callout-body-container callout-body">
+<h3 class="anchored" data-anchor-id="counterexample-7.9-uniform-distribution">Counterexample 7.9: uniform distribution</h3>
+<p>The family of uniform distributions on <span class="math inline">\([0,\theta]\)</span> is nowhere differentiable in quadratic mean. Here <span class="math inline">\(P_{\theta+h}(p_\theta=0)=h/(\theta+h)\)</span> is only <span class="math inline">\(O(h)\)</span>, whereas differentiability in quadratic mean would require the mass outside the support of <span class="math inline">\(P_\theta\)</span> to be <span class="math inline">\(o(h^2)\)</span>.</p>
+</section>
+</div>
+</section>
+</section>
+<section id="convergence-to-a-normal-experiment" class="level2">
+<h2 class="anchored" data-anchor-id="convergence-to-a-normal-experiment">7.3 Convergence to a Normal Experiment</h2>
+<p>Suppose the limit experiment consists of one observation <span class="math inline">\(X\sim N(h,I_\theta^{-1})\)</span>. Its log likelihood ratio relative to <span class="math inline">\(h=0\)</span> is</p>
+<p><span class="math display">\[
+\log \dfrac{ dN(h,I_\theta^{-1})}{dN(0,I_\theta^{-1})}(X)=h^TI_\theta X-\frac12h^TI_\theta h.
+\]</span></p>
+<p>This is the same quadratic form as the LAN expansion <span class="math inline">\(h^T\Delta_{n,\theta}-\frac12h^TI_\theta h\)</span> in §7.2. If a statistic <span class="math inline">\(T_n\)</span> has a limiting distribution under every local parameter <span class="math inline">\(h\)</span>, convergence of experiments means that the entire family of limits can be reproduced by a statistic in the Gaussian experiment. A <strong>randomized statistic</strong> has the form <span class="math inline">\(T=T(X,U)\)</span>, where <span class="math inline">\(U\sim\operatorname{Unif}[0,1]\)</span> is independent of <span class="math inline">\(X\)</span>; the auxiliary randomization represents arbitrary limiting conditional distributions.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Theorem">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Theorem
+</div>
+</div>
+<section id="theorem-normal-limit-experiment" class="level3 callout-body-container callout-body">
+<h3 class="anchored" data-anchor-id="theorem-normal-limit-experiment">Theorem 7.10: representation in the limit experiment</h3>
+<p>Assume the model is differentiable in quadratic mean at <span class="math inline">\(\theta\)</span> and <span class="math inline">\(I_\theta\)</span> is nonsingular. Let <span class="math inline">\(T_n\)</span> be statistics in the local experiments <span class="math inline">\(\{P_{\theta+h/\sqrt n}^n:h\in\mathbb R^k\}\)</span>, and suppose <span class="math inline">\(T_n\)</span> converges in distribution under every <span class="math inline">\(h\)</span>. Then there exists a randomized statistic <span class="math inline">\(T\)</span> in the Gaussian experiment <span class="math inline">\(\{N(h,I_\theta^{-1}):h\in\mathbb R^k\}\)</span> having the same limiting distribution under every <span class="math inline">\(h\)</span>.</p>
+</section>
+</div>
+<p>This representation is the handoff to Chapter 8. <a href="./chapter-8.html#theorem-limit-experiment-reduction">Theorem 8.3</a> uses the Gaussian experiment to transfer lower bounds back to the original model; the corresponding semiparametric convolution and minimax results are <a href="./chapter-25.html#theorem-25-20">Theorems 25.20</a> and <a href="./chapter-25.html#theorem-25-21">25.21</a>.</p>
+<p><strong>Proof roadmap.</strong> Couple the procedure to the central sequence, identify its law under every local alternative by change of measure, and then reproduce that joint law from the Gaussian observation.</p>
+<details>
+<summary>
+Complete proof of Theorem 7.10
+</summary>
+<p>Write</p>
+<p><span class="math display">\[
+P_{n,h}=P_{\theta+h/\sqrt n}^n,
+\qquad
+J=I_\theta,
+\qquad
+\Delta_n=\frac1{\sqrt n}\sum_{i=1}^n\dot\ell_\theta(X_i).
+\]</span></p>
+<p>Under <span class="math inline">\(P_{n,0}\)</span>, both <span class="math inline">\(T_n\)</span> and <span class="math inline">\(\Delta_n\)</span> are tight. Along any subsequence, extract a further subsequence such that</p>
+<p><span class="math display">\[
+(T_n,\Delta_n)\rightsquigarrow(S,\Delta),
+\qquad \Delta\sim N(0,J).
+\]</span></p>
+<p>Theorem 7.2 and Slutsky’s lemma then give, for every fixed <span class="math inline">\(h\)</span>,</p>
+<p><span class="math display">\[
+\left(T_n,\log\frac{dP_{n,h}}{dP_{n,0}}\right)
+\rightsquigarrow
+\left(S,h^T\Delta-\frac12h^TJh\right)
+\quad\text{under }P_{n,0}.
+\]</span></p>
+<p>The limiting likelihood ratio is positive and has mean one. The local laws are therefore mutually contiguous, and <a href="./chapter-6.html#lemma-le-cam-third">Le Cam’s third lemma</a> identifies the limiting law <span class="math inline">\(L_h\)</span> of <span class="math inline">\(T_n\)</span> under <span class="math inline">\(P_{n,h}\)</span> as</p>
+<p><span class="math display">\[
+L_h(B)
+=E\left[\mathbf 1_B(S)
+\exp\left\{h^T\Delta-\frac12h^TJh\right\}\right]
+\]</span></p>
+<p>for every Borel set <span class="math inline">\(B\)</span>.</p>
+<p>By Lemma 7.11, on an extension carrying an independent <span class="math inline">\(U\sim\operatorname{Unif}[0,1]\)</span>, there is a measurable map <span class="math inline">\(T\)</span> such that</p>
+<p><span class="math display">\[
+(T(\Delta,U),\Delta)\overset d=(S,\Delta).
+\]</span></p>
+<p>Now let <span class="math inline">\(X\sim N(h,J^{-1})\)</span>. Under <span class="math inline">\(h=0\)</span>, <span class="math inline">\(JX\sim N(0,J)\)</span> and hence has the same law as <span class="math inline">\(\Delta\)</span>. The Gaussian likelihood ratio and the preceding display yield</p>
+<p><span class="math display">\[
+\begin{aligned}
+P_h\{T(JX,U)\in B\}
+&amp;=E_0\left[\mathbf 1_B\{T(JX,U)\}
+e^{h^TJX-h^TJh/2}\right]\\
+&amp;=L_h(B).
+\end{aligned}
+\]</span></p>
+<p>Thus <span class="math inline">\(T(JX,U)\)</span> reproduces the full family of limiting distributions of <span class="math inline">\(T_n\)</span> in the Gaussian experiment.</p>
+</details>
+<div class="callout callout-style-default callout-note callout-titled" title="Lemma">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Lemma
+</div>
+</div>
+<section id="lemma-7.11" class="level3 callout-body-container callout-body">
+<h3 class="anchored" data-anchor-id="lemma-7.11">Lemma 7.11: randomized representation from conditional laws</h3>
+<p>Given a joint distribution <span class="math inline">\((S,\Delta)\)</span>, one can construct a measurable randomized function <span class="math inline">\(T(\Delta,U)\)</span> such that <span class="math inline">\((T(\Delta,U),\Delta)\)</span> has the same distribution as <span class="math inline">\((S,\Delta)\)</span>.</p>
+</section>
+</div>
+<p><strong>Proof roadmap.</strong> Disintegrate the joint law to obtain the conditional distribution of <span class="math inline">\(S\)</span> given <span class="math inline">\(\Delta\)</span>, then use an independent uniform randomizer and measurable conditional quantiles to realize that distribution as a function of <span class="math inline">\((\Delta,U)\)</span>.</p>
+<details>
+<summary>
+Complete proof of Lemma 7.11
+</summary>
+<p>Take a regular conditional distribution of <span class="math inline">\(S\)</span> given <span class="math inline">\(\Delta=\delta\)</span>. For a scalar <span class="math inline">\(S\)</span>, let <span class="math inline">\(Q(u\mid\delta)\)</span> be its conditional quantile function and set <span class="math inline">\(T(\delta,u)=Q(u\mid\delta)\)</span>. The conditional probability integral transform gives the required joint law.</p>
+<p>For a vector <span class="math inline">\(S=(S_1,\ldots,S_d)\)</span>, split one uniform random variable measurably into <span class="math inline">\(d\)</span> independent uniforms, for example by distributing the digits of its binary expansion. Generate <span class="math inline">\(S_1\)</span> from its conditional law given <span class="math inline">\(\Delta\)</span>, then <span class="math inline">\(S_2\)</span> from its conditional law given <span class="math inline">\((\Delta,S_1)\)</span>, and continue recursively. Conditional quantile maps may be chosen jointly measurable, so the resulting map <span class="math inline">\(T(\Delta,U)\)</span> has the same conditional law given <span class="math inline">\(\Delta\)</span> as <span class="math inline">\(S\)</span> and hence the same joint law with <span class="math inline">\(\Delta\)</span>.</p>
+</details>
+<p>Randomization is not asserting that a good estimator should add noise. It is the device that represents any residual conditional variation in the limit after the Gaussian central sequence has been observed.</p>
+<hr>
+</section>
+<section id="maximum-likelihood" class="level2">
+<h2 class="anchored" data-anchor-id="maximum-likelihood">7.4 Maximum Likelihood</h2>
+<p>Chapter 5 establishes asymptotic normality for maximum likelihood estimators in smooth parametric models. The Gaussian limit experiment explains the form of that result: the maximum likelihood estimator of <span class="math inline">\(h\)</span> from <span class="math inline">\(X\sim N(h,I_\theta^{-1})\)</span> is <span class="math inline">\(X\)</span> itself, suggesting that the local estimator <span class="math inline">\(\widehat h_n=\sqrt n(\widehat\theta_n-\theta)\)</span> should satisfy</p>
+<p><span class="math display">\[
+\sqrt n(\widehat\theta_n-\theta)\rightsquigarrow N(0,I_\theta^{-1})
+\]</span></p>
+<p>at an interior parameter point. This conclusion does not follow from LAN alone; consistency and uniform control of the likelihood are also required, as in Theorem 5.39.</p>
+<section id="constrained-parameter-spaces" class="level3">
+<h3 class="anchored" data-anchor-id="constrained-parameter-spaces">Constrained parameter spaces</h3>
+<p>Let <span class="math inline">\(H_n=\sqrt n(\Theta-\theta_0)\)</span> be the local parameter space. Here <span class="math inline">\(H_n\to H\)</span> has the source’s two-sided set-convergence meaning: every convergent sequence <span class="math inline">\(h_n\in H_n\)</span> has its limit in <span class="math inline">\(H\)</span>, and every <span class="math inline">\(h\in H\)</span> is the limit of some sequence <span class="math inline">\(h_n\in H_n\)</span>. Under this condition, the limiting maximum likelihood estimator maximizes the Gaussian likelihood over <span class="math inline">\(H\)</span>. Equivalently, it projects <span class="math inline">\(X\)</span> onto <span class="math inline">\(H\)</span> in the Fisher-information metric</p>
+<p><span class="math display">\[
+d_{I_{\theta_0}}(x,y)=\bigl[(x-y)^TI_{\theta_0}(x-y)\bigr]^{1/2}.
+\]</span></p>
+<p>Van der Vaart writes the corresponding squared form <span class="math inline">\((x-y)^TI_{\theta_0}(x-y)\)</span> when describing the projection. Minimizing the squared form gives the same closest point, while the square root is the metric itself. If <span class="math inline">\(H=\mathbb R^k\)</span>, the projection is simply <span class="math inline">\(X\)</span>.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Theorem">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Theorem
+</div>
+</div>
+<section id="theorem-7-12" class="level3 callout-body-container callout-body">
+<h3 class="anchored" data-anchor-id="theorem-7-12">Theorem 7.12: constrained-MLE limits</h3>
+<ul>
+<li>Suppose the model is differentiable in quadratic mean at <span class="math inline">\(\theta_0\)</span>,</li>
+<li><span class="math inline">\(I_{\theta_0}\)</span> is nonsingular,</li>
+<li>the log densities satisfy the stated local Lipschitz condition,</li>
+<li><span class="math inline">\(\widehat\theta_n\)</span> is consistent,</li>
+<li>and <span class="math inline">\(H_n=\sqrt n(\Theta-\theta_0)\)</span> converges to a nonempty convex set <span class="math inline">\(H\)</span>.</li>
+</ul>
+<p>Then <span class="math inline">\(I_{\theta_0}^{1/2}\sqrt n(\widehat\theta_n-\theta_0)\)</span> converges in distribution to the projection of a standard normal vector onto <span class="math inline">\(I_{\theta_0}^{1/2}H\)</span>.</p>
+<p>Thus boundary restrictions can produce nonnormal projected-Gaussian limiting distributions. The proof uses the <a href="./chapter-2.html#lemma-portmanteau">portmanteau lemma</a>.</p>
+</section>
+</div>
+<div class="callout callout-style-default callout-warning callout-titled" title="Notation: the empirical process in this proof">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Notation: the empirical process in this proof
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Following Chapter 7, the proof writes <span class="math inline">\(G_n=\sqrt n(\mathbb P_n-P_{\theta_0})\)</span>. Chapter 19 writes the same empirical-process operator as <span class="math inline">\(\mathbb G_n\)</span>. The local definition controls here; the operator has not changed.</p>
+</div>
+</div>
+<p><strong>Proof outline.</strong></p>
+<p>Let <span class="math inline">\(G_n=\sqrt n(\mathbb P_n-P_{\theta_0})\)</span> and <span class="math inline">\(\widehat h_n=\sqrt n(\widehat\theta_n-\theta_0)\)</span>. The goal is to identify the limit of <span class="math inline">\(I_{\theta_0}^{1/2}\widehat h_n\)</span>.</p>
+<section id="obtain-a-uniform-quadratic-approximation" class="level4">
+<h4 class="anchored" data-anchor-id="obtain-a-uniform-quadratic-approximation">Obtain a uniform quadratic approximation</h4>
+<p>Differentiability in quadratic mean and the local Lipschitz condition yield, for every fixed <span class="math inline">\(M&lt;\infty\)</span>,</p>
+<p><span class="math display">\[
+\sup_{|h|\leq M}
+\left|n\mathbb P_n\log\frac{p_{\theta_0+h/\sqrt n}}{p_{\theta_0}}
+-h^TG_n\dot\ell_{\theta_0}+\frac12h^TI_{\theta_0}h\right|
+\overset{P_{\theta_0}}\longrightarrow0.
+\]</span></p>
+<p>Thus the local log likelihood is uniformly approximated by <span class="math inline">\(h\mapsto h^TG_n\dot\ell_{\theta_0}-\frac12h^TI_{\theta_0}h\)</span>. Consistency and the regularity assumptions also give <span class="math inline">\(\widehat h_n=O_{P_{\theta_0}}(1)\)</span>, so the maximization may be restricted to a slowly expanding bounded subset of <span class="math inline">\(H_n=\sqrt n(\Theta-\theta_0)\)</span>.</p>
+</section>
+<section id="convert-maximization-to-projection" class="level4">
+<h4 class="anchored" data-anchor-id="convert-maximization-to-projection">Convert maximization to projection</h4>
+<p>For a closed set <span class="math inline">\(F\)</span>, the event <span class="math inline">\(\widehat h_n\in F\)</span> requires the approximating quadratic to attain at least as large a value over <span class="math inline">\(F\cap H_n\)</span> as over <span class="math inline">\(H_n\)</span>. Completing the square gives</p>
+<p><span class="math display">\[
+\begin{aligned}
+h^TG_n\dot\ell_{\theta_0}-\frac12h^TI_{\theta_0}h
+&amp;=-\frac12\left\|I_{\theta_0}^{-1/2}G_n\dot\ell_{\theta_0}
+-I_{\theta_0}^{1/2}h\right\|^2\\
+&amp;\quad+\frac12\left\|I_{\theta_0}^{-1/2}G_n\dot\ell_{\theta_0}\right\|^2.
+\end{aligned}
+\]</span></p>
+<p>The final term does not depend on <span class="math inline">\(h\)</span>, so maximizing the quadratic is equivalent to minimizing distance. In the book’s set-distance notation, <span class="math inline">\(\|x-A\|=\inf_{a\in A}\|x-a\|\)</span>; expressions such as <span class="math inline">\(I_{\theta_0}^{1/2}(F\cap H_n)\)</span> denote sets.</p>
+</section>
+<section id="pass-to-the-limiting-set" class="level4">
+<h4 class="anchored">Pass to the limiting set</h4>
+<p>By Lemma 7.13 and the central limit theorem,</p>
+<p><span class="math display">\[
+I_{\theta_0}^{-1/2}G_n\dot\ell_{\theta_0}\rightsquigarrow Z,
+\qquad Z\sim N(0,I_k),
+\]</span></p>
+<p>and distances to <span class="math inline">\(H_n\)</span> converge to distances to <span class="math inline">\(H\)</span>. Because <span class="math inline">\(I_{\theta_0}^{1/2}H\)</span> is nonempty, closed, and convex, the projection</p>
+<p><span class="math display">\[
+\Pi Z=\operatorname*{argmin}_{u\in I_{\theta_0}^{1/2}H}\|Z-u\|
+\]</span></p>
+<p>exists and is unique. The closed-set form of the portmanteau lemma then yields</p>
+<p><span class="math display">\[
+I_{\theta_0}^{1/2}\sqrt n(\widehat\theta_n-\theta_0)\rightsquigarrow\Pi Z.
+\]</span></p>
+<p>At an interior point, typically <span class="math inline">\(H=\mathbb R^k\)</span> and <span class="math inline">\(\Pi Z=Z\)</span>; at a boundary, the restricted set <span class="math inline">\(H\)</span> can produce a nonnormal projected-Gaussian limit.</p>
+<div class="callout callout-style-default callout-important callout-titled" title="Lemma">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Lemma
+</div>
+</div>
+<section id="lemma-7.13" class="level3 callout-body-container callout-body">
+<h3 class="anchored" data-anchor-id="lemma-7.13">Lemma 7.13: distances to moving parameter sets</h3>
+<p>If <span class="math inline">\(H_n\to H\)</span> and <span class="math inline">\(X_n\rightsquigarrow X\)</span>, then distances from <span class="math inline">\(X_n\)</span> to <span class="math inline">\(H_n\)</span> converge to the corresponding distance from <span class="math inline">\(X\)</span> to <span class="math inline">\(H\)</span>. More explicitly,</p>
+<ol type="1">
+<li><span class="math inline">\(\|X_n-H_n\|\rightsquigarrow\|X-H\|\)</span>;</li>
+<li><span class="math inline">\(\|X_n-(H_n\cap F)\|\geq\|X-(H\cap F)\|+o_P(1)\)</span> for every closed set <span class="math inline">\(F\)</span>;</li>
+<li><span class="math inline">\(\|X_n-(H_n\cap G)\|\leq\|X-(H\cap G)\|+o_P(1)\)</span> for every open set <span class="math inline">\(G\)</span>.</li>
+</ol>
+</section>
+</div>
+<p><strong>Proof outline.</strong></p>
+<p>For part (i):</p>
+<ol type="1">
+<li>Since <span class="math inline">\(X_n\rightsquigarrow X\)</span> and the map <span class="math inline">\(x\mapsto\|x-H\|\)</span> is continuous, the <a href="./chapter-2.html#theorem-continuous-mapping">continuous mapping theorem</a> gives <span class="math inline">\(\|X_n-H\|\rightsquigarrow\|X-H\|\)</span>.</li>
+<li>The set convergence <span class="math inline">\(H_n\to H\)</span> implies <span class="math inline">\(\|X_n-H_n\|-\|X_n-H\|\overset{P}\to0\)</span>.</li>
+<li>Then Slutsky’s lemma gives (i): <span class="math inline">\(\|X_n-H_n\|\rightsquigarrow \|X-H\|\)</span>.</li>
+</ol>
+<p>Parts (ii) and (iii) are one-sided approximations reflecting the distinction between closed and open sets. If <span class="math inline">\(F\)</span> is closed and <span class="math inline">\(h_n\in H_n\cap F\)</span> converges to <span class="math inline">\(h\)</span>, then <span class="math inline">\(h\in H\cap F\)</span>; the distance to <span class="math inline">\(H_n\cap F\)</span> therefore cannot be asymptotically smaller than the distance to <span class="math inline">\(H\cap F\)</span>. If <span class="math inline">\(G\)</span> is open and <span class="math inline">\(h\in H\cap G\)</span>, set convergence supplies <span class="math inline">\(h_n\in H_n\)</span> with <span class="math inline">\(h_n\to h\)</span>, and openness ensures <span class="math inline">\(h_n\in G\)</span> eventually; the distance to <span class="math inline">\(H_n\cap G\)</span> therefore cannot be asymptotically larger than the distance to <span class="math inline">\(H\cap G\)</span>.</p>
+</section>
+</section>
+</section>
+<section id="sec-limit-distributions-alternatives" class="level2">
+<h2 class="anchored" data-anchor-id="sec-limit-distributions-alternatives">7.5 Limit Distributions Under Alternatives</h2>
+<p>From <a href="#theorem-lan-iid">Theorem 7.2</a>, LAN gives the expansion</p>
+<p><span class="math display">\[
+\log\frac{dP_{\theta+h/\sqrt n}^n}{dP_\theta^n}=h^T\Delta_{n,\theta}-\frac12h^TI_\theta h+o_{P_\theta}(1).
+\]</span></p>
+<p>Under <span class="math inline">\(P_\theta^n\)</span>, <span class="math inline">\(\Delta_{n,\theta}\rightsquigarrow N(0,I_\theta)\)</span>, so <span class="math inline">\(h^T\Delta_{n,\theta}\rightsquigarrow N(0,h^TI_\theta h)\)</span>. Therefore,</p>
+<p><span class="math display">\[
+\log\frac{dP_{\theta+h/\sqrt n}^n}{dP_\theta^n}\rightsquigarrow N\left(-\frac12h^TI_\theta h,\,h^TI_\theta h\right).
+\]</span></p>
+<p>Let <span class="math inline">\(v=h^TI_\theta h\)</span>. If <span class="math inline">\(Z\sim N(-v/2,v)\)</span>, then <span class="math inline">\(e^Z&gt;0\)</span> almost surely and <span class="math inline">\(E(e^Z)=1\)</span>. The limiting likelihood ratio is therefore positive with expectation one. By <a href="./chapter-6.html#lemma-le-cam-first">Le Cam’s first lemma</a>,</p>
+<p><span class="math display">\[
+P_{\theta+h/\sqrt n}^n\triangleleft P_\theta^n.
+\]</span></p>
+<p>Applying the same argument in the reverse direction gives</p>
+<p><span class="math display">\[
+P_\theta^n\triangleleft P_{\theta+h/\sqrt n}^n.
+\]</span></p>
+<p>Thus <span class="math inline">\(P_{\theta+h/\sqrt n}^n\)</span> and <span class="math inline">\(P_\theta^n\)</span> are mutually contiguous; compare <a href="./chapter-6.html#example-asymptotic-log-normality">Example 6.5</a>.</p>
+<section id="general-scheme" class="level3">
+<h3 class="anchored" data-anchor-id="general-scheme">General scheme</h3>
+<p>Suppose a statistic has the asymptotically linear expansion, with <span class="math inline">\(P_\theta\psi_\theta=0\)</span> and <span class="math inline">\(P_\theta\psi_\theta\psi_\theta^T&lt;\infty\)</span>,</p>
+<p><span class="math display">\[
+\sqrt n(T_n-\mu_\theta)=n^{-1/2}\sum_{i=1}^n\psi_\theta(X_i)+o_{P_\theta}(1).
+\]</span></p>
+<p>The statistic and log likelihood ratio have the joint limit under <span class="math inline">\(P_\theta^n\)</span></p>
+<p><span class="math display">\[
+\begin{pmatrix}
+\sqrt n(T_n-\mu_\theta)\\[2pt]
+\log(dP_{\theta+h/\sqrt n}^n/dP_\theta^n)
+\end{pmatrix}
+\rightsquigarrow
+N\!\left[
+\begin{pmatrix}0\\-\tfrac12h^TI_\theta h\end{pmatrix},
+\begin{pmatrix}
+P_\theta\psi_\theta\psi_\theta^T &amp; P_\theta\psi_\theta\dot\ell_\theta^Th\\
+h^TP_\theta\dot\ell_\theta\psi_\theta^T &amp; h^TI_\theta h
+\end{pmatrix}
+\right].
+\]</span></p>
+<p><a href="./chapter-6.html#lemma-le-cam-third">Le Cam’s third lemma</a> therefore gives, under <span class="math inline">\(P_{\theta+h/\sqrt n}^n\)</span>,</p>
+<p><span class="math display">\[
+\sqrt n(T_n-\mu_\theta)
+\rightsquigarrow
+N\!\left(P_\theta\psi_\theta\dot\ell_\theta^Th,
+P_\theta\psi_\theta\psi_\theta^T\right).
+\]</span></p>
+<p>The covariance is unchanged, while the mean shifts by the covariance with the limiting log likelihood ratio.</p>
+<p>This method is used to study the local asymptotic behavior and efficiency of estimators and tests. Chapter 15 turns the shifted Gaussian limit into local-power bounds. <a href="./chapter-25.html#lemma-25-23">Lemma 25.23</a> and <a href="./chapter-25.html#sec-testing">§25.6</a> repeat the same change-of-measure argument along each semiparametric tangent direction.</p>
+<hr>
+</section>
+</section>
+<section id="sec-local-asymptotic-normality" class="level2">
+<h2 class="anchored" data-anchor-id="sec-local-asymptotic-normality">7.6 Local Asymptotic Normality</h2>
+<p>The preceding results begin with i.i.d. observations, but LAN can be defined for general sequences of statistical models.</p>
+<p>Let <span class="math inline">\(\{P_{n,\theta}:\theta\in\Theta\}\)</span> be a sequence of models.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Definition">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Definition
+</div>
+</div>
+<section id="definition-7-14" class="level3 callout-body-container callout-body">
+<h3 class="anchored" data-anchor-id="definition-7-14">Definition 7.14</h3>
+<p>The sequence <span class="math inline">\(\{P_{n,\theta}:\theta\in\Theta\}\)</span> is locally asymptotically normal at <span class="math inline">\(\theta\)</span> if there exist norming matrices <span class="math inline">\(r_n\)</span>, a matrix <span class="math inline">\(I_\theta\)</span>, and random vectors <span class="math inline">\(\Delta_{n,\theta}\)</span> such that <span class="math inline">\(\Delta_{n,\theta}\rightsquigarrow N(0,I_\theta)\)</span> under <span class="math inline">\(P_{n,\theta}\)</span>, and for every sequence <span class="math inline">\(h_n\to h\)</span>,</p>
+<p><span class="math display">\[
+\log\frac{dP_{n,\theta+r_n^{-1}h_n}}{dP_{n,\theta}}
+=h_n^T\Delta_{n,\theta}-\frac12h_n^TI_\theta h_n+o_{P_{n,\theta}}(1).
+\]</span></p>
+<p>Here <span class="math inline">\(r_n\)</span> determines the local rate at which parameters approach <span class="math inline">\(\theta\)</span>.</p>
+</section>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Example">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Example
+</div>
+</div>
+<section id="example-7-15" class="level3 callout-body-container callout-body">
+<h3 class="anchored" data-anchor-id="example-7-15">Example 7.15: the i.i.d. case</h3>
+<p>If <span class="math inline">\(\{P_\theta:\theta\in\Theta\}\)</span> is differentiable in quadratic mean, then <span class="math inline">\(\{P_\theta^n:\theta\in\Theta\}\)</span> is LAN with <span class="math inline">\(r_n=\sqrt n I\)</span>.</p>
+<p>The local experiments <span class="math inline">\(\{P_{n,\theta+r_n^{-1}h}:h\in\mathbb R^k\}\)</span> converge to <span class="math inline">\(\{N(h,I_\theta^{-1}):h\in\mathbb R^k\}\)</span> in the sense of Theorem 7.10.</p>
+</section>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Chapter takeaway">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Chapter takeaway
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Differentiability in quadratic mean turns an i.i.d. model into a local Gaussian shift experiment. LAN, representation, and change of measure then transport procedures and limit laws under local alternatives; Chapter 25 repeats this argument one tangent path at a time.</p>
+</div>
+</div>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
+<div id="ref-bailie2021" class="csl-entry" role="listitem">
+Bailie, James. 2021. <em>Stat213 Lecture Notes</em>. Course lecture notes, Harvard University. <a href="https://jameshbailie.github.io/files/papers/2021-06-16-Asymptotic-statistics.pdf">https://jameshbailie.github.io/files/papers/2021-06-16-Asymptotic-statistics.pdf</a>.
+</div>
+<div id="ref-bickelEtAl1993" class="csl-entry" role="listitem">
+Bickel, Peter J., Chris A. J. Klaassen, Ya’acov Ritov, and Jon A. Wellner. 1993. <em>Efficient and Adaptive Estimation for Semiparametric Models</em>. Johns Hopkins Series in the Mathematical Sciences. Johns Hopkins University Press. <a href="https://link.springer.com/book/9780387984735">https://link.springer.com/book/9780387984735</a>.
+</div>
+<div id="ref-chernozhukovEtAl2018" class="csl-entry" role="listitem">
+Chernozhukov, Victor, Denis Chetverikov, Mert Demirer, et al. 2018. <span>“Double/Debiased Machine Learning for Treatment and Structural Parameters.”</span> <em>The Econometrics Journal</em> 21 (1): C1–68. <a href="https://doi.org/10.1111/ectj.12097">https://doi.org/10.1111/ectj.12097</a>.
+</div>
+<div id="ref-dasgupta2008" class="csl-entry" role="listitem">
+DasGupta, Anirban. 2008. <em>Asymptotic Theory of Statistics and Probability</em>. Springer Texts in Statistics. Springer. <a href="https://doi.org/10.1007/978-0-387-75971-5">https://doi.org/10.1007/978-0-387-75971-5</a>.
+</div>
+<div id="ref-fisherKennedy2021" class="csl-entry" role="listitem">
+Fisher, Aaron, and Edward H. Kennedy. 2021. <span>“Visually Communicating and Teaching Intuition for Influence Functions.”</span> <em>The American Statistician</em> 75 (2): 162–72. <a href="https://doi.org/10.1080/00031305.2020.1717620">https://doi.org/10.1080/00031305.2020.1717620</a>.
+</div>
+<div id="ref-gillJohansen1990" class="csl-entry" role="listitem">
+Gill, Richard D., and Søren Johansen. 1990. <span>“A Survey of Product-Integration with a View Toward Application in Survival Analysis.”</span> <em>The Annals of Statistics</em> 18 (4): 1501–55. <a href="https://doi.org/10.1214/aos/1176347865">https://doi.org/10.1214/aos/1176347865</a>.
+</div>
+<div id="ref-jiang2022" class="csl-entry" role="listitem">
+Jiang, Jiming. 2022. <em>Large Sample Techniques for Statistics</em>. 2nd ed. Springer Texts in Statistics. Springer. <a href="https://doi.org/10.1007/978-3-030-91695-4">https://doi.org/10.1007/978-3-030-91695-4</a>.
+</div>
+<div id="ref-kennedy2016" class="csl-entry" role="listitem">
+Kennedy, Edward H. 2016. <span>“Semiparametric Theory and Empirical Processes in Causal Inference.”</span> In <em>Statistical Causal Inferences and Their Applications in Public Health Research</em>, edited by Hua He, Pan Wu, and Ding-Geng Chen. ICSA Book Series in Statistics. Springer International Publishing. <a href="https://doi.org/10.1007/978-3-319-41259-7_8">https://doi.org/10.1007/978-3-319-41259-7_8</a>.
+</div>
+<div id="ref-kennedy2022" class="csl-entry" role="listitem">
+Kennedy, Edward H. 2022. <em>Semiparametric Doubly Robust Targeted Double Machine Learning: A Review</em>. <a href="https://doi.org/10.48550/arXiv.2203.06469">https://doi.org/10.48550/arXiv.2203.06469</a>.
+</div>
+<div id="ref-kosorok2008" class="csl-entry" role="listitem">
+Kosorok, Michael R. 2008. <em>Introduction to Empirical Processes and Semiparametric Inference</em>. Springer Series in Statistics. Springer. <a href="https://doi.org/10.1007/978-0-387-74978-5">https://doi.org/10.1007/978-0-387-74978-5</a>.
+</div>
+<div id="ref-leCamYang2000" class="csl-entry" role="listitem">
+Le Cam, Lucien, and Grace Lo Yang. 2000. <em>Asymptotics in Statistics: Some Basic Concepts</em>. 2nd ed. Springer Series in Statistics. Springer. <a href="https://doi.org/10.1007/978-1-4612-1166-2">https://doi.org/10.1007/978-1-4612-1166-2</a>.
+</div>
+<div id="ref-murphyVanDerVaart1996" class="csl-entry" role="listitem">
+Murphy, Susan A., and Aad W. van der Vaart. 1996. <span>“Likelihood Inference in the Errors-in-Variables Model.”</span> <em>Journal of Multivariate Analysis</em> 59 (1): 81–108. <a href="https://doi.org/10.1006/jmva.1996.0055">https://doi.org/10.1006/jmva.1996.0055</a>.
+</div>
+<div id="ref-pollard2002" class="csl-entry" role="listitem">
+Pollard, David. 2002. <em>A User’s Guide to Measure Theoretic Probability</em>. Cambridge Series in Statistical and Probabilistic Mathematics 8. Cambridge University Press. <a href="https://doi.org/10.1017/CBO9780511811555">https://doi.org/10.1017/CBO9780511811555</a>.
+</div>
+<div id="ref-robinsEtAl1994" class="csl-entry" role="listitem">
+Robins, James M., Andrea Rotnitzky, and Lue Ping Zhao. 1994. <span>“Estimation of Regression Coefficients When Some Regressors Are Not Always Observed.”</span> <em>Journal of the American Statistical Association</em> 89 (427): 846–66. <a href="https://doi.org/10.1080/01621459.1994.10476818">https://doi.org/10.1080/01621459.1994.10476818</a>.
+</div>
+<div id="ref-sen2022" class="csl-entry" role="listitem">
+Sen, Bodhisattva. 2022. <em>A Gentle Introduction to Empirical Process Theory and Applications</em>. Lecture notes, Department of Statistics, Columbia University. <a href="https://sites.stat.columbia.edu/bodhi/Talks/Emp-Proc-Lecture-Notes.pdf">https://sites.stat.columbia.edu/bodhi/Talks/Emp-Proc-Lecture-Notes.pdf</a>.
+</div>
+<div id="ref-tsiatis2006" class="csl-entry" role="listitem">
+Tsiatis, Anastasios A. 2006. <em>Semiparametric Theory and Missing Data</em>. Springer Series in Statistics. Springer. <a href="https://doi.org/10.1007/0-387-37345-4">https://doi.org/10.1007/0-387-37345-4</a>.
+</div>
+<div id="ref-tsybakov2009" class="csl-entry" role="listitem">
+Tsybakov, Alexandre B. 2009. <em>Introduction to Nonparametric Estimation</em>. Springer Series in Statistics. Springer. <a href="https://doi.org/10.1007/b13794">https://doi.org/10.1007/b13794</a>.
+</div>
+<div id="ref-vanDerVaart1991Differentiable" class="csl-entry" role="listitem">
+Vaart, Aad W. van der. 1991. <span>“On Differentiable Functionals.”</span> <em>The Annals of Statistics</em> 19 (1): 178–204. <a href="https://doi.org/10.1214/aos/1176347976">https://doi.org/10.1214/aos/1176347976</a>.
+</div>
+<div id="ref-vanDerVaart1996Mixture" class="csl-entry" role="listitem">
+Vaart, Aad W. van der. 1996. <span>“Efficient Maximum Likelihood Estimation in Semiparametric Mixture Models.”</span> <em>The Annals of Statistics</em> 24 (2): 862–78. <a href="https://doi.org/10.1214/aos/1032894470">https://doi.org/10.1214/aos/1032894470</a>.
+</div>
+<div id="ref-vanDerVaartWellner1996" class="csl-entry" role="listitem">
+<span class="nocase">van der Vaart, Aad W., and Jon A. Wellner</span>. 1996. <em>Weak Convergence and Empirical Processes: With Applications to Statistics</em>. Springer Series in Statistics. Springer. <a href="https://doi.org/10.1007/978-1-4757-2545-2">https://doi.org/10.1007/978-1-4757-2545-2</a>.
+</div>
+</div>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./chapter-6.html" class="pagination-link" aria-label="Chapter 6: Contiguity">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Chapter 6: Contiguity</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./chapter-8.html" class="pagination-link" aria-label="Chapter 8: Efficiency of Estimators">
+        <span class="nav-page-text"><span class="chapter-title">Chapter 8: Efficiency of Estimators</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

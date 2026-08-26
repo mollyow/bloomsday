@@ -1,0 +1,1406 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Chapter 18: Stochastic Convergence in Metric Spaces – Reading Companion for Asymptotic Statistics</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./chapter-19.html" rel="next">
+<link href="./chapter-8.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-d3f7f8e73c8d287b30bcf59c2b563615.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./chapter-18.html"><span class="chapter-title">Chapter 18: Stochastic Convergence in Metric Spaces</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Reading Companion for Asymptotic Statistics</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Reading Companion for <em>Asymptotic Statistics</em></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./glossary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Glossary</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-2.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Chapter 2: Stochastic Convergence</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-6.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Chapter 6: Contiguity</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-7.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Chapter 7: Local Asymptotic Normality</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-8.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Chapter 8: Efficiency of Estimators</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-18.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Chapter 18: Stochastic Convergence in Metric Spaces</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-19.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Chapter 19: Empirical Processes</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-25.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Chapter 25: Semiparametric Models</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#metric-and-normed-spaces" id="toc-metric-and-normed-spaces" class="nav-link active" data-scroll-target="#metric-and-normed-spaces">18.1 Metric and Normed Spaces</a></li>
+  <li><a href="#basic-properties" id="toc-basic-properties" class="nav-link" data-scroll-target="#basic-properties">18.2 Basic Properties</a>
+  <ul class="collapse">
+  <li><a href="#sec-outer-expectation" id="toc-sec-outer-expectation" class="nav-link" data-scroll-target="#sec-outer-expectation">Outer expectation and probability</a></li>
+  <li><a href="#sec-tightness" id="toc-sec-tightness" class="nav-link" data-scroll-target="#sec-tightness">Tightness</a></li>
+  </ul></li>
+  <li><a href="#bounded-stochastic-processes" id="toc-bounded-stochastic-processes" class="nav-link" data-scroll-target="#bounded-stochastic-processes">18.3 Bounded Stochastic Processes</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-title">Chapter 18: Stochastic Convergence in Metric Spaces</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>This chapter extends stochastic convergence from Euclidean random vectors to random functions and other objects in metric spaces. Its central lesson is that convergence of every fixed coordinate is not enough: a process limit also requires uniform control between coordinates.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Why this chapter is here">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Why this chapter is here
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong>Prerequisites:</strong> the scalar and vector convergence tools in <a href="./chapter-2.html#sec-convergence">Chapter 2</a>.</li>
+<li><strong>Purpose:</strong> define weak convergence, tightness, and continuous mapping for possibly nonmeasurable maps into function spaces, then characterize convergence in <span class="math inline">\(\ell^\infty(T)\)</span> by finite-dimensional convergence and finite approximation.</li>
+<li><strong>Chapter 25 payoff:</strong> <a href="./chapter-25.html#sec-efficiency-delta-method">§25.7</a> uses differentiable maps between normed spaces, and <a href="./chapter-25.html#sec-likelihood-equations">§25.12</a> linearizes Banach-space-valued likelihood equations. <a href="./chapter-19.html#donsker-classes">Chapter 19</a> turns the present process theory into empirical-process tools.</li>
+</ul>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Companion readings">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Companion readings
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>For a gentler process-level development, see §§9.2–10.1 of <span class="citation" data-cites="sen2022">Sen (<a href="references.html#ref-sen2022" role="doc-biblioref">2022</a>)</span>. For systematic treatments of weak convergence in metric spaces, see chs.&nbsp;6–7 of <span class="citation" data-cites="kosorok2008">Kosorok (<a href="references.html#ref-kosorok2008" role="doc-biblioref">2008</a>)</span> and <span class="citation" data-cites="vanDerVaartWellner1996"><span class="nocase">van der Vaart and Wellner</span> (<a href="references.html#ref-vanDerVaartWellner1996" role="doc-biblioref">1996</a>)</span>. The measurable-map and image-measure viewpoint is developed in §§2.2 and 2.9 of <span class="citation" data-cites="pollard2002">Pollard (<a href="references.html#ref-pollard2002" role="doc-biblioref">2002</a>)</span>.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Reading guide">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Reading guide
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong>Core — §18.1, Definition 18.1, Lemma 18.2, and Examples 18.5, 18.7, and 18.8:</strong> metric-space definitions and selected function spaces used in <a href="./chapter-19.html#donsker-classes">Chapter 19</a> and <a href="./chapter-25.html#sec-efficiency-delta-banach">§25.7</a>.</li>
+<li><strong>Core — §18.2, Lemma 18.9, and Theorems 18.10–18.11:</strong> outer-probability conventions, modes of convergence, and the process-level continuous mapping theorem; identical Chapter 2 arguments are linked rather than repeated.</li>
+<li><strong>Core — §18.3, Theorem 18.14, and Lemma 18.15:</strong> finite-dimensional convergence, asymptotic equicontinuity, and the Gaussian semimetric used by Donsker theory and <a href="./chapter-19.html#theorem-19-26-infinite-dimensional-z-estimation">Z-estimation</a>.</li>
+<li><strong>Compressed — Theorem 18.12:</strong> the exact tightness statement is retained, while its proof remains deferred as in the source.</li>
+<li><strong>Omitted/deferred — Examples 18.3, 18.4, and 18.6 and Lemma 18.13:</strong> material that adds no further prerequisite for the route to Chapter 25.</li>
+</ul>
+</div>
+</div>
+<section id="metric-and-normed-spaces" class="level2">
+<h2 class="anchored" data-anchor-id="metric-and-normed-spaces">18.1 Metric and Normed Spaces</h2>
+<p>A metric space is a set <span class="math inline">\(\mathbb D\)</span> equipped with a function <span class="math inline">\(d:\mathbb D\times\mathbb D\to[0,\infty)\)</span> such that, for all <span class="math inline">\(x,y,z\in\mathbb D\)</span>,</p>
+<ol type="1">
+<li><span class="math inline">\(d(x,y)=d(y,x)\)</span>;</li>
+<li><span class="math inline">\(d(x,z)\leq d(x,y)+d(y,z)\)</span>; and</li>
+<li><span class="math inline">\(d(x,y)=0\)</span> if and only if <span class="math inline">\(x=y\)</span>.</li>
+</ol>
+<p>Following the source, a <strong>semimetric</strong> satisfies the first two properties but need not satisfy the third. A space is <strong>separable</strong> if it contains a countable dense subset. A set is <strong>totally bounded</strong> if, for every <span class="math inline">\(\varepsilon&gt;0\)</span>, it can be covered by finitely many balls of radius <span class="math inline">\(\varepsilon\)</span>. In a complete semimetric space, a subset is compact exactly when it is closed and totally bounded.</p>
+<p>A normed space is a vector space <span class="math inline">\(\mathbb D\)</span> with a norm <span class="math inline">\(\|\cdot\|\)</span>. Every norm induces the metric <span class="math inline">\(d(x,y)=\|x-y\|\)</span>. A seminorm may assign distance zero to distinct vectors, just as a semimetric may fail to separate points.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Definition">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Definition
+</div>
+</div>
+<section id="sec-random-elements" class="level3 callout-body-container callout-body">
+<h3 class="anchored" data-anchor-id="sec-random-elements">Definition 18.1: Borel measurability and random elements</h3>
+<p>The <strong>Borel <span class="math inline">\(\sigma\)</span>-field</strong> on a metric space <span class="math inline">\(\mathbb D\)</span> is the smallest <span class="math inline">\(\sigma\)</span>-field containing every open set. A Borel-measurable map</p>
+<p><span class="math display">\[
+X:(\Omega,\mathcal A,P)\to\mathbb D
+\]</span></p>
+<p>is a <strong>random element</strong> with values in <span class="math inline">\(\mathbb D\)</span>. Random variables, random vectors, and random functions are all instances of this definition.</p>
+</section>
+</div>
+<p>The <a href="./glossary.html#glossary-measurability">measurability diagram in the glossary</a> shows the same pullback construction: target Borel sets must have measurable inverse images in the probability space.</p>
+<div class="callout callout-style-default callout-important callout-titled" title="Lemma">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Lemma
+</div>
+</div>
+<section id="lemma-18.2" class="level3 callout-body-container callout-body">
+<h3 class="anchored" data-anchor-id="lemma-18.2">Lemma 18.2: continuous maps are Borel measurable</h3>
+<p>Every continuous map between metric spaces is Borel measurable.</p>
+</section>
+</div>
+<p><strong>Proof roadmap.</strong></p>
+<p>Continuity makes the inverse image of each open set open. Since open sets generate the target Borel <span class="math inline">\(\sigma\)</span>-field, their inverse images generate only sets in the source Borel <span class="math inline">\(\sigma\)</span>-field.</p>
+<details>
+<summary>
+Complete proof
+</summary>
+<p>Let <span class="math inline">\(g:\mathbb D\to\mathbb E\)</span> be continuous. For every open <span class="math inline">\(G\subset\mathbb E\)</span>, the inverse image <span class="math inline">\(g^{-1}(G)\)</span> is open in <span class="math inline">\(\mathbb D\)</span>, hence Borel. The collection</p>
+<p><span class="math display">\[
+\{B\subset\mathbb E:g^{-1}(B)\text{ is Borel in }\mathbb D\}
+\]</span></p>
+<p>is a <span class="math inline">\(\sigma\)</span>-field containing all open subsets of <span class="math inline">\(\mathbb E\)</span>. It therefore contains the Borel <span class="math inline">\(\sigma\)</span>-field of <span class="math inline">\(\mathbb E\)</span>, which proves that <span class="math inline">\(g\)</span> is Borel measurable.</p>
+</details>
+<p>This lemma makes continuous functionals of random elements ordinary random variables whenever the input map is Borel measurable. The outer conventions in §18.2 cover the cases in which the input map itself is not measurable.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Example">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Example
+</div>
+</div>
+<section id="example-18-5" class="level3 callout-body-container callout-body">
+<h3 class="anchored" data-anchor-id="example-18-5">Example 18.5: uniform norm</h3>
+<p>For an arbitrary index set <span class="math inline">\(T\)</span>,</p>
+<p><span class="math display">\[
+\ell^\infty(T)=\left\{z:T\to\mathbb R:\sup_{t\in T}|z(t)|&lt;\infty\right\}
+\]</span></p>
+<p>is the space of bounded functions on <span class="math inline">\(T\)</span>. With the uniform norm</p>
+<p><span class="math display">\[
+\|z\|_T=\sup_{t\in T}|z(t)|,
+\]</span></p>
+<p>convergence in <span class="math inline">\(\ell^\infty(T)\)</span> is uniform convergence. The space is separable if and only if <span class="math inline">\(T\)</span> is finite.</p>
+</section>
+</div>
+<div id="eighteenfig-ch18-pointwise-uniform" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-alt="The left panel shows increasingly narrow spikes whose maximum remains one; the right panel shows sinusoidal functions whose maximum magnitude shrinks toward zero.">
+<figure class="quarto-float quarto-float-eighteenfig figure">
+<div aria-describedby="eighteenfig-ch18-pointwise-uniform-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/generated/chapter-18-pointwise-uniform.svg" class="img-fluid figure-img" alt="The left panel shows increasingly narrow spikes whose maximum remains one; the right panel shows sinusoidal functions whose maximum magnitude shrinks toward zero.">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-eighteenfig" id="eighteenfig-ch18-pointwise-uniform-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure 18.1: Pointwise convergence can miss a moving spike, whereas uniform convergence controls the largest discrepancy over the whole index set.
+</figcaption>
+</figure>
+</div>
+<p>The moving spike is the warning that motivates Theorem 18.14: limits at each fixed <span class="math inline">\(t\)</span> do not control behavior at an index <span class="math inline">\(t_n\)</span> that changes with <span class="math inline">\(n\)</span>.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Example">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Example
+</div>
+</div>
+<section id="example-18-7" class="level3 callout-body-container callout-body">
+<h3 class="anchored" data-anchor-id="example-18-7">Example 18.7: uniformly continuous functions</h3>
+<p>Let <span class="math inline">\((T,\rho)\)</span> be totally bounded. The space <span class="math inline">\(UC(T,\rho)\)</span> consists of functions <span class="math inline">\(z:T\to\mathbb R\)</span> that are uniformly <span class="math inline">\(\rho\)</span>-continuous. Such functions are bounded, so</p>
+<p><span class="math display">\[
+UC(T,\rho)\subset\ell^\infty(T).
+\]</span></p>
+<p>Equipped with the uniform norm, <span class="math inline">\(UC(T,\rho)\)</span> is complete and separable. Its Borel <span class="math inline">\(\sigma\)</span>-field is generated by the coordinate projections <span class="math inline">\(z\mapsto z(t)\)</span>.</p>
+</section>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Example">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Example
+</div>
+</div>
+<section id="example-18-8-product-spaces" class="level3 callout-body-container callout-body">
+<h3 class="anchored" data-anchor-id="example-18-8-product-spaces">Example 18.8: product-space measurability</h3>
+<p>For metric spaces <span class="math inline">\((\mathbb D,d)\)</span> and <span class="math inline">\((\mathbb E,e)\)</span>, equip <span class="math inline">\(\mathbb D\times\mathbb E\)</span> with</p>
+<p><span class="math display">\[
+f\{(x_1,y_1),(x_2,y_2)\}
+=d(x_1,x_2)\vee e(y_1,y_2).
+\]</span></p>
+<p>There are then two natural <span class="math inline">\(\sigma\)</span>-fields: the product of the two Borel <span class="math inline">\(\sigma\)</span>-fields and the Borel <span class="math inline">\(\sigma\)</span>-field generated by <span class="math inline">\(f\)</span>. The latter can be larger. Consequently, Borel measurability of <span class="math inline">\(X:\Omega\to\mathbb D\)</span> and <span class="math inline">\(Y:\Omega\to\mathbb E\)</span> always makes <span class="math inline">\((X,Y)\)</span> measurable for the product <span class="math inline">\(\sigma\)</span>-field, but need not make it Borel measurable for the product metric.</p>
+<p>A concrete safe case is</p>
+<p><span class="math display">\[
+X:\Omega\to UC(T,\rho),
+\qquad
+Y:\Omega\to\mathbb R^p.
+\]</span></p>
+<p>Both ranges are separable, so the two product <span class="math inline">\(\sigma\)</span>-fields agree and <span class="math inline">\((X,Y)\)</span> is a random element. By contrast, for processes viewed in the generally nonseparable space <span class="math inline">\(\ell^\infty(T)\)</span>, coordinatewise measurability alone does not settle Borel measurability of the whole process or of a pair of processes. This is one reason the outer notation below is not cosmetic.</p>
+</section>
+</div>
+</section>
+<section id="basic-properties" class="level2">
+<h2 class="anchored" data-anchor-id="basic-properties">18.2 Basic Properties</h2>
+<p>Distribution functions do not extend naturally to arbitrary metric spaces. Van der Vaart therefore defines weak convergence through bounded continuous test functions and allows the approximating maps to be nonmeasurable.</p>
+<section id="sec-outer-expectation" class="level3">
+<h3 class="anchored" data-anchor-id="sec-outer-expectation">Outer expectation and probability</h3>
+<p>For an arbitrary map <span class="math inline">\(Z:\Omega\to\overline{\mathbb R}\)</span>, define its <strong>outer expectation</strong> by</p>
+<p><span class="math display">\[
+E^*Z
+=\inf\{EU:U\text{ is measurable},\ U\geq Z,\ EU\text{ exists}\}.
+\]</span></p>
+<p>The inner expectation is <span class="math inline">\(E_*Z=-E^*(-Z)\)</span>. For an arbitrary subset <span class="math inline">\(A\subset\Omega\)</span>, its outer probability is</p>
+<p><span class="math display">\[
+P^*(A)
+=E^*\mathbf 1_A
+=\inf\{P(B):A\subset B,\ B\in\mathcal A\}.
+\]</span></p>
+<p>If <span class="math inline">\(Z\)</span> or <span class="math inline">\(A\)</span> is measurable, the outer quantity equals the ordinary expectation or probability. The star records that a measurable majorant or cover may be needed.</p>
+<p>For arbitrary maps <span class="math inline">\(X_n:\Omega_n\to\mathbb D\)</span> and a Borel random element <span class="math inline">\(X\)</span> in <span class="math inline">\(\mathbb D\)</span>:</p>
+<ol type="1">
+<li><p><strong>Weak convergence:</strong> <span class="math inline">\(X_n\rightsquigarrow X\)</span> means</p>
+<p><span class="math display">\[
+E^*f(X_n)\to Ef(X)
+\]</span></p>
+<p>for every bounded continuous <span class="math inline">\(f:\mathbb D\to\mathbb R\)</span>.</p></li>
+<li><p><strong>Convergence in probability:</strong> <span class="math inline">\(X_n\overset P\to X\)</span> means</p>
+<p><span class="math display">\[
+P^*\{d(X_n,X)&gt;\varepsilon\}\to0
+\]</span></p>
+<p>for every <span class="math inline">\(\varepsilon&gt;0\)</span>.</p></li>
+<li><p><strong>Outer almost-sure convergence:</strong> <span class="math inline">\(X_n\overset{\mathrm{as}^*}\longrightarrow X\)</span> means that measurable random variables <span class="math inline">\(\Delta_n\)</span> exist such that</p>
+<p><span class="math display">\[
+d(X_n,X)\leq\Delta_n,
+\qquad
+\Delta_n\overset{\mathrm{as}}\longrightarrow0.
+\]</span></p></li>
+</ol>
+<p>The last definition is deliberately stronger than merely asserting pointwise convergence outside a possibly nonmeasurable set.</p>
+<div class="callout callout-style-default callout-important callout-titled" title="Lemma">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Lemma
+</div>
+</div>
+<section id="lemma-18-9" class="level3 callout-body-container callout-body">
+<h3 class="anchored" data-anchor-id="lemma-18-9">Lemma 18.9: Portmanteau</h3>
+<p>For arbitrary maps <span class="math inline">\(X_n:\Omega_n\to\mathbb D\)</span> and every random element <span class="math inline">\(X\)</span> in <span class="math inline">\(\mathbb D\)</span>, the following are equivalent:</p>
+<ol type="1">
+<li><span class="math inline">\(E^*f(X_n)\to Ef(X)\)</span> for every bounded continuous <span class="math inline">\(f\)</span>;</li>
+<li><span class="math inline">\(E^*f(X_n)\to Ef(X)\)</span> for every bounded Lipschitz <span class="math inline">\(f\)</span>;</li>
+<li><span class="math inline">\(\liminf_nP^*(X_n\in G)\geq P(X\in G)\)</span> for every open <span class="math inline">\(G\)</span>;</li>
+<li><span class="math inline">\(\limsup_nP^*(X_n\in F)\leq P(X\in F)\)</span> for every closed <span class="math inline">\(F\)</span>; and</li>
+<li><span class="math inline">\(P^*(X_n\in B)\to P(X\in B)\)</span> for every Borel <span class="math inline">\(B\)</span> with <span class="math inline">\(P(X\in\partial B)=0\)</span>.</li>
+</ol>
+</section>
+</div>
+<p>The proof is the metric-space version of <a href="./chapter-2.html#lemma-portmanteau">Lemma 2.2</a>. The same Lipschitz approximation</p>
+<p><span class="math display">\[
+f_m(x)=m\,d(x,G^c)\wedge1
+\]</span></p>
+<p>handles open sets, and the remaining complement and boundary arguments are identical. Outer expectations and probabilities replace ordinary ones wherever an approximating map may be nonmeasurable; no new analytic step is required.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Theorem">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Theorem
+</div>
+</div>
+<section id="theorem-18-10" class="level3 callout-body-container callout-body">
+<h3 class="anchored" data-anchor-id="theorem-18-10">Theorem 18.10: relations among modes of stochastic convergence</h3>
+<p>For arbitrary maps <span class="math inline">\(X_n,Y_n:\Omega_n\to\mathbb D\)</span> and every random element <span class="math inline">\(X\)</span> in <span class="math inline">\(\mathbb D\)</span>:</p>
+<ol type="1">
+<li><span class="math inline">\(X_n\overset{\mathrm{as}^*}\longrightarrow X\)</span> implies <span class="math inline">\(X_n\overset P\to X\)</span>;</li>
+<li><span class="math inline">\(X_n\overset P\to X\)</span> implies <span class="math inline">\(X_n\rightsquigarrow X\)</span>;</li>
+<li><span class="math inline">\(X_n\overset P\to c\)</span> for a constant <span class="math inline">\(c\)</span> if and only if <span class="math inline">\(X_n\rightsquigarrow c\)</span>;</li>
+<li>if <span class="math inline">\(X_n\rightsquigarrow X\)</span> and <span class="math inline">\(d(X_n,Y_n)\overset P\to0\)</span>, then <span class="math inline">\(Y_n\rightsquigarrow X\)</span>;</li>
+<li>if <span class="math inline">\(X_n\rightsquigarrow X\)</span> and <span class="math inline">\(Y_n\overset P\to c\)</span>, then <span class="math inline">\((X_n,Y_n)\rightsquigarrow(X,c)\)</span>; and</li>
+<li>if <span class="math inline">\(X_n\overset P\to X\)</span> and <span class="math inline">\(Y_n\overset P\to Y\)</span>, then <span class="math inline">\((X_n,Y_n)\overset P\to(X,Y)\)</span>.</li>
+</ol>
+</section>
+</div>
+<p>These are exactly the relations proved in <a href="./chapter-2.html#theorem-2-7">Theorem 2.7</a>, with outer probabilities inserted when necessary. The bounded-Lipschitz comparison in the proof of part 4 and the product-metric bound in part 6 already work in arbitrary metric spaces, so duplicating those arguments would add no new step.</p>
+<p><span id="theorem-18-11-continuous-mapping-theorem"></span></p>
+<div class="callout callout-style-default callout-note callout-titled" title="Theorem">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Theorem
+</div>
+</div>
+<section id="theorem-18-11" class="level3 callout-body-container callout-body">
+<h3 class="anchored" data-anchor-id="theorem-18-11">Theorem 18.11: continuous mapping</h3>
+<p>Let <span class="math inline">\(\mathbb D_n\subset\mathbb D\)</span> be arbitrary subsets and let</p>
+<p><span class="math display">\[
+g_n:\mathbb D_n\to\mathbb E,
+\qquad n\geq0,
+\]</span></p>
+<p>be arbitrary maps. Assume that, for every sequence <span class="math inline">\(x_n\in\mathbb D_n\)</span>, whenever <span class="math inline">\(x_{n'}\to x\)</span> along a subsequence and <span class="math inline">\(x\in\mathbb D_0\)</span>,</p>
+<p><span class="math display">\[
+g_{n'}(x_{n'})\to g_0(x).
+\]</span></p>
+<p>Let <span class="math inline">\(X_n:\Omega_n\to\mathbb D_n\)</span> be arbitrary maps and let <span class="math inline">\(X\)</span> be a random element taking values in <span class="math inline">\(\mathbb D_0\)</span>, with <span class="math inline">\(g_0(X)\)</span> a random element in <span class="math inline">\(\mathbb E\)</span>. Then:</p>
+<ol type="1">
+<li>if <span class="math inline">\(X_n\rightsquigarrow X\)</span>, then <span class="math inline">\(g_n(X_n)\rightsquigarrow g_0(X)\)</span>;</li>
+<li>if <span class="math inline">\(X_n\overset P\to X\)</span>, then <span class="math inline">\(g_n(X_n)\overset P\to g_0(X)\)</span>; and</li>
+<li>if <span class="math inline">\(X_n\overset{\mathrm{as}^*}\longrightarrow X\)</span>, then <span class="math inline">\(g_n(X_n)\overset{\mathrm{as}^*}\longrightarrow g_0(X)\)</span>.</li>
+</ol>
+</section>
+</div>
+<p><strong>Proof roadmap.</strong></p>
+<p>For weak convergence, collect all late inverse images of a closed set and close their union. The sequential hypothesis identifies every point that remains in all such closures. Portmanteau then supplies the closed-set inequality. For probability and outer almost-sure convergence, use the subsequence characterization of convergence in probability and apply the same deterministic sequential hypothesis along almost-surely convergent sample paths.</p>
+<details>
+<summary>
+Complete proof
+</summary>
+<p><strong>Weak convergence.</strong> Let <span class="math inline">\(F\subset\mathbb E\)</span> be closed and define the closed subsets of <span class="math inline">\(\mathbb D\)</span></p>
+<p><span class="math display">\[
+A_k
+=\overline{\bigcup_{m\geq k}
+\{x\in\mathbb D_m:g_m(x)\in F\}}.
+\]</span></p>
+<p>They decrease with <span class="math inline">\(k\)</span>, and</p>
+<p><span class="math display">\[
+\bigcap_{k=1}^\infty A_k
+\subset g_0^{-1}(F)\cup(\mathbb D\setminus\mathbb D_0).
+\tag{18.11.1}
+\]</span></p>
+<p>To verify the inclusion, take <span class="math inline">\(x\)</span> in the intersection. For each <span class="math inline">\(k\)</span>, choose <span class="math inline">\(m_k\geq k\)</span> and <span class="math inline">\(x_{m_k}\in\mathbb D_{m_k}\)</span> so that <span class="math inline">\(m_k\uparrow\infty\)</span>, <span class="math inline">\(d(x_{m_k},x)&lt;1/k\)</span>, and <span class="math inline">\(g_{m_k}(x_{m_k})\in F\)</span>. If <span class="math inline">\(x\in\mathbb D_0\)</span>, the sequential hypothesis gives <span class="math inline">\(g_{m_k}(x_{m_k})\to g_0(x)\)</span>. Closedness of <span class="math inline">\(F\)</span> then gives <span class="math inline">\(g_0(x)\in F\)</span>, proving (18.11.1).</p>
+<p>For fixed <span class="math inline">\(k\)</span> and every <span class="math inline">\(n\geq k\)</span>,</p>
+<p><span class="math display">\[
+\{g_n(X_n)\in F\}\subset\{X_n\in A_k\}.
+\]</span></p>
+<p>If <span class="math inline">\(X_n\rightsquigarrow X\)</span>, the closed-set form of Portmanteau gives</p>
+<p><span class="math display">\[
+\limsup_nP^*\{g_n(X_n)\in F\}
+\leq P(X\in A_k).
+\]</span></p>
+<p>Let <span class="math inline">\(k\to\infty\)</span>. Continuity from above and (18.11.1), together with <span class="math inline">\(P(X\in\mathbb D_0)=1\)</span>, yield</p>
+<p><span class="math display">\[
+\limsup_nP^*\{g_n(X_n)\in F\}
+\leq P\{g_0(X)\in F\}.
+\]</span></p>
+<p>Portmanteau in <span class="math inline">\(\mathbb E\)</span> proves <span class="math inline">\(g_n(X_n)\rightsquigarrow g_0(X)\)</span>.</p>
+<p><strong>Convergence in probability.</strong> Use the outer-probability subsequence criterion: <span class="math inline">\(Z_n\overset P\to0\)</span> if and only if every subsequence has a further subsequence that converges to zero in the outer almost-sure sense. For the forward implication, select indices so that <span class="math inline">\(P^*(Z_{n_j}&gt;2^{-j})&lt;2^{-j}\)</span>, cover these events by measurable sets with summable probabilities, and apply Borel–Cantelli. The converse follows because outer almost-sure convergence implies convergence in outer probability.</p>
+<p>Starting from any subsequence of <span class="math inline">\(X_n\)</span>, this criterion and <span class="math inline">\(X_n\overset P\to X\)</span> give a further subsequence, again denoted <span class="math inline">\(X_{n'}\)</span>, such that <span class="math inline">\(d(X_{n'},X)\to0\)</span> in the outer almost-sure sense. Outside one measurable null set, set</p>
+<p><span class="math display">\[
+x_{n'}=X_{n'}(\omega),
+\qquad x=X(\omega)\in\mathbb D_0.
+\]</span></p>
+<p>The sequential hypothesis gives</p>
+<p><span class="math display">\[
+g_{n'}\{X_{n'}(\omega)\}\to g_0\{X(\omega)\}.
+\]</span></p>
+<p>The measurable-majorant convention encoded by <span class="math inline">\(\mathrm{as}^*\)</span> transfers this pathwise conclusion to outer almost-sure convergence of the output subsequence. The subsequence criterion now gives <span class="math inline">\(g_n(X_n)\overset P\to g_0(X)\)</span>.</p>
+<p><strong>Outer almost-sure convergence.</strong> If <span class="math inline">\(d(X_n,X)\leq\Delta_n\)</span> with measurable <span class="math inline">\(\Delta_n\to0\)</span> almost surely, then outside one null set <span class="math inline">\(X_n(\omega)\to X(\omega)\in\mathbb D_0\)</span>. The sequential hypothesis again gives pointwise convergence of the transformed maps. Taking measurable envelopes of the tail output distances gives the majorants required in the definition of <span class="math inline">\(\mathrm{as}^*\)</span>, and these majorants decrease to zero almost surely.</p>
+<p>Van der Vaart prints the weak-convergence argument above and notes that the other refinements are not needed later in the source. The final two paragraphs complete the other two stated conclusions using the same outer subsequence device as Theorem 18.10.</p>
+</details>
+<p>When <span class="math inline">\(\mathbb D_n=\mathbb D\)</span> and <span class="math inline">\(g_n=g_0\)</span>, the sequential condition is ordinary continuity on the support of <span class="math inline">\(X\)</span>, so this result reduces to <a href="./chapter-2.html#theorem-continuous-mapping">Theorem 2.3</a>. Allowing both the domain and the map to vary is the form used in the functional delta method in Chapter 20.</p>
+</section>
+<section id="sec-tightness" class="level3">
+<h3 class="anchored" data-anchor-id="sec-tightness">Tightness</h3>
+<p>A Borel random element <span class="math inline">\(X\)</span> in <span class="math inline">\(\mathbb D\)</span> is <strong>tight</strong> if, for every <span class="math inline">\(\varepsilon&gt;0\)</span>, there is a compact <span class="math inline">\(K\subset\mathbb D\)</span> such that</p>
+<p><span class="math display">\[
+P(X\notin K)&lt;\varepsilon.
+\]</span></p>
+<p>An arbitrary sequence <span class="math inline">\(X_n:\Omega_n\to\mathbb D\)</span> is <strong>asymptotically tight</strong> if, for every <span class="math inline">\(\varepsilon&gt;0\)</span>, there is compact <span class="math inline">\(K\)</span> such that, for every <span class="math inline">\(\delta&gt;0\)</span>,</p>
+<p><span class="math display">\[
+\limsup_nP^*(X_n\notin K^\delta)&lt;\varepsilon,
+\qquad
+K^\delta=\{y:d(y,K)&lt;\delta\}.
+\]</span></p>
+<p>It is <strong>asymptotically measurable</strong> if, for every bounded continuous <span class="math inline">\(f\)</span>,</p>
+<p><span class="math display">\[
+E^*f(X_n)-E_*f(X_n)\to0.
+\]</span></p>
+<div class="callout callout-style-default callout-note callout-titled" title="Theorem">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Theorem
+</div>
+</div>
+<section id="theorem-18-12" class="level3 callout-body-container callout-body">
+<h3 class="anchored" data-anchor-id="theorem-18-12">Theorem 18.12: Prokhorov</h3>
+<p>Let <span class="math inline">\(X_n:\Omega_n\to\mathbb D\)</span> be arbitrary maps into a metric space.</p>
+<ol type="1">
+<li>If <span class="math inline">\(X_n\rightsquigarrow X\)</span> for a tight random element <span class="math inline">\(X\)</span>, then <span class="math inline">\(\{X_n:n\in\mathbb N\}\)</span> is asymptotically tight and asymptotically measurable.</li>
+<li>If <span class="math inline">\(X_n\)</span> is asymptotically tight and asymptotically measurable, then some subsequence converges weakly to a tight random element.</li>
+</ol>
+</section>
+</div>
+<p>Van der Vaart states that this version is not used in the source text and refers elsewhere for its proof. The complete Euclidean argument—where compact sets can be taken to be closed bounded rectangles—appears in <a href="./chapter-2.html#theorem-2-4">Theorem 2.4</a> and <a href="./chapter-2.html#lemma-2-5">Lemma 2.5</a>. The metric-space result is recorded here because the compact-set language clarifies the necessity half of Theorem 18.14 and because tight subsequences reappear in <a href="./chapter-25.html#sec-efficiency-delta-banach">§25.7</a>.</p>
+</section>
+</section>
+<section id="bounded-stochastic-processes" class="level2">
+<h2 class="anchored" data-anchor-id="bounded-stochastic-processes">18.3 Bounded Stochastic Processes</h2>
+<p>A stochastic process <span class="math inline">\(X=\{X_t:t\in T\}\)</span> is a collection of random variables on one probability space. For fixed <span class="math inline">\(\omega\)</span>, the function <span class="math inline">\(t\mapsto X_t(\omega)\)</span> is a sample path. If every sample path is bounded, the entire process can be viewed as one map</p>
+<p><span class="math display">\[
+X:\Omega\to\ell^\infty(T).
+\]</span></p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Running example: the empirical CDF">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Running example: the empirical CDF
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>For i.i.d. observations <span class="math inline">\(Z_1,\ldots,Z_n\)</span> with distribution function <span class="math inline">\(F\)</span>, the empirical CDF is the bounded random function</p>
+<p><span class="math display">\[
+F_n(t)=\frac1n\sum_{i=1}^n\mathbf 1\{Z_i\leq t\},
+\qquad t\in\mathbb R.
+\]</span></p>
+<p>Each fixed coordinate <span class="math inline">\(F_n(t)\)</span> is measurable, but the whole map into the nonseparable space <span class="math inline">\(\ell^\infty(\mathbb R)\)</span> need not be Borel measurable. The outer conventions therefore let us state both</p>
+<p><span class="math display">\[
+\|F_n-F\|_{\mathbb R}\overset P\longrightarrow0
+\]</span></p>
+<p>and the process limit for</p>
+<p><span class="math display">\[
+\alpha_n(t)=\sqrt n\{F_n(t)-F(t)\}
+\]</span></p>
+<p>without pretending that coordinatewise measurability resolves the function-space issue.</p>
+<p>Finite-dimensional central limit theorems handle <span class="math inline">\((\alpha_n(t_1),\ldots,\alpha_n(t_k))\)</span>. Theorem 18.14 identifies the additional finite-approximation condition needed for convergence of the entire process. Its Gaussian limit can be written <span class="math inline">\(G_F(t)=B\{F(t)\}\)</span> for a Brownian bridge <span class="math inline">\(B\)</span>. With <span class="math inline">\(\delta=|F(t)-F(s)|\)</span>, its natural semimetric is</p>
+<p><span class="math display">\[
+\rho_F(s,t)^2
+=E\{G_F(s)-G_F(t)\}^2
+=\delta(1-\delta).
+\]</span></p>
+<p><a href="./chapter-19.html#glivenko-cantelli-classes">Chapter 19</a> develops the Glivenko–Cantelli and Donsker versions of this example.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Theorem">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Theorem
+</div>
+</div>
+<section id="theorem-weak-convergence-processes" class="level3 callout-body-container callout-body">
+<h3 class="anchored" data-anchor-id="theorem-weak-convergence-processes">Theorem 18.14: weak convergence of stochastic processes</h3>
+<p>A sequence of arbitrary maps <span class="math inline">\(X_n:\Omega_n\to\ell^\infty(T)\)</span> converges weakly to a tight random element if and only if both conditions hold:</p>
+<ol type="1">
+<li><p>for every finite set <span class="math inline">\(t_1,\ldots,t_k\in T\)</span>, the sequence</p>
+<p><span class="math display">\[
+(X_{n,t_1},\ldots,X_{n,t_k})
+\]</span></p>
+<p>converges in distribution in <span class="math inline">\(\mathbb R^k\)</span>;</p></li>
+<li><p>for every <span class="math inline">\(\varepsilon,\eta&gt;0\)</span>, there is a partition <span class="math inline">\(T_1,\ldots,T_k\)</span> of <span class="math inline">\(T\)</span> such that</p>
+<p><span class="math display">\[
+\limsup_{n\to\infty}
+P^*\left(
+\max_{1\leq j\leq k}
+\sup_{s,t\in T_j}|X_{n,s}-X_{n,t}|
+\geq\varepsilon
+\right)
+\leq\eta.
+\]</span></p></li>
+</ol>
+</section>
+</div>
+<p><strong>Proof roadmap.</strong></p>
+<p>Necessity follows because coordinate projections are continuous and compact subsets of <span class="math inline">\(\ell^\infty(T)\)</span> admit finite uniform approximations. For sufficiency, nested finite partitions generate a totally bounded semimetric <span class="math inline">\(\rho\)</span> on <span class="math inline">\(T\)</span>. Finite-dimensional limits first construct a process on a countable <span class="math inline">\(\rho\)</span>-dense set; the oscillation condition and Borel–Cantelli make its paths uniformly continuous. Finite projections then approximate both <span class="math inline">\(X_n\)</span> and the constructed limit.</p>
+<details>
+<summary>
+Complete proof
+</summary>
+<p><strong>Necessity.</strong> Suppose <span class="math inline">\(X_n\rightsquigarrow X\)</span> for a tight random element <span class="math inline">\(X\)</span> in <span class="math inline">\(\ell^\infty(T)\)</span>. For fixed <span class="math inline">\(t_1,\ldots,t_k\)</span>, the coordinate map</p>
+<p><span class="math display">\[
+z\mapsto\{z(t_1),\ldots,z(t_k)\}
+\]</span></p>
+<p>is continuous. <a href="#theorem-18-11">Theorem 18.11</a> therefore gives condition 1.</p>
+<p>Fix <span class="math inline">\(\varepsilon,\eta&gt;0\)</span>. Tightness supplies compact <span class="math inline">\(K\subset\ell^\infty(T)\)</span> with <span class="math inline">\(P(X\notin K)&lt;\eta\)</span>. For any <span class="math inline">\(a&gt;0\)</span>, the bounded Lipschitz function</p>
+<p><span class="math display">\[
+h_a(z)=\{d(z,K)/a\}\wedge1
+\]</span></p>
+<p>equals one outside <span class="math inline">\(K^a\)</span> and zero on <span class="math inline">\(K\)</span>. Weak convergence gives</p>
+<p><span class="math display">\[
+\limsup_nP^*(X_n\notin K^a)
+\leq\lim_nE^*h_a(X_n)
+=Eh_a(X)
+\leq P(X\notin K)
+&lt;\eta.
+\tag{18.14.1}
+\]</span></p>
+<p>Because <span class="math inline">\(K\)</span> is compact, choose <span class="math inline">\(z_1,\ldots,z_N\in K\)</span> forming an <span class="math inline">\(\varepsilon/8\)</span>-net in the uniform norm. The vector</p>
+<p><span class="math display">\[
+t\mapsto\{z_1(t),\ldots,z_N(t)\}
+\]</span></p>
+<p>has bounded range in <span class="math inline">\(\mathbb R^N\)</span>. Partition that bounded range into finitely many cubes of side <span class="math inline">\(\varepsilon/4\)</span> and take their inverse images in <span class="math inline">\(T\)</span>. If <span class="math inline">\(s,t\)</span> are in the same resulting cell, then</p>
+<p><span class="math display">\[
+\max_{1\leq j\leq N}|z_j(s)-z_j(t)|\leq\varepsilon/4.
+\]</span></p>
+<p>If <span class="math inline">\(z\in K^{\varepsilon/8}\)</span>, choose <span class="math inline">\(y\in K\)</span> with <span class="math inline">\(\|z-y\|_T&lt;\varepsilon/8\)</span> and then <span class="math inline">\(z_j\)</span> with <span class="math inline">\(\|y-z_j\|_T&lt;\varepsilon/8\)</span>. For <span class="math inline">\(s,t\)</span> in the same cell,</p>
+<p><span class="math display">\[
+|z(s)-z(t)|
+\leq2\|z-z_j\|_T+|z_j(s)-z_j(t)|
+&lt;3\varepsilon/4.
+\]</span></p>
+<p>Thus an oscillation of at least <span class="math inline">\(\varepsilon\)</span> forces <span class="math inline">\(X_n\notin K^{\varepsilon/8}\)</span>. Equation (18.14.1) proves condition 2.</p>
+<p><strong>Sufficiency.</strong> For each <span class="math inline">\(m\geq1\)</span>, apply condition 2 with <span class="math inline">\(\varepsilon=\eta=2^{-m}\)</span>. Refine the partitions successively, which can only reduce their within-cell oscillations. Write the level-<span class="math inline">\(m\)</span> partition as</p>
+<p><span class="math display">\[
+T_1^m,\ldots,T_{k_m}^m.
+\]</span></p>
+<p>Define a semimetric</p>
+<p><span class="math display">\[
+\rho_m(s,t)=
+\begin{cases}
+0,&amp;s,t\text{ are in the same level-}m\text{ cell},\\
+1,&amp;\text{otherwise},
+\end{cases}
+\]</span></p>
+<p>and set</p>
+<p><span class="math display">\[
+\rho(s,t)=\sum_{m=1}^\infty2^{-m}\rho_m(s,t).
+\]</span></p>
+<p>The nesting makes <span class="math inline">\(\rho_1\leq\rho_2\leq\cdots\)</span>. Every level-<span class="math inline">\(m\)</span> cell has <span class="math inline">\(\rho\)</span>-diameter at most <span class="math inline">\(\sum_{j&gt;m}2^{-j}=2^{-m}\)</span>, so <span class="math inline">\((T,\rho)\)</span> is totally bounded. Choose one representative from every cell at every level; the resulting countable set <span class="math inline">\(T_0\)</span> is <span class="math inline">\(\rho\)</span>-dense in <span class="math inline">\(T\)</span>.</p>
+<p>Condition 1 and consistency of finite-dimensional limits permit Kolmogorov’s consistency theorem to construct a process <span class="math inline">\(\{X_t:t\in T_0\}\)</span> satisfying</p>
+<p><span class="math display">\[
+(X_{n,t_1},\ldots,X_{n,t_k})
+\rightsquigarrow
+(X_{t_1},\ldots,X_{t_k})
+\]</span></p>
+<p>for every finite subset of <span class="math inline">\(T_0\)</span>. For a finite <span class="math inline">\(S\subset T_0\)</span>, Portmanteau and the level-<span class="math inline">\(m\)</span> oscillation bound give</p>
+<p><span class="math display">\[
+P\left(
+\max_j\sup_{s,t\in T_j^m\cap S}|X_s-X_t|&gt;2^{-m}
+\right)
+\leq2^{-m}.
+\]</span></p>
+<p>Increase <span class="math inline">\(S\)</span> through finite subsets of <span class="math inline">\(T_0\)</span> and use monotone convergence of the events. If <span class="math inline">\(\rho(s,t)&lt;2^{-m}\)</span>, then <span class="math inline">\(\rho_m(s,t)=0\)</span>, so <span class="math inline">\(s\)</span> and <span class="math inline">\(t\)</span> lie in the same level-<span class="math inline">\(m\)</span> cell. Consequently,</p>
+<p><span class="math display">\[
+P\left(
+\sup_{\substack{s,t\in T_0\\\rho(s,t)&lt;2^{-m}}}
+|X_s-X_t|&gt;2^{-m}
+\right)
+\leq2^{-m}.
+\tag{18.14.2}
+\]</span></p>
+<p>The right sides are summable. By Borel–Cantelli, almost every sample path on <span class="math inline">\(T_0\)</span> is uniformly <span class="math inline">\(\rho\)</span>-continuous. Extend each such path uniquely to <span class="math inline">\(T\)</span>. The resulting process <span class="math inline">\(X\)</span> has paths in <span class="math inline">\(UC(T,\rho)\)</span>. This space is complete and separable, its Borel <span class="math inline">\(\sigma\)</span>-field is generated by coordinates, and every Borel probability on it is tight. Hence <span class="math inline">\(X\)</span> is a tight random element of <span class="math inline">\(\ell^\infty(T)\)</span>.</p>
+<p>For each <span class="math inline">\(m\)</span>, let <span class="math inline">\(\pi_m:T\to T_0\)</span> send every level-<span class="math inline">\(m\)</span> cell to its selected representative. Uniform continuity and the cell-diameter bound imply</p>
+<p><span class="math display">\[
+\|X\circ\pi_m-X\|_T\overset{\mathrm{as}}\longrightarrow0.
+\]</span></p>
+<p>For fixed <span class="math inline">\(m\)</span>, both <span class="math inline">\(X_n\circ\pi_m\)</span> and <span class="math inline">\(X\circ\pi_m\)</span> are determined by <span class="math inline">\(k_m\)</span> coordinates, so condition 1 gives</p>
+<p><span class="math display">\[
+X_n\circ\pi_m\rightsquigarrow X\circ\pi_m
+\qquad(n\to\infty).
+\]</span></p>
+<p>Let <span class="math inline">\(f:\ell^\infty(T)\to[0,1]\)</span> be Lipschitz. For every <span class="math inline">\(a&gt;0\)</span>,</p>
+<p><span class="math display">\[
+\begin{aligned}
+|E^*f(X_n)-Ef(X)|
+&amp;\leq |E^*f(X_n)-E^*f(X_n\circ\pi_m)|\\
+&amp;\quad+|E^*f(X_n\circ\pi_m)-Ef(X\circ\pi_m)|\\
+&amp;\quad+|Ef(X\circ\pi_m)-Ef(X)|\\
+&amp;\leq \|f\|_{\mathrm{Lip}}a
++P^*\{\|X_n-X_n\circ\pi_m\|_T&gt;a\}
++o(1),
+\end{aligned}
+\]</span></p>
+<p>where <span class="math inline">\(o(1)\)</span> first lets <span class="math inline">\(n\to\infty\)</span> at fixed <span class="math inline">\(m\)</span> and then uses <span class="math inline">\(X\circ\pi_m\to X\)</span>. Set <span class="math inline">\(a=2^{-m}\)</span>. The partition construction bounds the limiting upper probability by <span class="math inline">\(2^{-m}\)</span>, so</p>
+<p><span class="math display">\[
+\limsup_n|E^*f(X_n)-Ef(X)|
+\leq(\|f\|_{\mathrm{Lip}}+1)2^{-m}+o_m(1).
+\]</span></p>
+<p>Let <span class="math inline">\(m\to\infty\)</span>. The bounded-Lipschitz form of Portmanteau gives <span class="math inline">\(X_n\rightsquigarrow X\)</span>.</p>
+<p>Van der Vaart prints the constructive sufficiency argument. The compact-net argument at the start supplies the necessity direction that the source states but does not print.</p>
+</details>
+<p>The theorem can be read as</p>
+<p><span class="math display">\[
+\text{finite-dimensional convergence}
++\text{finite approximation}
+\quad\Longleftrightarrow\quad
+\text{weak convergence of the whole process}.
+\]</span></p>
+<p>Condition 2 is also called asymptotic tightness or asymptotic equicontinuity. It prevents the moving-spike behavior in <a href="#eighteenfig-ch18-pointwise-uniform" class="quarto-xref">Figure 18.<span>1</span></a>.</p>
+<div class="callout callout-style-default callout-important callout-titled" title="Lemma">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Lemma
+</div>
+</div>
+<section id="lemma-18.15-the-natural-semimetric-of-the-limit" class="level3 callout-body-container callout-body">
+<h3 class="anchored" data-anchor-id="lemma-18.15-the-natural-semimetric-of-the-limit">Lemma 18.15: the natural semimetric of the limit</h3>
+<p>Under conditions 1 and 2 of <a href="#theorem-weak-convergence-processes">Theorem 18.14</a>, there is a semimetric <span class="math inline">\(\rho\)</span> on <span class="math inline">\(T\)</span> such that <span class="math inline">\((T,\rho)\)</span> is totally bounded and the weak limit can be constructed with almost every sample path in <span class="math inline">\(UC(T,\rho)\)</span>. If the weak limit <span class="math inline">\(X\)</span> is zero-mean Gaussian, one may take</p>
+<p><span class="math display">\[
+\rho(s,t)=\operatorname{sd}(X_s-X_t).
+\]</span></p>
+</section>
+</div>
+<p><strong>Proof roadmap.</strong></p>
+<p>Theorem 18.14 already constructs one totally bounded semimetric supporting uniformly continuous paths. For a Gaussian process, compare that semimetric with the intrinsic standard-deviation semimetric. Compactness transfers by subsequences, and path continuity can fail only if two points at intrinsic distance zero have unequal process values. Separability reduces those possible pairs to a countable null union.</p>
+<details>
+<summary>
+Complete proof
+</summary>
+<p>The proof of Theorem 18.14 constructs a semimetric <span class="math inline">\(\rho\)</span> for which <span class="math inline">\(T\)</span> is totally bounded and almost every path of <span class="math inline">\(X\)</span> belongs to <span class="math inline">\(UC(T,\rho)\)</span>. This proves the first assertion.</p>
+<p>Now suppose <span class="math inline">\(X\)</span> is zero-mean Gaussian and define</p>
+<p><span class="math display">\[
+\rho_2(s,t)=\operatorname{sd}(X_s-X_t)
+=\{E(X_s-X_t)^2\}^{1/2}.
+\]</span></p>
+<p>Complete <span class="math inline">\((T,\rho)\)</span> and extend the uniformly <span class="math inline">\(\rho\)</span>-continuous paths. The completion is compact, so it is enough to work as if <span class="math inline">\((T,\rho)\)</span> were compact and every path were <span class="math inline">\(\rho\)</span>-continuous outside one null set.</p>
+<p>Take any sequence <span class="math inline">\(t_n\in T\)</span>. Compactness gives a subsequence <span class="math inline">\(t_{n'}\to t\)</span> in <span class="math inline">\(\rho\)</span>. Path continuity implies</p>
+<p><span class="math display">\[
+X_{t_{n'}}\to X_t
+\qquad\text{almost surely}.
+\]</span></p>
+<p>The differences <span class="math inline">\(X_{t_{n'}}-X_t\)</span> are zero-mean Gaussian and converge to zero in probability. Their variances must therefore converge to zero, so</p>
+<p><span class="math display">\[
+\rho_2(t_{n'},t)^2
+=E(X_{t_{n'}}-X_t)^2
+\to0.
+\]</span></p>
+<p>Every sequence thus has a <span class="math inline">\(\rho_2\)</span>-convergent subsequence, which makes <span class="math inline">\((T,\rho_2)\)</span> compact and hence totally bounded.</p>
+<p>It remains to prove path continuity in <span class="math inline">\(\rho_2\)</span>. Suppose a <span class="math inline">\(\rho\)</span>-continuous sample path is not <span class="math inline">\(\rho_2\)</span>-continuous. Then for some <span class="math inline">\(t\in T\)</span>, <span class="math inline">\(\varepsilon&gt;0\)</span>, and sequence <span class="math inline">\(t_n\)</span>,</p>
+<p><span class="math display">\[
+\rho_2(t_n,t)\to0,
+\qquad
+|X_{t_n}(\omega)-X_t(\omega)|\geq\varepsilon.
+\]</span></p>
+<p>By <span class="math inline">\(\rho\)</span>-compactness, pass to a subsequence with <span class="math inline">\(t_{n'}\to s\)</span> in <span class="math inline">\(\rho\)</span>. Then <span class="math inline">\(X_{t_{n'}}(\omega)\to X_s(\omega)\)</span>, and the preceding subsequence argument also gives <span class="math inline">\(\rho_2(t_{n'},s)\to0\)</span>. The triangle inequality implies <span class="math inline">\(\rho_2(s,t)=0\)</span>, while</p>
+<p><span class="math display">\[
+|X_s(\omega)-X_t(\omega)|\geq\varepsilon.
+\]</span></p>
+<p>Therefore discontinuity can occur only on</p>
+<p><span class="math display">\[
+N=\{\omega:\text{some }s,t\in T\text{ satisfy }\rho_2(s,t)=0
+\text{ but }X_s(\omega)\neq X_t(\omega)\}.
+\]</span></p>
+<p>The set <span class="math inline">\(\{(s,t):\rho_2(s,t)=0\}\)</span> has a countable <span class="math inline">\(\rho\)</span>-dense subset <span class="math inline">\(A\)</span>. Because paths are <span class="math inline">\(\rho\)</span>-continuous, the event <span class="math inline">\(N\)</span> is unchanged if the pair <span class="math inline">\((s,t)\)</span> is restricted to <span class="math inline">\(A\)</span>. For every fixed pair in <span class="math inline">\(A\)</span> with <span class="math inline">\(\rho_2(s,t)=0\)</span>,</p>
+<p><span class="math display">\[
+E(X_s-X_t)^2=0,
+\]</span></p>
+<p>so <span class="math inline">\(X_s=X_t\)</span> almost surely. A countable union of these null events is null. Hence <span class="math inline">\(P(N)=0\)</span>, almost every path is <span class="math inline">\(\rho_2\)</span>-continuous, and compactness makes that continuity uniform.</p>
+</details>
+<p>The intrinsic semimetric turns covariance into geometry: two indices are close when the Gaussian process cannot distinguish them in mean square. In the empirical-CDF example, this is exactly the Brownian-bridge semimetric <span class="math inline">\(\rho_F\)</span>.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Chapter takeaway">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Chapter takeaway
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>For an empirical process, the index <span class="math inline">\(t\)</span> becomes a function <span class="math inline">\(f\in\mathcal F\)</span>, and the limit is a Gaussian process indexed by <span class="math inline">\(\mathcal F\)</span>. Lemma 18.15 gives uniformly continuous sample paths under the natural variance semimetric. <a href="./chapter-19.html#donsker-classes">Chapter 19</a> uses that geometry to control empirical processes evaluated at estimated functions; <a href="./chapter-25.html#sec-efficient-score-equations">§25.8</a> then uses the resulting stochastic equicontinuity in efficient score equations.</p>
+<p><span class="math display">\[
+\text{random variables}
+\longrightarrow
+\text{random functions in }\ell^\infty(T)
+\longrightarrow
+\text{finite-dimensional convergence plus equicontinuity}
+\longrightarrow
+\text{weak process convergence}.
+\]</span></p>
+</div>
+</div>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
+<div id="ref-bailie2021" class="csl-entry" role="listitem">
+Bailie, James. 2021. <em>Stat213 Lecture Notes</em>. Course lecture notes, Harvard University. <a href="https://jameshbailie.github.io/files/papers/2021-06-16-Asymptotic-statistics.pdf">https://jameshbailie.github.io/files/papers/2021-06-16-Asymptotic-statistics.pdf</a>.
+</div>
+<div id="ref-bickelEtAl1993" class="csl-entry" role="listitem">
+Bickel, Peter J., Chris A. J. Klaassen, Ya’acov Ritov, and Jon A. Wellner. 1993. <em>Efficient and Adaptive Estimation for Semiparametric Models</em>. Johns Hopkins Series in the Mathematical Sciences. Johns Hopkins University Press. <a href="https://link.springer.com/book/9780387984735">https://link.springer.com/book/9780387984735</a>.
+</div>
+<div id="ref-chernozhukovEtAl2018" class="csl-entry" role="listitem">
+Chernozhukov, Victor, Denis Chetverikov, Mert Demirer, et al. 2018. <span>“Double/Debiased Machine Learning for Treatment and Structural Parameters.”</span> <em>The Econometrics Journal</em> 21 (1): C1–68. <a href="https://doi.org/10.1111/ectj.12097">https://doi.org/10.1111/ectj.12097</a>.
+</div>
+<div id="ref-dasgupta2008" class="csl-entry" role="listitem">
+DasGupta, Anirban. 2008. <em>Asymptotic Theory of Statistics and Probability</em>. Springer Texts in Statistics. Springer. <a href="https://doi.org/10.1007/978-0-387-75971-5">https://doi.org/10.1007/978-0-387-75971-5</a>.
+</div>
+<div id="ref-fisherKennedy2021" class="csl-entry" role="listitem">
+Fisher, Aaron, and Edward H. Kennedy. 2021. <span>“Visually Communicating and Teaching Intuition for Influence Functions.”</span> <em>The American Statistician</em> 75 (2): 162–72. <a href="https://doi.org/10.1080/00031305.2020.1717620">https://doi.org/10.1080/00031305.2020.1717620</a>.
+</div>
+<div id="ref-gillJohansen1990" class="csl-entry" role="listitem">
+Gill, Richard D., and Søren Johansen. 1990. <span>“A Survey of Product-Integration with a View Toward Application in Survival Analysis.”</span> <em>The Annals of Statistics</em> 18 (4): 1501–55. <a href="https://doi.org/10.1214/aos/1176347865">https://doi.org/10.1214/aos/1176347865</a>.
+</div>
+<div id="ref-jiang2022" class="csl-entry" role="listitem">
+Jiang, Jiming. 2022. <em>Large Sample Techniques for Statistics</em>. 2nd ed. Springer Texts in Statistics. Springer. <a href="https://doi.org/10.1007/978-3-030-91695-4">https://doi.org/10.1007/978-3-030-91695-4</a>.
+</div>
+<div id="ref-kennedy2016" class="csl-entry" role="listitem">
+Kennedy, Edward H. 2016. <span>“Semiparametric Theory and Empirical Processes in Causal Inference.”</span> In <em>Statistical Causal Inferences and Their Applications in Public Health Research</em>, edited by Hua He, Pan Wu, and Ding-Geng Chen. ICSA Book Series in Statistics. Springer International Publishing. <a href="https://doi.org/10.1007/978-3-319-41259-7_8">https://doi.org/10.1007/978-3-319-41259-7_8</a>.
+</div>
+<div id="ref-kennedy2022" class="csl-entry" role="listitem">
+Kennedy, Edward H. 2022. <em>Semiparametric Doubly Robust Targeted Double Machine Learning: A Review</em>. <a href="https://doi.org/10.48550/arXiv.2203.06469">https://doi.org/10.48550/arXiv.2203.06469</a>.
+</div>
+<div id="ref-kosorok2008" class="csl-entry" role="listitem">
+Kosorok, Michael R. 2008. <em>Introduction to Empirical Processes and Semiparametric Inference</em>. Springer Series in Statistics. Springer. <a href="https://doi.org/10.1007/978-0-387-74978-5">https://doi.org/10.1007/978-0-387-74978-5</a>.
+</div>
+<div id="ref-leCamYang2000" class="csl-entry" role="listitem">
+Le Cam, Lucien, and Grace Lo Yang. 2000. <em>Asymptotics in Statistics: Some Basic Concepts</em>. 2nd ed. Springer Series in Statistics. Springer. <a href="https://doi.org/10.1007/978-1-4612-1166-2">https://doi.org/10.1007/978-1-4612-1166-2</a>.
+</div>
+<div id="ref-murphyVanDerVaart1996" class="csl-entry" role="listitem">
+Murphy, Susan A., and Aad W. van der Vaart. 1996. <span>“Likelihood Inference in the Errors-in-Variables Model.”</span> <em>Journal of Multivariate Analysis</em> 59 (1): 81–108. <a href="https://doi.org/10.1006/jmva.1996.0055">https://doi.org/10.1006/jmva.1996.0055</a>.
+</div>
+<div id="ref-pollard2002" class="csl-entry" role="listitem">
+Pollard, David. 2002. <em>A User’s Guide to Measure Theoretic Probability</em>. Cambridge Series in Statistical and Probabilistic Mathematics 8. Cambridge University Press. <a href="https://doi.org/10.1017/CBO9780511811555">https://doi.org/10.1017/CBO9780511811555</a>.
+</div>
+<div id="ref-robinsEtAl1994" class="csl-entry" role="listitem">
+Robins, James M., Andrea Rotnitzky, and Lue Ping Zhao. 1994. <span>“Estimation of Regression Coefficients When Some Regressors Are Not Always Observed.”</span> <em>Journal of the American Statistical Association</em> 89 (427): 846–66. <a href="https://doi.org/10.1080/01621459.1994.10476818">https://doi.org/10.1080/01621459.1994.10476818</a>.
+</div>
+<div id="ref-sen2022" class="csl-entry" role="listitem">
+Sen, Bodhisattva. 2022. <em>A Gentle Introduction to Empirical Process Theory and Applications</em>. Lecture notes, Department of Statistics, Columbia University. <a href="https://sites.stat.columbia.edu/bodhi/Talks/Emp-Proc-Lecture-Notes.pdf">https://sites.stat.columbia.edu/bodhi/Talks/Emp-Proc-Lecture-Notes.pdf</a>.
+</div>
+<div id="ref-tsiatis2006" class="csl-entry" role="listitem">
+Tsiatis, Anastasios A. 2006. <em>Semiparametric Theory and Missing Data</em>. Springer Series in Statistics. Springer. <a href="https://doi.org/10.1007/0-387-37345-4">https://doi.org/10.1007/0-387-37345-4</a>.
+</div>
+<div id="ref-tsybakov2009" class="csl-entry" role="listitem">
+Tsybakov, Alexandre B. 2009. <em>Introduction to Nonparametric Estimation</em>. Springer Series in Statistics. Springer. <a href="https://doi.org/10.1007/b13794">https://doi.org/10.1007/b13794</a>.
+</div>
+<div id="ref-vanDerVaart1991Differentiable" class="csl-entry" role="listitem">
+Vaart, Aad W. van der. 1991. <span>“On Differentiable Functionals.”</span> <em>The Annals of Statistics</em> 19 (1): 178–204. <a href="https://doi.org/10.1214/aos/1176347976">https://doi.org/10.1214/aos/1176347976</a>.
+</div>
+<div id="ref-vanDerVaart1996Mixture" class="csl-entry" role="listitem">
+Vaart, Aad W. van der. 1996. <span>“Efficient Maximum Likelihood Estimation in Semiparametric Mixture Models.”</span> <em>The Annals of Statistics</em> 24 (2): 862–78. <a href="https://doi.org/10.1214/aos/1032894470">https://doi.org/10.1214/aos/1032894470</a>.
+</div>
+<div id="ref-vanDerVaartWellner1996" class="csl-entry" role="listitem">
+<span class="nocase">van der Vaart, Aad W., and Jon A. Wellner</span>. 1996. <em>Weak Convergence and Empirical Processes: With Applications to Statistics</em>. Springer Series in Statistics. Springer. <a href="https://doi.org/10.1007/978-1-4757-2545-2">https://doi.org/10.1007/978-1-4757-2545-2</a>.
+</div>
+</div>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./chapter-8.html" class="pagination-link" aria-label="Chapter 8: Efficiency of Estimators">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Chapter 8: Efficiency of Estimators</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./chapter-19.html" class="pagination-link" aria-label="Chapter 19: Empirical Processes">
+        <span class="nav-page-text"><span class="chapter-title">Chapter 19: Empirical Processes</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

@@ -1,0 +1,1196 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Chapter 6: Contiguity – Reading Companion for Asymptotic Statistics</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./chapter-7.html" rel="next">
+<link href="./chapter-2.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-d3f7f8e73c8d287b30bcf59c2b563615.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./chapter-6.html"><span class="chapter-title">Chapter 6: Contiguity</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Reading Companion for Asymptotic Statistics</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Reading Companion for <em>Asymptotic Statistics</em></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./glossary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Glossary</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-2.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Chapter 2: Stochastic Convergence</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-6.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Chapter 6: Contiguity</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-7.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Chapter 7: Local Asymptotic Normality</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-8.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Chapter 8: Efficiency of Estimators</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-18.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Chapter 18: Stochastic Convergence in Metric Spaces</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-19.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Chapter 19: Empirical Processes</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-25.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Chapter 25: Semiparametric Models</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#likelihood-ratios" id="toc-likelihood-ratios" class="nav-link active" data-scroll-target="#likelihood-ratios">6.1 Likelihood Ratios</a></li>
+  <li><a href="#contiguity" id="toc-contiguity" class="nav-link" data-scroll-target="#contiguity">6.2 Contiguity</a>
+  <ul class="collapse">
+  <li><a href="#example-6-normal-location" id="toc-example-6-normal-location" class="nav-link" data-scroll-target="#example-6-normal-location">Normal location under a local alternative</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span id="sec-contiguity" class="quarto-section-identifier"><span class="chapter-title">Chapter 6: Contiguity</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p><a href="./glossary.html#glossary-contiguity">Contiguity</a> is asymptotic absolute continuity. It allows limiting behavior under a baseline sequence <span class="math inline">\(P_n\)</span> to be transported to a changing sequence <span class="math inline">\(Q_n\)</span>, typically a sequence of local alternatives.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Why this chapter is here">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Why this chapter is here
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong>Prerequisites:</strong> weak convergence, Portmanteau, continuous mapping, and stochastic remainders from <a href="./chapter-2.html#sec-convergence">Chapter 2</a>.</li>
+<li><strong>Purpose:</strong> determine when <span class="math inline">\(P_n\)</span>-negligible events remain negligible under <span class="math inline">\(Q_n\)</span>, and obtain a <span class="math inline">\(Q_n\)</span>-limit from a joint <span class="math inline">\(P_n\)</span>-limit with the likelihood ratio.</li>
+<li><strong>Chapter 25 payoff:</strong> this argument drives the regular-estimator expansion in <a href="./chapter-25.html#lemma-25-23">Lemma 25.23</a> and the local-power bounds in <a href="./chapter-25.html#sec-testing">§25.6</a>, after first appearing for <a href="./chapter-7.html#sec-limit-distributions-alternatives">local alternatives in §7.5</a>.</li>
+</ul>
+<p>The reusable chain is</p>
+<p><span class="math display">\[
+\text{likelihood-ratio limit}
+\ \longrightarrow\
+\text{contiguity}
+\ \longrightarrow\
+\text{joint change of measure}
+\ \longrightarrow\
+\text{limit under a local alternative}.
+\]</span></p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Companion readings">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Companion readings
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>For a parallel development of likelihood ratios, contiguity, and Le Cam’s lemmas, see §§10.2.1–10.2.3 and §§11.1–11.2 of <span class="citation" data-cites="bailie2021">Bailie (<a href="references.html#ref-bailie2021" role="doc-biblioref">2021</a>)</span>.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Reading guide">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Reading guide
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong>Core — §6.1 and Lemma 6.2:</strong> likelihood ratios and the decomposition needed when the two measures are not absolutely continuous.</li>
+<li><strong>Core — §6.2, Lemma 6.4, and Theorem 6.6:</strong> contiguity and the abstract change-of-measure theorem.</li>
+<li><strong>Core — Example 6.7:</strong> Le Cam’s third lemma and the covariance-driven shift under local alternatives.</li>
+<li><strong>Compressed — Example 6.5:</strong> the lognormal likelihood-ratio limit as a diagnostic for contiguity.</li>
+<li><strong>Omitted/deferred:</strong> none; both source sections are on the direct route.</li>
+</ul>
+</div>
+</div>
+<section id="likelihood-ratios" class="level2">
+<h2 class="anchored" data-anchor-id="likelihood-ratios">6.1 Likelihood Ratios</h2>
+<p>For probability measures <span class="math inline">\(P\)</span> and <span class="math inline">\(Q\)</span> on the same measurable space:</p>
+<ul>
+<li><span class="math inline">\(Q\ll P\)</span> means that <span class="math inline">\(P(A)=0\)</span> implies <span class="math inline">\(Q(A)=0\)</span>;</li>
+<li><span class="math inline">\(Q\perp P\)</span> means that the two measures concentrate on disjoint measurable sets.</li>
+</ul>
+<p>Suppose <span class="math inline">\(P\)</span> and <span class="math inline">\(Q\)</span> have densities <span class="math inline">\(p\)</span> and <span class="math inline">\(q\)</span> with respect to a common dominating measure <span class="math inline">\(\mu\)</span>. Define</p>
+<p><span id="eq-lebesgue-decomposition"></span></p>
+<p><span class="math display">\[
+(6.1)\qquad
+Q^a(A)=Q\{A\cap(p&gt;0)\},
+\qquad
+Q^\perp(A)=Q\{A\cap(p=0)\}.
+\]</span></p>
+<p>The first measure is the part of <span class="math inline">\(Q\)</span> visible from <span class="math inline">\(P\)</span>; the second is the part placed where <span class="math inline">\(P\)</span> has no mass.</p>
+<div class="callout callout-style-default callout-important callout-titled" title="Lemma">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Lemma
+</div>
+</div>
+<section id="lemma-6-2" class="level3 callout-body-container callout-body">
+<h3 class="anchored" data-anchor-id="lemma-6-2">Lemma 6.2: Lebesgue decomposition</h3>
+<p>Let <span class="math inline">\(P\)</span> and <span class="math inline">\(Q\)</span> have densities <span class="math inline">\(p\)</span> and <span class="math inline">\(q\)</span> with respect to <span class="math inline">\(\mu\)</span>. The measures in <a href="#eq-lebesgue-decomposition">(6.1)</a> satisfy:</p>
+<ol type="1">
+<li><p><span class="math inline">\(Q=Q^a+Q^\perp\)</span>, with <span class="math inline">\(Q^a\ll P\)</span> and <span class="math inline">\(Q^\perp\perp P\)</span>;</p></li>
+<li><p>for every measurable <span class="math inline">\(A\)</span>,</p>
+<p><span class="math display">\[
+Q^a(A)=\int_A\frac qp\,dP;
+\]</span></p></li>
+<li><p><span class="math inline">\(Q\ll P\)</span> if and only if <span class="math inline">\(Q(p=0)=0\)</span>, and this is equivalent to</p>
+<p><span class="math display">\[
+\int\frac qp\,dP=1.
+\]</span></p></li>
+</ol>
+</section>
+</div>
+<p><strong>Proof roadmap.</strong></p>
+<p>Split the space into the regions <span class="math inline">\(p&gt;0\)</span> and <span class="math inline">\(p=0\)</span>. On the first region, substitution of <span class="math inline">\(dP=p\,d\mu\)</span> identifies <span class="math inline">\(q/p\)</span> as the density of <span class="math inline">\(Q^a\)</span> with respect to <span class="math inline">\(P\)</span>. The mass of this absolutely continuous part equals one exactly when the singular part vanishes.</p>
+<details>
+<summary>
+Complete proof
+</summary>
+<p>The definitions immediately give <span class="math inline">\(Q=Q^a+Q^\perp\)</span>. If <span class="math inline">\(P(A)=0\)</span>, then <span class="math inline">\(p=0\)</span> for <span class="math inline">\(\mu\)</span>-almost every point of <span class="math inline">\(A\)</span>, so</p>
+<p><span class="math display">\[
+Q^a(A)=\int_{A\cap\{p&gt;0\}}q\,d\mu=0.
+\]</span></p>
+<p>Thus <span class="math inline">\(Q^a\ll P\)</span>. Moreover, <span class="math inline">\(P(p=0)=0\)</span> while <span class="math inline">\(Q^\perp\)</span> is concentrated on <span class="math inline">\(\{p=0\}\)</span>, so <span class="math inline">\(Q^\perp\perp P\)</span>. This proves part 1.</p>
+<p>For every measurable <span class="math inline">\(A\)</span>,</p>
+<p><span class="math display">\[
+Q^a(A)
+=\int_{A\cap\{p&gt;0\}}q\,d\mu
+=\int_{A\cap\{p&gt;0\}}\frac qp\,p\,d\mu
+=\int_A\frac qp\,dP,
+\]</span></p>
+<p>where the quotient may be assigned any value on <span class="math inline">\(\{p=0\}\)</span> because that set has <span class="math inline">\(P\)</span>-probability zero. This proves part 2.</p>
+<p>Finally, <span class="math inline">\(Q\ll P\)</span> if and only if its singular part vanishes, which holds if and only if <span class="math inline">\(Q(p=0)=0\)</span>. By part 2,</p>
+<p><span class="math display">\[
+\int\frac qp\,dP=Q^a(\Omega)=Q(p&gt;0)=1-Q(p=0).
+\]</span></p>
+<p>This proves both equivalences in part 3.</p>
+</details>
+<div class="callout callout-style-default callout-warning callout-titled" title="Radon--Nikodym notation in this chapter">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Radon–Nikodym notation in this chapter
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Van der Vaart writes</p>
+<p><span class="math display">\[
+\frac{dQ}{dP}=\frac qp
+\qquad P\text{-almost surely}
+\]</span></p>
+<p>even when <span class="math inline">\(Q\not\ll P\)</span>. In that case this is the density of the absolutely continuous part <span class="math inline">\(Q^a\)</span>, not of all of <span class="math inline">\(Q\)</span>. Consequently,</p>
+<p><span class="math display">\[
+E_P\frac{dQ}{dP}\leq1,
+\]</span></p>
+<p>and equality holds exactly when <span class="math inline">\(Q\ll P\)</span>. The identity <span class="math inline">\(dQ=(dQ/dP)dP\)</span> is therefore valid only under absolute continuity. Without it, for nonnegative measurable <span class="math inline">\(f\)</span> one has only</p>
+<p><span class="math display">\[
+\int f\,dQ
+\geq\int f\frac{dQ}{dP}\,dP,
+\]</span></p>
+<p>because the right side omits the <span class="math inline">\(Q^\perp\)</span> contribution.</p>
+</div>
+</div>
+</section>
+<section id="contiguity" class="level2">
+<h2 class="anchored" data-anchor-id="contiguity">6.2 Contiguity</h2>
+<p>When <span class="math inline">\(Q\ll P\)</span>, the likelihood ratio reweights the <span class="math inline">\(P\)</span>-law into the <span class="math inline">\(Q\)</span>-law:</p>
+<p><span class="math display">\[
+E_Qf(X)=E_P\left\{f(X)\frac{dQ}{dP}\right\}.
+\]</span></p>
+<p>Contiguity is the sequence-level condition that prevents probability mass from disappearing in the limit.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Definition">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Definition
+</div>
+</div>
+<section id="definition-6-3" class="level3 callout-body-container callout-body">
+<h3 class="anchored" data-anchor-id="definition-6-3">Definition 6.3: contiguity</h3>
+<p>The sequence <span class="math inline">\(Q_n\)</span> is <strong>contiguous with respect to</strong> <span class="math inline">\(P_n\)</span>, written <span class="math inline">\(Q_n\triangleleft P_n\)</span>, if</p>
+<p><span class="math display">\[
+P_n(A_n)\to0
+\quad\Longrightarrow\quad
+Q_n(A_n)\to0
+\]</span></p>
+<p>for every sequence of measurable events <span class="math inline">\(A_n\)</span>. The sequences are <strong>mutually contiguous</strong>, written <span class="math inline">\(P_n\triangleleft\triangleright Q_n\)</span>, if contiguity holds in both directions.</p>
+</section>
+</div>
+<p>Absolute continuity is an exact statement about one pair of measures. Contiguity is an asymptotic statement about sequences, and it does not require their total-variation distance to vanish.</p>
+<div class="callout callout-style-default callout-important callout-titled" title="Lemma">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Lemma
+</div>
+</div>
+<section id="lemma-le-cam-first" class="level3 callout-body-container callout-body">
+<h3 class="anchored" data-anchor-id="lemma-le-cam-first">Lemma 6.4: Le Cam’s first lemma</h3>
+<p>Let <span class="math inline">\(P_n\)</span> and <span class="math inline">\(Q_n\)</span> be probability measures on measurable spaces <span class="math inline">\((\Omega_n,\mathcal A_n)\)</span>. The following statements are equivalent:</p>
+<ol type="1">
+<li><p><span class="math inline">\(Q_n\triangleleft P_n\)</span>.</p></li>
+<li><p>If, along a subsequence,</p>
+<p><span class="math display">\[
+\frac{dP_n}{dQ_n}\overset{Q_n}{\rightsquigarrow}U,
+\]</span></p>
+<p>then <span class="math inline">\(P(U&gt;0)=1\)</span>.</p></li>
+<li><p>If, along a subsequence,</p>
+<p><span class="math display">\[
+\frac{dQ_n}{dP_n}\overset{P_n}{\rightsquigarrow}V,
+\]</span></p>
+<p>then <span class="math inline">\(EV=1\)</span>.</p></li>
+<li><p>For every sequence of statistics <span class="math inline">\(T_n\)</span>, <span class="math inline">\(T_n\overset{P_n}\to0\)</span> implies <span class="math inline">\(T_n\overset{Q_n}\to0\)</span>.</p></li>
+</ol>
+</section>
+</div>
+<p><strong>Proof roadmap.</strong></p>
+<p>Statements 1 and 4 are the same eventwise condition written for indicator statistics. Contiguity rules out limiting mass at zero for the inverse likelihood ratio. Conversely, a mean-one limit for the forward likelihood ratio prevents <span class="math inline">\(Q_n\)</span>-mass from hiding on <span class="math inline">\(P_n\)</span>-negligible events. A bounded likelihood ratio relative to the midpoint measure <span class="math inline">\((P_n+Q_n)/2\)</span> links the two likelihood-ratio characterizations.</p>
+<details>
+<summary>
+Complete proof
+</summary>
+<p><strong>(1) <span class="math inline">\(\Leftrightarrow\)</span> (4).</strong> If <span class="math inline">\(T_n\overset{P_n}\to0\)</span>, apply contiguity to <span class="math inline">\(A_n=\{\|T_n\|&gt;\epsilon\}\)</span> for each <span class="math inline">\(\epsilon&gt;0\)</span>. Conversely, given events <span class="math inline">\(A_n\)</span> with <span class="math inline">\(P_n(A_n)\to0\)</span>, use <span class="math inline">\(T_n=\mathbf 1_{A_n}\)</span>.</p>
+<p><strong>(1) <span class="math inline">\(\Rightarrow\)</span> (2).</strong> Work along a subsequence on which</p>
+<p><span class="math display">\[
+L_n=\frac{dP_n}{dQ_n}\overset{Q_n}{\rightsquigarrow}U.
+\]</span></p>
+<p>Choose <span class="math inline">\(\epsilon_n\downarrow0\)</span> sufficiently slowly that</p>
+<p><span class="math display">\[
+Q_n(L_n\leq\epsilon_n)\to P(U=0);
+\]</span></p>
+<p>such a diagonal choice follows from weak convergence at continuity points of the law of <span class="math inline">\(U\)</span>. Because the part of <span class="math inline">\(P_n\)</span> on which <span class="math inline">\(L_n=0\)</span> has probability zero,</p>
+<p><span class="math display">\[
+P_n(L_n\leq\epsilon_n)
+=\int_{\{0&lt;L_n\leq\epsilon_n\}}L_n\,dQ_n
+\leq\epsilon_n.
+\]</span></p>
+<p>Contiguity makes <span class="math inline">\(Q_n(L_n\leq\epsilon_n)\to0\)</span>. Hence <span class="math inline">\(P(U=0)=0\)</span>.</p>
+<p><strong>(3) <span class="math inline">\(\Rightarrow\)</span> (1).</strong> Suppose <span class="math inline">\(P_n(A_n)\to0\)</span>. Along any subsequence, pass to a further subsequence on which</p>
+<p><span class="math display">\[
+\left(\frac{dQ_n}{dP_n},\mathbf 1_{A_n^c}\right)
+\overset{P_n}{\rightsquigarrow}(V,1).
+\]</span></p>
+<p>The likelihood ratios are tight under <span class="math inline">\(P_n\)</span> because their expectations are at most one. By the likelihood-ratio inequality and Portmanteau,</p>
+<p><span class="math display">\[
+\liminf_n Q_n(A_n^c)
+\geq
+\liminf_nE_{P_n}\left\{\mathbf 1_{A_n^c}\frac{dQ_n}{dP_n}\right\}
+\geq EV=1.
+\]</span></p>
+<p>Thus <span class="math inline">\(Q_n(A_n)\to0\)</span>. Since every subsequence has a further subsequence with this conclusion, it holds for the full sequence.</p>
+<p><strong>(2) <span class="math inline">\(\Rightarrow\)</span> (3).</strong> Set <span class="math inline">\(\mu_n=(P_n+Q_n)/2\)</span> and</p>
+<p><span class="math display">\[
+W_n=\frac{dP_n}{d\mu_n},
+\qquad
+\frac{dQ_n}{d\mu_n}=2-W_n.
+\]</span></p>
+<p>The variables <span class="math inline">\(W_n\)</span> lie in <span class="math inline">\([0,2]\)</span>. Along any subsequence under consideration, pass to a further subsequence for which <span class="math inline">\(W_n\rightsquigarrow W\)</span> under <span class="math inline">\(\mu_n\)</span>. Boundedness gives <span class="math inline">\(EW=1\)</span>. Under <span class="math inline">\(Q_n\)</span> and <span class="math inline">\(P_n\)</span>, respectively, the relevant ratios are the transformations</p>
+<p><span class="math display">\[
+\frac{dP_n}{dQ_n}=\frac{W_n}{2-W_n},
+\qquad
+\frac{dQ_n}{dP_n}=\frac{2-W_n}{W_n},
+\]</span></p>
+<p>with the endpoint conventions dictated by the absolutely continuous parts. Bounded continuous approximation at the endpoints and monotone convergence identify the corresponding limits <span class="math inline">\(U\)</span> and <span class="math inline">\(V\)</span> and give</p>
+<p><span class="math display">\[
+P(U=0)=2P(W=0),
+\]</span></p>
+<p>and</p>
+<p><span class="math display">\[
+EV
+=E\{(2-W)\mathbf 1_{\{W&gt;0\}}\}
+=1-2P(W=0).
+\]</span></p>
+<p>Therefore <span class="math inline">\(P(U=0)+EV=1\)</span>. Statement 2 makes the first term zero, so <span class="math inline">\(EV=1\)</span>, proving statement 3.</p>
+</details>
+<p>In applications, condition 3 usually establishes contiguity from a likelihood-ratio limit, and condition 4 then transfers <span class="math inline">\(o_{P_n}(1)\)</span> remainders to <span class="math inline">\(o_{Q_n}(1)\)</span> remainders.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Example">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Example
+</div>
+</div>
+<section id="example-asymptotic-log-normality" class="level3 callout-body-container callout-body">
+<h3 class="anchored" data-anchor-id="example-asymptotic-log-normality">Example 6.5: asymptotic lognormality</h3>
+<p>Suppose that, under <span class="math inline">\(Q_n\)</span>,</p>
+<p><span class="math display">\[
+\frac{dP_n}{dQ_n}\overset{Q_n}{\rightsquigarrow}e^{N(\mu,\sigma^2)}.
+\]</span></p>
+<p>The limit is strictly positive, so Lemma 6.4 gives <span class="math inline">\(Q_n\triangleleft P_n\)</span>. The sequences are mutually contiguous exactly when</p>
+<p><span class="math display">\[
+Ee^{N(\mu,\sigma^2)}
+=e^{\mu+\sigma^2/2}=1,
+\]</span></p>
+<p>or <span class="math inline">\(\mu=-\sigma^2/2\)</span>. This mean-equals-minus-one-half-variance form recurs in LAN likelihood ratios.</p>
+</section>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Theorem">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Theorem
+</div>
+</div>
+<section id="theorem-change-of-measure" class="level3 callout-body-container callout-body">
+<h3 class="anchored" data-anchor-id="theorem-change-of-measure">Theorem 6.6: abstract change of measure</h3>
+<p>Suppose <span class="math inline">\(Q_n\triangleleft P_n\)</span> and, under <span class="math inline">\(P_n\)</span>,</p>
+<p><span class="math display">\[
+\left(X_n,\frac{dQ_n}{dP_n}\right)
+\overset{P_n}{\rightsquigarrow}(X,V).
+\]</span></p>
+<p>Then</p>
+<p><span class="math display">\[
+L(B)=E\{\mathbf 1_B(X)V\}
+\]</span></p>
+<p>defines a probability measure, and <span class="math inline">\(X_n\overset{Q_n}{\rightsquigarrow}L\)</span>.</p>
+</section>
+</div>
+<p><strong>Proof roadmap.</strong></p>
+<p>Le Cam’s first lemma supplies <span class="math inline">\(EV=1\)</span>, so weighting by <span class="math inline">\(V\)</span> defines a probability measure. The finite-sample likelihood-ratio inequality and Portmanteau then give the nonnegative-test-function characterization of weak convergence under <span class="math inline">\(Q_n\)</span>.</p>
+<details>
+<summary>
+Complete proof
+</summary>
+<p>Because every likelihood ratio is nonnegative, its weak limit satisfies <span class="math inline">\(V\geq0\)</span>. Contiguity and <a href="#lemma-le-cam-first">Lemma 6.4</a> give <span class="math inline">\(EV=1\)</span>. Hence <span class="math inline">\(B\mapsto E\{\mathbf 1_B(X)V\}\)</span> is a probability measure.</p>
+<p>For every nonnegative continuous <span class="math inline">\(f\)</span>, the likelihood-ratio inequality from §6.1 gives</p>
+<p><span class="math display">\[
+E_{Q_n}f(X_n)
+\geq E_{P_n}\left\{f(X_n)\frac{dQ_n}{dP_n}\right\}.
+\]</span></p>
+<p>The map <span class="math inline">\((x,v)\mapsto f(x)v\)</span> is nonnegative and continuous. Portmanteau applied to the assumed joint convergence therefore yields</p>
+<p><span class="math display">\[
+\liminf_nE_{Q_n}f(X_n)
+\geq E\{f(X)V\}
+=\int f\,dL.
+\]</span></p>
+<p>The nonnegative-continuous-function characterization in <a href="./chapter-2.html#lemma-portmanteau">Lemma 2.2</a>, now applied in the converse direction, gives <span class="math inline">\(X_n\overset{Q_n}{\rightsquigarrow}L\)</span>.</p>
+</details>
+<p>The theorem reduces a change of asymptotic law to a joint limit under the baseline measure. The weighting variable <span class="math inline">\(V\)</span> is the limiting likelihood ratio.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Example">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Example
+</div>
+</div>
+<section id="lemma-le-cam-third" class="level3 callout-body-container callout-body">
+<h3 class="anchored" data-anchor-id="lemma-le-cam-third">Example 6.7: Le Cam’s third lemma</h3>
+<p>Suppose that, under <span class="math inline">\(P_n\)</span>,</p>
+<p><span class="math display">\[
+\left(X_n,\log\frac{dQ_n}{dP_n}\right)
+\overset{P_n}{\rightsquigarrow}
+N_{k+1}\left(
+\begin{pmatrix}\mu\\-\frac12\sigma^2\end{pmatrix},
+\begin{pmatrix}\Sigma&amp;\tau\\\tau^T&amp;\sigma^2\end{pmatrix}
+\right).
+\]</span></p>
+<p>Then, under <span class="math inline">\(Q_n\)</span>,</p>
+<p><span class="math display">\[
+X_n\overset{Q_n}{\rightsquigarrow}N_k(\mu+\tau,\Sigma).
+\]</span></p>
+</section>
+</div>
+<p><strong>Proof roadmap.</strong></p>
+<p>Exponentiate the Gaussian log-likelihood-ratio limit, use Le Cam’s first lemma to establish contiguity, and apply Theorem 6.6. The characteristic function of the exponentially tilted joint normal identifies the new mean <span class="math inline">\(\mu+\tau\)</span> and unchanged covariance <span class="math inline">\(\Sigma\)</span>.</p>
+<details>
+<summary>
+Complete proof
+</summary>
+<p>Write the limiting vector as <span class="math inline">\((X,W)\)</span>. By continuous mapping,</p>
+<p><span class="math display">\[
+\left(X_n,\frac{dQ_n}{dP_n}\right)
+\overset{P_n}{\rightsquigarrow}(X,e^W),
+\qquad
+W\sim N(-\sigma^2/2,\sigma^2).
+\]</span></p>
+<p>Because <span class="math inline">\(Ee^W=1\)</span>, Lemma 6.4 gives <span class="math inline">\(Q_n\triangleleft P_n\)</span>. Because <span class="math inline">\(e^W&gt;0\)</span> almost surely, the reverse likelihood-ratio condition in the same lemma also gives <span class="math inline">\(P_n\triangleleft Q_n\)</span>.</p>
+<p>Theorem 6.6 says that the limiting characteristic function under <span class="math inline">\(Q_n\)</span> is</p>
+<p><span class="math display">\[
+E\exp(i t^TX)e^W.
+\]</span></p>
+<p>For the stated joint normal law, evaluate its moment-generating function at the complex vector <span class="math inline">\((it,1)\)</span>:</p>
+<p><span class="math display">\[
+\begin{aligned}
+E\exp(i t^TX+W)
+&amp;=\exp\left\{
+i t^T\mu-\frac12\sigma^2
++\frac12\left(-t^T\Sigma t+2it^T\tau+\sigma^2\right)
+\right\}\\
+&amp;=\exp\left\{it^T(\mu+\tau)-\frac12t^T\Sigma t\right\}.
+\end{aligned}
+\]</span></p>
+<p>This is the characteristic function of <span class="math inline">\(N_k(\mu+\tau,\Sigma)\)</span>.</p>
+</details>
+<p>The cross-covariance <span class="math inline">\(\tau=\operatorname{Cov}(X,W)\)</span> determines the mean shift under the alternative. Exponential tilting changes the center but not the covariance, as Figure <a href="#sixfig-ch6-exponential-tilt" class="quarto-xref">Figure 6.<span>1</span></a> illustrates.</p>
+<div id="sixfig-ch6-exponential-tilt" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-alt="Contours of a joint Gaussian in the statistic T and centered likelihood coordinate Z retain the same elliptical shape after exponential tilting but have shifted centers. Marginal normal densities show the corresponding mean shift of T.">
+<figure class="quarto-float quarto-float-sixfig figure">
+<div aria-describedby="sixfig-ch6-exponential-tilt-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/generated/chapter-6-exponential-tilt.svg" class="img-fluid figure-img" alt="Contours of a joint Gaussian in the statistic T and centered likelihood coordinate Z retain the same elliptical shape after exponential tilting but have shifted centers. Marginal normal densities show the corresponding mean shift of T.">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-sixfig" id="sixfig-ch6-exponential-tilt-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure 6.1: Le Cam’s third lemma as exponential tilting: weighting by the Gaussian likelihood coordinate shifts the statistic’s mean by its covariance with that coordinate while preserving covariance.
+</figcaption>
+</figure>
+</div>
+<section id="example-6-normal-location" class="level3">
+<h3 class="anchored" data-anchor-id="example-6-normal-location">Normal location under a local alternative</h3>
+<p>Let <span class="math inline">\(P_n\)</span> be the joint law of <span class="math inline">\(n\)</span> independent <span class="math inline">\(N(0,1)\)</span> observations and <span class="math inline">\(Q_n\)</span> the joint law of <span class="math inline">\(n\)</span> independent <span class="math inline">\(N(h/\sqrt n,1)\)</span> observations, for fixed <span class="math inline">\(h\in\mathbb R\)</span>. Set</p>
+<p><span class="math display">\[
+Z_n=\sqrt n\,\overline X_n.
+\]</span></p>
+<p>The log likelihood ratio is exact:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\log\frac{dQ_n}{dP_n}
+&amp;=\sum_{i=1}^n\left\{-\frac12(X_i-h/\sqrt n)^2+\frac12X_i^2\right\}\\
+&amp;=hZ_n-\frac12h^2.
+\end{aligned}
+\]</span></p>
+<p>Under <span class="math inline">\(P_n\)</span>, <span class="math inline">\(Z_n\sim N(0,1)\)</span> exactly. Therefore</p>
+<p><span class="math display">\[
+\left(Z_n,\log\frac{dQ_n}{dP_n}\right)
+\overset{P_n}{\rightsquigarrow}
+\left(Z,hZ-\frac12h^2\right),
+\qquad Z\sim N(0,1).
+\]</span></p>
+<p>This is Example 6.7 with</p>
+<p><span class="math display">\[
+\mu=0,\qquad \Sigma=1,\qquad \sigma^2=h^2,\qquad
+\tau=\operatorname{Cov}(Z,hZ)=h.
+\]</span></p>
+<p>Thus <span class="math inline">\(P_n\)</span> and <span class="math inline">\(Q_n\)</span> are mutually contiguous and, under <span class="math inline">\(Q_n\)</span>,</p>
+<p><span class="math display">\[
+Z_n\rightsquigarrow N(h,1).
+\]</span></p>
+<p>The conclusion is also exact here: under <span class="math inline">\(Q_n\)</span>, <span class="math inline">\(\sqrt n\,\overline X_n\)</span> has mean <span class="math inline">\(h\)</span> and variance one for every <span class="math inline">\(n\)</span>. The calculation isolates the general mechanism used after <a href="./chapter-7.html#sec-limit-distributions-alternatives">LAN in §7.5</a>: a local parameter shift becomes a covariance-driven shift in a Gaussian limit experiment.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Chapter takeaway">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Chapter takeaway
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><a href="./chapter-7.html#theorem-lan-iid">Theorem 7.2</a> supplies the likelihood-ratio expansion, <a href="#example-asymptotic-log-normality">Example 6.5</a> establishes contiguity, and <a href="#lemma-le-cam-third">Example 6.7</a> supplies the shifted limit under <span class="math inline">\(P_{\theta+h/\sqrt n}^n\)</span>. Chapter 25 repeats this argument along a tangent direction <span class="math inline">\(g\)</span>: see <a href="./chapter-25.html#lemma-25-23">Lemma 25.23</a> for estimation and <a href="./chapter-25.html#sec-testing">§25.6</a> for testing.</p>
+</div>
+</div>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
+<div id="ref-bailie2021" class="csl-entry" role="listitem">
+Bailie, James. 2021. <em>Stat213 Lecture Notes</em>. Course lecture notes, Harvard University. <a href="https://jameshbailie.github.io/files/papers/2021-06-16-Asymptotic-statistics.pdf">https://jameshbailie.github.io/files/papers/2021-06-16-Asymptotic-statistics.pdf</a>.
+</div>
+<div id="ref-bickelEtAl1993" class="csl-entry" role="listitem">
+Bickel, Peter J., Chris A. J. Klaassen, Ya’acov Ritov, and Jon A. Wellner. 1993. <em>Efficient and Adaptive Estimation for Semiparametric Models</em>. Johns Hopkins Series in the Mathematical Sciences. Johns Hopkins University Press. <a href="https://link.springer.com/book/9780387984735">https://link.springer.com/book/9780387984735</a>.
+</div>
+<div id="ref-chernozhukovEtAl2018" class="csl-entry" role="listitem">
+Chernozhukov, Victor, Denis Chetverikov, Mert Demirer, et al. 2018. <span>“Double/Debiased Machine Learning for Treatment and Structural Parameters.”</span> <em>The Econometrics Journal</em> 21 (1): C1–68. <a href="https://doi.org/10.1111/ectj.12097">https://doi.org/10.1111/ectj.12097</a>.
+</div>
+<div id="ref-dasgupta2008" class="csl-entry" role="listitem">
+DasGupta, Anirban. 2008. <em>Asymptotic Theory of Statistics and Probability</em>. Springer Texts in Statistics. Springer. <a href="https://doi.org/10.1007/978-0-387-75971-5">https://doi.org/10.1007/978-0-387-75971-5</a>.
+</div>
+<div id="ref-fisherKennedy2021" class="csl-entry" role="listitem">
+Fisher, Aaron, and Edward H. Kennedy. 2021. <span>“Visually Communicating and Teaching Intuition for Influence Functions.”</span> <em>The American Statistician</em> 75 (2): 162–72. <a href="https://doi.org/10.1080/00031305.2020.1717620">https://doi.org/10.1080/00031305.2020.1717620</a>.
+</div>
+<div id="ref-gillJohansen1990" class="csl-entry" role="listitem">
+Gill, Richard D., and Søren Johansen. 1990. <span>“A Survey of Product-Integration with a View Toward Application in Survival Analysis.”</span> <em>The Annals of Statistics</em> 18 (4): 1501–55. <a href="https://doi.org/10.1214/aos/1176347865">https://doi.org/10.1214/aos/1176347865</a>.
+</div>
+<div id="ref-jiang2022" class="csl-entry" role="listitem">
+Jiang, Jiming. 2022. <em>Large Sample Techniques for Statistics</em>. 2nd ed. Springer Texts in Statistics. Springer. <a href="https://doi.org/10.1007/978-3-030-91695-4">https://doi.org/10.1007/978-3-030-91695-4</a>.
+</div>
+<div id="ref-kennedy2016" class="csl-entry" role="listitem">
+Kennedy, Edward H. 2016. <span>“Semiparametric Theory and Empirical Processes in Causal Inference.”</span> In <em>Statistical Causal Inferences and Their Applications in Public Health Research</em>, edited by Hua He, Pan Wu, and Ding-Geng Chen. ICSA Book Series in Statistics. Springer International Publishing. <a href="https://doi.org/10.1007/978-3-319-41259-7_8">https://doi.org/10.1007/978-3-319-41259-7_8</a>.
+</div>
+<div id="ref-kennedy2022" class="csl-entry" role="listitem">
+Kennedy, Edward H. 2022. <em>Semiparametric Doubly Robust Targeted Double Machine Learning: A Review</em>. <a href="https://doi.org/10.48550/arXiv.2203.06469">https://doi.org/10.48550/arXiv.2203.06469</a>.
+</div>
+<div id="ref-kosorok2008" class="csl-entry" role="listitem">
+Kosorok, Michael R. 2008. <em>Introduction to Empirical Processes and Semiparametric Inference</em>. Springer Series in Statistics. Springer. <a href="https://doi.org/10.1007/978-0-387-74978-5">https://doi.org/10.1007/978-0-387-74978-5</a>.
+</div>
+<div id="ref-leCamYang2000" class="csl-entry" role="listitem">
+Le Cam, Lucien, and Grace Lo Yang. 2000. <em>Asymptotics in Statistics: Some Basic Concepts</em>. 2nd ed. Springer Series in Statistics. Springer. <a href="https://doi.org/10.1007/978-1-4612-1166-2">https://doi.org/10.1007/978-1-4612-1166-2</a>.
+</div>
+<div id="ref-murphyVanDerVaart1996" class="csl-entry" role="listitem">
+Murphy, Susan A., and Aad W. van der Vaart. 1996. <span>“Likelihood Inference in the Errors-in-Variables Model.”</span> <em>Journal of Multivariate Analysis</em> 59 (1): 81–108. <a href="https://doi.org/10.1006/jmva.1996.0055">https://doi.org/10.1006/jmva.1996.0055</a>.
+</div>
+<div id="ref-pollard2002" class="csl-entry" role="listitem">
+Pollard, David. 2002. <em>A User’s Guide to Measure Theoretic Probability</em>. Cambridge Series in Statistical and Probabilistic Mathematics 8. Cambridge University Press. <a href="https://doi.org/10.1017/CBO9780511811555">https://doi.org/10.1017/CBO9780511811555</a>.
+</div>
+<div id="ref-robinsEtAl1994" class="csl-entry" role="listitem">
+Robins, James M., Andrea Rotnitzky, and Lue Ping Zhao. 1994. <span>“Estimation of Regression Coefficients When Some Regressors Are Not Always Observed.”</span> <em>Journal of the American Statistical Association</em> 89 (427): 846–66. <a href="https://doi.org/10.1080/01621459.1994.10476818">https://doi.org/10.1080/01621459.1994.10476818</a>.
+</div>
+<div id="ref-sen2022" class="csl-entry" role="listitem">
+Sen, Bodhisattva. 2022. <em>A Gentle Introduction to Empirical Process Theory and Applications</em>. Lecture notes, Department of Statistics, Columbia University. <a href="https://sites.stat.columbia.edu/bodhi/Talks/Emp-Proc-Lecture-Notes.pdf">https://sites.stat.columbia.edu/bodhi/Talks/Emp-Proc-Lecture-Notes.pdf</a>.
+</div>
+<div id="ref-tsiatis2006" class="csl-entry" role="listitem">
+Tsiatis, Anastasios A. 2006. <em>Semiparametric Theory and Missing Data</em>. Springer Series in Statistics. Springer. <a href="https://doi.org/10.1007/0-387-37345-4">https://doi.org/10.1007/0-387-37345-4</a>.
+</div>
+<div id="ref-tsybakov2009" class="csl-entry" role="listitem">
+Tsybakov, Alexandre B. 2009. <em>Introduction to Nonparametric Estimation</em>. Springer Series in Statistics. Springer. <a href="https://doi.org/10.1007/b13794">https://doi.org/10.1007/b13794</a>.
+</div>
+<div id="ref-vanDerVaart1991Differentiable" class="csl-entry" role="listitem">
+Vaart, Aad W. van der. 1991. <span>“On Differentiable Functionals.”</span> <em>The Annals of Statistics</em> 19 (1): 178–204. <a href="https://doi.org/10.1214/aos/1176347976">https://doi.org/10.1214/aos/1176347976</a>.
+</div>
+<div id="ref-vanDerVaart1996Mixture" class="csl-entry" role="listitem">
+Vaart, Aad W. van der. 1996. <span>“Efficient Maximum Likelihood Estimation in Semiparametric Mixture Models.”</span> <em>The Annals of Statistics</em> 24 (2): 862–78. <a href="https://doi.org/10.1214/aos/1032894470">https://doi.org/10.1214/aos/1032894470</a>.
+</div>
+<div id="ref-vanDerVaartWellner1996" class="csl-entry" role="listitem">
+<span class="nocase">van der Vaart, Aad W., and Jon A. Wellner</span>. 1996. <em>Weak Convergence and Empirical Processes: With Applications to Statistics</em>. Springer Series in Statistics. Springer. <a href="https://doi.org/10.1007/978-1-4757-2545-2">https://doi.org/10.1007/978-1-4757-2545-2</a>.
+</div>
+</div>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./chapter-2.html" class="pagination-link" aria-label="Chapter 2: Stochastic Convergence">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Chapter 2: Stochastic Convergence</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./chapter-7.html" class="pagination-link" aria-label="Chapter 7: Local Asymptotic Normality">
+        <span class="nav-page-text"><span class="chapter-title">Chapter 7: Local Asymptotic Normality</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

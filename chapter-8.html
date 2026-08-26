@@ -1,0 +1,1787 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Chapter 8: Efficiency of Estimators – Reading Companion for Asymptotic Statistics</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./chapter-18.html" rel="next">
+<link href="./chapter-7.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-d3f7f8e73c8d287b30bcf59c2b563615.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./chapter-8.html"><span class="chapter-title">Chapter 8: Efficiency of Estimators</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Reading Companion for Asymptotic Statistics</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Reading Companion for <em>Asymptotic Statistics</em></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./glossary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Glossary</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-2.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Chapter 2: Stochastic Convergence</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-6.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Chapter 6: Contiguity</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-7.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Chapter 7: Local Asymptotic Normality</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-8.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Chapter 8: Efficiency of Estimators</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-18.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Chapter 18: Stochastic Convergence in Metric Spaces</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-19.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Chapter 19: Empirical Processes</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-25.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Chapter 25: Semiparametric Models</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#asymptotic-concentration" id="toc-asymptotic-concentration" class="nav-link active" data-scroll-target="#asymptotic-concentration">8.1 Asymptotic Concentration</a></li>
+  <li><a href="#relative-efficiency" id="toc-relative-efficiency" class="nav-link" data-scroll-target="#relative-efficiency">8.2 Relative Efficiency</a></li>
+  <li><a href="#sec-lower-bound-experiments" id="toc-sec-lower-bound-experiments" class="nav-link" data-scroll-target="#sec-lower-bound-experiments">8.3 Lower Bound for Experiments</a></li>
+  <li><a href="#estimating-normal-means" id="toc-estimating-normal-means" class="nav-link" data-scroll-target="#estimating-normal-means">8.4 Estimating Normal Means</a>
+  <ul class="collapse">
+  <li><a href="#bowl-shaped-loss" id="toc-bowl-shaped-loss" class="nav-link" data-scroll-target="#bowl-shaped-loss">Bowl-shaped loss</a></li>
+  </ul></li>
+  <li><a href="#sec-convolution-theorem" id="toc-sec-convolution-theorem" class="nav-link" data-scroll-target="#sec-convolution-theorem">8.5 Convolution Theorem</a></li>
+  <li><a href="#almost-everywhere-convolution-theorem" id="toc-almost-everywhere-convolution-theorem" class="nav-link" data-scroll-target="#almost-everywhere-convolution-theorem">8.6 Almost-Everywhere Convolution Theorem</a></li>
+  <li><a href="#sec-local-asymptotic-minimax" id="toc-sec-local-asymptotic-minimax" class="nav-link" data-scroll-target="#sec-local-asymptotic-minimax">8.7 Local Asymptotic Minimax Theorem</a></li>
+  <li><a href="#shrinkage-estimators" id="toc-shrinkage-estimators" class="nav-link" data-scroll-target="#shrinkage-estimators">8.8* Shrinkage Estimators</a></li>
+  <li><a href="#sec-achieving-efficiency-bound" id="toc-sec-achieving-efficiency-bound" class="nav-link" data-scroll-target="#sec-achieving-efficiency-bound">8.9* Achieving the Bound</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-title">Chapter 8: Efficiency of Estimators</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>This chapter asks how well an estimator can perform asymptotically and develops several forms of the lower bound obtained from the <a href="./glossary.html#glossary-limit-experiment">Gaussian shift experiment</a>.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Why this chapter is here">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Why this chapter is here
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong>Prerequisites:</strong> <a href="./chapter-7.html#theorem-lan-iid">LAN in Chapter 7</a> and the <a href="./chapter-7.html#theorem-normal-limit-experiment">Gaussian limit experiment</a>.</li>
+<li><strong>Purpose:</strong> replace pointwise comparisons by comparisons that remain valid over <span class="math inline">\(n^{-1/2}\)</span>-local alternatives.</li>
+<li><strong>Chapter 25 payoff:</strong> Chapter 25 replaces the parametric score space by a tangent space. The <a href="./chapter-25.html#theorem-25-20">semiparametric convolution theorem</a> and <a href="./chapter-25.html#theorem-25-21">local asymptotic minimax theorem</a> are the direct analogues of §§8.5 and 8.7.</li>
+</ul>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Companion readings">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Companion readings
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>For alternative treatments of convolution, minimax bounds, and superefficiency, see §§13.2–14.2 of <span class="citation" data-cites="bailie2021">Bailie (<a href="references.html#ref-bailie2021" role="doc-biblioref">2021</a>)</span>, §§16.7–16.8 of <span class="citation" data-cites="dasgupta2008">DasGupta (<a href="references.html#ref-dasgupta2008" role="doc-biblioref">2008</a>)</span>, and §3.4.3 of <span class="citation" data-cites="tsybakov2009">Tsybakov (<a href="references.html#ref-tsybakov2009" role="doc-biblioref">2009</a>)</span>. For the broader limit-experiment perspective behind the chapter, see <span class="citation" data-cites="leCamYang2000">Le Cam and Yang (<a href="references.html#ref-leCamYang2000" role="doc-biblioref">2000</a>)</span>.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Reading guide">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Reading guide
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong>Core — §§8.1, 8.3–8.5, and 8.7:</strong> Hodges’ estimator motivates local comparison; Gaussian representation then yields the convolution and local asymptotic minimax bounds.</li>
+<li><strong>Core — §8.9:</strong> Lemma 8.14 identifies the asymptotic linear expansion attaining the bound and supplies the parametric prototype for <a href="./chapter-25.html#lemma-25-23">Lemma 25.23</a>.</li>
+<li><strong>Supporting — §§8.2 and 8.6:</strong> relative efficiency and an almost-everywhere alternative to regularity.</li>
+<li><strong>Compressed — §8.8 and Lemma 8.13:</strong> Stein shrinkage and the converse link from local minimaxity to best regularity are retained as caveats rather than part of the main proof route.</li>
+<li><strong>Omitted/deferred — §8.10:</strong> large-deviation comparisons on a different asymptotic scale.</li>
+</ul>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Chapter roadmap">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Chapter roadmap
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Suppose that <span class="math inline">\(T_n\)</span> estimates <span class="math inline">\(\psi(\theta)\)</span> and that <span class="math inline">\(\sqrt{n}\bigl(T_n-\psi(\theta)\bigr)\)</span> has a <strong>limiting distribution</strong>.</p>
+<ol type="1">
+<li>Study the estimator under nearby parameters <span class="math inline">\(\theta+h/\sqrt{n}\)</span>, not only at a fixed <span class="math inline">\(\theta\)</span>.</li>
+<li>Under <strong>differentiability in quadratic mean</strong>, the local experiment converges to the <strong>Gaussian shift experiment</strong> <span class="math inline">\(X\sim N(h,I_\theta^{-1})\)</span>.</li>
+<li>In that experiment, the natural estimator of <span class="math inline">\(\dot\psi_\theta h\)</span> is <span class="math inline">\(\dot\psi_\theta X\)</span>.</li>
+<li>Its <strong>error distribution</strong> is <span class="math inline">\(N\bigl(0,\dot\psi_\theta I_\theta^{-1}\dot\psi_\theta^T\bigr)\)</span>.</li>
+<li>Therefore, this normal distribution is the natural <strong>asymptotic lower bound</strong> for estimating <span class="math inline">\(\psi(\theta)\)</span>.</li>
+</ol>
+<p>The bound can be expressed through regularity, almost-everywhere results, or local minimax risk. It is not an absolute pointwise bound on every estimator at every parameter.</p>
+</div>
+</div>
+<section id="asymptotic-concentration" class="level2">
+<h2 class="anchored" data-anchor-id="asymptotic-concentration">8.1 Asymptotic Concentration</h2>
+<p>The goal is to compare how tightly possible limiting distributions of <span class="math inline">\(\sqrt n\{T_n-\psi(\theta)\}\)</span> concentrate near zero. If the limit at <span class="math inline">\(\theta\)</span> is <span class="math inline">\(N\bigl(\mu(\theta),\sigma^2(\theta)\bigr)\)</span>, then, approximately,</p>
+<p><span class="math display">\[
+T_n\approx N\left(\psi(\theta)+\frac{\mu(\theta)}{\sqrt n},\frac{\sigma^2(\theta)}{n}\right).
+\]</span></p>
+<p>A desirable limit has</p>
+<ul>
+<li>asymptotic bias <span class="math inline">\(\mu(\theta)=0\)</span>;</li>
+<li>asymptotic variance <span class="math inline">\(\sigma^2(\theta)\)</span> as small as possible.</li>
+</ul>
+<p>Within the normal family, these two choices also minimize asymptotic mean squared error.</p>
+<p>For <span class="math inline">\(Z\sim N\bigl(\mu(\theta),\sigma^2(\theta)\bigr)\)</span>, the probability <span class="math inline">\(P(-a&lt;Z&lt;a)\)</span> is largest at <span class="math inline">\(\mu(\theta)=0\)</span> for a fixed variance, and then increases as the variance decreases. Figure <a href="#eightfig-ch8-normal-concentration" class="quarto-xref">Figure 8.<span>1</span></a> shows these two effects.</p>
+<div id="eightfig-ch8-normal-concentration" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-alt="Two pairs of normal density curves compare a shifted mean with mean zero and a smaller variance with variance one. The interval from minus one to one is shaded.">
+<figure class="quarto-float quarto-float-eightfig figure">
+<div aria-describedby="eightfig-ch8-normal-concentration-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/generated/chapter-8-normal-concentration.svg" class="img-fluid figure-img" alt="Two pairs of normal density curves compare a shifted mean with mean zero and a smaller variance with variance one. The interval from minus one to one is shaded.">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-eightfig" id="eightfig-ch8-normal-concentration-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure 8.1: Centering and reducing the variance both increase the mass of a normal estimation-error distribution near zero.
+</figcaption>
+</figure>
+</div>
+<p>For general, possibly nonnormal limits, concentration is measured through a nonnegative loss function <span class="math inline">\(\ell\)</span>. If the limit distribution is <span class="math inline">\(L_\theta\)</span>, its asymptotic risk is <span class="math inline">\(\int \ell\,dL_\theta\)</span>. The book uses the visually similar symbols <span class="math inline">\(L_\theta\)</span> for the limiting law and <span class="math inline">\(\ell\)</span> for the loss; this chapter retains that convention.</p>
+<p>Examples include:</p>
+<ul>
+<li>quadratic loss: <span class="math inline">\(\int x^2\,dL_\theta(x)\)</span>;</li>
+<li>absolute loss: <span class="math inline">\(\int |x|\,dL_\theta(x)\)</span>;</li>
+<li>tail-probability loss: <span class="math inline">\(\int \mathbf 1\{|x|&gt;a\}\,dL_\theta(x)\)</span>.</li>
+</ul>
+<p>A distribution is more concentrated near zero when these risks are smaller.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Example">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Example
+</div>
+</div>
+<section id="example-8-1" class="level3 callout-body-container callout-body">
+<h3 class="anchored" data-anchor-id="example-8-1">Example 8.1: Hodges’ estimator</h3>
+<p>Suppose that <span class="math inline">\(T_n\)</span> is a sequence of estimators for a real parameter <span class="math inline">\(\theta\)</span> with standard root-<span class="math inline">\(n\)</span> behavior,</p>
+<p><span class="math display">\[
+\sqrt n(T_n-\theta)\rightsquigarrow L_\theta.
+\]</span></p>
+<p>For example, <span class="math inline">\(T_n\)</span> may be the mean of a size-<span class="math inline">\(n\)</span> sample from <span class="math inline">\(N(\theta,1)\)</span>.</p>
+<p>Define <span class="math inline">\(S_n=\begin{cases}T_n&amp;\text{if }|T_n|\geq n^{-1/4},\\ 0&amp;\text{if }|T_n|&lt;n^{-1/4}.\end{cases}\)</span></p>
+<ul>
+<li>For every fixed <span class="math inline">\(\theta\neq 0\)</span>, truncation eventually occurs with negligible probability, so <span class="math inline">\(\sqrt{n}(S_n-\theta)\rightsquigarrow L_\theta\)</span>.</li>
+<li>At <span class="math inline">\(\theta=0\)</span>, however, <span class="math inline">\(S_n\)</span> is set equal to zero with probability tending to one. It therefore converges faster than the usual root-<span class="math inline">\(n\)</span> rate.</li>
+<li>This appears to make <span class="math inline">\(S_n\)</span> better than <span class="math inline">\(T_n\)</span> at <span class="math inline">\(\theta=0\)</span> without making it worse elsewhere. Pointwise limits, however, hide the fact that
+<ul>
+<li>the risk has large peaks near zero;</li>
+<li>the peaks move toward zero as <span class="math inline">\(n\)</span> increases;</li>
+<li>their widths shrink, but their heights diverge.</li>
+</ul></li>
+<li>Thus, the estimator’s improvement exactly at <span class="math inline">\(\theta=0\)</span> is purchased through very poor behavior at parameter values that approach zero with <span class="math inline">\(n\)</span>.</li>
+</ul>
+<p><strong>Pointwise asymptotic comparisons at fixed parameter values are too weak. Efficiency must account for neighboring parameter values simultaneously.</strong> Figure <a href="#eightfig-ch8-hodges-risk" class="quarto-xref">Figure 8.<span>2</span></a> makes the moving risk peaks visible.</p>
+<div id="eightfig-ch8-hodges-risk" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-alt="Risk curves for sample sizes 10, 100, and 1000 have symmetric peaks approaching zero; the ordinary sample mean has constant scaled risk one.">
+<figure class="quarto-float quarto-float-eightfig figure">
+<div aria-describedby="eightfig-ch8-hodges-risk-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/generated/chapter-8-hodges-risk.svg" class="img-fluid figure-img" alt="Risk curves for sample sizes 10, 100, and 1000 have symmetric peaks approaching zero; the ordinary sample mean has constant scaled risk one.">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-eightfig" id="eightfig-ch8-hodges-risk-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure 8.2: The scaled quadratic risk of Hodges’ estimator develops higher, narrower peaks that move toward zero as the sample size grows.
+</figcaption>
+</figure>
+</div>
+</section>
+</div>
+</section>
+<section id="relative-efficiency" class="level2">
+<h2 class="anchored" data-anchor-id="relative-efficiency">8.2 Relative Efficiency</h2>
+<div class="callout callout-style-default callout-note callout-titled" title="Relative efficiency">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Relative efficiency
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Suppose</p>
+<p><span class="math display">\[
+\sqrt n\{T_n-\psi(\theta)\}\rightsquigarrow N\bigl(0,\sigma^2(\theta)\bigr).
+\]</span></p>
+<p>To attain asymptotic variance <span class="math inline">\(1/\nu\)</span>, the required sample size <span class="math inline">\(n_\nu\)</span> satisfies</p>
+<p><span class="math display">\[
+\frac{n_\nu}{\nu}\longrightarrow\sigma^2(\theta).
+\]</span></p>
+<p>For two estimator sequences, the relative sample-size requirement is</p>
+<p><span class="math display">\[
+\lim_{\nu\to\infty}\frac{n_{\nu,2}}{n_{\nu,1}}
+=\frac{\sigma_2^2(\theta)}{\sigma_1^2(\theta)}.
+\]</span></p>
+<p>If this ratio exceeds one, the second estimator needs proportionally more observations to attain the same asymptotic precision. The reciprocal convention is also commonly called asymptotic relative efficiency.</p>
+</div>
+</div>
+</section>
+<section id="sec-lower-bound-experiments" class="level2">
+<h2 class="anchored" data-anchor-id="sec-lower-bound-experiments">8.3 Lower Bound for Experiments</h2>
+<p>Because Hodges’ example defeats pointwise lower bounds, consider local alternatives <span class="math inline">\(\theta+h/\sqrt n\)</span>, where <span class="math inline">\(h\in\mathbb R^k\)</span> remains fixed. Suppose that, for some limit distributions <span class="math inline">\(L_{\theta,h}\)</span> and every <span class="math inline">\(h\)</span>,</p>
+<p><span id="eq-local-regularity"></span></p>
+<p><span class="math display">\[
+(8.2)\qquad  \sqrt{n}\left(T_n-\psi\left(\theta+\frac{h}{\sqrt{n}}\right)\right)\overset{\theta+h/\sqrt{n}}{\rightsquigarrow}L_{\theta,h}.
+\]</span></p>
+<p>The estimator is locally good at <span class="math inline">\(\theta\)</span> if the family <span class="math inline">\(\{L_{\theta,h}:h\in\mathbb R^k\}\)</span> is concentrated near zero, and it is <strong>locally optimal</strong> if these limits are maximally concentrated for every <span class="math inline">\(h\)</span>.</p>
+<p>For the rest of the chapter, assume:</p>
+<ul>
+<li><span class="math inline">\(\Theta\)</span> is an open subset of <span class="math inline">\(\mathbb R^k\)</span>, and <span class="math inline">\(\psi:\Theta\to\mathbb R^m\)</span>.</li>
+<li>The derivative <span class="math inline">\(\dot\psi_\theta\)</span> follows the book’s row-gradient convention: it is an <span class="math inline">\(m\times k\)</span> matrix, so <span class="math inline">\(\dot\psi_\theta h\)</span> is an <span class="math inline">\(m\)</span>-vector.</li>
+<li>The model is differentiable in quadratic mean at <span class="math inline">\(\theta\)</span>, so the local experiments converge to <span class="math inline">\(\{N(h,I_\theta^{-1}):h\in\mathbb R^k\}\)</span> by <a href="./chapter-7.html#theorem-normal-limit-experiment">Theorem 7.10</a>.</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled" title="Theorem">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Theorem
+</div>
+</div>
+<section id="theorem-limit-experiment-reduction" class="level3 callout-body-container callout-body">
+<h3 class="anchored" data-anchor-id="theorem-limit-experiment-reduction">Theorem 8.3: reduction to the limit experiment</h3>
+<p>Assume the experiment <span class="math inline">\(\{P_\theta:\theta\in\Theta\}\)</span> is differentiable in quadratic mean at <span class="math inline">\(\theta\)</span>, with nonsingular Fisher information <span class="math inline">\(I_\theta\)</span>, and let <span class="math inline">\(\psi\)</span> be differentiable at <span class="math inline">\(\theta\)</span>. If <span class="math inline">\(T_n\)</span> satisfies (8.2) for every <span class="math inline">\(h\)</span>, then there is a randomized estimator <span class="math inline">\(T\)</span> based on <span class="math inline">\(X\sim N(h,I_\theta^{-1})\)</span> such that</p>
+<p><span class="math display">\[
+T-\dot\psi_\theta h\sim L_{\theta,h}
+\]</span></p>
+<p>for every <span class="math inline">\(h\)</span>.</p>
+<p>Thus, the original asymptotic estimation problem reduces to observing <span class="math inline">\(X\sim N(h,I_\theta^{-1})\)</span> and estimating <span class="math inline">\(\dot\psi_\theta h\)</span>. The natural estimator is <span class="math inline">\(\dot\psi_\theta X\)</span>, with error distribution</p>
+<p><span class="math display">\[
+\dot\psi_\theta X-\dot\psi_\theta h
+\sim N\bigl(0,\dot\psi_\theta I_\theta^{-1}\dot\psi_\theta^T\bigr).
+\]</span></p>
+<p>This covariance matrix is also the parametric Cramér–Rao bound for estimating <span class="math inline">\(\psi(\theta)\)</span>.</p>
+</section>
+</div>
+<div class="callout callout-style-default callout-important callout-titled" title="The parametric prototype of an efficient influence function">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>The parametric prototype of an efficient influence function
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Let <span class="math inline">\(\dot\ell_\theta\)</span> be the score vector and let</p>
+<p><span class="math display">\[
+\widetilde\psi_\theta
+=\dot\psi_\theta I_\theta^{-1}\dot\ell_\theta.
+\]</span></p>
+<p>Then</p>
+<p><span class="math display">\[
+P_\theta\widetilde\psi_\theta\dot\ell_\theta^T=\dot\psi_\theta,
+\qquad
+P_\theta\widetilde\psi_\theta\widetilde\psi_\theta^T
+=\dot\psi_\theta I_\theta^{-1}\dot\psi_\theta^T.
+\]</span></p>
+<p>The first identity says that <span class="math inline">\(\widetilde\psi_\theta\)</span> represents the derivative of the target in every parametric score direction; the second recovers the covariance bound. In <a href="./chapter-25.html#sec-pathwise-differentiability">Chapter 25</a>, score vectors become an infinite-dimensional tangent space, and this normalized score becomes the <strong>efficient influence function</strong>.</p>
+</div>
+</div>
+<p><strong>Proof roadmap.</strong> Recenter the estimator at <span class="math inline">\(\psi(\theta)\)</span>, use differentiability to identify its translated local limits, and invoke Theorem 7.10 to reproduce those limits in the Gaussian experiment.</p>
+<details>
+<summary>
+Complete proof of Theorem 8.3
+</summary>
+<p>Define <span class="math inline">\(S_n=\sqrt n\{T_n-\psi(\theta)\}\)</span> and add and subtract the target at the local alternative:</p>
+<p><span class="math display">\[
+\begin{aligned}
+S_n
+&amp;=\sqrt n\left\{T_n-\psi\left(\theta+\frac{h}{\sqrt n}\right)\right\}\\
+&amp;\quad+\sqrt n\left\{\psi\left(\theta+\frac{h}{\sqrt n}\right)-\psi(\theta)\right\}.
+\end{aligned}
+\]</span></p>
+<p>Under <span class="math inline">\(P_{\theta+h/\sqrt n}^n\)</span>, the first term converges to <span class="math inline">\(L_{\theta,h}\)</span> by (8.2), while differentiability gives convergence of the second term to <span class="math inline">\(\dot\psi_\theta h\)</span>. Hence <a href="./chapter-2.html#lemma-slutsky">Slutsky’s lemma</a> yields</p>
+<p><span class="math display">\[
+S_n\overset{\theta+h/\sqrt n}{\rightsquigarrow}L_{\theta,h}*\delta_{\dot\psi_\theta h}
+\]</span></p>
+<p>where <span class="math inline">\(\delta_{\dot\psi_\theta h}\)</span> is the point mass at <span class="math inline">\(\dot\psi_\theta h\)</span>. Convolution with this measure shifts the distribution:</p>
+<p><span class="math display">\[
+X\sim L_{\theta,h}\quad\Longrightarrow\quad X+\dot\psi_\theta h\sim L_{\theta,h}*\delta_{\dot\psi_\theta h}.
+\]</span></p>
+<p><a href="./chapter-7.html#theorem-normal-limit-experiment">Theorem 7.10</a> then produces a statistic <span class="math inline">\(T\)</span> in the Gaussian limit experiment such that</p>
+<p><span class="math display">\[
+T-\dot\psi_\theta h\sim L_{\theta,h}.
+\]</span></p>
+</details>
+<p>The theorem does not itself impose regularity. The family <span class="math inline">\(L_{\theta,h}\)</span> may depend on <span class="math inline">\(h\)</span>. Regularity in <a href="#sec-convolution-theorem">§8.5</a> is the additional requirement that this error law be the same for every local direction.</p>
+</section>
+<section id="estimating-normal-means" class="level2">
+<h2 class="anchored" data-anchor-id="estimating-normal-means">8.4 Estimating Normal Means</h2>
+<p>Consider the Gaussian experiment <span class="math inline">\(X\sim N(h,\Sigma)\)</span>, where <span class="math inline">\(\Sigma\)</span> is known and nonsingular, and suppose the target is <span class="math inline">\(Ah\)</span>. The natural estimator is <span class="math inline">\(AX\)</span>, whose error distribution is <span class="math inline">\(AX-Ah\sim N(0,A\Sigma A^T)\)</span>.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="The Gaussian core of the chapter">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>The Gaussian core of the chapter
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The results in this section do three distinct jobs.</p>
+<ol type="1">
+<li>Proposition 8.4 shows that every equivariant error law is the unavoidable Gaussian error convolved with extra noise.</li>
+<li>Anderson’s lemma shows that extra independent noise cannot improve risk for a bowl-shaped loss.</li>
+<li>Proposition 8.6 removes equivariance by a diffuse-prior argument and proves minimaxity among all estimators.</li>
+</ol>
+<p>Theorem 8.8 and Theorem 8.11 transfer these two Gaussian conclusions back to the original local experiments.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Definition">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Definition
+</div>
+</div>
+<section id="equivariance-in-law" class="level3 callout-body-container callout-body">
+<h3 class="anchored" data-anchor-id="equivariance-in-law">Equivariance in law</h3>
+<p>An estimator <span class="math inline">\(T\)</span> is <strong>equivariant in law</strong> if the distribution of <span class="math inline">\(T-Ah\)</span> under <span class="math inline">\(h\)</span> does not depend on <span class="math inline">\(h.\)</span></p>
+</section>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Proposition">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Proposition
+</div>
+</div>
+<section id="proposition-8-4" class="level3 callout-body-container callout-body">
+<h3 class="anchored" data-anchor-id="proposition-8-4">Proposition 8.4: convolution form of equivariant estimators</h3>
+<p>The invariant distribution of any randomized equivariant-in-law estimator can be decomposed as <span class="math inline">\(L=N(0,A\Sigma A^T)*M\)</span> for some probability measure <span class="math inline">\(M\)</span>.</p>
+<p>Thus, every equivariant-in-law estimator behaves like</p>
+<ul>
+<li>the natural estimator <span class="math inline">\(AX\)</span>, plus</li>
+<li>an independent noise term with distribution <span class="math inline">\(M\)</span>.</li>
+</ul>
+<p>The estimator <span class="math inline">\(AX\)</span> corresponds to the case in which <span class="math inline">\(M\)</span> is degenerate at zero, and it is the only randomized equivariant-in-law estimator with this property, up to changes on null sets.</p>
+</section>
+</div>
+<p><strong>Proof roadmap.</strong> Introduce an increasingly diffuse Gaussian prior, separate posterior noise from the estimator’s remaining error, and pass to the limit through characteristic functions.</p>
+<details>
+<summary>
+Complete proof of Proposition 8.4
+</summary>
+<p>Under a Gaussian prior <span class="math inline">\(H\sim N(0,\Lambda)\)</span>, conditionally let <span class="math inline">\(X\mid H=h\sim N(h,\Sigma)\)</span>. Write</p>
+<p><span class="math display">\[
+m_\Lambda(X)=(\Sigma^{-1}+\Lambda^{-1})^{-1}\Sigma^{-1}X
+\]</span></p>
+<p>for the posterior mean and decompose</p>
+<p><span class="math display">\[
+T-AH=\underbrace{T-Am_\Lambda(X)}_{W_\Lambda}
++\underbrace{-A\{H-m_\Lambda(X)\}}_{G_\Lambda}.
+\]</span></p>
+<p>The posterior residual is Gaussian and independent of every function of <span class="math inline">\((X,U)\)</span>. Hence <span class="math inline">\(G_\Lambda\)</span> and <span class="math inline">\(W_\Lambda\)</span> are independent and</p>
+<p><span class="math display">\[
+G_\Lambda\sim
+N\!\left(0,A(\Sigma^{-1}+\Lambda^{-1})^{-1}A^T\right).
+\]</span></p>
+<p>If <span class="math inline">\(T\)</span> is equivariant in law with invariant law <span class="math inline">\(L\)</span>, then <span class="math inline">\(G_\Lambda+W_\Lambda=T-AH\)</span> has law <span class="math inline">\(L\)</span> for every <span class="math inline">\(\Lambda\)</span>. Set <span class="math inline">\(\Lambda=\lambda I\)</span> and let <span class="math inline">\(\lambda\to\infty\)</span>. Their characteristic functions satisfy</p>
+<p><span class="math display">\[
+\widehat L(t)=\widehat G_\lambda(t)\widehat W_\lambda(t).
+\]</span></p>
+<p>The first factor converges to the everywhere-positive characteristic function of <span class="math inline">\(G\sim N(0,A\Sigma A^T)\)</span>. Thus <span class="math inline">\(\widehat W_\lambda(t)\)</span> converges to a function continuous at zero. Lévy’s continuity theorem gives <span class="math inline">\(W_\lambda\rightsquigarrow W\)</span> for some law <span class="math inline">\(M\)</span>. Independence is preserved in the joint limit, and therefore</p>
+<p><span class="math display">\[
+L=\mathcal L(G+W)=N(0,A\Sigma A^T)*M.
+\]</span></p>
+<p>For uniqueness, let <span class="math inline">\(t(X)=E\{T(X,U)\mid X\}\)</span>. Equivariance implies that <span class="math inline">\(E_h\{t(X)-AX\}\)</span> is constant in <span class="math inline">\(h\)</span>. Completeness of the normal location family forces <span class="math inline">\(t(X)-AX\)</span> itself to be constant almost surely. If <span class="math inline">\(M=\delta_0\)</span>, then <span class="math inline">\(T-Ah\)</span> has the same law as <span class="math inline">\(AX-Ah\)</span>; equality of means makes the constant zero. Since conditional expectation cannot increase the second moment, equality of the second moments forces <span class="math inline">\(T=t(X)=AX\)</span> almost surely.</p>
+</details>
+<p>The same diffuse-prior construction, followed by Anderson’s lemma, proves Proposition 8.6 below.</p>
+<p>Equivalently, <span class="math inline">\(T-Ah\overset d=Z+W\)</span>, where <span class="math inline">\(Z\sim N(0,A\Sigma A^T)\)</span>, <span class="math inline">\(W\sim M\)</span>, and <span class="math inline">\(Z\)</span> and <span class="math inline">\(W\)</span> are independent. The Gaussian component <span class="math inline">\(Z\)</span> is unavoidable; <span class="math inline">\(W\)</span> is any additional noise. When <span class="math inline">\(M=\delta_0\)</span>, the additional term vanishes and <span class="math inline">\(L=N(0,A\Sigma A^T)\)</span>.</p>
+<div id="eightfig-ch8-efficient-noise" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-alt="A narrow efficient density and a wider density produced by adding centered Gaussian noise appear beside the general schematic equation: efficient Gaussian part plus independent remainder equals regular limit.">
+<figure class="quarto-float quarto-float-eightfig figure">
+<div aria-describedby="eightfig-ch8-efficient-noise-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/generated/chapter-8-efficient-noise.svg" class="img-fluid figure-img" alt="A narrow efficient density and a wider density produced by adding centered Gaussian noise appear beside the general schematic equation: efficient Gaussian part plus independent remainder equals regular limit.">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-eightfig" id="eightfig-ch8-efficient-noise-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure 8.3: A regular limit distribution consists of the efficient Gaussian component plus an independent remainder. The density panel uses a centered Gaussian remainder as one concrete convolution; the theorem does not require the remainder to be Gaussian.
+</figcaption>
+</figure>
+</div>
+<section id="bowl-shaped-loss" class="level3">
+<h3 class="anchored" data-anchor-id="bowl-shaped-loss">Bowl-shaped loss</h3>
+<ul>
+<li>A loss function <span class="math inline">\(\ell\)</span> is <strong>bowl-shaped</strong> if every sublevel set <span class="math inline">\(\{x:\ell(x)\leq c\}\)</span> is convex and symmetric around zero.</li>
+<li>It is <strong>subconvex</strong> if these sublevel sets are also closed.</li>
+<li>Typical examples include squared-error loss, norm loss, and indicators of complements of symmetric convex sets. Figure <a href="#eightfig-ch8-bowl-shaped-loss" class="quarto-xref">Figure 8.<span>4</span></a> shows two elementary cases.</li>
+</ul>
+<div id="eightfig-ch8-bowl-shaped-loss" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-alt="A circular and diamond-shaped pair of symmetric convex sublevel sets is shown beside squared and absolute loss curves.">
+<figure class="quarto-float quarto-float-eightfig figure">
+<div aria-describedby="eightfig-ch8-bowl-shaped-loss-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/generated/chapter-8-bowl-shaped-loss.svg" class="img-fluid figure-img" alt="A circular and diamond-shaped pair of symmetric convex sublevel sets is shown beside squared and absolute loss curves.">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-eightfig" id="eightfig-ch8-bowl-shaped-loss-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure 8.4: Squared and absolute losses are bowl-shaped because their sublevel sets are closed, convex, and symmetric about zero.
+</figcaption>
+</figure>
+</div>
+<div class="callout callout-style-default callout-important callout-titled" title="Lemma">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Lemma
+</div>
+</div>
+<section id="lemma-anderson" class="level3 callout-body-container callout-body">
+<h3 class="anchored" data-anchor-id="lemma-anderson">Lemma 8.5: Anderson’s lemma</h3>
+<p>For a bowl-shaped loss function, adding independent noise cannot improve the normal distribution:</p>
+<p><span class="math display">\[
+E\ell(Z+W)\geq E\ell(Z),
+\]</span></p>
+<p>where <span class="math inline">\(Z\sim N(0,A\Sigma A^T)\)</span> and <span class="math inline">\(W\)</span> is independent of <span class="math inline">\(Z\)</span>.</p>
+<p>Therefore, among equivariant-in-law estimators, <span class="math inline">\(AX\)</span> is optimal.</p>
+</section>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Definition">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Definition
+</div>
+</div>
+<section id="minimaxity" class="level3 callout-body-container callout-body">
+<h3 class="anchored" data-anchor-id="minimaxity">Minimaxity</h3>
+<p>The maximum risk of an estimator <span class="math inline">\(T\)</span> is</p>
+<p><span class="math display">\[
+\sup_h R(h,T)=\sup_h E_h\ell(T-Ah).
+\]</span></p>
+<p>For bowl-shaped loss, every randomized estimator satisfies <span class="math inline">\(\sup_h E_h\ell(T-Ah)\geq E_0\ell(AX)\)</span>. Because the risk of <span class="math inline">\(AX\)</span> is constant in <span class="math inline">\(h\)</span>, it attains this lower bound and is minimax.</p>
+</section>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Proposition">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Proposition
+</div>
+</div>
+<section id="proposition-8-6" class="level3 callout-body-container callout-body">
+<h3 class="anchored" data-anchor-id="proposition-8-6">Proposition 8.6: Gaussian minimax bound</h3>
+<p>For any bowl-shaped loss function <span class="math inline">\(\ell\)</span>, the maximum risk of any randomized estimator <span class="math inline">\(T\)</span> of <span class="math inline">\(Ah\)</span> is bounded below by <span class="math inline">\(E_0\ell(AX)\)</span>. Consequently, <span class="math inline">\(AX\)</span> is a minimax estimator for <span class="math inline">\(Ah\)</span>. If <span class="math inline">\(Ah\)</span> is real and <span class="math inline">\(E_0\{(AX)^2\ell(AX)\}&lt;\infty\)</span>, then <span class="math inline">\(AX\)</span> is the only minimax estimator for <span class="math inline">\(Ah\)</span> up to changes on sets of probability zero.</p>
+</section>
+</div>
+<div class="callout callout-style-default callout-warning callout-titled" title="Caveat about the printed uniqueness clause">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Caveat about the printed uniqueness clause
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The printed proposition does not exclude a loss that is constant up to null sets or a degenerate scalar target. Taken literally, its uniqueness clause is then false: under a constant loss every estimator is minimax. The qualified uniqueness argument below therefore makes explicit what that clause needs: <span class="math inline">\(A\Sigma A^T&gt;0\)</span> and a scalar bowl-shaped loss whose Gaussian concentration inequality is strict away from zero (equivalently here, the loss is not Lebesgue-almost-everywhere constant). The lower bound and minimaxity assertions do not need these qualifications.</p>
+</div>
+</div>
+<p><strong>Proof roadmap.</strong> Average the risk under an increasingly diffuse Gaussian prior, use the normal posterior to split the estimation error into posterior Gaussian noise and an independent remainder, and apply Anderson’s lemma. As the prior becomes diffuse, the Gaussian term approaches the error of <span class="math inline">\(AX\)</span>; because <span class="math inline">\(AX\)</span> has constant risk, the lower bound is attained. For qualified uniqueness, reduce to a one-dimensional least-favorable normal submodel and use the rate of convergence of diffuse-prior Bayes risks together with strict Anderson concentration.</p>
+<details>
+<summary>
+Complete proof of the minimax bound in Proposition 8.6
+</summary>
+<p>Let <span class="math inline">\(T=T(X,U)\)</span> be any possibly randomized estimator, with <span class="math inline">\(U\)</span> independent of <span class="math inline">\(X\)</span>. The proof compares maximum risk with a sequence of Bayes risks. Van der Vaart writes the limiting step for subconvex losses; the radial argument below also covers the stated bowl-shaped case.</p>
+<section id="introduce-a-gaussian-prior" class="level4">
+<h4 class="anchored" data-anchor-id="introduce-a-gaussian-prior">Introduce a Gaussian prior</h4>
+<p>Let <span class="math inline">\(H\sim N(0,\Lambda)\)</span> and, conditionally on <span class="math inline">\(H=h\)</span>, let <span class="math inline">\(X\sim N(h,\Sigma)\)</span>. Since a supremum is at least any average,</p>
+<p><span class="math display">\[
+\sup_h E_h\ell(T-Ah)\geq E\ell(T-AH).
+\]</span></p>
+<p>The posterior distribution is</p>
+<p><span class="math display">\[
+H\mid X\sim N\left((\Sigma^{-1}+\Lambda^{-1})^{-1}\Sigma^{-1}X,
+(\Sigma^{-1}+\Lambda^{-1})^{-1}\right).
+\]</span></p>
+<p>Write its mean as <span class="math inline">\(m_\Lambda(X)\)</span> and define</p>
+<p><span class="math display">\[
+W_\Lambda=T-Am_\Lambda(X),
+\qquad
+G_\Lambda=-A\{H-m_\Lambda(X)\}.
+\]</span></p>
+<p>Then <span class="math inline">\(T-AH=G_\Lambda+W_\Lambda\)</span>. The conditional distribution of <span class="math inline">\(G_\Lambda\)</span> does not depend on <span class="math inline">\(X\)</span>, so <span class="math inline">\(G_\Lambda\)</span> is independent of <span class="math inline">\(W_\Lambda\)</span> and</p>
+<p><span class="math display">\[
+G_\Lambda\sim N\left(0,A(\Sigma^{-1}+\Lambda^{-1})^{-1}A^T\right).
+\]</span></p>
+</section>
+<section id="apply-andersons-lemma-and-diffuse-the-prior" class="level4">
+<h4 class="anchored" data-anchor-id="apply-andersons-lemma-and-diffuse-the-prior">Apply Anderson’s lemma and diffuse the prior</h4>
+<p>By <a href="#lemma-anderson">Anderson’s lemma</a>,</p>
+<p><span class="math display">\[
+\sup_h E_h\ell(T-Ah)
+\geq E\ell(G_\Lambda+W_\Lambda)
+\geq E\ell(G_\Lambda).
+\]</span></p>
+<p>Set <span class="math inline">\(\Lambda=\lambda\Sigma\)</span>. The posterior covariance is then</p>
+<p><span class="math display">\[
+(\Sigma^{-1}+\Lambda^{-1})^{-1}
+=\frac{\lambda}{\lambda+1}\Sigma,
+\]</span></p>
+<p>so <span class="math inline">\(G_\Lambda\)</span> has the same distribution as <span class="math inline">\(a_\lambda G\)</span>, where <span class="math inline">\(G\sim N(0,A\Sigma A^T)\)</span> and <span class="math inline">\(a_\lambda=\{\lambda/(\lambda+1)\}^{1/2}\uparrow1\)</span>. Bowl-shapedness makes <span class="math inline">\(r\mapsto\ell(rx)\)</span> nondecreasing for <span class="math inline">\(r\geq0\)</span> along every ray. Such a one-dimensional monotone function has only countably many discontinuities, while the Gaussian radial distribution is continuous on the range of <span class="math inline">\(A\)</span>. Thus <span class="math inline">\(\ell(a_\lambda G)\uparrow\ell(G)\)</span> almost surely. The monotone convergence theorem gives</p>
+<p><span class="math display">\[
+\sup_h E_h\ell(T-Ah)\geq E\ell(G)=E_0\ell(AX).
+\]</span></p>
+<p>Because <span class="math inline">\(AX-Ah=A(X-h)\)</span> has the same distribution as <span class="math inline">\(G\)</span> for every <span class="math inline">\(h\)</span>, the risk of <span class="math inline">\(AX\)</span> is constant and attains this lower bound. Thus <span class="math inline">\(AX\)</span> is minimax for estimating <span class="math inline">\(Ah\)</span>.</p>
+</section></details>
+<p><strong>Derivation in these notes.</strong> Van der Vaart refers elsewhere for uniqueness. The following argument proves the corrected, nondegenerate version needed when uniqueness is invoked later.</p>
+<details>
+<summary>
+Complete proof of the qualified uniqueness clause
+</summary>
+<p>Assume that <span class="math inline">\(Ah\)</span> is real, write <span class="math inline">\(\sigma^2=A\Sigma A^T&gt;0\)</span>, and suppose that <span class="math inline">\(\ell\)</span> is not Lebesgue-almost-everywhere constant and</p>
+<p><span class="math display">\[
+E\{Z^2\ell(Z)\}&lt;\infty,
+\qquad Z\sim N(0,\sigma^2).
+\]</span></p>
+<p>Let <span class="math inline">\(T\)</span> be any minimax estimator. Because <span class="math inline">\(AX\)</span> has constant risk <span class="math inline">\(R_0=E\ell(Z)\)</span> and is minimax, necessarily</p>
+<p><span class="math display">\[
+E_h\ell(T-Ah)\leq R_0,
+\qquad h\in\mathbb R^k.
+\]</span></p>
+</details></section>
+<section id="reduce-to-one-normal-location-coordinate" class="level4">
+<h4 class="anchored" data-anchor-id="reduce-to-one-normal-location-coordinate">Reduce to one normal location coordinate</h4>
+<p>Choose <span class="math inline">\(v=\Sigma A^T/\sigma^2\)</span>, so <span class="math inline">\(Av=1\)</span>, and restrict to the submodel <span class="math inline">\(h=tv\)</span>. Then</p>
+<p><span class="math display">\[
+Y=AX\sim N(t,\sigma^2).
+\]</span></p>
+<p>Moreover, <span class="math inline">\(Y\)</span> is independent of <span class="math inline">\(X-vY\)</span>, whose distribution does not depend on <span class="math inline">\(t\)</span>. Thus the residual and the original randomization variable together act only as an auxiliary randomizer. It is enough to prove that every randomized estimator <span class="math inline">\(\delta(Y,U)\)</span> satisfying</p>
+<p><span class="math display">\[
+\sup_t E_t\ell\{\delta(Y,U)-t\}\leq R_0
+\]</span></p>
+<p>must equal <span class="math inline">\(Y\)</span> almost surely.</p>
+</section>
+<section id="compare-with-diffuse-normal-bayes-problems" class="level4">
+<h4 class="anchored" data-anchor-id="compare-with-diffuse-normal-bayes-problems">Compare with diffuse normal Bayes problems</h4>
+<p>Give <span class="math inline">\(t\)</span> the prior <span class="math inline">\(N(0,\tau^2)\)</span>. If <span class="math inline">\(c_\tau=\tau^2/(\tau^2+\sigma^2)\)</span>, then the posterior mean is <span class="math inline">\(c_\tau Y\)</span> and the posterior residual has variance</p>
+<p><span class="math display">\[
+v_\tau=\frac{\sigma^2\tau^2}{\sigma^2+\tau^2}.
+\]</span></p>
+<p>Let <span class="math inline">\(Z_\tau\sim N(0,v_\tau)\)</span> be independent of <span class="math inline">\((Y,U)\)</span> and put <span class="math inline">\(W_\tau=\delta(Y,U)-c_\tau Y\)</span>. Averaging the maximum-risk bound over the prior and applying Anderson’s lemma conditionally on <span class="math inline">\((Y,U)\)</span> gives</p>
+<p><span class="math display">\[
+0\leq E\!\left[
+E\{\ell(Z_\tau+W_\tau)\mid W_\tau\}-E\ell(Z_\tau)
+\right]
+\leq R_0-E\ell(Z_\tau).
+\tag{8.6a}
+\]</span></p>
+<p>The density of <span class="math inline">\(Z_\tau\)</span> differs from the density of <span class="math inline">\(Z\)</span> by</p>
+<p><span class="math display">\[
+O(\tau^{-2})(1+z^2)
+\]</span></p>
+<p>times a fixed Gaussian density. The displayed integrability assumption therefore yields</p>
+<p><span class="math display">\[
+R_0-E\ell(Z_\tau)=O(\tau^{-2}).
+\tag{8.6b}
+\]</span></p>
+</section>
+<section id="strict-concentration-forces-zero-remainder" class="level4">
+<h4 class="anchored" data-anchor-id="strict-concentration-forces-zero-remainder">Strict concentration forces zero remainder</h4>
+<p>For a scalar bowl-shaped loss that is not almost everywhere constant, strict Anderson concentration says</p>
+<p><span class="math display">\[
+d(w):=E\ell(Z+w)-E\ell(Z)&gt;0
+\qquad(w\neq0).
+\]</span></p>
+<p>Gaussian convolution makes this gap lower semicontinuous; consequently it is bounded away from zero on every compact set <span class="math inline">\(\{w:\varepsilon\leq |w|\leq M\}\)</span>. The same lower bound, reduced if necessary, holds with <span class="math inline">\(Z_\tau\)</span> for all sufficiently large <span class="math inline">\(\tau\)</span>.</p>
+<p>Suppose that <span class="math inline">\(\delta(y,u)\neq y\)</span> on a set of positive Lebesgue-times-randomization measure. For some <span class="math inline">\(K,M&lt;\infty\)</span> and <span class="math inline">\(\varepsilon&gt;0\)</span>, the set</p>
+<p><span class="math display">\[
+S=\{(y,u):|y|\leq K,\ \varepsilon\leq|\delta(y,u)-y|\leq M\}
+\]</span></p>
+<p>then has positive measure. Because <span class="math inline">\(c_\tau y\to y\)</span> uniformly on <span class="math inline">\([-K,K]\)</span>, <span class="math inline">\(W_\tau\)</span> remains in a compact set bounded away from zero on <span class="math inline">\(S\)</span>. The marginal density of <span class="math inline">\(Y\sim N(0,\tau^2+\sigma^2)\)</span> is bounded below by a positive multiple of <span class="math inline">\(\tau^{-1}\)</span> on <span class="math inline">\([-K,K]\)</span>. Hence the left side of (8.6a) is bounded below by <span class="math inline">\(C/\tau\)</span> for some <span class="math inline">\(C&gt;0\)</span>. This contradicts the <span class="math inline">\(O(\tau^{-2})\)</span> upper bound in (8.6b).</p>
+<p>Therefore <span class="math inline">\(\delta(Y,U)=Y\)</span> for Lebesgue-almost every <span class="math inline">\((y,u)\)</span>. Every normal location law has a positive density, so the equality holds almost surely under every <span class="math inline">\(t\)</span>. Returning to the least-favorable submodel gives <span class="math inline">\(T=AX\)</span> almost surely there; because its normal laws have positive densities on the original sample space, the equality holds up to a common probability-zero set. This proves qualified uniqueness.</p>
+
+</section>
+</section>
+
+<section id="sec-convolution-theorem" class="level2">
+<h2 class="anchored" data-anchor-id="sec-convolution-theorem">8.5 Convolution Theorem</h2>
+<p>An estimator sequence <span class="math inline">\(T_n\)</span> is <strong>regular</strong> at <span class="math inline">\(\theta\)</span> for estimating <span class="math inline">\(\psi(\theta)\)</span> if, for every <span class="math inline">\(h\)</span>,</p>
+<p><span class="math display">\[
+\sqrt n\left(T_n-\psi\left(\theta+\frac{h}{\sqrt n}\right)\right)\overset{\theta+h/\sqrt n}{\rightsquigarrow}L_\theta,
+\]</span></p>
+<p>where the same distribution <span class="math inline">\(L_\theta\)</span> appears for every <span class="math inline">\(h\)</span>. Thus local perturbations do not change the limiting error law. By <a href="#theorem-limit-experiment-reduction">Theorem 8.3</a>, the matching estimator in the Gaussian limit experiment is equivariant in law for <span class="math inline">\(\dot\psi_\theta h\)</span>. A <strong>best regular estimator</strong> has no additional convolution noise and hence has limiting distribution <span class="math inline">\(N\bigl(0,\dot\psi_\theta I_\theta^{-1}\dot\psi_\theta^T\bigr)\)</span>.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Theorem">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Theorem
+</div>
+</div>
+<section id="theorem-8-8" class="level3 callout-body-container callout-body">
+<h3 class="anchored" data-anchor-id="theorem-8-8">Theorem 8.8: convolution</h3>
+<p>Suppose <span class="math inline">\(\{P_\theta:\theta\in\Theta\}\)</span> is differentiable in quadratic mean at <span class="math inline">\(\theta\)</span>, with nonsingular Fisher information <span class="math inline">\(I_\theta\)</span>, and <span class="math inline">\(\psi\)</span> is differentiable at <span class="math inline">\(\theta\)</span>. For every regular estimator sequence with limiting distribution <span class="math inline">\(L_\theta\)</span>,</p>
+<p><span class="math display">\[
+L_\theta=N\bigl(0,\dot\psi_\theta I_\theta^{-1}\dot\psi_\theta^T\bigr)*M_\theta
+\]</span></p>
+<p>for some probability measure <span class="math inline">\(M_\theta\)</span>. Thus the limiting error is the efficient normal error plus additional independent noise. If <span class="math inline">\(L_\theta\)</span> has covariance matrix <span class="math inline">\(\Sigma_\theta\)</span>, then <span class="math inline">\(\Sigma_\theta-\dot\psi_\theta I_\theta^{-1}\dot\psi_\theta^T\)</span> is nonnegative definite.</p>
+<p>This result becomes <a href="./chapter-25.html#theorem-25-20">Theorem 25.20</a> after finite-dimensional score directions are replaced by tangent directions and the normalized score is replaced by the efficient influence function.</p>
+</section>
+</div>
+<p><strong>Proof roadmap.</strong> Regularity makes the local error law independent of <span class="math inline">\(h\)</span>. Theorem 8.3 therefore represents it by an equivariant-in-law estimator in the Gaussian experiment, and Proposition 8.4 decomposes that invariant law into the efficient Gaussian component and independent noise. Covariances then add.</p>
+<details>
+<summary>
+Complete proof of Theorem 8.8
+</summary>
+<p>Regularity says that (8.2) holds with <span class="math inline">\(L_{\theta,h}=L_\theta\)</span> for every <span class="math inline">\(h\)</span>. By <a href="#theorem-limit-experiment-reduction">Theorem 8.3</a>, there is a randomized estimator <span class="math inline">\(T\)</span> in the Gaussian experiment</p>
+<p><span class="math display">\[
+X\sim N(h,I_\theta^{-1})
+\]</span></p>
+<p>such that</p>
+<p><span class="math display">\[
+T-\dot\psi_\theta h\sim L_\theta,
+\qquad h\in\mathbb R^k.
+\]</span></p>
+<p>Because the error distribution is the same for every <span class="math inline">\(h\)</span>, <span class="math inline">\(T\)</span> is equivariant in law for estimating <span class="math inline">\(\dot\psi_\theta h\)</span>. Apply <a href="#proposition-8-4">Proposition 8.4</a> with <span class="math inline">\(A=\dot\psi_\theta\)</span> and <span class="math inline">\(\Sigma=I_\theta^{-1}\)</span>. It gives a probability measure <span class="math inline">\(M_\theta\)</span> for which</p>
+<p><span class="math display">\[
+L_\theta
+=N\bigl(0,\dot\psi_\theta I_\theta^{-1}\dot\psi_\theta^T\bigr)*M_\theta.
+\]</span></p>
+<p>Equivalently, on a product probability space the limiting error has the distribution of <span class="math inline">\(Z+W\)</span>, where</p>
+<p><span class="math display">\[
+Z\sim N\bigl(0,\dot\psi_\theta I_\theta^{-1}\dot\psi_\theta^T\bigr),
+\qquad W\sim M_\theta,
+\]</span></p>
+<p>and <span class="math inline">\(Z\)</span> and <span class="math inline">\(W\)</span> are independent. If <span class="math inline">\(L_\theta\)</span> has covariance matrix <span class="math inline">\(\Sigma_\theta\)</span>, then <span class="math inline">\(W=(Z+W)-Z\)</span> has finite second moments as well. Independence gives</p>
+<p><span class="math display">\[
+\Sigma_\theta
+=\dot\psi_\theta I_\theta^{-1}\dot\psi_\theta^T
++\operatorname{Cov}(W).
+\]</span></p>
+<p>Hence</p>
+<p><span class="math display">\[
+\Sigma_\theta-\dot\psi_\theta I_\theta^{-1}\dot\psi_\theta^T
+=\operatorname{Cov}(W)
+\]</span></p>
+<p>is nonnegative definite.</p>
+</details>
+<p>The convolution remainder is the parametric version of the orthogonal noise that appears in the <a href="./chapter-25.html#theorem-25-20">semiparametric convolution theorem</a>.</p>
+</section>
+<section id="almost-everywhere-convolution-theorem" class="level2">
+<h2 class="anchored" data-anchor-id="almost-everywhere-convolution-theorem">8.6 Almost-Everywhere Convolution Theorem</h2>
+<p>Regularity is a substantive restriction, and Hodges’ estimator is not regular at the point where it is superefficient. The almost-everywhere theorem removes that assumption.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Theorem">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Theorem
+</div>
+</div>
+<section id="theorem-8-9-almost-everywhere-convolution" class="level3 callout-body-container callout-body">
+<h3 class="anchored" data-anchor-id="theorem-8-9-almost-everywhere-convolution">Theorem 8.9: almost-everywhere convolution</h3>
+<p>Suppose the model is differentiable in quadratic mean at every <span class="math inline">\(\theta\)</span>, with nonsingular information matrix <span class="math inline">\(I_\theta\)</span>, and <span class="math inline">\(\psi\)</span> is differentiable at every <span class="math inline">\(\theta\)</span>. If <span class="math inline">\(\sqrt n\{T_n-\psi(\theta)\}\rightsquigarrow L_\theta\)</span> under every <span class="math inline">\(\theta\)</span>, then, for Lebesgue-almost every <span class="math inline">\(\theta\)</span>,</p>
+<p><span class="math display">\[
+L_\theta=N\bigl(0,\dot\psi_\theta I_\theta^{-1}\dot\psi_\theta^T\bigr)*M_\theta.
+\]</span></p>
+<p>If <span class="math inline">\(L_\theta\)</span> has covariance matrix <span class="math inline">\(\Sigma_\theta\)</span>, then</p>
+<p><span class="math display">\[
+\Sigma_\theta-\dot\psi_\theta I_\theta^{-1}\dot\psi_\theta^T
+\]</span></p>
+<p>is nonnegative definite for Lebesgue-almost every <span class="math inline">\(\theta\)</span>.</p>
+<p>Consequently, an estimator can beat the efficient normal limit only on a Lebesgue null set of parameter values.</p>
+<p>This explains Hodges’ estimator:</p>
+<ul>
+<li>it can be superefficient at <span class="math inline">\(\theta=0\)</span>;</li>
+<li>it cannot be superefficient on a set of positive Lebesgue measure.</li>
+</ul>
+<p>The supporting lemma shows that any estimator sequence possessing pointwise limits is automatically regular at almost every parameter along a suitable subsequence.</p>
+</section>
+</div>
+<p><strong>Supporting-result dependency.</strong> Van der Vaart obtains Theorem 8.9 by combining the convolution theorem with Lemma 8.10. This almost-everywhere route explains superefficiency but is not needed for the Chapter 25 proof chain, so the notes retain the exact result and its supporting lemma without adding a second full convolution argument.</p>
+<div class="callout callout-style-default callout-important callout-titled" title="Lemma">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Lemma
+</div>
+</div>
+<section id="lemma-8-10" class="level3 callout-body-container callout-body">
+<h3 class="anchored" data-anchor-id="lemma-8-10">Lemma 8.10: almost-everywhere local regularity</h3>
+<p>Let <span class="math inline">\(T_n\)</span> be estimators in experiments <span class="math inline">\(\left(P_{n,\theta}:\theta\in\Theta\right),\)</span> where <span class="math inline">\(\Theta\)</span> is a measurable subset of <span class="math inline">\(\mathbb{R}^k\)</span>.</p>
+<p>Assume:</p>
+<ul>
+<li>For every measurable set <span class="math inline">\(A\)</span> and every <span class="math inline">\(n\)</span>, the map <span class="math inline">\(\theta\mapsto P_{n,\theta}(A)\)</span> is measurable.</li>
+<li>The map <span class="math inline">\(\theta\mapsto\psi(\theta)\)</span> is measurable.</li>
+<li>There exist distributions <span class="math inline">\(L_\theta\)</span> such that, for Lebesgue almost every <span class="math inline">\(\theta\)</span>, <span class="math inline">\(r_n\left(T_n-\psi(\theta)\right)\overset{\theta}{\rightsquigarrow}L_\theta.\)</span></li>
+</ul>
+<p>Then, for every sequence <span class="math inline">\(\gamma_n\to0\)</span>, there exists a subsequence <span class="math inline">\(\{n_j\}\)</span> such that, for Lebesgue-almost every pair <span class="math inline">\((\theta,h)\)</span>,</p>
+<p><span class="math display">\[
+r_{n_j}\left(T_{n_j}-\psi\left(\theta+\gamma_{n_j}h\right)\right)\overset{\theta+\gamma_{n_j}h}{\rightsquigarrow}L_\theta.
+\]</span></p>
+<p>Thus an estimator with pointwise limits at almost every parameter is, along a subsequence, automatically regular under vanishing perturbations <span class="math inline">\(\theta+\gamma_nh\)</span> for almost every <span class="math inline">\((\theta,h)\)</span>. Its local limiting distribution remains <span class="math inline">\(L_\theta\)</span>.</p>
+</section>
+</div>
+<p><strong>Supporting-proof roadmap.</strong> Express weak convergence through a countable determining class, reduce the problem to bounded measurable functions evaluated at perturbed arguments, prove convergence in mean under an auxiliary Gaussian law, and extract one subsequence by diagonalization.</p>
+<details>
+<summary>
+Supporting proof of Lemma 8.10
+</summary>
+<p>The proof upgrades pointwise convergence of measurable functions to convergence after small perturbations of their arguments.</p>
+<section id="reduce-weak-convergence-to-measurable-functions" class="level4">
+<h4 class="anchored" data-anchor-id="reduce-weak-convergence-to-measurable-functions">Reduce weak convergence to measurable functions</h4>
+<p>Extend the model to <span class="math inline">\(\mathbb R^k\)</span> if necessary, and write <span class="math inline">\(T_{n,\theta}=r_n\{T_n-\psi(\theta)\}\)</span>. Choose a countable convergence-determining class <span class="math inline">\(\mathcal F\)</span> of bounded test functions. For fixed <span class="math inline">\(f\in\mathcal F\)</span>, define</p>
+<p><span class="math display">\[
+g_n(\theta)=E_\theta f(T_{n,\theta}),
+\qquad
+g(\theta)=\int f\,dL_\theta.
+\]</span></p>
+<p>The assumption gives <span class="math inline">\(g_n(\theta)\to g(\theta)\)</span> almost everywhere. It remains to find a subsequence for which <span class="math inline">\(g_n(\theta+\gamma_nh)\to g(\theta)\)</span> for almost every <span class="math inline">\((\theta,h)\)</span>.</p>
+</section>
+<section id="control-a-randomly-perturbed-argument" class="level4">
+<h4 class="anchored" data-anchor-id="control-a-randomly-perturbed-argument">Control a randomly perturbed argument</h4>
+<p>Let <span class="math inline">\(\Theta\)</span> and <span class="math inline">\(H\)</span> be independent <span class="math inline">\(N(0,I)\)</span> vectors. If <span class="math inline">\(p\)</span> is the density of <span class="math inline">\(\Theta\)</span> and <span class="math inline">\(p_n\)</span> is the density of <span class="math inline">\(\Theta+\gamma_nH\)</span>, then Scheffé’s lemma gives <span class="math inline">\(\int|p_n-p|\to0\)</span>. For bounded <span class="math inline">\(g_n\)</span>,</p>
+<p><span class="math display">\[
+\begin{aligned}
+E|g_n(\Theta+\gamma_nH)-g(\Theta)|
+&amp;\leq E|g_n(\Theta+\gamma_nH)-g(\Theta+\gamma_nH)|\\
+&amp;\quad+E|g(\Theta+\gamma_nH)-g(\Theta)|.
+\end{aligned}
+\]</span></p>
+<p>The first term tends to zero by dominated convergence and <span class="math inline">\(\int|p_n-p|\to0\)</span>. For the second, approximate the bounded measurable function <span class="math inline">\(g\)</span> in <span class="math inline">\(L_1(p)\)</span> by a bounded continuous function. Continuity controls the perturbation, and the <span class="math inline">\(L_1\)</span> approximation controls the remaining terms. Hence</p>
+<p><span class="math display">\[
+g_n(\Theta+\gamma_nH)-g(\Theta)\longrightarrow0
+\]</span></p>
+<p>in probability.</p>
+</section>
+<section id="extract-and-diagonalize" class="level4">
+<h4 class="anchored" data-anchor-id="extract-and-diagonalize">Extract and diagonalize</h4>
+<p>Choose an almost-surely convergent subsequence. Because <span class="math inline">\((\Theta,H)\)</span> has a strictly positive density on <span class="math inline">\(\mathbb R^{2k}\)</span>, its null sets are exactly the Lebesgue null sets. Thus, for the chosen <span class="math inline">\(f\)</span>,</p>
+<p><span class="math display">\[
+g_{n_j}(\theta+\gamma_{n_j}h)\longrightarrow g(\theta)
+\]</span></p>
+<p>for Lebesgue-almost every <span class="math inline">\((\theta,h)\)</span>. Diagonalizing over the countable class <span class="math inline">\(\mathcal F\)</span> gives one subsequence for which</p>
+<p><span class="math display">\[
+r_{n_j}\left\{T_{n_j}-\psi(\theta+\gamma_{n_j}h)\right\}
+\overset{\theta+\gamma_{n_j}h}{\rightsquigarrow}L_\theta
+\]</span></p>
+<p>for Lebesgue-almost every <span class="math inline">\((\theta,h)\)</span>, which is the required almost-everywhere local regularity.</p>
+</section></details>
+<hr>
+</section>
+
+<section id="sec-local-asymptotic-minimax" class="level2">
+<h2 class="anchored" data-anchor-id="sec-local-asymptotic-minimax">8.7 Local Asymptotic Minimax Theorem</h2>
+<p>The convolution theorem applies only to regular estimators, while the almost-everywhere theorem leaves open a null set of parameter values. The local asymptotic minimax theorem instead evaluates the worst risk over shrinking neighborhoods.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Theorem">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Theorem
+</div>
+</div>
+<section id="theorem-8-11" class="level3 callout-body-container callout-body">
+<h3 class="anchored" data-anchor-id="theorem-8-11">Theorem 8.11: local asymptotic minimax bound</h3>
+<p>Suppose the model is differentiable in quadratic mean at <span class="math inline">\(\theta\)</span>, with nonsingular Fisher information <span class="math inline">\(I_\theta\)</span>, and <span class="math inline">\(\psi\)</span> is differentiable at <span class="math inline">\(\theta\)</span>. For every estimator sequence <span class="math inline">\(T_n\)</span> and every bowl-shaped loss <span class="math inline">\(\ell\)</span>,</p>
+<p><span class="math display">\[
+\sup_I\liminf_{n\to\infty}\sup_{h\in I}E_{\theta+h/\sqrt{n}}\ell\left(\sqrt{n}\left[T_n-\psi\left(\theta+\frac{h}{\sqrt{n}}\right)\right]\right)\geq\int\ell\,dN\bigl(0,\dot\psi_\theta I_\theta^{-1}\dot\psi_\theta^T\bigr),
+\]</span></p>
+<p>where the first supremum ranges over finite subsets <span class="math inline">\(I\subset\mathbb{R}^k\)</span>.</p>
+</section>
+</div>
+<p>No estimator can have uniformly smaller asymptotic risk over all local directions <span class="math inline">\(h\)</span>. Exceptional performance at one point or along selected directions cannot persist uniformly over a shrinking neighborhood. <a href="./chapter-25.html#theorem-25-21">Theorem 25.21</a> uses the same argument after replacing <span class="math inline">\(h\in\mathbb R^k\)</span> by finitely many directions from the semiparametric tangent set.</p>
+<p><strong>Proof roadmap.</strong> First approximate the loss from below by bounded continuous bowl-shaped losses. For one such loss, compactify the estimator through all loss profiles at rational local directions; this forces tightness without restricting the estimator. LAN then produces a randomized compact-action rule in the Gaussian experiment. Finite-prior Bayes risks show that boundary actions cannot improve the problem, and diffuse Gaussian priors recover the normal lower bound. Finally remove the loss approximation.</p>
+<p><strong>Derivation in these notes.</strong> Van der Vaart proves the result under auxiliary tightness and lower-semicontinuity conditions and points to §3.11 of <span class="citation" data-cites="vanDerVaartWellner1996"><span class="nocase">van der Vaart and Wellner</span> (<a href="references.html#ref-vanDerVaartWellner1996" role="doc-biblioref">1996</a>)</span> for the general compactification argument. The reconstruction below exposes that argument for the present finite-dimensional setting.</p>
+<details>
+<summary>
+Complete proof of Theorem 8.11
+</summary>
+<p>Write</p>
+<p><span class="math display">\[
+A=\dot\psi_\theta,
+\qquad
+V=AI_\theta^{-1}A^T,
+\qquad
+Z\sim N(0,V),
+\]</span></p>
+<p>and let <span class="math inline">\(R(\ell)\)</span> denote the left side of the theorem.</p>
+<section id="approximate-the-loss-from-below" class="level4">
+<h4 class="anchored" data-anchor-id="approximate-the-loss-from-below">Approximate the loss from below</h4>
+<p>For <span class="math inline">\(q\geq0\)</span>, let</p>
+<p><span class="math display">\[
+C_q=\operatorname{cl}\{x:\ell(x)\leq q\}.
+\]</span></p>
+<p>These sets are nested, closed, convex, and symmetric. For integers <span class="math inline">\(j\geq1\)</span>, take the nested dyadic grids</p>
+<p><span class="math display">\[
+G_j=\left\{\frac r{2^j}:r=0,1,\ldots,j2^j\right\}
+\subset[0,j]
+\]</span></p>
+<p>and define</p>
+<p><span class="math display">\[
+\ell_j(x)
+=\max_{q\in G_j}
+q\min\{1,j\,\operatorname{dist}(x,C_q)\},
+\tag{8.11a}
+\]</span></p>
+<p>with the convention <span class="math inline">\(\operatorname{dist}(x,\varnothing)=\infty\)</span>. For fixed <span class="math inline">\(q&gt;0\)</span> and <span class="math inline">\(0\leq c&lt;q\)</span>, the <span class="math inline">\(c\)</span>-sublevel set of the corresponding term is</p>
+<p><span class="math display">\[
+C_q+\overline B\!\left(0,\frac{c}{qj}\right);
+\]</span></p>
+<p>for <span class="math inline">\(c\geq q\)</span> it is all of <span class="math inline">\(\mathbb R^m\)</span>. Thus each term is bounded, continuous, and bowl-shaped. A sublevel set of their maximum is the intersection of the corresponding sublevel sets, so <span class="math inline">\(\ell_j\)</span> is also bounded, continuous, and bowl-shaped.</p>
+<p>If <span class="math inline">\(\ell(x)\leq q\)</span>, then <span class="math inline">\(x\in C_q\)</span> and the <span class="math inline">\(q\)</span>-term vanishes; if <span class="math inline">\(q&lt;\ell(x)\)</span>, that term is at most <span class="math inline">\(q\)</span>. Hence <span class="math inline">\(\ell_j\leq\ell\)</span>. Moreover, <span class="math inline">\(G_j\subset G_{j+1}\)</span> and the distance multiplier increases from <span class="math inline">\(j\)</span> to <span class="math inline">\(j+1\)</span>, so <span class="math inline">\(\ell_j\leq\ell_{j+1}\)</span>.</p>
+<p>Let <span class="math inline">\(\ell_*\)</span> be the lower-semicontinuous envelope of <span class="math inline">\(\ell\)</span>. Every <span class="math inline">\(\ell_j\)</span> is a continuous minorant, so <span class="math inline">\(\ell_j\leq\ell_*\)</span>. Conversely, if <span class="math inline">\(q&lt;\ell_*(x)\)</span> is dyadic, then <span class="math inline">\(x\notin C_q\)</span>; once <span class="math inline">\(j\)</span> is large enough that <span class="math inline">\(q\in G_j\)</span> and <span class="math inline">\(j\operatorname{dist}(x,C_q)\geq1\)</span>, the <span class="math inline">\(q\)</span>-term equals <span class="math inline">\(q\)</span>. Density of the dyadic rationals therefore gives <span class="math inline">\(\ell_j(x)\uparrow\ell_*(x)\)</span>.</p>
+<p>Finally, a point at which <span class="math inline">\(\ell_*&lt;\ell\)</span> lies on the relative boundary, in the linear support of <span class="math inline">\(Z\)</span>, of <span class="math inline">\(C_q\)</span> for some rational <span class="math inline">\(q\)</span>. Boundaries of proper convex sets have Gaussian measure zero, and there are only countably many rational <span class="math inline">\(q\)</span>. Therefore</p>
+<p><span class="math display">\[
+\ell_j(Z)\uparrow\ell(Z)
+\quad\text{almost surely}.
+\tag{8.11b}
+\]</span></p>
+<p>Because <span class="math inline">\(R(\ell)\geq R(\ell_j)\)</span>, it is enough to prove</p>
+<p><span class="math display">\[
+R(\ell_j)\geq E\ell_j(Z)
+\tag{8.11c}
+\]</span></p>
+<p>for every <span class="math inline">\(j\)</span> and then use monotone convergence. Fix one <span class="math inline">\(j\)</span> and abbreviate <span class="math inline">\(l=\ell_j\)</span>. Let <span class="math inline">\(B&lt;\infty\)</span> bound <span class="math inline">\(l\)</span>, and let <span class="math inline">\(L&lt;\infty\)</span> be a Lipschitz constant.</p>
+</section>
+<section id="compactify-the-action-by-its-rational-loss-profile" class="level4">
+<h4 class="anchored" data-anchor-id="compactify-the-action-by-its-rational-loss-profile">Compactify the action by its rational loss profile</h4>
+<p>Enumerate <span class="math inline">\(\mathbb Q^k\)</span> as <span class="math inline">\(h_1,h_2,\ldots\)</span>, and put</p>
+<p><span class="math display">\[
+a(h)=Ah,
+\qquad
+a_n(h)=\sqrt n\left\{\psi\left(\theta+\frac h{\sqrt n}\right)-\psi(\theta)\right\}.
+\]</span></p>
+<p>Differentiability of <span class="math inline">\(\psi\)</span> gives <span class="math inline">\(a_n(h)\to a(h)\)</span>. Embed an action <span class="math inline">\(t\in\mathbb R^m\)</span> into the compact product cube by</p>
+<p><span class="math display">\[
+e(t)=\bigl(l\{t-a(h_1)\},l\{t-a(h_2)\},\ldots\bigr)
+\in[0,B]^{\mathbb N},
+\]</span></p>
+<p>and let <span class="math inline">\(K\)</span> be the closure of <span class="math inline">\(e(\mathbb R^m)\)</span>. The space <span class="math inline">\(K\)</span> is compact and metrizable. Its <span class="math inline">\(i\)</span>th coordinate map <span class="math inline">\(L_i:K\to[0,B]\)</span> is the continuous extension of <span class="math inline">\(t\mapsto l\{t-a(h_i)\}\)</span>.</p>
+<p>Set</p>
+<p><span class="math display">\[
+Y_n=\sqrt n\{T_n-\psi(\theta)\},
+\qquad
+D_n=e(Y_n).
+\]</span></p>
+<p>This transformation is the compactification step: <span class="math inline">\(D_n\)</span> is automatically tight even if <span class="math inline">\(Y_n\)</span> is not.</p>
+<p>Let <span class="math inline">\(I_s=\{h_1,\ldots,h_s\}\)</span>. If <span class="math inline">\(R(l)=\infty\)</span>, there is nothing to prove. Otherwise, the definition of the liminf permits a sequence <span class="math inline">\(n_s\uparrow\infty\)</span> such that</p>
+<p><span class="math display">\[
+\max_{i\leq s}
+E_{\theta+h_i/\sqrt{n_s}}
+l\{Y_{n_s}-a_{n_s}(h_i)\}
+\leq R(l)+s^{-1}.
+\tag{8.11d}
+\]</span></p>
+</section>
+<section id="extract-the-gaussian-kernel" class="level4">
+<h4 class="anchored" data-anchor-id="extract-the-gaussian-kernel">Extract the Gaussian kernel</h4>
+<p>Let</p>
+<p><span class="math display">\[
+\Delta_n=\frac1{\sqrt n}\sum_{r=1}^n\dot\ell_\theta(X_r)
+\]</span></p>
+<p>be the central sequence. Under <span class="math inline">\(P_\theta^n\)</span>, <span class="math inline">\(\Delta_n\rightsquigarrow N(0,I_\theta)\)</span>. Compactness of <span class="math inline">\(K\)</span> makes the joint laws of <span class="math inline">\((D_{n_s},\Delta_{n_s})\)</span> tight, so a further subsequence converges to some <span class="math inline">\((D,\Delta)\)</span> with <span class="math inline">\(D\in K\)</span> and <span class="math inline">\(\Delta\sim N(0,I_\theta)\)</span>.</p>
+<p>For every fixed rational direction <span class="math inline">\(h_i\)</span>, LAN and Le Cam’s third lemma tilt this joint limit by</p>
+<p><span class="math display">\[
+\exp\left(h_i^T\Delta-\frac12h_i^TI_\theta h_i\right).
+\]</span></p>
+<p>Because <span class="math inline">\(l\)</span> is Lipschitz and <span class="math inline">\(a_n(h_i)\to a(h_i)\)</span>,</p>
+<p><span class="math display">\[
+\left|l\{Y_n-a_n(h_i)\}-L_i(D_n)\right|
+\leq L\|a_n(h_i)-a(h_i)\|\longrightarrow0.
+\]</span></p>
+<p>The coordinate <span class="math inline">\(L_i\)</span> is bounded and continuous. Combining this observation with (8.11d) gives, under the tilted limit law,</p>
+<p><span class="math display">\[
+E_{h_i}L_i(D)\leq R(l),
+\qquad i=1,2,\ldots.
+\tag{8.11e}
+\]</span></p>
+<p>Disintegrate the null-limit law of <span class="math inline">\(D\)</span> given <span class="math inline">\(\Delta\)</span>. The resulting Markov kernel is unchanged by each tilt, because the likelihood ratio depends only on <span class="math inline">\(\Delta\)</span>. With <span class="math inline">\(X=I_\theta^{-1}\Delta\)</span>, it is therefore a randomized <span class="math inline">\(K\)</span>-valued decision rule in the Gaussian experiment</p>
+<p><span class="math display">\[
+X\sim N(h,I_\theta^{-1}).
+\]</span></p>
+<p>Equation (8.11e) bounds this rule’s risk at every rational <span class="math inline">\(h_i\)</span>.</p>
+</section>
+<section id="boundary-actions-do-not-reduce-finite-prior-bayes-risk" class="level4">
+<h4 class="anchored" data-anchor-id="boundary-actions-do-not-reduce-finite-prior-bayes-risk">Boundary actions do not reduce finite-prior Bayes risk</h4>
+<p>Let <span class="math inline">\(\pi\)</span> be any prior with finite support among the rational directions. Given the Gaussian observation <span class="math inline">\(x\)</span>, let <span class="math inline">\(w_i(x)\)</span> be its posterior weights. The posterior loss of an action <span class="math inline">\(z\in K\)</span> is</p>
+<p><span class="math display">\[
+z\longmapsto\sum_iw_i(x)L_i(z).
+\]</span></p>
+<p>This function is continuous on <span class="math inline">\(K\)</span>. Since <span class="math inline">\(e(\mathbb R^m)\)</span> is dense in <span class="math inline">\(K\)</span>, its infimum over <span class="math inline">\(K\)</span> equals its infimum over ordinary actions <span class="math inline">\(t\in\mathbb R^m\)</span>. A countable dense subset of ordinary actions supplies measurable <span class="math inline">\(\varepsilon\)</span>-minimizers, so the compactified and ordinary Gaussian decision problems have the same Bayes risk <span class="math inline">\(b(\pi)\)</span>. Averaging (8.11e) over <span class="math inline">\(\pi\)</span> now yields</p>
+<p><span class="math display">\[
+R(l)\geq b(\pi)
+\tag{8.11f}
+\]</span></p>
+<p>for every finite rational prior.</p>
+</section>
+<section id="pass-from-finite-priors-to-a-diffuse-normal-prior" class="level4">
+<h4 class="anchored" data-anchor-id="pass-from-finite-priors-to-a-diffuse-normal-prior">Pass from finite priors to a diffuse normal prior</h4>
+<p>Fix <span class="math inline">\(\lambda&gt;0\)</span> and let <span class="math inline">\(\Pi_\lambda=N(0,\lambda I_k)\)</span>. Finite rational priors can approximate <span class="math inline">\(\Pi_\lambda\)</span> by first truncating to a large compact set and then quantizing on a fine rational grid. This approximation also preserves Bayes risks. Indeed, uniformly over all decision rules <span class="math inline">\(d\)</span>,</p>
+<p><span class="math display">\[
+\begin{aligned}
+|R_h(d)-R_{h'}(d)|
+&amp;\leq L\|A(h-h')\|\\
+&amp;\quad+B\left\|N(h,I_\theta^{-1})-N(h',I_\theta^{-1})\right\|_{\mathrm{TV}},
+\end{aligned}
+\tag{8.11g}
+\]</span></p>
+<p>and the right side tends to zero with <span class="math inline">\(\|h-h'\|\)</span>. The bounded loss controls the discarded prior tail. Hence (8.11f) passes to <span class="math inline">\(\Pi_\lambda\)</span>.</p>
+<p>Under this normal prior, the posterior covariance of <span class="math inline">\(h\)</span> is</p>
+<p><span class="math display">\[
+C_\lambda=(I_\theta+\lambda^{-1}I_k)^{-1}.
+\]</span></p>
+<p>Conditionally on <span class="math inline">\(X\)</span>, Anderson’s lemma shows that the posterior mean is Bayes for estimating <span class="math inline">\(Ah\)</span>. Its posterior error is <span class="math inline">\(N(0,AC_\lambda A^T)\)</span>, so</p>
+<p><span class="math display">\[
+R(l)\geq b(\Pi_\lambda)
+=\int l\,dN(0,AC_\lambda A^T).
+\]</span></p>
+<p>Letting <span class="math inline">\(\lambda\to\infty\)</span> and using bounded continuity of <span class="math inline">\(l\)</span> gives</p>
+<p><span class="math display">\[
+R(l)\geq\int l\,dN(0,AI_\theta^{-1}A^T),
+\]</span></p>
+<p>which proves (8.11c). Finally, (8.11b) and monotone convergence give</p>
+<p><span class="math display">\[
+R(\ell)\geq E\ell(Z).
+\]</span></p>
+<p>This is the exact bound in Theorem 8.11, with neither tightness of the original estimator sequence nor lower semicontinuity or boundedness of the original loss imposed.</p>
+</section></details>
+<p>The finite-set formulation is deliberate: it avoids assuming that risk converges uniformly over a continuum of directions. The proof only needs to defeat each finite collection, then lets those collections exhaust the local parameter space.</p>
+</section>
+
+<section id="shrinkage-estimators" class="level2">
+<h2 class="anchored" data-anchor-id="shrinkage-estimators">8.8* Shrinkage Estimators</h2>
+<p>Stein’s phenomenon is an important qualification, not a contradiction. For <span class="math inline">\(k\geq3\)</span>, let <span class="math inline">\(\bar X_n\)</span> be the mean of a sample from <span class="math inline">\(N_k(\theta,I_k)\)</span> and define</p>
+<p><span class="math display">\[
+T_n=\bar X_n-(k-2)\frac{\bar X_n}{n\|\bar X_n\|^2}.
+\]</span></p>
+<p>At every fixed <span class="math inline">\(\theta\neq0\)</span>, the correction is <span class="math inline">\(O_{P_\theta}(n^{-1})\)</span>, so <span class="math inline">\(T_n\)</span> has the same regular first-order limit as <span class="math inline">\(\bar X_n\)</span>. At <span class="math inline">\(\theta=0\)</span> and under local alternatives <span class="math inline">\(\theta=h/\sqrt n\)</span>, however,</p>
+<p><span class="math display">\[
+\sqrt nT_n
+=X-(k-2)\frac{X}{\|X\|^2},
+\qquad X\sim N_k(h,I_k),
+\]</span></p>
+<p>whose centered distribution depends on <span class="math inline">\(h\)</span>. The estimator is therefore not regular at the origin, even though it improves joint quadratic risk throughout the local Gaussian experiment. This does not contradict the convolution theorem, which assumes regularity, or the local asymptotic minimax theorem, which controls worst risk over local directions rather than risk at a single point.</p>
+<p>Indeed, for the joint quadratic loss, the Stein estimator satisfies</p>
+<p><span class="math display">\[
+E_h\left\|X-(k-2)\frac X{\|X\|^2}-h\right\|^2&lt;k
+=E_h\|X-h\|^2
+\]</span></p>
+<p>for every <span class="math inline">\(h\)</span>. The gain is loss-specific and is accompanied by nonregular local behavior.</p>
+</section>
+<section id="sec-achieving-efficiency-bound" class="level2">
+<h2 class="anchored" data-anchor-id="sec-achieving-efficiency-bound">8.9* Achieving the Bound</h2>
+<p>The lower bound becomes operational once an estimator’s first-order expansion is identified.</p>
+<div class="callout callout-style-default callout-important callout-titled" title="Lemma">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Lemma
+</div>
+</div>
+<section id="lemma-8-14" class="level3 callout-body-container callout-body">
+<h3 class="anchored" data-anchor-id="lemma-8-14">Lemma 8.14: characterization of best regular estimators</h3>
+<p>Suppose the model is differentiable in quadratic mean at <span class="math inline">\(\theta\)</span>, <span class="math inline">\(I_\theta\)</span> is nonsingular, and <span class="math inline">\(\psi\)</span> is differentiable at <span class="math inline">\(\theta\)</span>. If</p>
+<p><span class="math display">\[
+\sqrt n\{T_n-\psi(\theta)\}
+=\frac1{\sqrt n}\sum_{i=1}^n
+\dot\psi_\theta I_\theta^{-1}\dot\ell_\theta(X_i)
++o_{P_\theta}(1),
+\]</span></p>
+<p>then <span class="math inline">\(T_n\)</span> is best regular for estimating <span class="math inline">\(\psi(\theta)\)</span> at <span class="math inline">\(\theta\)</span>. Conversely, every best regular estimator satisfies this expansion.</p>
+</section>
+</div>
+<p><strong>Proof roadmap.</strong> Joint asymptotic normality with the log likelihood ratio proves regularity and efficiency in the forward direction. For the converse, compare any best regular estimator with the canonical score-based estimator and use uniqueness in the Gaussian experiment.</p>
+<details>
+<summary>
+Complete proof of Lemma 8.14
+</summary>
+<p>Let</p>
+<p><span class="math display">\[
+\Delta_n=\frac1{\sqrt n}\sum_{i=1}^n\dot\ell_\theta(X_i),
+\qquad
+\Delta_n\rightsquigarrow\Delta\sim N(0,I_\theta).
+\]</span></p>
+<p>Under <span class="math inline">\(P_\theta^n\)</span>, the assumed expansion and LAN give the joint limit</p>
+<p><span class="math display">\[
+\left(
+\sqrt n\{T_n-\psi(\theta)\},
+\log\frac{dP_{\theta+h/\sqrt n}^n}{dP_\theta^n}
+\right)
+\rightsquigarrow
+\left(
+\dot\psi_\theta I_\theta^{-1}\Delta,
+h^T\Delta-\frac12h^TI_\theta h
+\right).
+\]</span></p>
+<p>This is jointly Gaussian. Its first component has covariance <span class="math inline">\(\dot\psi_\theta I_\theta^{-1}\dot\psi_\theta^T\)</span>, and its covariance with the second component is <span class="math inline">\(\dot\psi_\theta h\)</span>. Le Cam’s third lemma therefore shifts the first-component mean to <span class="math inline">\(\dot\psi_\theta h\)</span> under <span class="math inline">\(P_{\theta+h/\sqrt n}^n\)</span> without changing its covariance. Since</p>
+<p><span class="math display">\[
+\sqrt n\left\{\psi\left(\theta+\frac h{\sqrt n}\right)-\psi(\theta)\right\}
+\longrightarrow\dot\psi_\theta h,
+\]</span></p>
+<p>the locally centered error converges for every <span class="math inline">\(h\)</span> to</p>
+<p><span class="math display">\[
+N\bigl(0,\dot\psi_\theta I_\theta^{-1}\dot\psi_\theta^T\bigr).
+\]</span></p>
+<p>Hence <span class="math inline">\(T_n\)</span> is regular and attains the convolution bound.</p>
+<p>Conversely, let <span class="math inline">\(T_n\)</span> be any best regular estimator and define the canonical score-based sequence</p>
+<p><span class="math display">\[
+S_n=\psi(\theta)+\frac1{\sqrt n}
+\dot\psi_\theta I_\theta^{-1}\Delta_n.
+\]</span></p>
+<p>The first part shows that <span class="math inline">\(S_n\)</span> is best regular. To justify comparison of the two estimators, begin with an arbitrary subsequence. Regularity of each estimator makes the pair</p>
+<p><span class="math display">\[
+\bigl(\sqrt n\{T_n-\psi(\theta)\},
+      \sqrt n\{S_n-\psi(\theta)\}\bigr)
+\]</span></p>
+<p>tight under <span class="math inline">\(P_\theta^n\)</span>, so a further subsequence has a joint weak limit. Apply the representation argument to that joint limit. In the Gaussian limit experiment, both coordinates estimate <span class="math inline">\(\dot\psi_\theta h\)</span> equivariantly in law and both have error distribution</p>
+<p><span class="math display">\[
+N\bigl(0,\dot\psi_\theta I_\theta^{-1}\dot\psi_\theta^T\bigr).
+\]</span></p>
+<p><a href="#proposition-8-4">Proposition 8.4</a> decomposes each such coordinate as the efficient Gaussian estimator <span class="math inline">\(\dot\psi_\theta X\)</span> plus independent extra noise. Equality with the efficient covariance forces that extra noise to be zero almost surely. Thus both coordinates of every joint subsequential limit equal <span class="math inline">\(\dot\psi_\theta X\)</span> almost surely, and their difference is zero. Since every subsequence has a further subsequence with this property, the subsequence criterion gives</p>
+<p><span class="math display">\[
+\sqrt n(T_n-S_n)\overset{P_\theta}\longrightarrow0,
+\]</span></p>
+<p>which is exactly the asserted asymptotic linear expansion.</p>
+</details>
+<p>The summand</p>
+<p><span class="math display">\[
+\widetilde\psi_\theta(X)
+=\dot\psi_\theta I_\theta^{-1}\dot\ell_\theta(X)
+\]</span></p>
+<p>is the parametric efficient influence function introduced in <a href="#theorem-limit-experiment-reduction">§8.3</a>. Chapter 25 keeps this characterization but replaces the finite-dimensional normalized score by the efficient influence function in the tangent space; see <a href="./chapter-25.html#lemma-25-23">Lemma 25.23</a>.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Chapter takeaway">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Chapter takeaway
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>Pointwise asymptotics are not enough because of superefficient estimators such as Hodges’ estimator.</li>
+<li>Efficiency is fundamentally local: parameters of the form <span class="math inline">\(\theta+h/\sqrt{n}\)</span> must be considered together.</li>
+<li>A differentiable parametric model is locally approximated by the Gaussian shift experiment <span class="math inline">\(N(h,I_\theta^{-1})\)</span>.</li>
+<li>The natural Gaussian estimator yields the covariance bound <span class="math inline">\(\dot\psi_\theta I_\theta^{-1}\dot\psi_\theta^T\)</span>.</li>
+<li>Every regular estimator’s limit is the efficient normal distribution convolved with additional noise.</li>
+<li>Without regularity, the same conclusion holds at almost every parameter.</li>
+<li>Without any estimator restriction, the efficient normal risk remains a lower bound in the local asymptotic minimax sense.</li>
+</ul>
+</div>
+</div>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
+<div id="ref-bailie2021" class="csl-entry" role="listitem">
+Bailie, James. 2021. <em>Stat213 Lecture Notes</em>. Course lecture notes, Harvard University. <a href="https://jameshbailie.github.io/files/papers/2021-06-16-Asymptotic-statistics.pdf">https://jameshbailie.github.io/files/papers/2021-06-16-Asymptotic-statistics.pdf</a>.
+</div>
+<div id="ref-bickelEtAl1993" class="csl-entry" role="listitem">
+Bickel, Peter J., Chris A. J. Klaassen, Ya’acov Ritov, and Jon A. Wellner. 1993. <em>Efficient and Adaptive Estimation for Semiparametric Models</em>. Johns Hopkins Series in the Mathematical Sciences. Johns Hopkins University Press. <a href="https://link.springer.com/book/9780387984735">https://link.springer.com/book/9780387984735</a>.
+</div>
+<div id="ref-chernozhukovEtAl2018" class="csl-entry" role="listitem">
+Chernozhukov, Victor, Denis Chetverikov, Mert Demirer, et al. 2018. <span>“Double/Debiased Machine Learning for Treatment and Structural Parameters.”</span> <em>The Econometrics Journal</em> 21 (1): C1–68. <a href="https://doi.org/10.1111/ectj.12097">https://doi.org/10.1111/ectj.12097</a>.
+</div>
+<div id="ref-dasgupta2008" class="csl-entry" role="listitem">
+DasGupta, Anirban. 2008. <em>Asymptotic Theory of Statistics and Probability</em>. Springer Texts in Statistics. Springer. <a href="https://doi.org/10.1007/978-0-387-75971-5">https://doi.org/10.1007/978-0-387-75971-5</a>.
+</div>
+<div id="ref-fisherKennedy2021" class="csl-entry" role="listitem">
+Fisher, Aaron, and Edward H. Kennedy. 2021. <span>“Visually Communicating and Teaching Intuition for Influence Functions.”</span> <em>The American Statistician</em> 75 (2): 162–72. <a href="https://doi.org/10.1080/00031305.2020.1717620">https://doi.org/10.1080/00031305.2020.1717620</a>.
+</div>
+<div id="ref-gillJohansen1990" class="csl-entry" role="listitem">
+Gill, Richard D., and Søren Johansen. 1990. <span>“A Survey of Product-Integration with a View Toward Application in Survival Analysis.”</span> <em>The Annals of Statistics</em> 18 (4): 1501–55. <a href="https://doi.org/10.1214/aos/1176347865">https://doi.org/10.1214/aos/1176347865</a>.
+</div>
+<div id="ref-jiang2022" class="csl-entry" role="listitem">
+Jiang, Jiming. 2022. <em>Large Sample Techniques for Statistics</em>. 2nd ed. Springer Texts in Statistics. Springer. <a href="https://doi.org/10.1007/978-3-030-91695-4">https://doi.org/10.1007/978-3-030-91695-4</a>.
+</div>
+<div id="ref-kennedy2016" class="csl-entry" role="listitem">
+Kennedy, Edward H. 2016. <span>“Semiparametric Theory and Empirical Processes in Causal Inference.”</span> In <em>Statistical Causal Inferences and Their Applications in Public Health Research</em>, edited by Hua He, Pan Wu, and Ding-Geng Chen. ICSA Book Series in Statistics. Springer International Publishing. <a href="https://doi.org/10.1007/978-3-319-41259-7_8">https://doi.org/10.1007/978-3-319-41259-7_8</a>.
+</div>
+<div id="ref-kennedy2022" class="csl-entry" role="listitem">
+Kennedy, Edward H. 2022. <em>Semiparametric Doubly Robust Targeted Double Machine Learning: A Review</em>. <a href="https://doi.org/10.48550/arXiv.2203.06469">https://doi.org/10.48550/arXiv.2203.06469</a>.
+</div>
+<div id="ref-kosorok2008" class="csl-entry" role="listitem">
+Kosorok, Michael R. 2008. <em>Introduction to Empirical Processes and Semiparametric Inference</em>. Springer Series in Statistics. Springer. <a href="https://doi.org/10.1007/978-0-387-74978-5">https://doi.org/10.1007/978-0-387-74978-5</a>.
+</div>
+<div id="ref-leCamYang2000" class="csl-entry" role="listitem">
+Le Cam, Lucien, and Grace Lo Yang. 2000. <em>Asymptotics in Statistics: Some Basic Concepts</em>. 2nd ed. Springer Series in Statistics. Springer. <a href="https://doi.org/10.1007/978-1-4612-1166-2">https://doi.org/10.1007/978-1-4612-1166-2</a>.
+</div>
+<div id="ref-murphyVanDerVaart1996" class="csl-entry" role="listitem">
+Murphy, Susan A., and Aad W. van der Vaart. 1996. <span>“Likelihood Inference in the Errors-in-Variables Model.”</span> <em>Journal of Multivariate Analysis</em> 59 (1): 81–108. <a href="https://doi.org/10.1006/jmva.1996.0055">https://doi.org/10.1006/jmva.1996.0055</a>.
+</div>
+<div id="ref-pollard2002" class="csl-entry" role="listitem">
+Pollard, David. 2002. <em>A User’s Guide to Measure Theoretic Probability</em>. Cambridge Series in Statistical and Probabilistic Mathematics 8. Cambridge University Press. <a href="https://doi.org/10.1017/CBO9780511811555">https://doi.org/10.1017/CBO9780511811555</a>.
+</div>
+<div id="ref-robinsEtAl1994" class="csl-entry" role="listitem">
+Robins, James M., Andrea Rotnitzky, and Lue Ping Zhao. 1994. <span>“Estimation of Regression Coefficients When Some Regressors Are Not Always Observed.”</span> <em>Journal of the American Statistical Association</em> 89 (427): 846–66. <a href="https://doi.org/10.1080/01621459.1994.10476818">https://doi.org/10.1080/01621459.1994.10476818</a>.
+</div>
+<div id="ref-sen2022" class="csl-entry" role="listitem">
+Sen, Bodhisattva. 2022. <em>A Gentle Introduction to Empirical Process Theory and Applications</em>. Lecture notes, Department of Statistics, Columbia University. <a href="https://sites.stat.columbia.edu/bodhi/Talks/Emp-Proc-Lecture-Notes.pdf">https://sites.stat.columbia.edu/bodhi/Talks/Emp-Proc-Lecture-Notes.pdf</a>.
+</div>
+<div id="ref-tsiatis2006" class="csl-entry" role="listitem">
+Tsiatis, Anastasios A. 2006. <em>Semiparametric Theory and Missing Data</em>. Springer Series in Statistics. Springer. <a href="https://doi.org/10.1007/0-387-37345-4">https://doi.org/10.1007/0-387-37345-4</a>.
+</div>
+<div id="ref-tsybakov2009" class="csl-entry" role="listitem">
+Tsybakov, Alexandre B. 2009. <em>Introduction to Nonparametric Estimation</em>. Springer Series in Statistics. Springer. <a href="https://doi.org/10.1007/b13794">https://doi.org/10.1007/b13794</a>.
+</div>
+<div id="ref-vanDerVaart1991Differentiable" class="csl-entry" role="listitem">
+Vaart, Aad W. van der. 1991. <span>“On Differentiable Functionals.”</span> <em>The Annals of Statistics</em> 19 (1): 178–204. <a href="https://doi.org/10.1214/aos/1176347976">https://doi.org/10.1214/aos/1176347976</a>.
+</div>
+<div id="ref-vanDerVaart1996Mixture" class="csl-entry" role="listitem">
+Vaart, Aad W. van der. 1996. <span>“Efficient Maximum Likelihood Estimation in Semiparametric Mixture Models.”</span> <em>The Annals of Statistics</em> 24 (2): 862–78. <a href="https://doi.org/10.1214/aos/1032894470">https://doi.org/10.1214/aos/1032894470</a>.
+</div>
+<div id="ref-vanDerVaartWellner1996" class="csl-entry" role="listitem">
+<span class="nocase">van der Vaart, Aad W., and Jon A. Wellner</span>. 1996. <em>Weak Convergence and Empirical Processes: With Applications to Statistics</em>. Springer Series in Statistics. Springer. <a href="https://doi.org/10.1007/978-1-4757-2545-2">https://doi.org/10.1007/978-1-4757-2545-2</a>.
+</div>
+</div>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./chapter-7.html" class="pagination-link" aria-label="Chapter 7: Local Asymptotic Normality">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Chapter 7: Local Asymptotic Normality</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./chapter-18.html" class="pagination-link" aria-label="Chapter 18: Stochastic Convergence in Metric Spaces">
+        <span class="nav-page-text"><span class="chapter-title">Chapter 18: Stochastic Convergence in Metric Spaces</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

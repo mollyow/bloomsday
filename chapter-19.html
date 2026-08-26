@@ -1,0 +1,2164 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Chapter 19: Empirical Processes – Reading Companion for Asymptotic Statistics</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./chapter-25.html" rel="next">
+<link href="./chapter-18.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-d3f7f8e73c8d287b30bcf59c2b563615.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./chapter-19.html"><span class="chapter-title">Chapter 19: Empirical Processes</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Reading Companion for Asymptotic Statistics</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Reading Companion for <em>Asymptotic Statistics</em></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./glossary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Glossary</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-2.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Chapter 2: Stochastic Convergence</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-6.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Chapter 6: Contiguity</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-7.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Chapter 7: Local Asymptotic Normality</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-8.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Chapter 8: Efficiency of Estimators</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-18.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Chapter 18: Stochastic Convergence in Metric Spaces</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-19.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Chapter 19: Empirical Processes</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-25.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Chapter 25: Semiparametric Models</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#empirical-distribution-functions" id="toc-empirical-distribution-functions" class="nav-link active" data-scroll-target="#empirical-distribution-functions">19.1 Empirical Distribution Functions</a></li>
+  <li><a href="#empirical-distributions" id="toc-empirical-distributions" class="nav-link" data-scroll-target="#empirical-distributions">19.2 Empirical Distributions</a>
+  <ul class="collapse">
+  <li><a href="#sec-vc-classes" id="toc-sec-vc-classes" class="nav-link" data-scroll-target="#sec-vc-classes">VC classes</a></li>
+  </ul></li>
+  <li><a href="#sec-19-3-omitted" id="toc-sec-19-3-omitted" class="nav-link" data-scroll-target="#sec-19-3-omitted">19.3 Goodness-of-Fit Statistics (omitted)</a></li>
+  <li><a href="#random-functions" id="toc-random-functions" class="nav-link" data-scroll-target="#random-functions">19.4 Random Functions</a></li>
+  <li><a href="#changing-classes" id="toc-changing-classes" class="nav-link" data-scroll-target="#changing-classes">19.5 Changing Classes</a></li>
+  <li><a href="#maximal-inequalities" id="toc-maximal-inequalities" class="nav-link" data-scroll-target="#maximal-inequalities">19.6 Maximal Inequalities</a>
+  <ul class="collapse">
+  <li><a href="#maximal-inequality-roadmap" id="toc-maximal-inequality-roadmap" class="nav-link" data-scroll-target="#maximal-inequality-roadmap">Maximal-inequality roadmap</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-title">Chapter 19: Empirical Processes</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>This chapter makes the ordinary law of large numbers and central limit theorem uniform over classes of functions. Its central objects are the <a href="./glossary.html#glossary-empirical-measure">empirical measure</a> <span class="math inline">\(\mathbb P_n\)</span> and <a href="./glossary.html#glossary-empirical-process">empirical process</a> <span class="math inline">\(\mathbb G_n\)</span>.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Why this chapter is here">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Why this chapter is here
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong>Prerequisites:</strong> <a href="./chapter-18.html#theorem-weak-convergence-processes">Chapter 18</a>, which explains finite-dimensional convergence, tightness, and asymptotic equicontinuity for random functions.</li>
+<li><strong>Purpose:</strong> turn those abstract tools into uniform laws for sample averages indexed by function classes.</li>
+<li><strong>Chapter 25 payoff:</strong> Donsker theory controls estimated scores in <a href="./chapter-25.html#sec-efficient-score-equations">§25.8</a>, supplies nuisance-rate bounds in <a href="./chapter-25.html#sec-approximately-least-favorable-submodels">§25.11</a>, and gives the Gaussian process used to linearize <a href="./chapter-25.html#sec-likelihood-equations">likelihood equations in §25.12</a>.</li>
+</ul>
+</div>
+</div>
+<p>The chapter develops two levels of uniformity:</p>
+<ul>
+<li>A <a href="./glossary.html#glossary-glivenko-cantelli"><strong>Glivenko–Cantelli class</strong></a> supports a uniform law of large numbers.</li>
+<li>A <a href="./glossary.html#glossary-donsker"><strong>Donsker class</strong></a> supports a uniform central limit theorem.</li>
+</ul>
+<p>Donsker conditions also control empirical processes evaluated at estimated random functions, including functions that depend on nuisance estimates.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Companion readings">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Companion readings
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>For complementary introductions, see §§1.3–4 and ch.&nbsp;11 of <span class="citation" data-cites="sen2022">Sen (<a href="references.html#ref-sen2022" role="doc-biblioref">2022</a>)</span>, chs.&nbsp;8–10 and §13.2 of <span class="citation" data-cites="kosorok2008">Kosorok (<a href="references.html#ref-kosorok2008" role="doc-biblioref">2008</a>)</span>, and ch.&nbsp;7 of <span class="citation" data-cites="jiang2022">Jiang (<a href="references.html#ref-jiang2022" role="doc-biblioref">2022</a>)</span>. The standard comprehensive reference is <span class="citation" data-cites="vanDerVaartWellner1996"><span class="nocase">van der Vaart and Wellner</span> (<a href="references.html#ref-vanDerVaartWellner1996" role="doc-biblioref">1996</a>)</span>.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Reading guide">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Reading guide
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong>Core — §§19.1–19.2:</strong> empirical measures, Glivenko–Cantelli and Donsker classes, the complete bracketing route to Theorem 19.5, and selected entropy examples used throughout Chapter 25.</li>
+<li><strong>Core — §19.4:</strong> Lemma 19.24, Example 19.25, and Theorem 19.26 for estimated random functions and infinite-dimensional estimating equations.</li>
+<li><strong>Supporting — §§19.5–19.6:</strong> orientation to changing classes, Bernstein’s inequality, finite maxima, the bracketing maximal inequality, and the bounded-class Lemma 19.36 used in nuisance-rate calculations.</li>
+<li><strong>Compressed — smoothness and VC material:</strong> selected entropy conditions, the meaning of shattering, and practical verification rules without the source’s longer combinatorial development.</li>
+<li><strong>Omitted/deferred — §19.3 and additional specialized results:</strong> goodness-of-fit limits and other results not needed for the score and likelihood equations in Chapter 25.</li>
+</ul>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Chapter 19 destinations in Chapter 25">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Chapter 19 destinations in Chapter 25
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Chapter 19 tool</th>
+<th>What it does in Chapter 25</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><a href="#donsker-classes">Donsker classes</a></td>
+<td>Control estimated score functions in <a href="./chapter-25.html#sec-efficient-score-equations">§25.8</a> and the score systems in <a href="./chapter-25.html#sec-likelihood-equations">§25.12</a>.</td>
+</tr>
+<tr class="even">
+<td><a href="#lemma-19.24">Lemma 19.24</a></td>
+<td>Replaces an estimated efficient score by its population limit in <a href="./chapter-25.html#theorem-25-54">Theorem 25.54</a>.</td>
+</tr>
+<tr class="odd">
+<td><a href="#theorem-19-26-infinite-dimensional-z-estimation">Theorem 19.26</a></td>
+<td>Supplies the empirical-process/population linearization used for efficient score equations and <a href="./chapter-25.html#theorem-25-90">Theorem 25.90</a>.</td>
+</tr>
+<tr class="even">
+<td><a href="#example-19.11-bounded-variation">Bounded-variation classes</a></td>
+<td>Verify the joint score class for the <a href="./chapter-25.html#sec-25-12-cox-model">Cox likelihood equations</a>.</td>
+</tr>
+<tr class="odd">
+<td><a href="#lemma-19.36">Lemma 19.36</a></td>
+<td>Converts local entropy control into the nuisance rate in the <a href="./chapter-25.html#sec-25-11-current-status-cox">current-status Cox model</a>.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<section id="empirical-distribution-functions" class="level2">
+<h2 class="anchored" data-anchor-id="empirical-distribution-functions">19.1 Empirical Distribution Functions</h2>
+<p>For i.i.d. observations <span class="math inline">\(X_1,\ldots,X_n\)</span> with distribution function <span class="math inline">\(F\)</span>, define the empirical distribution function</p>
+<p><span class="math display">\[
+\mathbb F_n(t)=\frac1n\sum_{i=1}^n\mathbf 1\{X_i\leq t\}.
+\]</span></p>
+<p>For each fixed <span class="math inline">\(t\)</span>, the ordinary law of large numbers and central limit theorem give</p>
+<p><span class="math display">\[
+\mathbb F_n(t)\overset{\mathrm{a.s.}}{\longrightarrow}F(t),
+\qquad
+\sqrt n\{\mathbb F_n(t)-F(t)\}
+\rightsquigarrow
+N(0,F(t)(1-F(t))).
+\]</span></p>
+<p>The results in this section strengthen these pointwise statements to conclusions that hold simultaneously over all <span class="math inline">\(t\)</span>.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Definition">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Definition
+</div>
+</div>
+<section id="kolmogorovsmirnov-statistic" class="level3 callout-body-container callout-body">
+<h3 class="anchored" data-anchor-id="kolmogorovsmirnov-statistic">Kolmogorov–Smirnov statistic</h3>
+<p><span class="math display">\[
+\sqrt n\,\|\mathbb F_n-F\|_\infty=\sup_t\left|\sqrt n\bigl(\mathbb F_n(t)-F(t)\bigr)\right|.
+\]</span></p>
+</section>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Theorem">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Theorem
+</div>
+</div>
+<section id="theorem-19-1" class="level3 callout-body-container callout-body">
+<h3 class="anchored" data-anchor-id="theorem-19-1">Theorem 19.1: Glivenko–Cantelli</h3>
+<p>If <span class="math inline">\(X_1,X_2,\ldots\)</span> are i.i.d. with distribution function <span class="math inline">\(F\)</span>, then the empirical CDF based on the first <span class="math inline">\(n\)</span> observations satisfies</p>
+<p><span class="math display">\[
+\|\mathbb F_n-F\|_\infty
+=\sup_t|\mathbb F_n(t)-F(t)|
+\overset{\mathrm{a.s.}}{\longrightarrow}0.
+\]</span></p>
+</section>
+</div>
+<p><strong>Proof roadmap.</strong> Choose finitely many cut points whose intervening open intervals carry less than <span class="math inline">\(\varepsilon\)</span> probability. Apply the strong law to the empirical CDF and its left limits at those cut points, then use monotonicity to squeeze every value between the corresponding endpoint values.</p>
+<details>
+<summary>
+Complete proof
+</summary>
+<p>Fix <span class="math inline">\(\varepsilon&gt;0\)</span>. First construct a finite partition</p>
+<p><span class="math display">\[
+-\infty=t_0&lt;t_1&lt;\cdots&lt;t_k=\infty
+\]</span></p>
+<p>such that</p>
+<p><span class="math display">\[
+F(t_i-)-F(t_{i-1})&lt;\varepsilon,
+\qquad i=1,\ldots,k.
+\tag{19.1a}
+\]</span></p>
+<p>For completeness, choose an integer <span class="math inline">\(m\)</span> with <span class="math inline">\(1/m&lt;\varepsilon\)</span> and consider the quantiles</p>
+<p><span class="math display">\[
+q_j=\inf\{x:F(x)\geq j/m\},
+\qquad j=1,\ldots,m-1.
+\]</span></p>
+<p>Keep the distinct <span class="math inline">\(q_j\)</span>’s in increasing order and adjoin <span class="math inline">\(-\infty\)</span> and <span class="math inline">\(\infty\)</span>. If <span class="math inline">\(a&lt;b\)</span> are two successive distinct finite cut points and <span class="math inline">\(s\)</span> is the first index for which <span class="math inline">\(q_s=b\)</span>, then <span class="math inline">\(q_{s-1}=a\)</span>. Hence</p>
+<p><span class="math display">\[
+F(a)\geq (s-1)/m,
+\qquad
+F(b-)\leq s/m,
+\]</span></p>
+<p>so <span class="math inline">\(F(b-)-F(a)\leq1/m&lt;\varepsilon\)</span>. The same argument gives <span class="math inline">\(F(t_1-)\leq1/m\)</span> for the left tail and <span class="math inline">\(1-F(t_{k-1})\leq1/m\)</span> for the right tail. Thus (19.1a) holds. Jumps large enough to cross one or more grid levels become cut points; smaller jumps may remain inside an interval but are already included in its bound of <span class="math inline">\(1/m\)</span>.</p>
+<p>For every fixed finite cut point <span class="math inline">\(t_i\)</span>, the strong law applied to <span class="math inline">\(\mathbf 1\{X_j\leq t_i\}\)</span> and <span class="math inline">\(\mathbf 1\{X_j&lt;t_i\}\)</span> gives</p>
+<p><span class="math display">\[
+\mathbb F_n(t_i)\longrightarrow F(t_i),
+\qquad
+\mathbb F_n(t_i-)\longrightarrow F(t_i-)
+\quad\text{almost surely}.
+\tag{19.1b}
+\]</span></p>
+<p>Because there are only finitely many cut points, all convergences in (19.1b) hold simultaneously on an event of probability one. If <span class="math inline">\(t_{i-1}\leq t&lt;t_i\)</span>, monotonicity of <span class="math inline">\(\mathbb F_n\)</span> and <span class="math inline">\(F\)</span>, together with (19.1a), yields</p>
+<p><span class="math display">\[
+\begin{aligned}
+\mathbb F_n(t)-F(t)
+&amp;\leq \mathbb F_n(t_i-)-F(t_{i-1})\\
+&amp;=\{\mathbb F_n(t_i-)-F(t_i-)\}
+  +\{F(t_i-)-F(t_{i-1})\}\\
+&amp;&lt;\mathbb F_n(t_i-)-F(t_i-)+\varepsilon,
+\end{aligned}
+\]</span></p>
+<p>and</p>
+<p><span class="math display">\[
+\begin{aligned}
+\mathbb F_n(t)-F(t)
+&amp;\geq \mathbb F_n(t_{i-1})-F(t_i-)\\
+&amp;=\{\mathbb F_n(t_{i-1})-F(t_{i-1})\}
+  -\{F(t_i-)-F(t_{i-1})\}\\
+&amp;&gt;\mathbb F_n(t_{i-1})-F(t_{i-1})-\varepsilon.
+\end{aligned}
+\]</span></p>
+<p>The finitely many errors at finite endpoints converge almost surely to zero by (19.1b), while the errors at <span class="math inline">\(-\infty\)</span> and <span class="math inline">\(\infty\)</span> are identically zero. Therefore</p>
+<p><span class="math display">\[
+\limsup_{n\to\infty}\|\mathbb F_n-F\|_\infty\leq\varepsilon
+\quad\text{almost surely}.
+\]</span></p>
+<p>Apply this conclusion for <span class="math inline">\(\varepsilon=1/r\)</span>, <span class="math inline">\(r=1,2,\ldots\)</span>, and intersect the resulting probability-one events. The limit superior is then zero almost surely, which proves the theorem.</p>
+</details>
+<p>Unlike the pointwise law of large numbers, the theorem controls the largest discrepancy over the entire index set. Its proof is the elementary version of the finite-approximation principle used in <a href="./chapter-18.html#theorem-weak-convergence-processes">Theorem 18.14</a>: control a finite set of coordinates and then control what happens between them.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Theorem">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Theorem
+</div>
+</div>
+<section id="theorem-19-3" class="level3 callout-body-container callout-body">
+<h3 class="anchored" data-anchor-id="theorem-19-3">Theorem 19.3: Donsker</h3>
+<p>The process <span class="math inline">\(\sqrt n(\mathbb F_n-F)\)</span> converges as a random function to an <span class="math inline">\(F\)</span>-Brownian bridge <span class="math inline">\(\mathbb G_F\)</span>. The limit is a zero-mean Gaussian process with covariance</p>
+<p><span class="math display">\[
+E\{\mathbb G_F(s)\mathbb G_F(t)\}
+=F(s\wedge t)-F(s)F(t).
+\]</span></p>
+<p>This is the functional, uniform analogue of the central limit theorem. §19.2 develops conditions under which the same conclusion holds for more general function classes.</p>
+</section>
+</div>
+<p>The rest of the chapter generalizes these two results from the indicator class <span class="math inline">\(\{\mathbf 1_{(-\infty,t]}:t\in\mathbb R\}\)</span> to arbitrary classes of functions.</p>
+</section>
+<section id="empirical-distributions" class="level2">
+<h2 class="anchored" data-anchor-id="empirical-distributions">19.2 Empirical Distributions</h2>
+<div class="callout callout-style-default callout-note callout-titled" title="Definition">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Definition
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<section id="empirical-measure-notation" class="level3">
+<h3 class="anchored" data-anchor-id="empirical-measure-notation">Empirical measure notation</h3>
+<p>Let <span class="math inline">\(P\)</span> be the common distribution of <span class="math inline">\(X_1,\ldots,X_n\)</span>. The empirical distribution is</p>
+<p><span class="math display">\[
+\mathbb P_n=\frac1n\sum_{i=1}^n\delta_{X_i}.
+\]</span></p>
+<p>For a measurable function <span class="math inline">\(f\)</span>,</p>
+<p><span class="math display">\[
+\mathbb P_nf=\frac1n\sum_{i=1}^nf(X_i),
+\qquad
+Pf=\int f\,dP.
+\]</span></p>
+<p>Thus <span class="math inline">\(\mathbb P_nf\)</span> is the sample average of <span class="math inline">\(f(X)\)</span>.</p>
+</section>
+<section id="empirical-process-notation" class="level3">
+<h3 class="anchored" data-anchor-id="empirical-process-notation">Empirical process notation</h3>
+<p>The empirical process is</p>
+<p><span class="math display">\[
+\mathbb G_nf
+=\sqrt n(\mathbb P_n-P)f
+=\frac1{\sqrt n}\sum_{i=1}^n\{f(X_i)-Pf\}.
+\]</span></p>
+<p>For one fixed <span class="math inline">\(f\)</span> with <span class="math inline">\(Pf^2&lt;\infty\)</span>, the ordinary central limit theorem gives</p>
+<p><span class="math display">\[
+\mathbb G_nf\rightsquigarrow N(0,Pf^2-(Pf)^2).
+\]</span></p>
+<p>Uniform statements treat <span class="math inline">\(f\mapsto\mathbb G_nf\)</span> as a single random function in <span class="math inline">\(\ell^\infty(\mathcal F)\)</span>.</p>
+</section>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Source convention: vector-valued classes">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Source convention: vector-valued classes
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>For a class <span class="math inline">\(\mathcal F\)</span> of functions <span class="math inline">\(f=(f_1,\ldots,f_k):\mathcal X\to\mathbb R^k\)</span>, the source calls <span class="math inline">\(\mathcal F\)</span> Glivenko–Cantelli or Donsker when each coordinate class</p>
+<p><span class="math display">\[
+\mathcal F_j=\{f_j:f=(f_1,\ldots,f_k)\in\mathcal F\},
+\qquad j=1,\ldots,k,
+\]</span></p>
+<p>has the corresponding property. Equivalently, the finite union <span class="math inline">\(\bigcup_{j=1}^k\mathcal F_j\)</span> is Glivenko–Cantelli or Donsker. Thus later vector score equations are handled coordinate by coordinate; no new meaning of <em>Donsker</em> is introduced.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Definition">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Definition
+</div>
+</div>
+<section id="glivenko-cantelli-classes" class="level3 callout-body-container callout-body">
+<h3 class="anchored" data-anchor-id="glivenko-cantelli-classes">Glivenko–Cantelli classes</h3>
+<p>A class <span class="math inline">\(\mathcal F\)</span> is <span class="math inline">\(P\)</span>-Glivenko–Cantelli if</p>
+<p><span class="math display">\[
+\|\mathbb P_n-P\|_{\mathcal F}
+=\sup_{f\in\mathcal F}|\mathbb P_nf-Pf|
+\overset{\mathrm{a.s.}^*}{\longrightarrow}0.
+\]</span></p>
+<p>This is the law of large numbers uniformly over <span class="math inline">\(\mathcal F\)</span>.</p>
+</section>
+</div>
+<p>A finite class of integrable functions is automatically Glivenko–Cantelli. For a larger class, pointwise laws of large numbers need not combine into a uniform result, so the size or complexity of <span class="math inline">\(\mathcal F\)</span> must be controlled.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Definition">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Definition
+</div>
+</div>
+<section id="donsker-classes" class="level3 callout-body-container callout-body">
+<h3 class="anchored" data-anchor-id="donsker-classes">Donsker classes</h3>
+<p>A class <span class="math inline">\(\mathcal F\)</span> is <span class="math inline">\(P\)</span>-Donsker if <span class="math inline">\(\{\mathbb G_nf:f\in\mathcal F\}\)</span> converges weakly in <span class="math inline">\(\ell^\infty(\mathcal F)\)</span> to a tight Gaussian process <span class="math inline">\(\mathbb G_P\)</span>. This <span class="math inline">\(P\)</span>-Brownian bridge has mean zero and covariance</p>
+<p><span class="math display">\[
+E(\mathbb G_Pf\,\mathbb G_Pg)=Pfg-PfPg.
+\]</span></p>
+</section>
+</div>
+<p>For each finite set <span class="math inline">\(f_1,\ldots,f_k\)</span>, the ordinary multivariate central limit theorem gives convergence of <span class="math inline">\((\mathbb G_nf_1,\ldots,\mathbb G_nf_k)\)</span>. The Donsker property adds the equicontinuity needed for convergence of the entire process:</p>
+<p><span class="math display">\[
+\text{finite-dimensional CLT}+\text{asymptotic equicontinuity}\Rightarrow\text{Donsker convergence}
+\]</span></p>
+<div class="callout callout-style-default callout-warning callout-titled" title="Definition versus verification">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Definition versus verification
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The exact Donsker property is the weak-convergence statement above. Saying that <span class="math inline">\(\mathcal F\)</span> is “not too rich” is useful intuition, but it is not a definition. Bracketing entropy, covering entropy, smoothness, and VC dimension are different <strong>sufficient routes</strong> for proving the tightness and equicontinuity that the definition requires. A class may be Donsker even when one particular sufficient entropy integral is unavailable.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Definition">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Definition
+</div>
+</div>
+<section id="envelope-function" class="level3 callout-body-container callout-body">
+<h3 class="anchored" data-anchor-id="envelope-function">Envelope function</h3>
+<p>An envelope for <span class="math inline">\(\mathcal F\)</span> is a function <span class="math inline">\(F\)</span> such that <span class="math inline">\(|f(x)|\leq F(x)\)</span> for every <span class="math inline">\(f\in\mathcal F\)</span> and every <span class="math inline">\(x\)</span>. Moment conditions on <span class="math inline">\(F\)</span> control the magnitude of functions in the class.</p>
+<p>This follows the source notation: <span class="math inline">\(F\)</span> denotes an envelope here but a distribution function in §19.1; <span class="math inline">\(\mathcal F\)</span> continues to denote the function class.</p>
+</section>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Definition">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Definition
+</div>
+</div>
+<section id="brackets" class="level3 callout-body-container callout-body">
+<h3 class="anchored" data-anchor-id="brackets">Brackets</h3>
+<p>Given functions <span class="math inline">\(l\)</span> and <span class="math inline">\(u\)</span> with <span class="math inline">\(l\leq u\)</span>, the bracket <span class="math inline">\([l,u]\)</span> contains all <span class="math inline">\(f\)</span> satisfying <span class="math inline">\(l\leq f\leq u\)</span>. It is an <span class="math inline">\(\varepsilon\)</span>-bracket in <span class="math inline">\(L_r(P)\)</span> when</p>
+<p><span class="math display">\[
+\|u-l\|_{P,r}&lt;\varepsilon,
+\qquad
+\|f\|_{P,r}=(P|f|^r)^{1/r}.
+\]</span></p>
+<p>The <strong>bracketing number</strong> <span class="math inline">\(N_{[]}(\varepsilon,\mathcal F,L_r(P))\)</span> is the minimum number of such brackets needed to cover <span class="math inline">\(\mathcal F\)</span>. Smaller bracketing numbers indicate lower effective complexity.</p>
+</section>
+</div>
+<p>Bracketing replaces the possibly infinite class <span class="math inline">\(\mathcal F\)</span> by finitely many approximations. Uniform control becomes possible when sufficiently few brackets are needed at increasingly fine scales.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Theorem">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Theorem
+</div>
+</div>
+<section id="theorem-19-4" class="level3 callout-body-container callout-body">
+<h3 class="anchored" data-anchor-id="theorem-19-4">Theorem 19.4: Glivenko–Cantelli via bracketing</h3>
+<p>If <span class="math inline">\(N_{[]}(\varepsilon,\mathcal F,L_1(P))&lt;\infty\)</span> for every <span class="math inline">\(\varepsilon&gt;0\)</span>, then <span class="math inline">\(\mathcal F\)</span> is <span class="math inline">\(P\)</span>-Glivenko–Cantelli. At every desired accuracy, finitely many brackets reduce the uniform claim to finitely many ordinary laws of large numbers.</p>
+</section>
+</div>
+<p><strong>Proof roadmap.</strong> Cover the class by finitely many <span class="math inline">\(L_1(P)\)</span> brackets, squeeze every empirical average between its two bracket endpoints, and apply the strong law to that finite collection.</p>
+<details>
+<summary>
+Complete proof
+</summary>
+<p>Fix <span class="math inline">\(\varepsilon&gt;0\)</span> and cover <span class="math inline">\(\mathcal F\)</span> by finitely many <span class="math inline">\(L_1(P)\)</span> brackets <span class="math inline">\([l_j,u_j]\)</span> satisfying <span class="math inline">\(P(u_j-l_j)&lt;\varepsilon\)</span>. If <span class="math inline">\(f\in[l_j,u_j]\)</span>, then</p>
+<p><span class="math display">\[
+(\mathbb P_n-P)f
+\leq(\mathbb P_n-P)u_j+P(u_j-l_j)
+&lt;(\mathbb P_n-P)u_j+\varepsilon,
+\]</span></p>
+<p>and, similarly,</p>
+<p><span class="math display">\[
+(\mathbb P_n-P)f
+\geq(\mathbb P_n-P)l_j-P(u_j-l_j)
+&gt;(\mathbb P_n-P)l_j-\varepsilon.
+\]</span></p>
+<p>Consequently,</p>
+<p><span class="math display">\[
+\|\mathbb P_n-P\|_{\mathcal F}
+\leq
+\max_j\bigl\{|(\mathbb P_n-P)l_j|,|(\mathbb P_n-P)u_j|\bigr\}
++\varepsilon.
+\]</span></p>
+<p>There are only finitely many bracket endpoints. The ordinary strong law makes the maximum on the right converge almost surely to zero. Therefore the almost-sure outer limit superior of <span class="math inline">\(\|\mathbb P_n-P\|_{\mathcal F}\)</span> is at most <span class="math inline">\(\varepsilon\)</span>. Letting <span class="math inline">\(\varepsilon\downarrow0\)</span> proves the theorem.</p>
+</details>
+<div class="callout callout-style-default callout-note callout-titled" title="Theorem">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Theorem
+</div>
+</div>
+<section id="theorem-19-5" class="level3 callout-body-container callout-body">
+<h3 class="anchored" data-anchor-id="theorem-19-5">Theorem 19.5: Donsker via bracketing entropy</h3>
+<p>Define the bracketing entropy integral</p>
+<p><span class="math display">\[
+J_{[]}(\delta,\mathcal F,L_2(P))
+=\int_0^\delta
+\sqrt{\log N_{[]}(\varepsilon,\mathcal F,L_2(P))}\,d\varepsilon.
+\]</span></p>
+<p>If <span class="math inline">\(J_{[]}(1,\mathcal F,L_2(P))&lt;\infty\)</span>, then <span class="math inline">\(\mathcal F\)</span> is <span class="math inline">\(P\)</span>-Donsker.</p>
+</section>
+</div>
+<p>For a uniform central limit theorem, finite approximation at each scale is not enough: the complexity cannot grow too quickly as <span class="math inline">\(\varepsilon\downarrow0\)</span>. The entropy integral accumulates that complexity across increasingly fine scales.</p>
+<p><strong>Proof roadmap.</strong> Use nested brackets and the maximal inequality in <a href="#lemma-19.34">Lemma 19.34</a> to obtain asymptotic equicontinuity; combine that uniform control with the finite-dimensional central limit theorem and <a href="./chapter-18.html#theorem-weak-convergence-processes">Theorem 18.14</a>.</p>
+<details>
+<summary>
+Complete proof
+</summary>
+<p>Let</p>
+<p><span class="math display">\[
+\mathcal G=\{f-g:f,g\in\mathcal F\}.
+\]</span></p>
+<p>If <span class="math inline">\([l_i,u_i]\)</span> and <span class="math inline">\([l_j,u_j]\)</span> are <span class="math inline">\(\varepsilon/2\)</span>-brackets for <span class="math inline">\(\mathcal F\)</span>, then</p>
+<p><span class="math display">\[
+[l_i-u_j,u_i-l_j]
+\]</span></p>
+<p>is an <span class="math inline">\(\varepsilon\)</span>-bracket for the differences of functions in those two brackets. Hence</p>
+<p><span class="math display">\[
+N_{[]}(\varepsilon,\mathcal G,L_2(P))
+\leq
+N_{[]}(\varepsilon/2,\mathcal F,L_2(P))^2.
+\tag{19.5a}
+\]</span></p>
+<p>Taking square roots after logarithms and changing variables shows that the bracketing entropy integral of <span class="math inline">\(\mathcal G\)</span> is bounded by a universal multiple of that of <span class="math inline">\(\mathcal F\)</span>.</p>
+<p>Fix a small <span class="math inline">\(\delta&gt;0\)</span>. A finite collection of <span class="math inline">\(\delta\)</span>-brackets partitions <span class="math inline">\(\mathcal F\)</span> into sets <span class="math inline">\(\mathcal F_1,\ldots,\mathcal F_m\)</span> whose <span class="math inline">\(L_2(P)\)</span> diameters are at most <span class="math inline">\(\delta\)</span>. The local increment class</p>
+<p><span class="math display">\[
+\mathcal G_\delta
+=\bigcup_{i=1}^m\{f-g:f,g\in\mathcal F_i\}
+\]</span></p>
+<p>therefore consists of functions with <span class="math inline">\(L_2(P)\)</span> norm at most <span class="math inline">\(\delta\)</span>. By (19.5a), its bracketing integral is bounded by a constant multiple of <span class="math inline">\(J_{[]}(\delta,\mathcal F,L_2(P))\)</span>. Apply <a href="#lemma-19.34">Lemma 19.34</a> to <span class="math inline">\(\mathcal G_\delta\)</span>. It gives a positive finite number <span class="math inline">\(a(\delta)\)</span> such that</p>
+<p><span class="math display">\[
+\begin{aligned}
+E^*\max_{1\leq i\leq m}
+\sup_{f,g\in\mathcal F_i}|\mathbb G_n(f-g)|
+\lesssim{}&amp;J_{[]}(\delta,\mathcal F,L_2(P))\\
+&amp;+\sqrt n\,P^*F\,\mathbf 1\{F&gt;a(\delta)\sqrt n\}.
+\end{aligned}
+\tag{19.5b}
+\]</span></p>
+<p>Here <span class="math inline">\(F\)</span> can be chosen as the supremum of the absolute values of the endpoints in a finite set of brackets of size <span class="math inline">\(1\)</span> covering <span class="math inline">\(\mathcal F\)</span>. Those endpoints are in <span class="math inline">\(L_2(P)\)</span>, so <span class="math inline">\(PF^2&lt;\infty\)</span>.</p>
+<p>For fixed <span class="math inline">\(\delta\)</span>,</p>
+<p><span class="math display">\[
+\sqrt n\,P^*F1\{F&gt;a(\delta)\sqrt n\}
+\leq
+\frac1{a(\delta)}P^*F^2 \mathbf 1\{F&gt;a(\delta)\sqrt n\}
+\longrightarrow0.
+\]</span></p>
+<p>Moreover, finiteness of <span class="math inline">\(J_{[]}(1,\mathcal F,L_2(P))\)</span> implies</p>
+<p><span class="math display">\[
+J_{[]}(\delta,\mathcal F,L_2(P))\longrightarrow0
+\qquad\text{as }\delta\downarrow0.
+\]</span></p>
+<p>Thus Markov’s inequality applied to (19.5b) gives asymptotic equicontinuity of <span class="math inline">\(\mathbb G_n\)</span> in the <span class="math inline">\(L_2(P)\)</span> semimetric. Finite-dimensional convergence follows from the ordinary multivariate central limit theorem. <a href="./chapter-18.html#theorem-weak-convergence-processes">Theorem 18.14</a> now yields weak convergence in <span class="math inline">\(\ell^\infty(\mathcal F)\)</span> to the tight <span class="math inline">\(P\)</span>-Brownian bridge. Hence <span class="math inline">\(\mathcal F\)</span> is <span class="math inline">\(P\)</span>-Donsker.</p>
+</details>
+<p>The proof’s reusable chain is</p>
+<p><span class="math display">\[
+\boxed{\text{brackets}\Rightarrow\text{maximal inequality}\Rightarrow
+\text{equicontinuity}\Rightarrow\text{Donsker}.}
+\]</span></p>
+<p>Figure <a href="#nineteenfig-ch19-donsker-entropy" class="quarto-xref">Figure 19.<span>1</span></a> connects this chain to the threshold class and its Brownian-bridge limit.</p>
+<div id="nineteenfig-ch19-donsker-entropy" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-nineteenfig figure">
+<div aria-describedby="nineteenfig-ch19-donsker-entropy-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<p><img src="images/generated/chapter-19-donsker-entropy.svg" class="img-fluid figure-img" alt="Two-panel diagram for threshold indicators under a uniform distribution. The first panel compares a finite-sample empirical bridge with a Brownian-bridge draw, illustrating process-level convergence. The second partitions the threshold index into four cells at L2 accuracy one half and sixteen cells at accuracy one quarter, illustrating how finer approximation requires more brackets."></p>
+<p>For the threshold class <span class="math inline">\(f_t(x)=\mathbf 1\{x\leq t\}\)</span> under <span class="math inline">\(P=\operatorname{Unif}(0,1)\)</span>, the empirical process is the entire path <span class="math inline">\(\sqrt n\{\mathbb F_n(t)-t\}\)</span> and its limit is a Brownian bridge. Moreover,</p>
+<p><span class="math display">\[
+\|f_s-f_t\|_{P,2}=\sqrt{|s-t|},
+\]</span></p>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-nineteenfig" id="nineteenfig-ch19-donsker-entropy-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure 19.1: so a grid with spacing <span class="math inline">\(\varepsilon^2\)</span> gives an <span class="math inline">\(L_2(P)\)</span> bracketing cover of order <span class="math inline">\(\varepsilon^{-2}\)</span>. The picture makes “manageable at finer scales” concrete, but the entropy integral in Theorem 19.5 remains a sufficient verification route rather than the definition of Donsker.
+</figcaption>
+</figure>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Example">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Example
+</div>
+</div>
+<section id="example-19-6" class="level3 callout-body-container callout-body">
+<h3 class="anchored" data-anchor-id="example-19-6">Example 19.6: distribution functions</h3>
+<p>Let</p>
+<p><span class="math display">\[
+\mathcal F=\{f_t:t\in\mathbb R\},
+\qquad
+f_t=\mathbf 1_{(-\infty,t]}.
+\]</span></p>
+<p>Choose points <span class="math inline">\(-\infty=t_0&lt;t_1&lt;\cdots&lt;t_k=\infty\)</span> so that</p>
+<p><span class="math display">\[
+F(t_i-)-F(t_{i-1})&lt;\varepsilon,
+\qquad i=1,\ldots,k,
+\]</span></p>
+<p>with <span class="math inline">\(k&lt;2/\varepsilon\)</span>. The factor <span class="math inline">\(2\)</span> accommodates jumps of <span class="math inline">\(F\)</span>. The brackets</p>
+<p><span class="math display">\[
+\left[\mathbf 1_{(-\infty,t_{i-1}]},\mathbf 1_{(-\infty,t_i)}\right]
+\]</span></p>
+<p>cover the indicators with endpoints between <span class="math inline">\(t_{i-1}\)</span> and <span class="math inline">\(t_i\)</span>; an indicator at <span class="math inline">\(t_i\)</span> is the lower endpoint of the next bracket. Their <span class="math inline">\(L_1(F)\)</span> size is less than <span class="math inline">\(\varepsilon\)</span>. Because the difference of two bracket endpoints is itself an indicator,</p>
+<p><span class="math display">\[
+\|u_i-l_i\|_{F,2}^2
+=\int(u_i-l_i)\,dF
+&lt;\varepsilon.
+\]</span></p>
+<p>Therefore</p>
+<p><span class="math display">\[
+N_{[]}(\sqrt\varepsilon,\mathcal F,L_2(F))
+\leq\frac2\varepsilon.
+\]</span></p>
+<p>Writing <span class="math inline">\(r=\sqrt\varepsilon\)</span> gives</p>
+<p><span class="math display">\[
+N_{[]}(r,\mathcal F,L_2(F))\leq\frac2{r^2},
+\]</span></p>
+<p>and hence</p>
+<p><span class="math display">\[
+J_{[]}(1,\mathcal F,L_2(F))
+\leq
+\int_0^1\sqrt{\log(2/r^2)}\,dr
+&lt;\infty.
+\]</span></p>
+<p>Thus Theorems 19.4 and 19.5 recover the classical Glivenko–Cantelli and Donsker theorems, including distributions with atoms.</p>
+</section>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Example">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Example
+</div>
+</div>
+<section id="example-19-7" class="level3 callout-body-container callout-body">
+<h3 class="anchored" data-anchor-id="example-19-7">Example 19.7: parametric classes</h3>
+<p>Suppose <span class="math inline">\(\mathcal F=\{f_\theta:\theta\in\Theta\subset\mathbb R^d\}\)</span> and</p>
+<p><span class="math display">\[
+|f_{\theta_1}(x)-f_{\theta_2}(x)|
+\leq m(x)|\theta_1-\theta_2|.
+\]</span></p>
+<p>If <span class="math inline">\(Pm^2&lt;\infty\)</span> and <span class="math inline">\(\Theta\)</span> is bounded, the class has polynomially growing bracketing numbers and is Donsker. Thus smooth finite-dimensional parametric families are typically Donsker under mild moment conditions.</p>
+</section>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Examples">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Examples
+</div>
+</div>
+<section id="examples-19-9-19-10" class="level3 callout-body-container callout-body">
+<h3 class="anchored" data-anchor-id="examples-19-9-19-10">Examples 19.9–19.10: smooth function classes</h3>
+<p>Sufficiently smooth infinite-dimensional classes also have controlled entropy. Greater smoothness reduces effective complexity, and sufficiently smooth classes are Donsker.</p>
+</section>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Example">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Example
+</div>
+</div>
+<section id="example-19.11-bounded-variation" class="level3 callout-body-container callout-body">
+<h3 class="anchored" data-anchor-id="example-19.11-bounded-variation">Example 19.11: bounded variation</h3>
+<p>Uniformly bounded classes of monotone functions, and classes whose total variation and value at one fixed point are uniformly bounded, are Donsker under the usual measurability and envelope conditions. The <a href="./chapter-25.html#sec-25-12-cox-model">Cox likelihood equations in §25.12</a> use such variation control to verify a joint score class.</p>
+</section>
+</div>
+<section id="sec-vc-classes" class="level3">
+<h3 class="anchored" data-anchor-id="sec-vc-classes">VC classes</h3>
+<p>VC classes provide a combinatorial way to control complexity.</p>
+<section id="sec-shattering" class="level4">
+<h4 class="anchored">What it means to shatter a finite set</h4>
+<p>Let <span class="math inline">\(\mathcal A\)</span> be a class of subsets of <span class="math inline">\(\mathcal X\)</span>, and fix</p>
+<p><span class="math display">\[
+S=\{x_1,\ldots,x_m\}.
+\]</span></p>
+<p>The class <span class="math inline">\(\mathcal A\)</span> <strong>shatters</strong> <span class="math inline">\(S\)</span> when its intersections with <span class="math inline">\(S\)</span> realize every subset of <span class="math inline">\(S\)</span>:</p>
+<p><span class="math display">\[
+\{A\cap S:A\in\mathcal A\}=2^S.
+\]</span></p>
+<p>Equivalently, for every binary labeling <span class="math inline">\((b_1,\ldots,b_m)\in\{0,1\}^m\)</span>, there is some <span class="math inline">\(A\in\mathcal A\)</span> such that</p>
+<p><span class="math display">\[
+\mathbf 1\{x_i\in A\}=b_i,
+\qquad i=1,\ldots,m.
+\]</span></p>
+<p>Thus shattering <span class="math inline">\(m\)</span> points means realizing all <span class="math inline">\(2^m\)</span> possible include/exclude patterns—not merely separating the points in one particular way. The <strong>VC dimension</strong> is the largest <span class="math inline">\(m\)</span> for which some <span class="math inline">\(m\)</span>-point set is shattered; it is infinite if sets of every finite size can be shattered.</p>
+<p>Two one-dimensional examples make the definition concrete:</p>
+<ul>
+<li>The half-lines <span class="math inline">\(\{(-\infty,t]:t\in\mathbb R\}\)</span> have VC dimension <span class="math inline">\(1\)</span>. They can include or exclude one point, but for <span class="math inline">\(x_1&lt;x_2\)</span> they cannot realize the labeling <span class="math inline">\((0,1)\)</span>: any lower half-line containing <span class="math inline">\(x_2\)</span> also contains <span class="math inline">\(x_1\)</span>.</li>
+<li>The intervals <span class="math inline">\(\{[a,b]:a\leq b\}\)</span> have VC dimension <span class="math inline">\(2\)</span>. They realize all four labelings of two ordered points. They cannot shatter three ordered points because the labeling <span class="math inline">\((1,0,1)\)</span> would require one interval to contain the two outer points but exclude the point between them.</li>
+</ul>
+<p>This is a property of the class itself, independent of the probability law <span class="math inline">\(P\)</span>. For a real-valued function class, the analogous notion is applied to its subgraphs and is called the <strong>VC-subgraph</strong> property.</p>
+<p>Finite VC dimension yields polynomial covering-number bounds. For indicator classes the envelope is automatically bounded by one; more generally, suitable measurability and envelope moment conditions are still required before concluding Glivenko–Cantelli or Donsker behavior:</p>
+<p><span class="math display">\[
+\boxed{
+\text{finite VC dimension}
++\text{measurability and envelope control}
+\Longrightarrow
+\text{polynomial entropy}
+\Longrightarrow
+\text{GC/Donsker}
+}.
+\]</span></p>
+<p>Figure <a href="#nineteenfig-ch19-shattering" class="quarto-xref">Figure 19.<span>2</span></a> shows the distinction between shattering two ordered points and failing to shatter three.</p>
+<div id="nineteenfig-ch19-shattering" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-alt="Diagram showing intervals realizing all four binary inclusion patterns on two ordered points. A final row requests the pattern one-zero-one on three ordered points; a red interval spanning the two selected outer points necessarily passes through the excluded middle point, showing that the pattern is impossible.">
+<figure class="quarto-float quarto-float-nineteenfig figure">
+<div aria-describedby="nineteenfig-ch19-shattering-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/generated/chapter-19-shattering.svg" class="img-fluid figure-img" alt="Diagram showing intervals realizing all four binary inclusion patterns on two ordered points. A final row requests the pattern one-zero-one on three ordered points; a red interval spanning the two selected outer points necessarily passes through the excluded middle point, showing that the pattern is impossible.">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-nineteenfig" id="nineteenfig-ch19-shattering-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure 19.2: Intervals shatter two ordered points because all four rows are achievable. For three ordered points, the red row exposes the obstruction: an interval containing <span class="math inline">\(x_1\)</span> and <span class="math inline">\(x_3\)</span> must also contain <span class="math inline">\(x_2\)</span>, so the labeling <span class="math inline">\((1,0,1)\)</span> is impossible. See <span class="citation" data-cites="vanDerVaartWellner1996"><span class="nocase">van der Vaart and Wellner</span> (<a href="references.html#ref-vanDerVaartWellner1996" role="doc-biblioref">1996</a>)</span>, §§2.5–2.6, for the general entropy and VC theory.
+</figcaption>
+</figure>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Example">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Example
+</div>
+</div>
+<section id="example-19-20" class="level3 callout-body-container callout-body">
+<h3 class="anchored" data-anchor-id="example-19-20">Example 19.20: stability under Lipschitz transformations</h3>
+<p>Donsker classes remain Donsker under many simple transformations. If <span class="math inline">\(\mathcal F\)</span> and <span class="math inline">\(\mathcal G\)</span> are Donsker with suitable envelopes, then classes formed by sums, minima, maxima, and—under boundedness conditions—products can also be Donsker. Complicated estimating functions can therefore be assembled from simpler known classes.</p>
+</section>
+</div>
+</section>
+</section>
+</section>
+<section id="sec-19-3-omitted" class="level2">
+<h2 class="anchored" data-anchor-id="sec-19-3-omitted">19.3 Goodness-of-Fit Statistics (omitted)</h2>
+<p>Van der Vaart’s §19.3 develops goodness-of-fit statistics from empirical-process limits. This route omits the section because those applications are not needed for the Chapter 25 development; the next required ingredient is the treatment of estimated random functions in §19.4.</p>
+</section>
+<section id="random-functions" class="level2">
+<h2 class="anchored" data-anchor-id="random-functions">19.4 Random Functions</h2>
+<p>Donsker theory initially controls <span class="math inline">\(\mathbb G_nf\)</span> uniformly over deterministic <span class="math inline">\(f\in\mathcal F\)</span>. Statistical applications instead evaluate the process at an estimated function such as <span class="math inline">\(\widehat f_n=f_{\widehat\theta_n}\)</span>. Because <span class="math inline">\(\widehat f_n\)</span> may depend on the same observations that define <span class="math inline">\(\mathbb G_n\)</span>, an ordinary conditional central limit theorem does not apply directly. Stochastic equicontinuity supplies the replacement argument.</p>
+<div class="callout callout-style-default callout-important callout-titled" title="Lemma">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Lemma
+</div>
+</div>
+<section id="lemma-19.24" class="level3 callout-body-container callout-body">
+<h3 class="anchored" data-anchor-id="lemma-19.24">Lemma 19.24: substituting an estimated index</h3>
+<p>Suppose:</p>
+<ul>
+<li><span class="math inline">\(\mathcal F\)</span> is <span class="math inline">\(P\)</span>-Donsker;</li>
+<li>the random functions <span class="math inline">\(f_n\)</span> take their values in <span class="math inline">\(\mathcal F\)</span>;</li>
+<li><span class="math inline">\(P(f_n-f_0)^2\overset P\longrightarrow0\)</span> for some <span class="math inline">\(f_0\in L_2(P)\)</span>.</li>
+</ul>
+<p>Then:</p>
+<p><span class="math display">\[
+\boxed{\mathbb G_n(f_n-f_0)\overset P\longrightarrow0}
+\]</span></p>
+<p>and consequently</p>
+<p><span class="math display">\[
+\boxed{\mathbb G_nf_n=\mathbb G_nf_0+o_P(1)
+\rightsquigarrow\mathbb G_Pf_0.}
+\]</span></p>
+</section>
+</div>
+<p>If <span class="math inline">\(f_n\)</span> is close to <span class="math inline">\(f_0\)</span> in <span class="math inline">\(L_2(P)\)</span>, the two functions are close in the natural variance semimetric of the limiting Gaussian process. Because <span class="math inline">\(\mathcal F\)</span> is Donsker, the limiting Brownian bridge has uniformly continuous sample paths in this semimetric. The empirical process therefore cannot distinguish <span class="math inline">\(f_n\)</span> from <span class="math inline">\(f_0\)</span> asymptotically.</p>
+<p>Thus:</p>
+<p><span class="math display">\[
+\boxed{L_2(P)\text{ closeness of functions}+\text{Donsker equicontinuity}\Rightarrow\text{empirical-process closeness}.}
+\]</span></p>
+<p><strong>Proof roadmap.</strong> Jointly converge the empirical process and its random index, use <span class="math inline">\(L_2(P)\)</span> continuity of the limiting Brownian bridge, and apply the continuous mapping theorem to evaluation at that index.</p>
+<details>
+<summary>
+Complete proof
+</summary>
+<p>Adjoin <span class="math inline">\(f_0\)</span> to <span class="math inline">\(\mathcal F\)</span> if necessary; adding one square-integrable function preserves the Donsker property. Give <span class="math inline">\(\mathcal F\)</span> the <span class="math inline">\(L_2(P)\)</span> semimetric and define</p>
+<p><span class="math display">\[
+g:\ell^\infty(\mathcal F)\times\mathcal F\to\mathbb R,
+\qquad
+g(z,f)=z(f)-z(f_0).
+\]</span></p>
+<p>The map <span class="math inline">\(g\)</span> is continuous at every <span class="math inline">\((z,f_0)\)</span> for which <span class="math inline">\(f\mapsto z(f)\)</span> is <span class="math inline">\(L_2(P)\)</span>-continuous at <span class="math inline">\(f_0\)</span>. Indeed, if <span class="math inline">\(z_n\to z\)</span> uniformly and <span class="math inline">\(f_n\to f_0\)</span> in <span class="math inline">\(L_2(P)\)</span>, then</p>
+<p><span class="math display">\[
+|z_n(f_n)-z(f_0)|
+\leq\|z_n-z\|_{\mathcal F}+|z(f_n)-z(f_0)|\longrightarrow0.
+\]</span></p>
+<p>The Donsker assumption gives <span class="math inline">\(\mathbb G_n\rightsquigarrow\mathbb G_P\)</span> in <span class="math inline">\(\ell^\infty(\mathcal F)\)</span>, while the assumed quadratic-mean convergence gives <span class="math inline">\(f_n\overset P\to f_0\)</span> in the indexing semimetric. Hence Slutsky’s lemma gives</p>
+<p><span class="math display">\[
+(\mathbb G_n,f_n)
+\rightsquigarrow
+(\mathbb G_P,f_0).
+\]</span></p>
+<p>By <a href="./chapter-18.html#lemma-18.15-the-natural-semimetric-of-the-limit">Lemma 18.15</a>, almost every path <span class="math inline">\(f\mapsto\mathbb G_Pf\)</span> is continuous in the relevant semimetric. Applying the continuous mapping theorem to <span class="math inline">\(g\)</span> gives</p>
+<p><span class="math display">\[
+\mathbb G_n(f_n-f_0)
+\rightsquigarrow
+\mathbb G_Pf_0-\mathbb G_Pf_0=0.
+\]</span></p>
+<p>Convergence in distribution to a constant is equivalent to convergence in probability. Adding <span class="math inline">\(\mathbb G_nf_0\)</span> and applying the ordinary central limit theorem gives the second conclusion.</p>
+</details>
+<div class="callout callout-style-default callout-tip callout-titled" title="Example">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Example
+</div>
+</div>
+<section id="example-19-25" class="level3 callout-body-container callout-body">
+<h3 class="anchored" data-anchor-id="example-19-25">Example 19.25: mean absolute deviation</h3>
+<p>Let <span class="math inline">\(F\)</span> be the distribution of the observations and retain the source convention <span class="math inline">\(Ff=\int f\,dF\)</span>. Assume <span class="math inline">\(Fx=0\)</span> and <span class="math inline">\(Fx^2&lt;\infty\)</span>, and define</p>
+<p><span class="math display">\[
+M_n=\frac1n\sum_{j=1}^n|X_j-\overline X_n|
+=\mathbb P_n|x-\overline X_n|.
+\]</span></p>
+<p>On any compact interval containing zero, the class <span class="math inline">\(\{|x-\theta|:\theta\in[-1,1]\}\)</span> is <span class="math inline">\(F\)</span>-Donsker by Example 19.7. Since <span class="math inline">\(\overline X_n\overset P\to0\)</span>, it belongs to this interval with probability tending to one; it may be redefined on the complementary event. The triangle inequality gives</p>
+<p><span class="math display">\[
+F\!\left[\left\{|x-\overline X_n|-|x|\right\}^2\right]
+\leq|\overline X_n|^2
+\overset P\longrightarrow0.
+\]</span></p>
+<p>Lemma 19.24 therefore yields</p>
+<p><span class="math display">\[
+\mathbb G_n|x-\overline X_n|
+=\mathbb G_n|x|+o_P(1).
+\tag{19.25a}
+\]</span></p>
+<p>If <span class="math inline">\(\theta\mapsto F|x-\theta|\)</span> is differentiable at zero, its derivative is <span class="math inline">\(2F(0)-1\)</span>, where <span class="math inline">\(F(0)\)</span> is now the CDF value. Since <span class="math inline">\(\sqrt n\,\overline X_n=\mathbb G_nx\)</span>,</p>
+<p><span class="math display">\[
+\sqrt n\{M_n-F|x|\}
+=\mathbb G_n\left[|x|+\{2F(0)-1\}x\right]+o_P(1).
+\tag{19.25b}
+\]</span></p>
+<p>Thus the asymptotic variance is the variance under <span class="math inline">\(F\)</span> of <span class="math inline">\(|X|+\{2F(0)-1\}X\)</span>. If the mean and median agree, so that <span class="math inline">\(F(0)=1/2\)</span>, estimating the center has no first-order effect. This is a concrete instance of Lemma 19.24 removing a random estimated function from an empirical-process term.</p>
+</section>
+</div>
+<p>In semiparametric models, efficient scores and influence functions depend on unknown nuisance parameters. Lemma 19.24 gives conditions under which</p>
+<p><span class="math display">\[
+\mathbb G_n\widetilde\ell_{\widehat\eta_n}
+=\mathbb G_n\widetilde\ell_{\eta_0}+o_P(1).
+\]</span></p>
+<p>Once the estimated score has been replaced by its population counterpart, an ordinary central limit theorem can often complete the argument. <a href="./chapter-25.html#theorem-25-54">Theorem 25.54</a> uses precisely this step.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Theorem">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Theorem
+</div>
+</div>
+<section id="theorem-19-26-infinite-dimensional-z-estimation" class="level3 callout-body-container callout-body">
+<h3 class="anchored" data-anchor-id="theorem-19-26-infinite-dimensional-z-estimation">Theorem 19.26: infinite-dimensional Z-estimation</h3>
+<p>For each <span class="math inline">\(\theta\)</span> in a subset <span class="math inline">\(\Theta\)</span> of a normed space and every <span class="math inline">\(h\)</span> in an arbitrary set <span class="math inline">\(H\)</span>, let <span class="math inline">\(x\mapsto\psi_{\theta,h}(x)\)</span> be measurable. Write</p>
+<p><span class="math display">\[
+\psi_\theta(x):h\mapsto\psi_{\theta,h}(x),
+\qquad
+P\psi_\theta:h\mapsto P\psi_{\theta,h},
+\]</span></p>
+<p>and <span class="math inline">\(\|z\|_H=\sup_{h\in H}|z(h)|\)</span>. Assume:</p>
+<ol type="1">
+<li><p>for some <span class="math inline">\(\delta&gt;0\)</span>, the local class</p>
+<p><span class="math display">\[
+\{\psi_{\theta,h}:\|\theta-\theta_0\|&lt;\delta, h\in H\}
+\tag{19.26a}
+\]</span></p>
+<p>is <span class="math inline">\(P\)</span>-Donsker and has a finite envelope;</p></li>
+<li><p>as a map into <span class="math inline">\(\ell^\infty(H)\)</span>, <span class="math inline">\(\theta\mapsto P\psi_\theta\)</span> is Fréchet differentiable at a zero <span class="math inline">\(\theta_0\)</span>, with derivative</p>
+<p><span class="math display">\[
+V:\operatorname{lin}\Theta\to\ell^\infty(H)
+\]</span></p>
+<p>that is one-to-one and has a continuous inverse on its range;</p></li>
+<li><p>the local <span class="math inline">\(L_2(P)\)</span> continuity condition</p>
+<p><span class="math display">\[
+\left\|P(\psi_{\theta,h}-\psi_{\theta_0,h})^2\right\|_H
+\longrightarrow0
+\qquad\text{as }\theta\to\theta_0
+\tag{19.26b}
+\]</span></p>
+<p>holds;</p></li>
+<li><p><span class="math inline">\(\widehat\theta_n\overset P\to\theta_0\)</span> and approximately solves the full empirical system:</p>
+<p><span class="math display">\[
+\|\mathbb P_n\psi_{\widehat\theta_n}\|_H
+=o_P(n^{-1/2}).
+\tag{19.26c}
+\]</span></p></li>
+</ol>
+<p>Then, in <span class="math inline">\(\ell^\infty(H)\)</span>,</p>
+<p><span class="math display">\[
+V\sqrt n(\widehat\theta_n-\theta_0)=-\mathbb G_n\psi_{\theta_0}+o_P(1).
+\tag{19.26d}
+\]</span></p>
+</section>
+</div>
+<p>The theorem is the infinite-dimensional version of Theorem 5.21. The index <span class="math inline">\(h\)</span> labels an entire system of equations; the parameter <span class="math inline">\(\theta\)</span> itself may also be infinite-dimensional.</p>
+<p><strong>Proof roadmap.</strong> Donsker equicontinuity removes the random change in the estimating function, the approximate-root condition turns the empirical equation into a population drift plus one empirical-process term, and Fréchet differentiability with a continuous inverse converts that drift into the stated linear expansion.</p>
+<details>
+<summary>
+Complete proof
+</summary>
+<p>By consistency, the estimator lies in <span class="math inline">\(\Theta_\delta=\{\theta\in\Theta:\|\theta-\theta_0\|&lt;\delta\}\)</span> with probability tending to one. Redefining it on the complementary event does not affect the conclusion, so suppose <span class="math inline">\(\widehat\theta_n\in\Theta_\delta\)</span>.</p>
+<p>First establish a uniform version of Lemma 19.24. Let <span class="math inline">\(\mathbb G_n\psi\)</span> denote the empirical process indexed by <span class="math inline">\((\theta,h)\in\Theta_\delta\times H\)</span>, and define</p>
+<p><span class="math display">\[
+g:\ell^\infty(\Theta_\delta\times H)\times\Theta_\delta
+\to\ell^\infty(H),
+\qquad
+g(z,\theta)(h)=z(\theta,h)-z(\theta_0,h).
+\]</span></p>
+<p>This map is continuous at <span class="math inline">\((z,\theta_0)\)</span> whenever</p>
+<p><span class="math display">\[
+\sup_{h\in H}|z(\theta,h)-z(\theta_0,h)|\longrightarrow0
+\qquad\text{as }\theta\to\theta_0.
+\]</span></p>
+<p>The local Donsker assumption gives</p>
+<p><span class="math display">\[
+\mathbb G_n\psi\rightsquigarrow\mathbb G_P\psi
+\quad\text{in }\ell^\infty(\Theta_\delta\times H).
+\]</span></p>
+<p>Condition (19.26b) makes <span class="math inline">\(\theta\mapsto(\psi_{\theta,h}:h\in H)\)</span> continuous at <span class="math inline">\(\theta_0\)</span> in the limiting process’s variance semimetric, uniformly in <span class="math inline">\(h\)</span>. The uniform continuity of the Brownian-bridge sample paths therefore gives</p>
+<p><span class="math display">\[
+\sup_{h\in H}
+|\mathbb G_P\psi_{\theta,h}-\mathbb G_P\psi_{\theta_0,h}|
+\longrightarrow0
+\]</span></p>
+<p>almost surely. Since <span class="math inline">\(\widehat\theta_n\overset P\to\theta_0\)</span>, the continuous mapping theorem yields</p>
+<p><span class="math display">\[
+\|\mathbb G_n(\psi_{\widehat\theta_n}-\psi_{\theta_0})\|_H
+=o_P(1).
+\tag{19.26e}
+\]</span></p>
+<p>Now use the approximate equations. Uniformly over <span class="math inline">\(h\)</span>,</p>
+<p><span class="math display">\[
+\begin{aligned}
+o_P(1)
+&amp;=\sqrt n\,\mathbb P_n\psi_{\widehat\theta_n}\\
+&amp;=\mathbb G_n\psi_{\widehat\theta_n}
++\sqrt n\,P\psi_{\widehat\theta_n}\\
+&amp;=\mathbb G_n\psi_{\theta_0}
++\sqrt n\,P\psi_{\widehat\theta_n}+o_P(1),
+\end{aligned}
+\tag{19.26f}
+\]</span></p>
+<p>where (19.26e) gives the last equality. Fréchet differentiability at the zero <span class="math inline">\(P\psi_{\theta_0}=0\)</span> gives</p>
+<p><span class="math display">\[
+P\psi_{\widehat\theta_n}
+=V(\widehat\theta_n-\theta_0)
++o_P(\|\widehat\theta_n-\theta_0\|)
+\quad\text{in }\ell^\infty(H).
+\tag{19.26g}
+\]</span></p>
+<p>Combining (19.26f) and (19.26g),</p>
+<p><span class="math display">\[
+V\sqrt n(\widehat\theta_n-\theta_0)
+=-\mathbb G_n\psi_{\theta_0}
++o_P(1)
++o_P\{\sqrt n\|\widehat\theta_n-\theta_0\|\}.
+\tag{19.26h}
+\]</span></p>
+<p>Because the local class has a finite envelope, <span class="math inline">\(\|\mathbb G_n\psi_{\theta_0}\|_H=O_P(1)\)</span>. Continuity of <span class="math inline">\(V^{-1}\)</span> on its range gives a constant <span class="math inline">\(C&lt;\infty\)</span> such that <span class="math inline">\(\|u\|\leq C\|Vu\|_H\)</span> for <span class="math inline">\(u\in\operatorname{lin}\Theta\)</span>. Apply this bound to (19.26h) and absorb the smaller-order multiple to obtain</p>
+<p><span class="math display">\[
+\sqrt n\|\widehat\theta_n-\theta_0\|=O_P(1).
+\]</span></p>
+<p>Substitute this rate back into (19.26h). Its final remainder is now <span class="math inline">\(o_P(1)\)</span>, which proves (19.26d).</p>
+</details>
+<p><span class="math display">\[
+\boxed{\text{empirical-process linearization}+\text{population linearization}
+\Rightarrow\text{asymptotic linearity}.}
+\]</span></p>
+<div id="nineteenfig-ch19-empirical-z" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-alt="Three panels show reference and sample empirical distribution functions for Old Faithful eruption durations, their centered empirical process, and reference versus sample estimating equations with different zero crossings.">
+<figure class="quarto-float quarto-float-nineteenfig figure">
+<div aria-describedby="nineteenfig-ch19-empirical-z-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/generated/chapter-19-empirical-z.svg" class="img-fluid figure-img" alt="Three panels show reference and sample empirical distribution functions for Old Faithful eruption durations, their centered empirical process, and reference versus sample estimating equations with different zero crossings.">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-nineteenfig" id="nineteenfig-ch19-empirical-z-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure 19.3: The empirical-distribution example and a Z-estimator share the same structure: a random function fluctuates around its population counterpart, and the estimator is the resulting shifted zero crossing.
+</figcaption>
+</figure>
+</div>
+<p>Figure <a href="#nineteenfig-ch19-empirical-z" class="quarto-xref">Figure 19.<span>3</span></a> links the empirical-CDF thread to Chapter 25: <a href="./chapter-25.html#example-25-24">Example 25.24</a> uses empirical averages as efficient estimators, while <a href="./chapter-25.html#theorem-25-90">Theorem 25.90</a> applies the same two-part Z-linearization to a full semiparametric likelihood system.</p>
+</section>
+<section id="changing-classes" class="level2">
+<h2 class="anchored" data-anchor-id="changing-classes">19.5 Changing Classes</h2>
+<p>The preceding results use a fixed class <span class="math inline">\(\mathcal F\)</span>. After local rescaling around an estimated parameter, however, the relevant class may change with <span class="math inline">\(n\)</span> and must be treated as a sequence <span class="math inline">\(\mathcal F_n\)</span>.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Theorem">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Theorem
+</div>
+</div>
+<section id="theorem-19.28" class="level3 callout-body-container callout-body">
+<h3 class="anchored" data-anchor-id="theorem-19.28">Theorem 19.28: Donsker convergence for changing classes</h3>
+<p>The theorem extends Donsker-type weak convergence to changing classes <span class="math inline">\(\mathcal F_n\)</span>. Its ingredients remain finite-dimensional Gaussian convergence, entropy control for the changing classes, and asymptotic equicontinuity.</p>
+</section>
+</div>
+</section>
+<section id="maximal-inequalities" class="level2">
+<h2 class="anchored" data-anchor-id="maximal-inequalities">19.6 Maximal Inequalities</h2>
+<p>To prove asymptotic equicontinuity, one must control suprema such as <span class="math inline">\(\sup_{f\in\mathcal F}|\mathbb G_nf|\)</span>. A <strong>maximal inequality</strong> supplies an expectation bound for this supremum, providing the technical bridge from the entropy of a function class to uniform control of its empirical process.</p>
+<p>The source writes <span class="math inline">\(A\lesssim B\)</span> when <span class="math inline">\(A\)</span> is bounded by a universal constant times <span class="math inline">\(B\)</span>, and writes</p>
+<p><span class="math display">\[
+\operatorname{Log}x=1\vee\log x.
+\]</span></p>
+<p>Using <span class="math inline">\(\operatorname{Log}\)</span> rather than <span class="math inline">\(\log\)</span> avoids a degenerate singleton edge case. Equivalently, one may adjoin the zero function to every class. This changes the displayed entropy integrals only up to the universal constants hidden by <span class="math inline">\(\lesssim\)</span>.</p>
+<section id="maximal-inequality-roadmap" class="level3">
+<h3 class="anchored" data-anchor-id="maximal-inequality-roadmap">Maximal-inequality roadmap</h3>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Result</th>
+<th>Operation</th>
+<th>Used for</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Lemma 19.32</td>
+<td>Exponential tail for one empirical average</td>
+<td>Starting point</td>
+</tr>
+<tr class="even">
+<td>Lemma 19.33</td>
+<td>Integrate a union bound over a finite class</td>
+<td>One link in a chain</td>
+</tr>
+<tr class="odd">
+<td>Lemma 19.34</td>
+<td>Chain nested bracketing approximations</td>
+<td><a href="#theorem-19-5">Theorem 19.5</a></td>
+</tr>
+<tr class="even">
+<td>Lemma 19.36</td>
+<td>Use uniform boundedness to remove the envelope-tail term</td>
+<td>Current-status and profile-likelihood rates in Chapter 25</td>
+</tr>
+</tbody>
+</table>
+<p><span class="math display">\[
+\boxed{\text{Bernstein tail}\rightarrow\text{finite maxima}
+\rightarrow\text{bracketing chain}\rightarrow\text{local rate bound}.}
+\]</span></p>
+<div class="callout callout-style-default callout-important callout-titled" title="Lemma">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Lemma
+</div>
+</div>
+<section id="lemma-19.32" class="level3 callout-body-container callout-body">
+<h3 class="anchored" data-anchor-id="lemma-19.32">Lemma 19.32: Bernstein’s inequality</h3>
+<p>For every bounded measurable <span class="math inline">\(f\)</span> and every <span class="math inline">\(x&gt;0\)</span>,</p>
+<p><span class="math display">\[
+P_P\{|\mathbb G_nf|&gt;x\}
+\leq
+2\exp\left\{-\frac14
+\frac{x^2}{Pf^2+x\|f\|_\infty/\sqrt n}
+\right\}.
+\tag{19.32}
+\]</span></p>
+</section>
+</div>
+<p><strong>Proof roadmap.</strong> Center the summand, bound its moment-generating function using boundedness and its second moment, optimize the exponential Markov bound, and repeat for the lower tail.</p>
+<details>
+<summary>
+Complete proof
+</summary>
+<p>It is enough to bound the right tail; applying the same argument to <span class="math inline">\(-f\)</span> supplies the factor <span class="math inline">\(2\)</span>. Let <span class="math inline">\(Y=f-Pf\)</span>. For every <span class="math inline">\(\lambda&gt;0\)</span>, Markov’s inequality and independence give</p>
+<p><span class="math display">\[
+P(\mathbb G_nf&gt;x)
+\leq
+e^{-\lambda x}
+\left\{P\exp(\lambda Y/\sqrt n)\right\}^n.
+\tag{19.32a}
+\]</span></p>
+<p>The first-order term in the exponential series vanishes because <span class="math inline">\(PY=0\)</span>. Moreover,</p>
+<p><span class="math display">\[
+|PY^k|\leq Pf^2(2\|f\|_\infty)^{k-2},
+\qquad k\geq2.
+\tag{19.32b}
+\]</span></p>
+<p>Choose</p>
+<p><span class="math display">\[
+\lambda
+=\frac12\frac{x}{Pf^2+x\|f\|_\infty/\sqrt n}
+\leq
+\frac12\left(\frac{x}{Pf^2}\wedge
+\frac{\sqrt n}{\|f\|_\infty}
+\right).
+\tag{19.32c}
+\]</span></p>
+<p>Insert (19.32b) into the power series in (19.32a). The two upper bounds in (19.32c) control respectively the variance factor and every higher-order factor, giving</p>
+<p><span class="math display">\[
+P\exp(\lambda Y/\sqrt n)
+\leq1+\frac{\lambda x}{2n}
+\leq\exp\left(\frac{\lambda x}{2n}\right).
+\]</span></p>
+<p>Consequently, (19.32a) is at most <span class="math inline">\(\exp(-\lambda x/2)\)</span>. Substituting (19.32c) gives the displayed right-tail bound. Apply it to both <span class="math inline">\(f\)</span> and <span class="math inline">\(-f\)</span> to finish.</p>
+</details>
+<div class="callout callout-style-default callout-important callout-titled" title="Lemma">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Lemma
+</div>
+</div>
+<section id="lemma-19.33" class="level3 callout-body-container callout-body">
+<h3 class="anchored" data-anchor-id="lemma-19.33">Lemma 19.33: a finite maximum</h3>
+<p>For every finite class <span class="math inline">\(\mathcal F\)</span> of bounded, measurable, square-integrable functions,</p>
+<p><span class="math display">\[
+E_P\|\mathbb G_n\|_{\mathcal F}
+\lesssim
+\max_{f\in\mathcal F}\frac{\|f\|_\infty}{\sqrt n}
+\log(1+|\mathcal F|)
++
+\max_{f\in\mathcal F}\|f\|_{P,2}
+\sqrt{\log(1+|\mathcal F|)}.
+\tag{19.33}
+\]</span></p>
+</section>
+</div>
+<p><strong>Proof roadmap.</strong> Apply Bernstein’s inequality to each element of the finite class, use a union bound, and integrate the resulting sub-Gaussian/sub-exponential tail in its two natural ranges.</p>
+<details>
+<summary>
+Complete proof
+</summary>
+<p>Set</p>
+<p><span class="math display">\[
+b=\max_{f\in\mathcal F}Pf^2,
+\qquad
+m=\max_{f\in\mathcal F}\|f\|_\infty,
+\qquad
+N=|\mathcal F|.
+\]</span></p>
+<p>Lemma 19.32 and a union bound give</p>
+<p><span class="math display">\[
+P\{\|\mathbb G_n\|_{\mathcal F}&gt;x\}
+\leq
+2N\exp\left\{-\frac14
+\frac{x^2}{b+x m/\sqrt n}\right\}.
+\tag{19.33a}
+\]</span></p>
+<p>If <span class="math inline">\(x\leq b\sqrt n/m\)</span>, the exponent is bounded above by <span class="math inline">\(-x^2/(8b)\)</span>; if <span class="math inline">\(x&gt;b\sqrt n/m\)</span>, it is bounded above by <span class="math inline">\(-x\sqrt n/(8m)\)</span>. Thus the maximum has a sub-Gaussian part on scale <span class="math inline">\(\sqrt b\)</span> and a sub-exponential part on scale <span class="math inline">\(m/\sqrt n\)</span>.</p>
+<p>Integrate (19.33a) using <span class="math inline">\(E Z=\int_0^\infty P(Z&gt;x)\,dx\)</span> for nonnegative <span class="math inline">\(Z\)</span>. Splitting at constant multiples of</p>
+<p><span class="math display">\[
+\sqrt{b\log(1+N)}
+\quad\text{and}\quad
+\frac{m}{\sqrt n}\log(1+N)
+\]</span></p>
+<p>gives</p>
+<p><span class="math display">\[
+E_P\|\mathbb G_n\|_{\mathcal F}
+\lesssim
+\sqrt{b\log(1+N)}
++\frac{m}{\sqrt n}\log(1+N),
+\]</span></p>
+<p>which is (19.33).</p>
+</details>
+<div class="callout callout-style-default callout-important callout-titled" title="Lemma">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Lemma
+</div>
+</div>
+<section id="lemma-19.34" class="level3 callout-body-container callout-body">
+<h3 class="anchored" data-anchor-id="lemma-19.34">Lemma 19.34: the bracketing maximal inequality</h3>
+<p>Let <span class="math inline">\(\mathcal F\)</span> be any class of measurable real functions satisfying <span class="math inline">\(Pf^2&lt;\delta^2\)</span> for every <span class="math inline">\(f\in\mathcal F\)</span>. Let <span class="math inline">\(F\)</span> be an envelope and set</p>
+<p><span class="math display">\[
+a(\delta)
+=\frac{\delta}
+{\sqrt{\operatorname{Log}N_{[]}(\delta,\mathcal F,L_2(P))}}.
+\]</span></p>
+<p>Then</p>
+<p><span class="math display">\[
+E_P^*\|\mathbb G_n\|_{\mathcal F}
+\lesssim
+J_{[]}(\delta,\mathcal F,L_2(P))
++\sqrt n\,P^*F1\{F&gt;\sqrt n\,a(\delta)\}.
+\tag{19.34}
+\]</span></p>
+</section>
+</div>
+<p><strong>Proof roadmap.</strong> Remove the large-envelope region, approximate every remaining function along a nested bracketing chain, apply the finite-class maximum bound to each link, and sum the entropy contributions across scales.</p>
+<details>
+<summary>
+Complete proof
+</summary>
+<section id="remove-the-large-envelope-region" class="level4">
+<h4 class="anchored" data-anchor-id="remove-the-large-envelope-region">1. Remove the large-envelope region</h4>
+<p>For <span class="math inline">\(t=\sqrt n\,a(\delta)\)</span> and <span class="math inline">\(|f|\leq F\)</span>,</p>
+<p><span class="math display">\[
+|\mathbb G_n(f1\{F&gt;t\})|
+\leq\sqrt n(\mathbb P_n+P)F1\{F&gt;t\}.
+\]</span></p>
+<p>Taking outer expectations bounds this contribution by</p>
+<p><span class="math display">\[
+2\sqrt n\,P^*F1\{F&gt;t\}.
+\tag{19.34a}
+\]</span></p>
+<p>Truncating every function to <span class="math inline">\(\{F\leq t\}\)</span> cannot increase its bracketing numbers. It therefore remains to prove the entropy term under the additional bound <span class="math inline">\(|f|\leq\sqrt n\,a(\delta)\)</span>.</p>
+</section>
+<section id="build-nested-brackets" class="level4">
+<h4 class="anchored" data-anchor-id="build-nested-brackets">2. Build nested brackets</h4>
+<p>Choose an integer <span class="math inline">\(q_0\)</span> with</p>
+<p><span class="math display">\[
+4\delta\leq2^{-q_0}\leq8\delta.
+\]</span></p>
+<p>At every level <span class="math inline">\(q\geq q_0\)</span>, cover <span class="math inline">\(\mathcal F\)</span> by <span class="math inline">\(L_2(P)\)</span> brackets of radius <span class="math inline">\(2^{-q}\)</span> and refine the successive covers into nested partitions</p>
+<p><span class="math display">\[
+\mathcal F=\bigcup_{i=1}^{N_q}\mathcal F_{q,i}.
+\]</span></p>
+<p>The construction can be made so that each cell has a measurable width <span class="math inline">\(\Delta_{q,i}\)</span> satisfying</p>
+<p><span class="math display">\[
+\sup_{f,g\in\mathcal F_{q,i}}|f-g|\leq\Delta_{q,i},
+\qquad
+P\Delta_{q,i}^2&lt;2^{-2q},
+\tag{19.34b}
+\]</span></p>
+<p>and</p>
+<p><span class="math display">\[
+\sum_{q=q_0}^\infty2^{-q}\sqrt{\operatorname{Log}N_q}
+\lesssim
+J_{[]}(\delta,\mathcal F,L_2(P)).
+\tag{19.34c}
+\]</span></p>
+<p>To see (19.34c), first use minimal brackets at each dyadic radius. Replacing each cover by its intersections with all coarser covers makes the partitions nested. The square root of the logarithm of a product is bounded by the sum of the square roots of the logarithms, and rearranging the resulting dyadic sum gives the entropy integral.</p>
+<p>Choose one representative <span class="math inline">\(\pi_qf\)</span> from the cell containing <span class="math inline">\(f\)</span>, and write <span class="math inline">\(\Delta_qf\)</span> for that cell’s width. Define</p>
+<p><span class="math display">\[
+a_q=\frac{2^{-q}}{\sqrt{\operatorname{Log}N_{q+1}}}.
+\]</span></p>
+<p>For <span class="math inline">\(q&gt;q_0\)</span>, let <span class="math inline">\(A_{q-1}f\)</span> indicate that every width through level <span class="math inline">\(q-1\)</span> is at most <span class="math inline">\(\sqrt n\,a_p\)</span> at its corresponding level, and let <span class="math inline">\(B_qf\)</span> indicate that this is the first level at which <span class="math inline">\(\Delta_qf&gt;\sqrt n\,a_q\)</span>. Nestedness gives the pointwise decomposition</p>
+<p><span class="math display">\[
+\begin{aligned}
+A_{q-1}f
+&amp;=\mathbf 1\{\Delta_{q_0}f\leq\sqrt n\,a_{q_0},\ldots,
+\Delta_{q-1}f\leq\sqrt n\,a_{q-1}\},\\
+B_qf
+&amp;=\mathbf 1\{\Delta_{q_0}f\leq\sqrt n\,a_{q_0},\ldots,
+\Delta_{q-1}f\leq\sqrt n\,a_{q-1},
+\Delta_qf&gt;\sqrt n\,a_q\}.
+\end{aligned}
+\]</span></p>
+<p>Either every <span class="math inline">\(B_qf\)</span> is zero and the ordinary chain continues indefinitely, or exactly one <span class="math inline">\(B_qf\)</span> is one and the chain stops at that first oversized width. Therefore</p>
+<p><span class="math display">\[
+f-\pi_{q_0}f
+=\sum_{q&gt;q_0}(f-\pi_qf)B_qf
++\sum_{q&gt;q_0}(\pi_qf-\pi_{q-1}f)A_{q-1}f.
+\tag{19.34d}
+\]</span></p>
+<p>The first sum records the first oversized link; the second is the ordinary telescoping chain while all links remain below their thresholds.</p>
+</section>
+<section id="bound-the-first-oversized-link-series" class="level4">
+<h4 class="anchored" data-anchor-id="bound-the-first-oversized-link-series">3. Bound the first-oversized-link series</h4>
+<p>At level <span class="math inline">\(q\)</span>, the first-series terms are dominated by one of the <span class="math inline">\(N_q\)</span> cell widths. More precisely,</p>
+<p><span class="math display">\[
+|\mathbb G_n\{(f-\pi_qf)B_qf\}|
+\leq
+|\mathbb G_n(\Delta_qfB_qf)|
++2\sqrt n\,P(\Delta_qfB_qf).
+\]</span></p>
+<p>On <span class="math inline">\(B_qf\)</span> the width is bounded by the preceding width <span class="math inline">\(\Delta_{q-1}f\leq\sqrt n\,a_{q-1}\)</span>, while (19.34b) gives its <span class="math inline">\(L_2(P)\)</span> size of order <span class="math inline">\(2^{-q}\)</span>. Lemma 19.33, together with</p>
+<p><span class="math display">\[
+P(\Delta_qfB_qf)
+\leq
+\frac{P\Delta_q^2f}{\sqrt n\,a_q}
+\leq
+\frac{2^{-2q}}{\sqrt n\,a_q},
+\]</span></p>
+<p>therefore bounds the expected supremum of this level by a constant multiple of</p>
+<p><span class="math display">\[
+a_{q-1}\operatorname{Log}N_q
++2^{-q}\sqrt{\operatorname{Log}N_q}
++\frac{2^{-2q}}{a_q}.
+\tag{19.34e}
+\]</span></p>
+<p>By the definition of <span class="math inline">\(a_q\)</span>, each term in (19.34e) is bounded by neighboring terms of the series in (19.34c). Summing over <span class="math inline">\(q&gt;q_0\)</span> is therefore bounded by a universal multiple of the bracketing integral.</p>
+</section>
+<section id="bound-the-ordinary-link-series-and-the-base-level" class="level4">
+<h4 class="anchored" data-anchor-id="bound-the-ordinary-link-series-and-the-base-level">4. Bound the ordinary-link series and the base level</h4>
+<p>At level <span class="math inline">\(q\)</span>, the links <span class="math inline">\((\pi_qf-\pi_{q-1}f)A_{q-1}f\)</span> take at most <span class="math inline">\(N_q\)</span> values, have <span class="math inline">\(L_2(P)\)</span> size at most a constant times <span class="math inline">\(2^{-q}\)</span>, and are bounded by <span class="math inline">\(\sqrt n\,a_{q-1}\)</span>. Lemma 19.33 bounds their expected maximum by</p>
+<p><span class="math display">\[
+a_{q-1}\operatorname{Log}N_q
++2^{-q}\sqrt{\operatorname{Log}N_q}.
+\]</span></p>
+<p>Again, the sum over <span class="math inline">\(q\)</span> is controlled by (19.34c). The construction and the choice of <span class="math inline">\(q_0\)</span> also ensure <span class="math inline">\(2a(\delta)\leq a_{q_0}\)</span>. Thus the base approximations <span class="math inline">\(\pi_{q_0}f\)</span> take only <span class="math inline">\(N_{q_0}\)</span> values, have <span class="math inline">\(L_2(P)\)</span> norm at most a constant multiple of <span class="math inline">\(\delta\)</span>, and are bounded by <span class="math inline">\(\sqrt n\,a_{q_0}\)</span>. One last application of Lemma 19.33 controls their maximum by the first few terms of (19.34c).</p>
+<p>Combining the base, the two series in (19.34d), and the tail contribution (19.34a) proves (19.34).</p>
+</section></details>
+<p>The maximal inequality is exactly the missing link in the proof of Theorem 19.5: local <span class="math inline">\(L_2(P)\)</span> size gives <span class="math inline">\(\delta\)</span>, bracketing controls the chain, and square-integrability makes the envelope-tail term disappear in the iterated limit.</p>
+<div class="callout callout-style-default callout-important callout-titled" title="Lemma">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Lemma
+</div>
+</div>
+<section id="lemma-19.36" class="level3 callout-body-container callout-body">
+<h3 class="anchored" data-anchor-id="lemma-19.36">Lemma 19.36: uniformly bounded local classes</h3>
+<p>For every class <span class="math inline">\(\mathcal F\)</span> of measurable functions satisfying</p>
+<p><span class="math display">\[
+Pf^2&lt;\delta^2,
+\qquad
+\|f\|_\infty\leq M,
+\qquad f\in\mathcal F,
+\]</span></p>
+<p>the source’s bound is</p>
+<p><span class="math display">\[
+E_P^*\|\mathbb G_n\|_{\mathcal F}
+\lesssim
+J_{[]}(\delta,\mathcal F,L_2(P))
+\left\{
+1+
+\frac{J_{[]}(\delta,\mathcal F,L_2(P))}{\delta^2\sqrt n}M
+\right\}.
+\tag{19.36}
+\]</span></p>
+</section>
+</div>
+<p><strong>Proof roadmap.</strong> Apply Lemma 19.34 at a slightly enlarged radius chosen so the constant envelope never enters its tail term, then bound the enlarged entropy integral by the original integral and its quadratic correction.</p>
+<details>
+<summary>
+Complete adapted derivation
+</summary>
+<p><strong>Derivation in these notes.</strong></p>
+<p>The source states Lemma 19.36 without proof and directs the reader to Lemmas 3.4.2–3.4.3 and §2.14 of <span class="citation" data-cites="vanDerVaartWellner1996"><span class="nocase">van der Vaart and Wellner</span> (<a href="references.html#ref-vanDerVaartWellner1996" role="doc-biblioref">1996</a>)</span>. The derivation here follows that bracketing maximal-inequality route but obtains the bounded-class specialization directly from Lemma 19.34.</p>
+<p>Write</p>
+<p><span class="math display">\[
+H(\varepsilon)
+=\operatorname{Log}N_{[]}(\varepsilon,\mathcal F,L_2(P)),
+\qquad
+J(\delta)=\int_0^\delta\sqrt{H(\varepsilon)}\,d\varepsilon.
+\]</span></p>
+<p>As noted at the start of §19.6, this augmented integral is equivalent, up to the universal constants hidden by <span class="math inline">\(\lesssim\)</span>, to the source’s <span class="math inline">\(J_{[]}\)</span> convention.</p>
+<p>Increase the radius from <span class="math inline">\(\delta\)</span> to</p>
+<p><span class="math display">\[
+\eta
+=\delta\vee\frac{M\sqrt{H(\delta)}}{\sqrt n}.
+\tag{19.36a}
+\]</span></p>
+<p>Because <span class="math inline">\(H\)</span> is nonincreasing,</p>
+<p><span class="math display">\[
+\sqrt n\,
+\frac{\eta}{\sqrt{H(\eta)}}
+\geq
+\sqrt n\,
+\frac{\eta}{\sqrt{H(\delta)}}
+\geq M.
+\tag{19.36b}
+\]</span></p>
+<p>The assumptions <span class="math inline">\(Pf^2&lt;\delta^2\leq\eta^2\)</span> permit Lemma 19.34 to be applied at radius <span class="math inline">\(\eta\)</span>. Take the constant envelope <span class="math inline">\(F=M\)</span>. By (19.36b), the envelope-tail event in Lemma 19.34 is empty, so</p>
+<p><span class="math display">\[
+E_P^*\|\mathbb G_n\|_{\mathcal F}
+\lesssim J(\eta).
+\tag{19.36c}
+\]</span></p>
+<p>Monotonicity of <span class="math inline">\(H\)</span> gives</p>
+<p><span class="math display">\[
+\begin{aligned}
+J(\eta)
+&amp;=J(\delta)+\int_\delta^\eta\sqrt{H(\varepsilon)}\,d\varepsilon\\
+&amp;\leq J(\delta)+(\eta-\delta)_+\sqrt{H(\delta)}\\
+&amp;\leq J(\delta)+\frac{M}{\sqrt n}H(\delta).
+\end{aligned}
+\tag{19.36d}
+\]</span></p>
+<p>Finally, because <span class="math inline">\(H(\varepsilon)\geq H(\delta)\)</span> for <span class="math inline">\(0&lt;\varepsilon\leq\delta\)</span>,</p>
+<p><span class="math display">\[
+J(\delta)
+\geq\delta\sqrt{H(\delta)},
+\qquad
+H(\delta)\leq\frac{J(\delta)^2}{\delta^2}.
+\tag{19.36e}
+\]</span></p>
+<p>Substituting (19.36e) into (19.36d), then into (19.36c), gives</p>
+<p><span class="math display">\[
+E_P^*\|\mathbb G_n\|_{\mathcal F}
+\lesssim
+J(\delta)
++\frac{M J(\delta)^2}{\delta^2\sqrt n},
+\]</span></p>
+<p>which is exactly (19.36).</p>
+</details>
+<div class="callout callout-style-default callout-tip callout-titled" title="How Lemma 19.36 becomes a rate condition">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>How Lemma 19.36 becomes a rate condition
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If a local class <span class="math inline">\(\mathcal F_\delta\)</span> has <span class="math inline">\(Pf^2\lesssim\delta^2\)</span>, a fixed uniform bound <span class="math inline">\(M\)</span>, and</p>
+<p><span class="math display">\[
+J_{[]}(\delta,\mathcal F_\delta,L_2(P))\lesssim\delta^\beta,
+\]</span></p>
+<p>then Lemma 19.36 gives</p>
+<p><span class="math display">\[
+E^*\|\mathbb G_n\|_{\mathcal F_\delta}
+\lesssim
+\delta^\beta
++\frac{M}{\sqrt n}\delta^{2\beta-2}.
+\tag{19.36f}
+\]</span></p>
+<p>This is the quantity balanced against deterministic criterion curvature in Theorem 5.55 and <a href="./chapter-25.html#theorem-25-81">Theorem 25.81</a>. The <a href="./chapter-25.html#sec-25-11-current-status-cox">current-status Cox calculation</a> is a concrete instance.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Lemma">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Lemma
+</div>
+</div>
+<section id="lemma-19-37" class="level3 callout-body-container callout-body">
+<h3 class="anchored" data-anchor-id="lemma-19-37">Lemma 19.37: stronger tail control</h3>
+<p>The source next replaces the <span class="math inline">\(L_2(P)\)</span> bracket size by the Bernstein gauge</p>
+<p><span class="math display">\[
+\|f\|_{P,B}^2=2P(e^{|f|}-1-|f|).
+\]</span></p>
+<p>This removes the uniform boundedness restriction at the cost of measuring brackets in a stronger scale. It is useful in specialized Chapter 25 likelihood arguments, but Lemma 19.36 is the route’s principal quantitative bound.</p>
+</section>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Chapter takeaway">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Chapter takeaway
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The empirical process <span class="math inline">\(\mathbb G_n=\sqrt n(\mathbb P_n-P)\)</span> turns a collection of centered sample averages into one random function. The chapter’s main chain is</p>
+<p><span class="math display">\[
+\text{entropy, bracketing, or VC control}
+\longrightarrow
+\text{Donsker property}
+\longrightarrow
+\text{stochastic equicontinuity}.
+\]</span></p>
+<p>Consequently,</p>
+<p><span class="math display">\[
+\widehat f_n\to f_0\text{ in }L_2(P)
+\quad\Longrightarrow\quad
+\mathbb G_n(\widehat f_n-f_0)=o_P(1)
+\]</span></p>
+<p>under the conditions of Lemma 19.24. This first-order replacement of an estimated nuisance-dependent function by its population counterpart is the empirical-process step used throughout <a href="./chapter-25.html#sec-efficient-score-equations">Chapter 25’s estimator constructions</a>.</p>
+</div>
+</div>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
+<div id="ref-bailie2021" class="csl-entry" role="listitem">
+Bailie, James. 2021. <em>Stat213 Lecture Notes</em>. Course lecture notes, Harvard University. <a href="https://jameshbailie.github.io/files/papers/2021-06-16-Asymptotic-statistics.pdf">https://jameshbailie.github.io/files/papers/2021-06-16-Asymptotic-statistics.pdf</a>.
+</div>
+<div id="ref-bickelEtAl1993" class="csl-entry" role="listitem">
+Bickel, Peter J., Chris A. J. Klaassen, Ya’acov Ritov, and Jon A. Wellner. 1993. <em>Efficient and Adaptive Estimation for Semiparametric Models</em>. Johns Hopkins Series in the Mathematical Sciences. Johns Hopkins University Press. <a href="https://link.springer.com/book/9780387984735">https://link.springer.com/book/9780387984735</a>.
+</div>
+<div id="ref-chernozhukovEtAl2018" class="csl-entry" role="listitem">
+Chernozhukov, Victor, Denis Chetverikov, Mert Demirer, et al. 2018. <span>“Double/Debiased Machine Learning for Treatment and Structural Parameters.”</span> <em>The Econometrics Journal</em> 21 (1): C1–68. <a href="https://doi.org/10.1111/ectj.12097">https://doi.org/10.1111/ectj.12097</a>.
+</div>
+<div id="ref-dasgupta2008" class="csl-entry" role="listitem">
+DasGupta, Anirban. 2008. <em>Asymptotic Theory of Statistics and Probability</em>. Springer Texts in Statistics. Springer. <a href="https://doi.org/10.1007/978-0-387-75971-5">https://doi.org/10.1007/978-0-387-75971-5</a>.
+</div>
+<div id="ref-fisherKennedy2021" class="csl-entry" role="listitem">
+Fisher, Aaron, and Edward H. Kennedy. 2021. <span>“Visually Communicating and Teaching Intuition for Influence Functions.”</span> <em>The American Statistician</em> 75 (2): 162–72. <a href="https://doi.org/10.1080/00031305.2020.1717620">https://doi.org/10.1080/00031305.2020.1717620</a>.
+</div>
+<div id="ref-gillJohansen1990" class="csl-entry" role="listitem">
+Gill, Richard D., and Søren Johansen. 1990. <span>“A Survey of Product-Integration with a View Toward Application in Survival Analysis.”</span> <em>The Annals of Statistics</em> 18 (4): 1501–55. <a href="https://doi.org/10.1214/aos/1176347865">https://doi.org/10.1214/aos/1176347865</a>.
+</div>
+<div id="ref-jiang2022" class="csl-entry" role="listitem">
+Jiang, Jiming. 2022. <em>Large Sample Techniques for Statistics</em>. 2nd ed. Springer Texts in Statistics. Springer. <a href="https://doi.org/10.1007/978-3-030-91695-4">https://doi.org/10.1007/978-3-030-91695-4</a>.
+</div>
+<div id="ref-kennedy2016" class="csl-entry" role="listitem">
+Kennedy, Edward H. 2016. <span>“Semiparametric Theory and Empirical Processes in Causal Inference.”</span> In <em>Statistical Causal Inferences and Their Applications in Public Health Research</em>, edited by Hua He, Pan Wu, and Ding-Geng Chen. ICSA Book Series in Statistics. Springer International Publishing. <a href="https://doi.org/10.1007/978-3-319-41259-7_8">https://doi.org/10.1007/978-3-319-41259-7_8</a>.
+</div>
+<div id="ref-kennedy2022" class="csl-entry" role="listitem">
+Kennedy, Edward H. 2022. <em>Semiparametric Doubly Robust Targeted Double Machine Learning: A Review</em>. <a href="https://doi.org/10.48550/arXiv.2203.06469">https://doi.org/10.48550/arXiv.2203.06469</a>.
+</div>
+<div id="ref-kosorok2008" class="csl-entry" role="listitem">
+Kosorok, Michael R. 2008. <em>Introduction to Empirical Processes and Semiparametric Inference</em>. Springer Series in Statistics. Springer. <a href="https://doi.org/10.1007/978-0-387-74978-5">https://doi.org/10.1007/978-0-387-74978-5</a>.
+</div>
+<div id="ref-leCamYang2000" class="csl-entry" role="listitem">
+Le Cam, Lucien, and Grace Lo Yang. 2000. <em>Asymptotics in Statistics: Some Basic Concepts</em>. 2nd ed. Springer Series in Statistics. Springer. <a href="https://doi.org/10.1007/978-1-4612-1166-2">https://doi.org/10.1007/978-1-4612-1166-2</a>.
+</div>
+<div id="ref-murphyVanDerVaart1996" class="csl-entry" role="listitem">
+Murphy, Susan A., and Aad W. van der Vaart. 1996. <span>“Likelihood Inference in the Errors-in-Variables Model.”</span> <em>Journal of Multivariate Analysis</em> 59 (1): 81–108. <a href="https://doi.org/10.1006/jmva.1996.0055">https://doi.org/10.1006/jmva.1996.0055</a>.
+</div>
+<div id="ref-pollard2002" class="csl-entry" role="listitem">
+Pollard, David. 2002. <em>A User’s Guide to Measure Theoretic Probability</em>. Cambridge Series in Statistical and Probabilistic Mathematics 8. Cambridge University Press. <a href="https://doi.org/10.1017/CBO9780511811555">https://doi.org/10.1017/CBO9780511811555</a>.
+</div>
+<div id="ref-robinsEtAl1994" class="csl-entry" role="listitem">
+Robins, James M., Andrea Rotnitzky, and Lue Ping Zhao. 1994. <span>“Estimation of Regression Coefficients When Some Regressors Are Not Always Observed.”</span> <em>Journal of the American Statistical Association</em> 89 (427): 846–66. <a href="https://doi.org/10.1080/01621459.1994.10476818">https://doi.org/10.1080/01621459.1994.10476818</a>.
+</div>
+<div id="ref-sen2022" class="csl-entry" role="listitem">
+Sen, Bodhisattva. 2022. <em>A Gentle Introduction to Empirical Process Theory and Applications</em>. Lecture notes, Department of Statistics, Columbia University. <a href="https://sites.stat.columbia.edu/bodhi/Talks/Emp-Proc-Lecture-Notes.pdf">https://sites.stat.columbia.edu/bodhi/Talks/Emp-Proc-Lecture-Notes.pdf</a>.
+</div>
+<div id="ref-tsiatis2006" class="csl-entry" role="listitem">
+Tsiatis, Anastasios A. 2006. <em>Semiparametric Theory and Missing Data</em>. Springer Series in Statistics. Springer. <a href="https://doi.org/10.1007/0-387-37345-4">https://doi.org/10.1007/0-387-37345-4</a>.
+</div>
+<div id="ref-tsybakov2009" class="csl-entry" role="listitem">
+Tsybakov, Alexandre B. 2009. <em>Introduction to Nonparametric Estimation</em>. Springer Series in Statistics. Springer. <a href="https://doi.org/10.1007/b13794">https://doi.org/10.1007/b13794</a>.
+</div>
+<div id="ref-vanDerVaart1991Differentiable" class="csl-entry" role="listitem">
+Vaart, Aad W. van der. 1991. <span>“On Differentiable Functionals.”</span> <em>The Annals of Statistics</em> 19 (1): 178–204. <a href="https://doi.org/10.1214/aos/1176347976">https://doi.org/10.1214/aos/1176347976</a>.
+</div>
+<div id="ref-vanDerVaart1996Mixture" class="csl-entry" role="listitem">
+Vaart, Aad W. van der. 1996. <span>“Efficient Maximum Likelihood Estimation in Semiparametric Mixture Models.”</span> <em>The Annals of Statistics</em> 24 (2): 862–78. <a href="https://doi.org/10.1214/aos/1032894470">https://doi.org/10.1214/aos/1032894470</a>.
+</div>
+<div id="ref-vanDerVaartWellner1996" class="csl-entry" role="listitem">
+<span class="nocase">van der Vaart, Aad W., and Jon A. Wellner</span>. 1996. <em>Weak Convergence and Empirical Processes: With Applications to Statistics</em>. Springer Series in Statistics. Springer. <a href="https://doi.org/10.1007/978-1-4757-2545-2">https://doi.org/10.1007/978-1-4757-2545-2</a>.
+</div>
+</div>
+</section>
+</section>
+
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./chapter-18.html" class="pagination-link" aria-label="Chapter 18: Stochastic Convergence in Metric Spaces">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Chapter 18: Stochastic Convergence in Metric Spaces</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./chapter-25.html" class="pagination-link" aria-label="Chapter 25: Semiparametric Models">
+        <span class="nav-page-text"><span class="chapter-title">Chapter 25: Semiparametric Models</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
