@@ -51,7 +51,8 @@ book:
   title: "Reading Companion for Asymptotic Statistics"
   search: true
   chapters:
-    - index.qmd
+    - text: "Reading Companion for Asymptotic Statistics"
+      href: index.qmd
     - glossary.qmd
     - chapter-2.qmd
     - chapter-6.qmd
